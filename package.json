@@ -1,7 +1,7 @@
 {
-    "name": "phaser3-webpack5-typescript-template",
+    "name": "juicy-breakout",
     "version": "0.1.0",
-    "description": "Phaser 3.70, Webpack 5, and TypeScript template",
+    "description": "Juicy Breakout with Phaser 3 and TypeScript",
     "main": "src/ts/game.ts",
     "scripts": {
         "start": "webpack-dev-server",
@@ -12,27 +12,24 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template.git"
+        "url": "git+https://github.com/pavle-goloskokovic/juicy-breakout.git"
     },
     "keywords": [
+        "juicy",
+        "breakout",
         "phaser",
-        "type",
-        "script",
         "typescript",
-        "boilerplate",
-        "template",
         "gamedev",
         "game",
         "development",
-        "javascript",
-        "webpack"
+        "javascript"
     ],
     "author": "Pavle Goloskoković",
-    "license": "MIT",
+    "license": "zlib",
     "bugs": {
-        "url": "https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template/issues"
+        "url": "https://github.com/pavle-goloskokovic/juicy-breakout/issues"
     },
-    "homepage": "https://github.com/pavle-goloskokovic/phaser3-webpack5-typescript-template#readme",
+    "homepage": "https://github.com/pavle-goloskokovic/juicy-breakout#readme",
     "dependencies": {
         "phaser": "^3.70.0",
         "stats.js": "^0.17.0"
