@@ -16,7 +16,7 @@ export class MP3LoopGapless extends MP3LoopBase {
     private _samples_total = 0;
     private _mp3: Sound;
     private _samples_position = 0;
-    public constructor (samplesTotal: number, url = '', autoLoad = false, playOnLoad = false)
+    constructor (samplesTotal: number, url = '', autoLoad = false, playOnLoad = false)
     {
         super(url, autoLoad, playOnLoad);
         this._samples_total = samplesTotal;
@@ -34,7 +34,7 @@ export class MP3LoopGapless extends MP3LoopBase {
         super.handleLoadComplete(event);
     }
 
-    public play (): boolean
+    play (): boolean
     {
         if (this._playing || !this.loaded )
         {
@@ -45,7 +45,7 @@ export class MP3LoopGapless extends MP3LoopBase {
         return true;
     }
 
-    public stop (): boolean
+    stop (): boolean
     {
         if (!super.stop() )
         {

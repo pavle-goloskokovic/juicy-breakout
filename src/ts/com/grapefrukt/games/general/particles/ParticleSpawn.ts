@@ -4,7 +4,7 @@ import { GameObjectCollection } from '../collections/GameObjectCollection';
 import { GameObject } from '../gameobjects/GameObject';
 import { Point } from '../../../../../flash/geom/Point';
 export class ParticleSpawn {
-    public static burst (spawnX: number, spawnY: number, count: number, spread: number, baseAngle: number, speed: number, speedVariance: number, pool: ParticlePool): void
+    static burst (spawnX: number, spawnY: number, count: number, spread: number, baseAngle: number, speed: number, speedVariance: number, pool: ParticlePool): void
     {
         let speedRnd: number;
         const angleVector: Point = new Point();
@@ -22,7 +22,7 @@ export class ParticleSpawn {
         }
     }
 
-    public static explode (spawnX: number, spawnY: number, count: number, distanceMultiplier: number, pool: ParticlePool, randomRange = 2, vector: Point = null, spawnAreaSize = 0): void
+    static explode (spawnX: number, spawnY: number, count: number, distanceMultiplier: number, pool: ParticlePool, randomRange = 2, vector: Point = null, spawnAreaSize = 0): void
     {
         if (vector == null )
         {
@@ -35,7 +35,7 @@ export class ParticleSpawn {
         }
     }
 
-    public static explode2 (position: Point, pool: ParticlePool, count: number, randomRange: Point = null, vector: Point = null, spawnAreaSize = 0, distanceMultiplier = 1): void
+    static explode2 (position: Point, pool: ParticlePool, count: number, randomRange: Point = null, vector: Point = null, spawnAreaSize = 0, distanceMultiplier = 1): void
     {
         if (randomRange == null )
         {

@@ -2,7 +2,7 @@ import { UISlider } from './UISlider';
 import { VSlider } from './VSlider';
 import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjectContainer';
 export class VUISlider extends UISlider {
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._sliderClass = VSlider;
         super(parent, xpos, ypos, label, defaultHandler);
@@ -14,7 +14,7 @@ export class VUISlider extends UISlider {
         this.setSize(20, 146);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._label.x = this.width / 2 - this._label.width / 2;
@@ -30,7 +30,7 @@ export class VUISlider extends UISlider {
         this._valueLabel.x = this.width / 2 - this._valueLabel.width / 2;
     }
 
-    public get width (): number
+    get width (): number
     {
         if (this._label == null )
         {

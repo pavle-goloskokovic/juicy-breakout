@@ -1,3 +1,3 @@
 export class grapelib {
-    public static grapelib = 'http://grapefrukt.com';
+    static grapelib = 'http://grapefrukt.com';
 }

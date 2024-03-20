@@ -2,7 +2,7 @@ import { UISlider } from './UISlider';
 import { HSlider } from './HSlider';
 import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjectContainer';
 export class HUISlider extends UISlider {
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._sliderClass = HSlider;
         super(parent, xpos, ypos, label, defaultHandler);
@@ -19,7 +19,7 @@ export class HUISlider extends UISlider {
         this._valueLabel.x = this._slider.x + this._slider.width + 5;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._slider.x = this._label.width + 5;

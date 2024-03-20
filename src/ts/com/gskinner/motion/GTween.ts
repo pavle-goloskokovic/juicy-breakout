@@ -4,16 +4,16 @@ import { Dictionary } from '../../../flash/utils/Dictionary';
 import { getTimer } from '../../../flash/utils/getTimer';
 import { IEventDispatcher } from '../../../flash/events/IEventDispatcher';
 export class GTween {
-    public static pauseAll = false;
-    public static defaultEase: Function = linearEase;
-    public static timeScaleAll = 1;
+    static pauseAll = false;
+    static defaultEase: Function = linearEase;
+    static timeScaleAll = 1;
     protected static hasStarPlugins = false;
     protected static plugins: any = {};
     protected static shape: Shape;
     protected static time: number;
     protected static tickList: Dictionary = new Dictionary(true);
     protected static gcLockList: Dictionary = new Dictionary(false);
-    public static installPlugin (plugin: any, propertyNames: any[], highPriority = false): void
+    static installPlugin (plugin: any, propertyNames: any[], highPriority = false): void
     {
         for (let i = 0; i < propertyNames.length; i++)
         {
@@ -38,7 +38,7 @@ export class GTween {
         }
     }
 
-    public static linearEase (a: number, b: number, c: number, d: number): number
+    static linearEase (a: number, b: number, c: number, d: number): number
     {
         return a;
     }
@@ -74,27 +74,27 @@ export class GTween {
     protected _rangeValues: any;
     protected _referenceTime: number;
     protected _proxy: TargetProxy;
-    public autoPlay = true;
-    public data: any;
-    public duration: number;
-    public ease: Function;
-    public nextTween: GTween;
-    public pluginData: any;
-    public reflect: boolean;
-    public repeatCount = 1;
-    public target: any;
-    public useFrames: boolean;
-    public timeScale = 1;
-    public positionOld: number;
-    public ratio: number;
-    public ratioOld: number;
-    public calculatedPosition: number;
-    public calculatedPositionOld: number;
-    public suppressEvents: boolean;
-    public onComplete: Function;
-    public onChange: Function;
-    public onInit: Function;
-    public constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null)
+    autoPlay = true;
+    data: any;
+    duration: number;
+    ease: Function;
+    nextTween: GTween;
+    pluginData: any;
+    reflect: boolean;
+    repeatCount = 1;
+    target: any;
+    useFrames: boolean;
+    timeScale = 1;
+    positionOld: number;
+    ratio: number;
+    ratioOld: number;
+    calculatedPosition: number;
+    calculatedPositionOld: number;
+    suppressEvents: boolean;
+    onComplete: Function;
+    onChange: Function;
+    onInit: Function;
+    constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null)
     {
         this.ease = GTween.defaultEase;
         this.target = target;
@@ -117,12 +117,12 @@ export class GTween {
         }
     }
 
-    public get paused (): boolean
+    get paused (): boolean
     {
         return this._paused;
     }
 
-    public set paused (value: boolean)
+    set paused (value: boolean)
     {
         if (value == this._paused )
         {
@@ -146,12 +146,12 @@ export class GTween {
         }
     }
 
-    public get position (): number
+    get position (): number
     {
         return this._position;
     }
 
-    public set position (value: number)
+    set position (value: number)
     {
         this.positionOld = this._position;
         this.ratioOld = this.ratio;
@@ -234,12 +234,12 @@ export class GTween {
         }
     }
 
-    public get delay (): number
+    get delay (): number
     {
         return this._delay;
     }
 
-    public set delay (value: number)
+    set delay (value: number)
     {
         if (this._position <= 0 )
         {
@@ -248,7 +248,7 @@ export class GTween {
         this._delay = value;
     }
 
-    public get proxy (): TargetProxy
+    get proxy (): TargetProxy
     {
         if (this._proxy == null )
         {
@@ -257,47 +257,47 @@ export class GTween {
         return this._proxy;
     }
 
-    public setValue (name: string, value: number): void
+    setValue (name: string, value: number): void
     {
         this._values[name] = value;
         this.invalidate();
     }
 
-    public getValue (name: string): number
+    getValue (name: string): number
     {
         return this._values[name];
     }
 
-    public deleteValue (name: string): boolean
+    deleteValue (name: string): boolean
     {
         delete this._rangeValues[name];
         delete this._initValues[name];
         return delete this._values[name];
     }
 
-    public setValues (values: any): void
+    setValues (values: any): void
     {
         this.copy(values, this._values, true);
         this.invalidate();
     }
 
-    public resetValues (values: any = null): void
+    resetValues (values: any = null): void
     {
         this._values = {};
         this.setValues(values);
     }
 
-    public getValues (): any
+    getValues (): any
     {
         return this.copy(this._values, {});
     }
 
-    public getInitValue (name: string): number
+    getInitValue (name: string): number
     {
         return this._initValues[name];
     }
 
-    public swapValues (): void
+    swapValues (): void
     {
         if (!this._inited )
         {
@@ -323,7 +323,7 @@ export class GTween {
         }
     }
 
-    public init (): void
+    init (): void
     {
         this._inited = true;
         this._initValues = {};
@@ -364,13 +364,13 @@ export class GTween {
         }
     }
 
-    public beginning (): void
+    beginning (): void
     {
         this.position = 0;
         this.paused = true;
     }
 
-    public end (): void
+    end (): void
     {
         this.position = this.repeatCount > 0 ? this.repeatCount * this.duration : this.duration;
     }
@@ -431,7 +431,7 @@ import { Proxy } from '../../../flash/utils/Proxy';
 import { flash_proxy } from '../../../flash/utils/flash_proxy';
 class TargetProxy extends Proxy {
     private tween: GTween;
-    public constructor (tween: GTween)
+    constructor (tween: GTween)
     {
         super();
         this.tween = tween;

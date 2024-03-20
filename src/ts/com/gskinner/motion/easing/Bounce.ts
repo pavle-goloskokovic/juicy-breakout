@@ -1,10 +1,10 @@
 export class Bounce {
-    public static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         return 1 - Bounce.easeOut(1 - ratio, 0, 0, 0);
     }
 
-    public static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         if (ratio < 1 / 2.75 )
         {
@@ -24,7 +24,7 @@ export class Bounce {
         }
     }
 
-    public static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         return (ratio *= 2) < 1 ? 0.5 * Bounce.easeIn(ratio, 0, 0, 0) : 0.5 * Bounce.easeOut(ratio - 1, 0, 0, 0) + 0.5;
     }

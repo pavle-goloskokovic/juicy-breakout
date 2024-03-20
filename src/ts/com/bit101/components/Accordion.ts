@@ -8,7 +8,7 @@ export class Accordion extends Component {
     protected _winWidth = 100;
     protected _winHeight = 100;
     protected _vbox: VBox;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -26,12 +26,12 @@ export class Accordion extends Component {
         this._windows = [];
     }
 
-    public addWindow (title: string): void
+    addWindow (title: string): void
     {
         this.addWindowAt(title, this._windows.length);
     }
 
-    public addWindowAt (title: string, index: number): void
+    addWindowAt (title: string, index: number): void
     {
         index = Math.min(index, this._windows.length);
         index = Math.max(index, 0);
@@ -46,7 +46,7 @@ export class Accordion extends Component {
         this.setSize(this._winWidth, this._winHeight);
     }
 
-    public setSize (w: number, h: number): void
+    setSize (w: number, h: number): void
     {
         super.setSize(w, h);
         this._winWidth = w;
@@ -54,7 +54,7 @@ export class Accordion extends Component {
         this.draw();
     }
 
-    public draw (): void
+    draw (): void
     {
         this._winHeight = Math.max(this._winHeight, 40);
         for (let i = 0; i < this._windows.length; i++)
@@ -64,7 +64,7 @@ export class Accordion extends Component {
         }
     }
 
-    public getWindowAt (index: number): Window
+    getWindowAt (index: number): Window
     {
         return this._windows[index];
     }
@@ -83,19 +83,19 @@ export class Accordion extends Component {
         this._vbox.draw();
     }
 
-    public set width (w: number)
+    set width (w: number)
     {
         this._winWidth = w;
         super.width = w;
     }
 
-    public set height (h: number)
+    set height (h: number)
     {
         this._winHeight = h - (this._windows.length - 1) * 20;
         super.height = h;
     }
 
-    public get numWindows (): number
+    get numWindows (): number
     {
         return this._windows.length;
     }

@@ -1,10 +1,10 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class AutoHidePlugin implements IGTweenPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: AutoHidePlugin;
     protected static tweenProperties: any[] = ['alpha'];
-    public static install (): void
+    static install (): void
     {
         if (AutoHidePlugin.instance )
         {
@@ -14,12 +14,12 @@ export class AutoHidePlugin implements IGTweenPlugin {
         GTween.installPlugin(AutoHidePlugin.instance, AutoHidePlugin.tweenProperties);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         return value;
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (tween.pluginData.AutoHideEnabled == null && AutoHidePlugin.enabled || tween.pluginData.AutoHideEnabled )
         {

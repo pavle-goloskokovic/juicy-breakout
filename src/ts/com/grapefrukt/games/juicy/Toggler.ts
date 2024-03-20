@@ -17,7 +17,7 @@ import { describeType } from '../../../../flash/utils/describeType';
 export class Toggler extends Sprite {
     private _targetClass: Class;
     private _properties: Array<Property>;
-    public constructor (targetClass: Class, visible = false)
+    constructor (targetClass: Class, visible = false)
     {
         super();
         this._targetClass = targetClass;
@@ -121,7 +121,7 @@ export class Toggler extends Sprite {
         accordion.width = 250;
     }
 
-    public setAll (value: boolean): void
+    setAll (value: boolean): void
     {
         for (const property of this._properties)
         {
@@ -219,12 +219,12 @@ export class Toggler extends Sprite {
     }
 }
 class Property {
-    public name: string;
-    public comment: string;
-    public type: string;
-    public value: any;
-    public max: number;
-    public min: number;
-    public order = '';
-    public header = '';
+    name: string;
+    comment: string;
+    type: string;
+    value: any;
+    max: number;
+    min: number;
+    order = '';
+    header = '';
 }

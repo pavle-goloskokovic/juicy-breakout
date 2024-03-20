@@ -22,7 +22,7 @@ export class ScrollBar extends Component {
     protected _repeatTimer: Timer;
     protected _direction: string;
     protected _shouldRepeat = false;
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
+    constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
@@ -90,17 +90,17 @@ export class ScrollBar extends Component {
         this._repeatTimer.addEventListener(TimerEvent.TIMER, this.onRepeat);
     }
 
-    public setSliderParams (min: number, max: number, value: number): void
+    setSliderParams (min: number, max: number, value: number): void
     {
         this._scrollSlider.setSliderParams(min, max, value);
     }
 
-    public setThumbPercent (value: number): void
+    setThumbPercent (value: number): void
     {
         this._scrollSlider.setThumbPercent(value);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         if (this._orientation == Slider.VERTICAL )
@@ -132,64 +132,64 @@ export class ScrollBar extends Component {
         }
     }
 
-    public set autoHide (value: boolean)
+    set autoHide (value: boolean)
     {
         this._autoHide = this.value;
         this.invalidate();
     }
 
-    public get autoHide (): boolean
+    get autoHide (): boolean
     {
         return this._autoHide;
     }
 
-    public set value (v: number)
+    set value (v: number)
     {
         this._scrollSlider.value = v;
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._scrollSlider.value;
     }
 
-    public set minimum (v: number)
+    set minimum (v: number)
     {
         this._scrollSlider.minimum = v;
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._scrollSlider.minimum;
     }
 
-    public set maximum (v: number)
+    set maximum (v: number)
     {
         this._scrollSlider.maximum = v;
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._scrollSlider.maximum;
     }
 
-    public set lineSize (value: number)
+    set lineSize (value: number)
     {
         this._lineSize = this.value;
     }
 
-    public get lineSize (): number
+    get lineSize (): number
     {
         return this._lineSize;
     }
 
-    public set pageSize (value: number)
+    set pageSize (value: number)
     {
         this._scrollSlider.pageSize = this.value;
         this.invalidate();
     }
 
-    public get pageSize (): number
+    get pageSize (): number
     {
         return this._scrollSlider.pageSize;
     }
@@ -262,7 +262,7 @@ import { Style } from './Style';
 class ScrollSlider extends Slider {
     protected _thumbPercent = 1.0;
     protected _pageSize = 1;
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
+    constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(orientation, parent, xpos, ypos);
         if (defaultHandler != null )
@@ -321,7 +321,7 @@ class ScrollSlider extends Slider {
         }
     }
 
-    public setThumbPercent (value: number): void
+    setThumbPercent (value: number): void
     {
         this._thumbPercent = Math.min(value, 1.0);
         this.invalidate();
@@ -433,18 +433,18 @@ class ScrollSlider extends Slider {
         }
     }
 
-    public set pageSize (value: number)
+    set pageSize (value: number)
     {
         this._pageSize = this.value;
         this.invalidate();
     }
 
-    public get pageSize (): number
+    get pageSize (): number
     {
         return this._pageSize;
     }
 
-    public get thumbPercent (): number
+    get thumbPercent (): number
     {
         return this._thumbPercent;
     }

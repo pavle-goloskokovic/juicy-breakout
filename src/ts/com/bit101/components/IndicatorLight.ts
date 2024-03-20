@@ -13,7 +13,7 @@ export class IndicatorLight extends Component {
     protected _labelText = '';
     protected _lite: Shape;
     protected _timer: Timer;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, color = 0xff0000, label = '')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, color = 0xff0000, label = '')
     {
         this._color = color;
         this._labelText = label;
@@ -60,7 +60,7 @@ export class IndicatorLight extends Component {
         this.draw();
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this.drawLite();
@@ -71,7 +71,7 @@ export class IndicatorLight extends Component {
         this._height = 10;
     }
 
-    public flash (interval = 500): void
+    flash (interval = 500): void
     {
         if (interval < 1 )
         {
@@ -83,41 +83,41 @@ export class IndicatorLight extends Component {
         this._timer.start();
     }
 
-    public set isLit (value: boolean)
+    set isLit (value: boolean)
     {
         this._timer.stop();
         this._lit = value;
         this.drawLite();
     }
 
-    public get isLit (): boolean
+    get isLit (): boolean
     {
         return this._lit;
     }
 
-    public set color (value: number)
+    set color (value: number)
     {
         this._color = value;
         this.draw();
     }
 
-    public get color (): number
+    get color (): number
     {
         return this._color;
     }
 
-    public get isFlashing (): boolean
+    get isFlashing (): boolean
     {
         return this._timer.running;
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.draw();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }

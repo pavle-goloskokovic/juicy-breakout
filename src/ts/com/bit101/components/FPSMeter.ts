@@ -9,7 +9,7 @@ export class FPSMeter extends Component {
     protected _frames: number;
     protected _prefix = '';
     protected _fps = 0;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, prefix = 'FPS:')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, prefix = 'FPS:')
     {
         super(parent, xpos, ypos);
         this._prefix = prefix;
@@ -29,7 +29,7 @@ export class FPSMeter extends Component {
         this._label = new Label(this, 0, 0);
     }
 
-    public draw (): void
+    draw (): void
     {
         this._label.text = this._prefix + this._fps.toString();
     }
@@ -53,27 +53,27 @@ export class FPSMeter extends Component {
         this.stop();
     }
 
-    public stop (): void
+    stop (): void
     {
         this.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
 
-    public start (): void
+    start (): void
     {
         this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
 
-    public set prefix (value: string)
+    set prefix (value: string)
     {
         this._prefix = value;
     }
 
-    public get prefix (): string
+    get prefix (): string
     {
         return this._prefix;
     }
 
-    public get fps (): number
+    get fps (): number
     {
         return this._fps;
     }

@@ -6,25 +6,25 @@ export class Shaker {
     private _target: DisplayObject;
     private _drag = .1;
     private _elasticity = .1;
-    public constructor (target: DisplayObject)
+    constructor (target: DisplayObject)
     {
         this._target = target;
         this._velocity = new Point();
         this._position = new Point();
     }
 
-    public shake (powerX: number, powerY: number): void
+    shake (powerX: number, powerY: number): void
     {
         this._velocity.x += powerX;
         this._velocity.y += powerY;
     }
 
-    public shakeRandom (power: number): void
+    shakeRandom (power: number): void
     {
         this._velocity = Point.polar(power, Math.random() * Math.PI * 2);
     }
 
-    public update (delta: number): void
+    update (delta: number): void
     {
         this._velocity.x -= this._velocity.x * this._drag * delta;
         this._velocity.y -= this._velocity.y * this._drag * delta;

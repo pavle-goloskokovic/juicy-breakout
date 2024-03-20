@@ -10,7 +10,7 @@ export class OneButtonInput extends EventDispatcher {
     private _keyState = false;
     private _changedSinceLastReadout = false;
     private _last_was_keyboard = true;
-    public constructor (stage: Stage, keyCode = 32, resetChangedOnReadout = true)
+    constructor (stage: Stage, keyCode = 32, resetChangedOnReadout = true)
     {
         super();
         this._keyCode = keyCode;
@@ -57,7 +57,7 @@ export class OneButtonInput extends EventDispatcher {
         }
     }
 
-    public get isChanged (): boolean
+    get isChanged (): boolean
     {
         const tmp: boolean = this._changedSinceLastReadout;
         if (this._resetChangedOnReadout )
@@ -67,17 +67,17 @@ export class OneButtonInput extends EventDispatcher {
         return tmp;
     }
 
-    public get isDown (): boolean
+    get isDown (): boolean
     {
         return this._keyState;
     }
 
-    public get lastWasKeyboard (): boolean
+    get lastWasKeyboard (): boolean
     {
         return this._last_was_keyboard;
     }
 
-    public resetChanged (): void
+    resetChanged (): void
     {
         this._changedSinceLastReadout = false;
     }

@@ -3,10 +3,10 @@ import { ColorMatrix } from '../../geom/ColorMatrix';
 import { ColorMatrixFilter } from '../../../../flash/filters/ColorMatrixFilter';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class ColorAdjustPlugin implements IGTweenPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: ColorAdjustPlugin;
     protected static tweenProperties: any[] = ['brightness', 'contrast', 'hue', 'saturation'];
-    public static install (): void
+    static install (): void
     {
         if (ColorAdjustPlugin.instance )
         {
@@ -16,7 +16,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         GTween.installPlugin(ColorAdjustPlugin.instance, ColorAdjustPlugin.tweenProperties);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled) )
         {
@@ -40,7 +40,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         return tween.getValue(name) - 1;
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled) )
         {

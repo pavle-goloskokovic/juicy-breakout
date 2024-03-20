@@ -1,10 +1,10 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class SmartRotationPlugin implements IGTweenPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: SmartRotationPlugin;
     protected static tweenProperties: any[] = ['rotation', 'rotationX', 'rotationY', 'rotationZ'];
-    public static install (properties: any[] = null): void
+    static install (properties: any[] = null): void
     {
         if (SmartRotationPlugin.instance )
         {
@@ -14,12 +14,12 @@ export class SmartRotationPlugin implements IGTweenPlugin {
         GTween.installPlugin(SmartRotationPlugin.instance, properties || SmartRotationPlugin.tweenProperties, true);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         return value;
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(SmartRotationPlugin.enabled && tween.pluginData.SmartRotationEnabled == null || tween.pluginData.SmartRotationEnabled) )
         {

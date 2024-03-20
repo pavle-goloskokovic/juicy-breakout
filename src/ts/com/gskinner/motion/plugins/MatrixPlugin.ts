@@ -2,10 +2,10 @@ import { GTween } from '../GTween';
 import { IGTweenPlugin } from './IGTweenPlugin';
 import type { Matrix } from '../../../../flash/geom/Matrix';
 export class MatrixPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: MatrixPlugin;
     protected static tweenProperties: any[] = ['a', 'b', 'c', 'd', 'tx', 'ty'];
-    public static install (): void
+    static install (): void
     {
         if (MatrixPlugin.instance )
         {
@@ -15,7 +15,7 @@ export class MatrixPlugin {
         GTween.installPlugin(MatrixPlugin.instance, MatrixPlugin.tweenProperties, true);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled) )
         {
@@ -24,7 +24,7 @@ export class MatrixPlugin {
         return tween.target.transform.matrix[name];
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled) )
         {

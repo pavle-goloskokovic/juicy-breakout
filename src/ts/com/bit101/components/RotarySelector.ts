@@ -7,10 +7,10 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class RotarySelector extends Component {
-    public static ALPHABETIC = 'alphabetic';
-    public static NUMERIC = 'numeric';
-    public static NONE = 'none';
-    public static ROMAN = 'roman';
+    static ALPHABETIC = 'alphabetic';
+    static NUMERIC = 'numeric';
+    static NONE = 'none';
+    static ROMAN = 'roman';
     protected _label: Label;
     protected _labelText = '';
     protected _knob: Sprite;
@@ -18,7 +18,7 @@ export class RotarySelector extends Component {
     protected _choice = 0;
     protected _labels: Sprite;
     protected _labelMode: string = ALPHABETIC;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -90,7 +90,7 @@ export class RotarySelector extends Component {
         this._knob.y = this._height / 2;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         const radius: number = Math.min(this._width, this._height) / 2;
@@ -158,36 +158,36 @@ export class RotarySelector extends Component {
         this.choice = this._labels.getChildIndex(lab);
     }
 
-    public set numChoices (value: number)
+    set numChoices (value: number)
     {
         this._numChoices = Math.min(value, 10);
         this.draw();
     }
 
-    public get numChoices (): number
+    get numChoices (): number
     {
         return this._numChoices;
     }
 
-    public set choice (value: number)
+    set choice (value: number)
     {
         this._choice = Math.max(0, Math.min(this._numChoices - 1, value));
         this.draw();
         dispatchEvent(new Event(Event.CHANGE));
     }
 
-    public get choice (): number
+    get choice (): number
     {
         return this._choice;
     }
 
-    public set labelMode (value: string)
+    set labelMode (value: string)
     {
         this._labelMode = value;
         this.draw();
     }
 
-    public get labelMode (): string
+    get labelMode (): string
     {
         return this._labelMode;
     }

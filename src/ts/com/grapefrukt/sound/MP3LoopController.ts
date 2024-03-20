@@ -6,7 +6,7 @@ export class MP3LoopController {
     private _next_music: MP3LoopBase;
     private _gtween: GTween;
     private _volume = 0;
-    public constructor (loop: MP3LoopBase)
+    constructor (loop: MP3LoopBase)
     {
         this._loop = loop;
         this._gtween = new GTween(this, 1);
@@ -33,7 +33,7 @@ export class MP3LoopController {
         this._loop.soundChannel.soundTransform = soundTransform;
     }
 
-    public tweenVolume (value: number): void
+    tweenVolume (value: number): void
     {
         this._gtween.proxy.volume = value;
         if (value > 0 && !this._loop.playing )
@@ -42,7 +42,7 @@ export class MP3LoopController {
         }
     }
 
-    public play (): boolean
+    play (): boolean
     {
         if (!this._loop.play() )
         {
@@ -56,22 +56,22 @@ export class MP3LoopController {
         return true;
     }
 
-    public setNextMusic (value: MP3LoopBase): void
+    setNextMusic (value: MP3LoopBase): void
     {
         this._next_music = value;
     }
 
-    public get volume (): number
+    get volume (): number
     {
         return this._volume;
     }
 
-    public set volume (value: number)
+    set volume (value: number)
     {
         this._volume = value;
     }
 
-    public get loop (): MP3LoopBase
+    get loop (): MP3LoopBase
     {
         return this._loop;
     }

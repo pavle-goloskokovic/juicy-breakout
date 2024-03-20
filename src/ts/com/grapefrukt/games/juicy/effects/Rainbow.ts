@@ -4,7 +4,7 @@ export class Rainbow extends Shape {
     private _segments: Array<Segment>;
     private _verts: Array<number>;
     private _indices: Array<number>;
-    public constructor ()
+    constructor ()
     {
         super();
         this._segments = [];
@@ -12,7 +12,7 @@ export class Rainbow extends Shape {
         this._indices = [];
     }
 
-    public addSegment (x: number, y: number): void
+    addSegment (x: number, y: number): void
     {
         let seg: Segment;
         while (this._segments.length > Settings.EFFECT_BALL_TRAIL_LENGTH)
@@ -28,7 +28,7 @@ export class Rainbow extends Shape {
         this._segments.push(seg);
     }
 
-    public redrawSegments (offsetX = 0, offsetY = 0): void
+    redrawSegments (offsetX = 0, offsetY = 0): void
     {
         this.graphics.clear();
         if (!Settings.EFFECT_BALL_TRAIL )
@@ -94,6 +94,6 @@ export class Rainbow extends Shape {
     }
 }
 class Segment {
-    public x = 0.0;
-    public y = 0.0;
+    x = 0.0;
+    y = 0.0;
 }

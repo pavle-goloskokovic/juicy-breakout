@@ -8,14 +8,14 @@ export class MinimalConfigurator extends EventDispatcher {
     protected loader: URLLoader;
     protected parent: DisplayObjectContainer;
     protected idMap: any;
-    public constructor (parent: DisplayObjectContainer)
+    constructor (parent: DisplayObjectContainer)
     {
         super();
         this.parent = parent;
         this.idMap = new Object();
     }
 
-    public loadXML (url: string): void
+    loadXML (url: string): void
     {
         this.loader = new URLLoader();
         this.loader.addEventListener(Event.COMPLETE, this.onLoadComplete);
@@ -27,7 +27,7 @@ export class MinimalConfigurator extends EventDispatcher {
         this.parseXMLString(this.loader.data as string);
     }
 
-    public parseXMLString (string: string): void
+    parseXMLString (string: string): void
     {
         try
         {
@@ -42,7 +42,7 @@ export class MinimalConfigurator extends EventDispatcher {
         dispatchEvent(new Event(Event.COMPLETE));
     }
 
-    public parseXML (xml: XML): void
+    parseXML (xml: XML): void
     {
         for (let i = 0; i < xml.children().length(); i++)
         {
@@ -123,7 +123,7 @@ export class MinimalConfigurator extends EventDispatcher {
         return compInst as Component;
     }
 
-    public getCompById (id: string): Component
+    getCompById (id: string): Component
     {
         return this.idMap[id];
     }

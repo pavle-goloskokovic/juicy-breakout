@@ -5,7 +5,7 @@ import { Sprite } from '../../../../../flash/display/Sprite';
 export class ParticlePool extends Sprite {
     private _particleclass: Class;
     private _pool: ObjectPool;
-    public constructor (particleClass: Class, size = 20)
+    constructor (particleClass: Class, size = 20)
     {
         super();
         this._particleclass = particleClass;
@@ -15,7 +15,7 @@ export class ParticlePool extends Sprite {
         this.addEventListener(ParticleEvent.DIE, this.handleParticleDeath, true);
     }
 
-    public clear (): void
+    clear (): void
     {
         while (this.numChildren)
         {
@@ -32,7 +32,7 @@ export class ParticlePool extends Sprite {
         this._pool.object = p;
     }
 
-    public add (): Particle
+    add (): Particle
     {
         const p: Particle = this._pool.object;
         this.addChild(p);

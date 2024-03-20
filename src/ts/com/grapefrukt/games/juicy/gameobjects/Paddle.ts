@@ -6,7 +6,7 @@ import { MathUtil } from '../../../math/MathUtil';
 export class Paddle extends Block {
     private _face: PaddleFace;
     private _happyExtraScale: number;
-    public constructor ()
+    constructor ()
     {
         super(Settings.STAGE_W / 2, Settings.STAGE_H + Settings.PADDLE_H / 2 - 50);
         this._collisionW = Settings.PADDLE_W;
@@ -16,12 +16,12 @@ export class Paddle extends Block {
         this._gfx.addChild(this._face);
     }
 
-    public collide (ball: Ball): void
+    collide (ball: Ball): void
     {
         this._happyExtraScale = 10;
     }
 
-    public update (timeDelta = 1): void
+    update (timeDelta = 1): void
     {
         super.update(timeDelta);
         this._face.visible = Settings.EFFECT_PADDLE_FACE;
@@ -33,7 +33,7 @@ export class Paddle extends Block {
         this._face.eye_r.scaleX = (this._face.eye_r.scaleY = 1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100);
     }
 
-    public lookAt (ball: Ball): void
+    lookAt (ball: Ball): void
     {
         if (Settings.EFFECT_PADDLE_LOOK_AT_BALL )
         {
@@ -52,7 +52,7 @@ export class Paddle extends Block {
         this.smile(distance);
     }
 
-    public smile (how_much: number): void
+    smile (how_much: number): void
     {
         let t = 0;
         if (how_much < 0.4 )

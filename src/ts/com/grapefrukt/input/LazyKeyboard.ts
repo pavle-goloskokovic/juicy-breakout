@@ -3,7 +3,7 @@ import { KeyboardEvent } from '../../../flash/events/KeyboardEvent';
 import { Keyboard } from '../../../flash/ui/Keyboard';
 export class LazyKeyboard {
     private _keys: any;
-    public constructor (stage: Stage)
+    constructor (stage: Stage)
     {
         this._keys = {};
         stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKey);
@@ -20,7 +20,7 @@ export class LazyKeyboard {
         this._keys[e.keyCode] = keyState;
     }
 
-    public keyIsDown (keyCode: number): boolean
+    keyIsDown (keyCode: number): boolean
     {
         return this._keys[keyCode];
     }

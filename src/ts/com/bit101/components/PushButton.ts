@@ -13,7 +13,7 @@ export class PushButton extends Component {
     protected _down = false;
     protected _selected = false;
     protected _toggle = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
         if (defaultHandler != null )
@@ -64,7 +64,7 @@ export class PushButton extends Component {
         this._face.graphics.endFill();
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._back.graphics.clear();
@@ -124,18 +124,18 @@ export class PushButton extends Component {
         this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.draw();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public set selected (value: boolean)
+    set selected (value: boolean)
     {
         if (!this._toggle )
         {
@@ -147,17 +147,17 @@ export class PushButton extends Component {
         this.drawFace();
     }
 
-    public get selected (): boolean
+    get selected (): boolean
     {
         return this._selected;
     }
 
-    public set toggle (value: boolean)
+    set toggle (value: boolean)
     {
         this._toggle = value;
     }
 
-    public get toggle (): boolean
+    get toggle (): boolean
     {
         return this._toggle;
     }

@@ -10,12 +10,12 @@ export class GTweener {
         GTween.installPlugin(GTweener.instance, ['*']);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         return value;
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (end && tween.pluginData.GTweener )
         {
@@ -24,21 +24,21 @@ export class GTweener {
         return value;
     }
 
-    public static to (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
+    static to (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
     {
         const tween: GTween = new GTween(target, duration, values, props, pluginData);
         GTweener.add(tween);
         return tween;
     }
 
-    public static from (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
+    static from (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
     {
         const tween: GTween = GTweener.to(target, duration, values, props, pluginData);
         tween.swapValues();
         return tween;
     }
 
-    public static add (tween: GTween): void
+    static add (tween: GTween): void
     {
         const target: any = tween.target;
         let list: any[] = GTweener.tweens[target];
@@ -54,7 +54,7 @@ export class GTweener {
         tween.pluginData.GTweener = true;
     }
 
-    public static getTween (target: any, name: string): GTween
+    static getTween (target: any, name: string): GTween
     {
         const list: any[] = GTweener.tweens[target];
         if (list == null )
@@ -73,12 +73,12 @@ export class GTweener {
         return null;
     }
 
-    public static getTweens (target: any): any[]
+    static getTweens (target: any): any[]
     {
         return GTweener.tweens[target] || [];
     }
 
-    public static pauseTweens (target: any, paused = true): void
+    static pauseTweens (target: any, paused = true): void
     {
         const list: any[] = GTweener.tweens[target];
         if (list == null )
@@ -92,12 +92,12 @@ export class GTweener {
         }
     }
 
-    public static resumeTweens (target: any): void
+    static resumeTweens (target: any): void
     {
         GTweener.pauseTweens(target, false);
     }
 
-    public static remove (tween: GTween): void
+    static remove (tween: GTween): void
     {
         delete tween.pluginData.GTweener;
         const list: any[] = GTweener.tweens[tween.target];
@@ -116,7 +116,7 @@ export class GTweener {
         }
     }
 
-    public static removeTweens (target: any): void
+    static removeTweens (target: any): void
     {
         GTweener.pauseTweens(target);
         const list: any[] = GTweener.tweens[target];

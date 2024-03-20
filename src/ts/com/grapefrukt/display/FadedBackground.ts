@@ -14,7 +14,7 @@ export class FadedBackground extends Sprite {
     private _stageNormalWidth = 0;
     private _stageNormalHeight = 0;
     private _ratios: any[];
-    public constructor (newColor: number, stageNormalWidth: number, stageNormalHeight: number, fadedColor = 0x000000, ratios: any[] = null)
+    constructor (newColor: number, stageNormalWidth: number, stageNormalHeight: number, fadedColor = 0x000000, ratios: any[] = null)
     {
         super();
         this._base_color = newColor;
@@ -61,7 +61,7 @@ export class FadedBackground extends Sprite {
         this.stage.addEventListener(Event.RESIZE, this.resizeHandler);
     }
 
-    public redraw (newColor = -1): void
+    redraw (newColor = -1): void
     {
         if (newColor >= 0 )
         {

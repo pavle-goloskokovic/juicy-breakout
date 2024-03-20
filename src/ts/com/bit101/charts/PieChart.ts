@@ -6,7 +6,7 @@ export class PieChart extends Chart {
     protected _sprite: Sprite;
     protected _beginningAngle = 0;
     protected _colors: any[] = [0xff9999, 0xffff99, 0x99ff99, 0x99ffff, 0x9999ff, 0xff99ff, 0xffcccc, 0xffffcc, 0xccffcc, 0xccffff, 0xccccff, 0xffccff, 0xff6666, 0xffff66, 0x99ff66, 0x66ffff, 0x6666ff, 0xff66ff, 0xffffff];
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         super(parent, xpos, ypos, data);
     }
@@ -117,24 +117,24 @@ export class PieChart extends Chart {
         return total;
     }
 
-    public set colors (value: any[])
+    set colors (value: any[])
     {
         this._colors = value;
         this.invalidate();
     }
 
-    public get colors (): any[]
+    get colors (): any[]
     {
         return this._colors;
     }
 
-    public set beginningAngle (value: number)
+    set beginningAngle (value: number)
     {
         this._beginningAngle = value;
         this.invalidate();
     }
 
-    public get beginningAngle (): number
+    get beginningAngle (): number
     {
         return this._beginningAngle;
     }

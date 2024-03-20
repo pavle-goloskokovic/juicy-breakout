@@ -23,7 +23,7 @@ export class Window extends Component {
     protected _hasCloseButton: boolean;
     protected _closeButton: PushButton;
     protected _grips: Shape;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, title = 'Window')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, title = 'Window')
     {
         this._title = title;
         super(parent, xpos, ypos);
@@ -80,19 +80,19 @@ export class Window extends Component {
         this.filters = [this.getShadow(4, false)];
     }
 
-    public addChild (child: DisplayObject): DisplayObject
+    addChild (child: DisplayObject): DisplayObject
     {
         this.content.addChild(child);
         return child;
     }
 
-    public addRawChild (child: DisplayObject): DisplayObject
+    addRawChild (child: DisplayObject): DisplayObject
     {
         super.addChild(child);
         return child;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._titleBar.color = this._color;
@@ -141,7 +141,7 @@ export class Window extends Component {
         dispatchEvent(new Event(Event.CLOSE));
     }
 
-    public set shadow (b: boolean)
+    set shadow (b: boolean)
     {
         this._shadow = b;
         if (this._shadow )
@@ -154,51 +154,51 @@ export class Window extends Component {
         }
     }
 
-    public get shadow (): boolean
+    get shadow (): boolean
     {
         return this._shadow;
     }
 
-    public set color (c: number)
+    set color (c: number)
     {
         this._color = c;
         this.invalidate();
     }
 
-    public get color (): number
+    get color (): number
     {
         return this._color;
     }
 
-    public set title (t: string)
+    set title (t: string)
     {
         this._title = t;
         this._titleLabel.text = this._title;
     }
 
-    public get title (): string
+    get title (): string
     {
         return this._title;
     }
 
-    public get content (): DisplayObjectContainer
+    get content (): DisplayObjectContainer
     {
         return this._panel.content;
     }
 
-    public set draggable (b: boolean)
+    set draggable (b: boolean)
     {
         this._draggable = b;
         this._titleBar.buttonMode = this._draggable;
         this._titleBar.useHandCursor = this._draggable;
     }
 
-    public get draggable (): boolean
+    get draggable (): boolean
     {
         return this._draggable;
     }
 
-    public set hasMinimizeButton (b: boolean)
+    set hasMinimizeButton (b: boolean)
     {
         this._hasMinimizeButton = b;
         if (this._hasMinimizeButton )
@@ -212,12 +212,12 @@ export class Window extends Component {
         this.invalidate();
     }
 
-    public get hasMinimizeButton (): boolean
+    get hasMinimizeButton (): boolean
     {
         return this._hasMinimizeButton;
     }
 
-    public set minimized (value: boolean)
+    set minimized (value: boolean)
     {
         this._minimized = value;
         if (this._minimized )
@@ -239,12 +239,12 @@ export class Window extends Component {
         dispatchEvent(new Event(Event.RESIZE));
     }
 
-    public get minimized (): boolean
+    get minimized (): boolean
     {
         return this._minimized;
     }
 
-    public get height (): number
+    get height (): number
     {
         if (this.contains(this._panel) )
         {
@@ -256,7 +256,7 @@ export class Window extends Component {
         }
     }
 
-    public set hasCloseButton (value: boolean)
+    set hasCloseButton (value: boolean)
     {
         this._hasCloseButton = value;
         if (this._hasCloseButton )
@@ -270,22 +270,22 @@ export class Window extends Component {
         this.invalidate();
     }
 
-    public get hasCloseButton (): boolean
+    get hasCloseButton (): boolean
     {
         return this._hasCloseButton;
     }
 
-    public get titleBar (): Panel
+    get titleBar (): Panel
     {
         return this._titleBar;
     }
 
-    public set titleBar (value: Panel)
+    set titleBar (value: Panel)
     {
         this._titleBar = value;
     }
 
-    public get grips (): Shape
+    get grips (): Shape
     {
         return this._grips;
     }

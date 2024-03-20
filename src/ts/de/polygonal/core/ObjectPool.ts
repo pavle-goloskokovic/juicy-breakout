@@ -8,12 +8,12 @@ export class ObjectPool {
     private _tail: ObjNode;
     private _emptyNode: ObjNode;
     private _allocNode: ObjNode;
-    public constructor (grow = false)
+    constructor (grow = false)
     {
         this._grow = grow;
     }
 
-    public deconstruct (): void
+    deconstruct (): void
     {
         let node: ObjNode = this._head;
         let t: ObjNode;
@@ -27,22 +27,22 @@ export class ObjectPool {
         this._head = (this._tail = (this._emptyNode = (this._allocNode = null)));
     }
 
-    public get size (): number
+    get size (): number
     {
         return this._currSize;
     }
 
-    public get usageCount (): number
+    get usageCount (): number
     {
         return this._usageCount;
     }
 
-    public get wasteCount (): number
+    get wasteCount (): number
     {
         return this._currSize - this._usageCount;
     }
 
-    public get object (): any
+    get object (): any
     {
         if (this._usageCount == this._currSize )
         {
@@ -79,7 +79,7 @@ export class ObjectPool {
         }
     }
 
-    public set object (o: any)
+    set object (o: any)
     {
         if (this._usageCount > 0 )
         {
@@ -89,7 +89,7 @@ export class ObjectPool {
         }
     }
 
-    public allocate (C: Class, size: number): void
+    allocate (C: Class, size: number): void
     {
         this.deconstruct();
         this._obj = C;
@@ -108,7 +108,7 @@ export class ObjectPool {
         this._tail.next = this._head;
     }
 
-    public initialize (func: string, args: any[]): void
+    initialize (func: string, args: any[]): void
     {
         let n: ObjNode = this._head;
         while (n)
@@ -122,7 +122,7 @@ export class ObjectPool {
         }
     }
 
-    public purge (): void
+    purge (): void
     {
         let i: number;
         let node: ObjNode;
@@ -194,6 +194,6 @@ export class ObjectPool {
     }
 }
 class ObjNode {
-    public next: ObjNode;
-    public data: any;
+    next: ObjNode;
+    data: any;
 }

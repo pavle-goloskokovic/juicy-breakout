@@ -1,5 +1,5 @@
 export class ColorConverter {
-    public static UINTtoRGB (color: number): any[]
+    static UINTtoRGB (color: number): any[]
     {
         const r: number = color >> 16 & 0xFF;
         const g: number = color >> 8 & 0xFF;
@@ -7,23 +7,23 @@ export class ColorConverter {
         return [r, g, b];
     }
 
-    public static UINTtoHSB (color: number): any[]
+    static UINTtoHSB (color: number): any[]
     {
         const rgb: any[] = ColorConverter.UINTtoRGB(color);
         return ColorConverter.RGBtoHSB(rgb[0], rgb[1], rgb[2]);
     }
 
-    public static HSBtoRGB (hue: number, saturation: number, brightness: number): any[]
+    static HSBtoRGB (hue: number, saturation: number, brightness: number): any[]
     {
         return ColorConverter.UINTtoRGB(ColorConverter.HSBtoUINT(hue, saturation, brightness));
     }
 
-    public static RGBtoUINT (r: number, g: number, b: number): number
+    static RGBtoUINT (r: number, g: number, b: number): number
     {
         return r << 16 | g << 8 | b << 0;
     }
 
-    public static RGBtoHSB (r: number, g: number, b: number): any[]
+    static RGBtoHSB (r: number, g: number, b: number): any[]
     {
         const cmax: number = Math.max(r, g, b);
         const cmin: number = Math.min(r, g, b);
@@ -56,7 +56,7 @@ export class ColorConverter {
         return [hue, saturation, brightness];
     }
 
-    public static HSBtoUINT (hue: number, saturation: number, brightness: number): number
+    static HSBtoUINT (hue: number, saturation: number, brightness: number): number
     {
         let r = 0;
         let g = 0;

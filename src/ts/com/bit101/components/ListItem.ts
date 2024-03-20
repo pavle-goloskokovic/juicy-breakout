@@ -10,7 +10,7 @@ export class ListItem extends Component {
     protected _rolloverColor = 0xeeeeee;
     protected _selected: boolean;
     protected _mouseOver = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any = null)
     {
         this._data = data;
         super(parent, xpos, ypos);
@@ -30,7 +30,7 @@ export class ListItem extends Component {
         this._label.draw();
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this.graphics.clear();
@@ -80,57 +80,57 @@ export class ListItem extends Component {
         this.invalidate();
     }
 
-    public set data (value: any)
+    set data (value: any)
     {
         this._data = value;
         this.invalidate();
     }
 
-    public get data (): any
+    get data (): any
     {
         return this._data;
     }
 
-    public set selected (value: boolean)
+    set selected (value: boolean)
     {
         this._selected = value;
         this.invalidate();
     }
 
-    public get selected (): boolean
+    get selected (): boolean
     {
         return this._selected;
     }
 
-    public set defaultColor (value: number)
+    set defaultColor (value: number)
     {
         this._defaultColor = value;
         this.invalidate();
     }
 
-    public get defaultColor (): number
+    get defaultColor (): number
     {
         return this._defaultColor;
     }
 
-    public set selectedColor (value: number)
+    set selectedColor (value: number)
     {
         this._selectedColor = value;
         this.invalidate();
     }
 
-    public get selectedColor (): number
+    get selectedColor (): number
     {
         return this._selectedColor;
     }
 
-    public set rolloverColor (value: number)
+    set rolloverColor (value: number)
     {
         this._rolloverColor = value;
         this.invalidate();
     }
 
-    public get rolloverColor (): number
+    get rolloverColor (): number
     {
         return this._rolloverColor;
     }

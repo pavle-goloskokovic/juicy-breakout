@@ -2,10 +2,10 @@ import { GTween } from '../GTween';
 import { BlurFilter } from '../../../../flash/filters/BlurFilter';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class BlurPlugin implements IGTweenPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: BlurPlugin;
     protected static tweenProperties: any[] = ['blurX', 'blurY', 'blur'];
-    public static install (): void
+    static install (): void
     {
         if (BlurPlugin.instance )
         {
@@ -15,7 +15,7 @@ export class BlurPlugin implements IGTweenPlugin {
         GTween.installPlugin(BlurPlugin.instance, BlurPlugin.tweenProperties);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled) )
         {
@@ -41,7 +41,7 @@ export class BlurPlugin implements IGTweenPlugin {
         return 0;
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled) )
         {

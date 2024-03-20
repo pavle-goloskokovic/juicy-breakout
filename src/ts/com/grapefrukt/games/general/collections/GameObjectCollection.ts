@@ -5,7 +5,7 @@ import { Point } from '../../../../../flash/geom/Point';
 import { grapelib } from '../namespaces/grapelib';
 export class GameObjectCollection extends Sprite {
     protected _collection: Array<GameObject>;
-    public constructor ()
+    constructor ()
     {
         super();
         this._collection = [];
@@ -17,7 +17,7 @@ export class GameObjectCollection extends Sprite {
         this.remove(GameObject(e.target), false);
     }
 
-    public getClosest (x: number, y: number, maxDistance: number = Number.MAX_VALUE, classFilter: Class = null, filterObject: GameObject = null): GameObject
+    getClosest (x: number, y: number, maxDistance: number = Number.MAX_VALUE, classFilter: Class = null, filterObject: GameObject = null): GameObject
     {
         let dist = 0.0;
         let minDist: number = maxDistance;
@@ -41,21 +41,21 @@ export class GameObjectCollection extends Sprite {
         return minObj;
     }
 
-    public add (go: GameObject): GameObject
+    add (go: GameObject): GameObject
     {
         this._collection.push(go);
         this.addChild(go);
         return go;
     }
 
-    public addAt (go: GameObject, index: number): GameObject
+    addAt (go: GameObject, index: number): GameObject
     {
         this._collection.splice(index - 1, 0, go);
         this.addChild(go);
         return go;
     }
 
-    public removeAtIndex (pos: number, doRemove: boolean): GameObject
+    removeAtIndex (pos: number, doRemove: boolean): GameObject
     {
         const go: GameObject = this._collection[pos];
         this._collection.splice(pos, 1);
@@ -67,7 +67,7 @@ export class GameObjectCollection extends Sprite {
         return go;
     }
 
-    public remove (go: GameObject, doRemove: boolean): GameObject
+    remove (go: GameObject, doRemove: boolean): GameObject
     {
         const i: number = this._collection.indexOf(go);
         if (this._collection[i] && GameObject(this._collection[i]) == go )
@@ -83,7 +83,7 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    public getIndex (go: GameObject): number
+    getIndex (go: GameObject): number
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
@@ -95,7 +95,7 @@ export class GameObjectCollection extends Sprite {
         return -1;
     }
 
-    public getRandom (): GameObject
+    getRandom (): GameObject
     {
         if (this._collection.length == 0 )
         {
@@ -111,7 +111,7 @@ export class GameObjectCollection extends Sprite {
         return go;
     }
 
-    public checkCollision (x: number, y: number, classFilter: Class = null, filterObject: GameObject = null): GameObject
+    checkCollision (x: number, y: number, classFilter: Class = null, filterObject: GameObject = null): GameObject
     {
         const hitGo: GameObject = this.getClosest(x, y, Number.MAX_VALUE, classFilter, filterObject);
         if ((hitGo && !hitGo.flaggedForRemoval) && hitGo.hitTestPoint(x, y, true) )
@@ -121,7 +121,7 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    public hasItemOfClass (findClass: Class): boolean
+    hasItemOfClass (findClass: Class): boolean
     {
         for (const go of this._collection)
         {
@@ -133,7 +133,7 @@ export class GameObjectCollection extends Sprite {
         return false;
     }
 
-    public update (timeDelta = 1): void
+    update (timeDelta = 1): void
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
@@ -141,7 +141,7 @@ export class GameObjectCollection extends Sprite {
         }
     }
 
-    public clear (): void
+    clear (): void
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
@@ -150,7 +150,7 @@ export class GameObjectCollection extends Sprite {
         this._collection.length = 0;
     }
 
-    public get head (): GameObject
+    get head (): GameObject
     {
         if (this._collection.length )
         {
@@ -159,7 +159,7 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    public get tail (): GameObject
+    get tail (): GameObject
     {
         if (this._collection.length )
         {
@@ -168,12 +168,12 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    public get collection (): Array<GameObject>
+    get collection (): Array<GameObject>
     {
         return this._collection;
     }
 
-    public get size (): number
+    get size (): number
     {
         return this._collection.length;
     }

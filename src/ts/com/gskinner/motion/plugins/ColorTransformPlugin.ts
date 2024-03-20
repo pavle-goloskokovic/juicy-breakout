@@ -1,10 +1,10 @@
 import { GTween } from '../GTween';
 import { ColorTransform } from '../../../../flash/geom/ColorTransform';
 export class ColorTransformPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static installed = false;
     protected static tweenProperties: any[] = ['redMultiplier', 'greenMultiplier', 'blueMultiplier', 'alphaMultiplier', 'redOffset', 'greenOffset', 'blueOffset', 'alphaOffset', 'tint'];
-    public static install (): void
+    static install (): void
     {
         if (ColorTransformPlugin.installed )
         {
@@ -14,7 +14,7 @@ export class ColorTransformPlugin {
         GTween.installPlugin(ColorTransformPlugin, ColorTransformPlugin.tweenProperties, true);
     }
 
-    public static init (tween: GTween, name: string, value: number): number
+    static init (tween: GTween, name: string, value: number): number
     {
         if (!(ColorTransformPlugin.enabled && tween.pluginData.ColorTransformEnabled == null || tween.pluginData.ColorTransformEnabled) )
         {
@@ -36,7 +36,7 @@ export class ColorTransformPlugin {
         }
     }
 
-    public static tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    static tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(tween.pluginData.ColorTransformEnabled == null && ColorTransformPlugin.enabled || tween.pluginData.ColorTransformEnabled) )
         {

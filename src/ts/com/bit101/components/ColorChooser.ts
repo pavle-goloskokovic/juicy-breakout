@@ -17,8 +17,8 @@ import { Matrix } from '../../../flash/geom/Matrix';
 import { Point } from '../../../flash/geom/Point';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class ColorChooser extends Component {
-    public static TOP = 'top';
-    public static BOTTOM = 'bottom';
+    static TOP = 'top';
+    static BOTTOM = 'bottom';
     protected _colors: BitmapData;
     protected _colorsContainer: Sprite;
     protected _defaultModelColors: any[] = [0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF, 0xFF0000, 0xFFFFFF, 0x000000];
@@ -31,7 +31,7 @@ export class ColorChooser extends Component {
     protected _tmpColorChoice: number = _value;
     protected _usePopup = false;
     protected _value = 0xff0000;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, value = 0xff0000, defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, value = 0xff0000, defaultHandler: Function = null)
     {
         this._oldColorChoice = (this._tmpColorChoice = (this._value = value));
         super(parent, xpos, ypos);
@@ -68,7 +68,7 @@ export class ColorChooser extends Component {
         this.drawColors(this._model);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._swatch.graphics.clear();
@@ -87,7 +87,7 @@ export class ColorChooser extends Component {
         dispatchEvent(new Event(Event.CHANGE));
     }
 
-    public set value (n: number)
+    set value (n: number)
     {
         let str: string = n.toString(16).toUpperCase();
         while (str.length < 6)
@@ -99,17 +99,17 @@ export class ColorChooser extends Component {
         this.invalidate();
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._value;
     }
 
-    public get model (): DisplayObject
+    get model (): DisplayObject
     {
         return this._model;
     }
 
-    public set model (value: DisplayObject)
+    set model (value: DisplayObject)
     {
         this._model = value;
         if (this._model != null )
@@ -140,23 +140,23 @@ export class ColorChooser extends Component {
         this.placeColors();
     }
 
-    public get popupAlign (): string
+    get popupAlign (): string
     {
         return this._popupAlign;
     }
 
-    public set popupAlign (value: string)
+    set popupAlign (value: string)
     {
         this._popupAlign = value;
         this.placeColors();
     }
 
-    public get usePopup (): boolean
+    get usePopup (): boolean
     {
         return this._usePopup;
     }
 
-    public set usePopup (value: boolean)
+    set usePopup (value: boolean)
     {
         this._usePopup = value;
         this._swatch.buttonMode = true;

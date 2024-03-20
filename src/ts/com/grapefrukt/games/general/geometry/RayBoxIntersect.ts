@@ -1,9 +1,9 @@
 import { Point } from '../../../../../flash/geom/Point';
 import type { Rectangle } from '../../../../../flash/geom/Rectangle';
 export class RayBoxIntersect {
-    public static IN = 0;
-    public static OUT = 1;
-    public static rayBoxIntersect (r1: Point, r2: Point, box: Rectangle): Array<Point>
+    static IN = 0;
+    static OUT = 1;
+    static rayBoxIntersect (r1: Point, r2: Point, box: Rectangle): Array<Point>
     {
         if (box.x + box.width < Math.min(r1.x, r2.x) || box.x > Math.max(r1.x, r2.x) )
         {
@@ -79,7 +79,7 @@ export class RayBoxIntersect {
         return null;
     }
 
-    public static rayBoxIntersectFast (r1: Point, r2: Point, box: Rectangle, output: Point): boolean
+    static rayBoxIntersectFast (r1: Point, r2: Point, box: Rectangle, output: Point): boolean
     {
         if (box.x + box.width < Math.min(r1.x, r2.x) || box.x > Math.max(r1.x, r2.x) )
         {

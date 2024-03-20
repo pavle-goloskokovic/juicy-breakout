@@ -14,7 +14,7 @@ export class Calendar extends Panel {
     protected _monthNames: any[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     protected _selection: Shape;
     protected _year: number;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -92,7 +92,7 @@ export class Calendar extends Panel {
         return 30;
     }
 
-    public setDate (date: Date): void
+    setDate (date: Date): void
     {
         this._year = date.fullYear;
         this._month = date.month;
@@ -120,7 +120,7 @@ export class Calendar extends Panel {
         this._dateLabel.x = (this.width - this._dateLabel.width) / 2;
     }
 
-    public setYearMonthDay (year: number, month: number, day: number): void
+    setYearMonthDay (year: number, month: number, day: number): void
     {
         this.setDate(new Date(year, month, day));
     }
@@ -170,22 +170,22 @@ export class Calendar extends Panel {
         dispatchEvent(new Event(Event.SELECT));
     }
 
-    public get selectedDate (): Date
+    get selectedDate (): Date
     {
         return new Date(this._year, this._month, this._day);
     }
 
-    public get month (): number
+    get month (): number
     {
         return this._month;
     }
 
-    public get year (): number
+    get year (): number
     {
         return this._year;
     }
 
-    public get day (): number
+    get day (): number
     {
         return this._day;
     }

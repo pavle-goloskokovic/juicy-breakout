@@ -2,7 +2,7 @@ import { StringUtil } from '../../string/StringUtil';
 import type { DisplayObject } from '../../../../flash/display/DisplayObject';
 import type { DisplayObjectContainer } from '../../../../flash/display/DisplayObjectContainer';
 export class DisplayListTraverser {
-    public static explore (root: DisplayObjectContainer): void
+    static explore (root: DisplayObjectContainer): void
     {
         DisplayListTraverser.traverse(root);
     }

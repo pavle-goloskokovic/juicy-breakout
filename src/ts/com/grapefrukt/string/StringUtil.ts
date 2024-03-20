@@ -1,5 +1,5 @@
 export class StringUtil {
-    public static padStart (string: string, len: number, padding: string): string
+    static padStart (string: string, len: number, padding: string): string
     {
         while (string.length < len)
         {
@@ -8,7 +8,7 @@ export class StringUtil {
         return string;
     }
 
-    public static zeroPad (string: string, len: number): string
+    static zeroPad (string: string, len: number): string
     {
         while (string.length < len)
         {
@@ -17,7 +17,7 @@ export class StringUtil {
         return string;
     }
 
-    public static secondsToTime (seconds: number, separator = ':'): string
+    static secondsToTime (seconds: number, separator = ':'): string
     {
         const minutes: number = seconds / 60;
         seconds -= minutes * 60;

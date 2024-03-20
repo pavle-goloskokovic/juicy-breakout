@@ -4,7 +4,7 @@ import { TextFieldAutoSize } from '../../../flash/text/TextFieldAutoSize';
 import { TextFormat } from '../../../flash/text/TextFormat';
 export class TXT extends Sprite {
     private txt_text: TextField;
-    public constructor (color = 0xffffff, size = 12)
+    constructor (color = 0xffffff, size = 12)
     {
         super();
         const textformat: TextFormat = new TextFormat('Arial', size);
@@ -21,17 +21,17 @@ export class TXT extends Sprite {
         this.txt_text.width = 400;
     }
 
-    public setText (str: string): void
+    setText (str: string): void
     {
         this.txt_text.text = str + '\n';
     }
 
-    public appendText (str: string): void
+    appendText (str: string): void
     {
         this.txt_text.appendText(str + '\n');
     }
 
-    public set selectable (value: boolean)
+    set selectable (value: boolean)
     {
         this.txt_text.selectable = value;
     }

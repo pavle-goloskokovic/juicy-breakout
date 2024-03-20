@@ -13,7 +13,7 @@ import { Keyboard } from '../../../../../flash/ui/Keyboard';
 export class SliceEffect extends Sprite {
     private _container: Sprite;
     private _slices: Array<LineSliceObject>;
-    public constructor (source: DisplayObject, bounds: Rectangle = null)
+    constructor (source: DisplayObject, bounds: Rectangle = null)
     {
         super();
         let bounds: Rectangle = source.getBounds(source.parent);
@@ -43,7 +43,7 @@ export class SliceEffect extends Sprite {
         this._container.addChild(lso);
     }
 
-    public update (timeDelta: number): void
+    update (timeDelta: number): void
     {
         for (const slice of this._slices)
         {
@@ -56,7 +56,7 @@ export class SliceEffect extends Sprite {
         }
     }
 
-    public slice (p1: Point, p2: Point): void
+    slice (p1: Point, p2: Point): void
     {
         const toSlice: Array<LineSliceObject> = this._slices.concat();
         for (const slice of toSlice)
@@ -83,7 +83,7 @@ export class SliceEffect extends Sprite {
         this._slices.splice(this._slices.indexOf(e.target), 1);
     }
 
-    public get slices (): Array<LineSliceObject>
+    get slices (): Array<LineSliceObject>
     {
         return this._slices;
     }
@@ -96,9 +96,9 @@ class LineSliceObject extends Shape {
     private _length: number;
     private _texture: BitmapData;
     private _textureOffset: Point;
-    public velocity: Point;
-    public velocityR = 0;
-    public constructor (points: Array<Point>, texture: BitmapData, textureOffset: Point)
+    velocity: Point;
+    velocityR = 0;
+    constructor (points: Array<Point>, texture: BitmapData, textureOffset: Point)
     {
         super();
         this._textureOffset = textureOffset;
@@ -120,7 +120,7 @@ class LineSliceObject extends Shape {
         this.graphics.endFill();
     }
 
-    public slice (point1: Point, point2: Point): void
+    slice (point1: Point, point2: Point): void
     {
         const _pt1: Point = this.globalToLocal(this.parent.localToGlobal(point1));
         const _pt2: Point = this.globalToLocal(this.parent.localToGlobal(point2));
@@ -197,7 +197,7 @@ class LineSliceObject extends Shape {
         return vector1.x * vector2.y - vector1.y * vector2.x;
     }
 
-    public static isCross (n: number): boolean
+    static isCross (n: number): boolean
     {
         return 0 <= n && n <= 1;
     }

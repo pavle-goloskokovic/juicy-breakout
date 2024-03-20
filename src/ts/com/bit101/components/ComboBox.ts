@@ -9,8 +9,8 @@ import { Point } from '../../../flash/geom/Point';
 import { Rectangle } from '../../../flash/geom/Rectangle';
 [Event(name = 'select', type = 'flash.events.Event')];
 export class ComboBox extends Component {
-    public static TOP = 'top';
-    public static BOTTOM = 'bottom';
+    static TOP = 'top';
+    static BOTTOM = 'bottom';
     protected _defaultLabel = '';
     protected _dropDownButton: PushButton;
     protected _items: any[];
@@ -20,7 +20,7 @@ export class ComboBox extends Component {
     protected _open = false;
     protected _openPosition: string = BOTTOM;
     protected _stage: Stage;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultLabel = '', items: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultLabel = '', items: any[] = null)
     {
         this._defaultLabel = defaultLabel;
         this._items = items;
@@ -76,7 +76,7 @@ export class ComboBox extends Component {
         this._dropDownButton.label = '+';
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._labelButton.setSize(this._width - this._height + 1, this._height);
@@ -87,27 +87,27 @@ export class ComboBox extends Component {
         this._list.setSize(this._width, this._numVisibleItems * this._list.listItemHeight);
     }
 
-    public addItem (item: any): void
+    addItem (item: any): void
     {
         this._list.addItem(item);
     }
 
-    public addItemAt (item: any, index: number): void
+    addItemAt (item: any, index: number): void
     {
         this._list.addItemAt(item, index);
     }
 
-    public removeItem (item: any): void
+    removeItem (item: any): void
     {
         this._list.removeItem(item);
     }
 
-    public removeItemAt (index: number): void
+    removeItemAt (index: number): void
     {
         this._list.removeItemAt(index);
     }
 
-    public removeAll (): void
+    removeAll (): void
     {
         this._list.removeAll();
     }
@@ -174,153 +174,153 @@ export class ComboBox extends Component {
         this.removeList();
     }
 
-    public set selectedIndex (value: number)
+    set selectedIndex (value: number)
     {
         this._list.selectedIndex = value;
         this.setLabelButtonLabel();
     }
 
-    public get selectedIndex (): number
+    get selectedIndex (): number
     {
         return this._list.selectedIndex;
     }
 
-    public set selectedItem (item: any)
+    set selectedItem (item: any)
     {
         this._list.selectedItem = item;
         this.setLabelButtonLabel();
     }
 
-    public get selectedItem (): any
+    get selectedItem (): any
     {
         return this._list.selectedItem;
     }
 
-    public set defaultColor (value: number)
+    set defaultColor (value: number)
     {
         this._list.defaultColor = value;
     }
 
-    public get defaultColor (): number
+    get defaultColor (): number
     {
         return this._list.defaultColor;
     }
 
-    public set selectedColor (value: number)
+    set selectedColor (value: number)
     {
         this._list.selectedColor = value;
     }
 
-    public get selectedColor (): number
+    get selectedColor (): number
     {
         return this._list.selectedColor;
     }
 
-    public set rolloverColor (value: number)
+    set rolloverColor (value: number)
     {
         this._list.rolloverColor = value;
     }
 
-    public get rolloverColor (): number
+    get rolloverColor (): number
     {
         return this._list.rolloverColor;
     }
 
-    public set listItemHeight (value: number)
+    set listItemHeight (value: number)
     {
         this._list.listItemHeight = value;
         this.invalidate();
     }
 
-    public get listItemHeight (): number
+    get listItemHeight (): number
     {
         return this._list.listItemHeight;
     }
 
-    public set openPosition (value: string)
+    set openPosition (value: string)
     {
         this._openPosition = value;
     }
 
-    public get openPosition (): string
+    get openPosition (): string
     {
         return this._openPosition;
     }
 
-    public set defaultLabel (value: string)
+    set defaultLabel (value: string)
     {
         this._defaultLabel = value;
         this.setLabelButtonLabel();
     }
 
-    public get defaultLabel (): string
+    get defaultLabel (): string
     {
         return this._defaultLabel;
     }
 
-    public set numVisibleItems (value: number)
+    set numVisibleItems (value: number)
     {
         this._numVisibleItems = value;
         this.invalidate();
     }
 
-    public get numVisibleItems (): number
+    get numVisibleItems (): number
     {
         return this._numVisibleItems;
     }
 
-    public set items (value: any[])
+    set items (value: any[])
     {
         this._list.items = value;
     }
 
-    public get items (): any[]
+    get items (): any[]
     {
         return this._list.items;
     }
 
-    public set listItemClass (value: Class)
+    set listItemClass (value: Class)
     {
         this._list.listItemClass = value;
     }
 
-    public get listItemClass (): Class
+    get listItemClass (): Class
     {
         return this._list.listItemClass;
     }
 
-    public set alternateColor (value: number)
+    set alternateColor (value: number)
     {
         this._list.alternateColor = value;
     }
 
-    public get alternateColor (): number
+    get alternateColor (): number
     {
         return this._list.alternateColor;
     }
 
-    public set alternateRows (value: boolean)
+    set alternateRows (value: boolean)
     {
         this._list.alternateRows = value;
     }
 
-    public get alternateRows (): boolean
+    get alternateRows (): boolean
     {
         return this._list.alternateRows;
     }
 
-    public set autoHideScrollBar (value: boolean)
+    set autoHideScrollBar (value: boolean)
     {
         this._list.autoHideScrollBar = value;
         this.invalidate();
     }
 
-    public get autoHideScrollBar (): boolean
+    get autoHideScrollBar (): boolean
     {
         return this._list.autoHideScrollBar;
     }
 
-    public get isOpen (): boolean
+    get isOpen (): boolean
     {
         return this._open;
     }

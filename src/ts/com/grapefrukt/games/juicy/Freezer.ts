@@ -3,12 +3,12 @@ import { GTween } from '../../../gskinner/motion/GTween';
 import { getTimer } from '../../../../flash/utils/getTimer';
 export class Freezer {
     private static frozeAt: number;
-    public static freeze (): void
+    static freeze (): void
     {
         Freezer.frozeAt = getTimer();
     }
 
-    public static get multiplier (): number
+    static get multiplier (): number
     {
         let time: number = getTimer() - Freezer.frozeAt;
         if (time < Settings.EFFECT_FREEZE_FADE_IN_MS )

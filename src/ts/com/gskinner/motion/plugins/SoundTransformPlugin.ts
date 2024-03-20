@@ -4,10 +4,10 @@ import { Sound } from '../../../../flash/media/Sound';
 import { SoundChannel } from '../../../../flash/media/SoundChannel';
 import type { SoundTransform } from '../../../../flash/media/SoundTransform';
 export class SoundTransformPlugin implements IGTweenPlugin {
-    public static enabled = true;
+    static enabled = true;
     protected static instance: SoundTransformPlugin;
     protected static tweenProperties: any[] = ['leftToLeft', 'leftToRight', 'pan', 'rightToLeft', 'rightToRight', 'volume'];
-    public static install (): void
+    static install (): void
     {
         if (SoundTransformPlugin.instance )
         {
@@ -17,7 +17,7 @@ export class SoundTransformPlugin implements IGTweenPlugin {
         GTween.installPlugin(SoundTransformPlugin.instance, SoundTransformPlugin.tweenProperties, true);
     }
 
-    public init (tween: GTween, name: string, value: number): number
+    init (tween: GTween, name: string, value: number): number
     {
         if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled) )
         {
@@ -26,7 +26,7 @@ export class SoundTransformPlugin implements IGTweenPlugin {
         return tween.target.soundTransform[name];
     }
 
-    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
         if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled) )
         {

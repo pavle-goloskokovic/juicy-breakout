@@ -16,8 +16,8 @@ export class FPS extends Sprite {
     private _average = 0;
     private insert_pos = 0;
     private BUFFER_SIZE = 0;
-    public speedFraction = 1;
-    public constructor (_target_fps: number, _label = 'fps', _manual_update = false, textColor = 0xffffff)
+    speedFraction = 1;
+    constructor (_target_fps: number, _label = 'fps', _manual_update = false, textColor = 0xffffff)
     {
         super();
         this.target_fps = _target_fps;
@@ -44,7 +44,7 @@ export class FPS extends Sprite {
         }
     }
 
-    public tick (event: Event = null): void
+    tick (event: Event = null): void
     {
         this._t = getTimer() - this.last_tick;
         this.last_tick = getTimer();
@@ -64,7 +64,7 @@ export class FPS extends Sprite {
         this.fps_text.text = this.fps_label + ': ' + Number(1000 / this._average).toFixed(1) + ' (' + Number(this.speedFraction * 100).toFixed(0) + '%)';
     }
 
-    public get average (): number
+    get average (): number
     {
         return this._average;
     }

@@ -7,7 +7,7 @@ export class Timestep {
     private _real_speed = 0.0;
     private _last_frame_time = 0.0;
     private _delta = 0.0;
-    public constructor (fps = 60, gameSpeed = 1.0, maxSpeed = 3.0, smoothing = 0.5)
+    constructor (fps = 60, gameSpeed = 1.0, maxSpeed = 3.0, smoothing = 0.5)
     {
         this._target_frametime = 1000 / fps;
         this._smoothing = smoothing;
@@ -15,7 +15,7 @@ export class Timestep {
         this.maxSpeed = maxSpeed;
     }
 
-    public tick (): number
+    tick (): number
     {
         this._real_speed = (getTimer() - this._last_frame_time) / this._target_frametime;
         this._last_frame_time = getTimer();
@@ -27,37 +27,37 @@ export class Timestep {
         return this._delta * this._game_speed;
     }
 
-    public get timeDelta (): number
+    get timeDelta (): number
     {
         return this._delta * this._game_speed;
     }
 
-    public get maxSpeed (): number
+    get maxSpeed (): number
     {
         return this._max_speed;
     }
 
-    public set maxSpeed (value: number)
+    set maxSpeed (value: number)
     {
         this._max_speed = value;
     }
 
-    public get gameSpeed (): number
+    get gameSpeed (): number
     {
         return this._game_speed;
     }
 
-    public set gameSpeed (value: number)
+    set gameSpeed (value: number)
     {
         this._game_speed = value;
     }
 
-    public get smoothing (): number
+    get smoothing (): number
     {
         return this._smoothing;
     }
 
-    public set smoothing (value: number)
+    set smoothing (value: number)
     {
         if (value > 1 )
         {

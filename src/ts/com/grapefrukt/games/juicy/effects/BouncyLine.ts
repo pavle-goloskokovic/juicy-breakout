@@ -6,13 +6,13 @@ import { CapsStyle } from '../../../../../flash/display/CapsStyle';
 import { Shape } from '../../../../../flash/display/Shape';
 import { Point } from '../../../../../flash/geom/Point';
 export class BouncyLine extends GameObject {
-    public constructor (x1 = 0, y1 = 0, x2 = 0, y2 = 0)
+    constructor (x1 = 0, y1 = 0, x2 = 0, y2 = 0)
     {
         super();
         this.set(x1, y1, x2, y2);
     }
 
-    public set (x1: number, y1: number, x2: number, y2: number): void
+    set (x1: number, y1: number, x2: number, y2: number): void
     {
         this.pos1.x = x1;
         this.pos1.y = y1;
@@ -29,7 +29,7 @@ export class BouncyLine extends GameObject {
         this.pos_middle = this.pos_middle.add(delta);
     }
 
-    public wobble (x: number, y: number): void
+    wobble (x: number, y: number): void
     {
         const wobble_pos: Point = new Point(x - this.pos_middle.x, y - this.pos_middle.y);
         const tx: number = wobble_pos.x;
@@ -38,7 +38,7 @@ export class BouncyLine extends GameObject {
         this.wobble_middle = wobble_pos;
     }
 
-    public update (imeDelta = 1): void
+    update (imeDelta = 1): void
     {
         if (Math.abs(this.wobble_middle.y) > 0 )
         {
@@ -68,17 +68,17 @@ export class BouncyLine extends GameObject {
         }
     }
 
-    public get position1 (): Point
+    get position1 (): Point
     {
         return this.pos1;
     }
 
-    public get position2 (): Point
+    get position2 (): Point
     {
         return this.pos2;
     }
 
-    public get middle (): Point
+    get middle (): Point
     {
         let temp: Point;
         temp = this.wobble_middle.clone();
@@ -92,7 +92,7 @@ export class BouncyLine extends GameObject {
         return temp;
     }
 
-    public checkCollision (ball: Ball): void
+    checkCollision (ball: Ball): void
     {
         if (this.collisionCounter > 0 )
         {
@@ -107,7 +107,7 @@ export class BouncyLine extends GameObject {
         }
     }
 
-    public closestPointOnLineSegment (a: Point, b: Point, p: Point): Point
+    closestPointOnLineSegment (a: Point, b: Point, p: Point): Point
     {
         const c: Point = new Point(p.x - a.x, p.y - a.y);
         const v: Point = new Point(b.x - a.x, b.y - a.y);
@@ -131,7 +131,7 @@ export class BouncyLine extends GameObject {
         return a.add(v);
     }
 
-    public distanceFromLine (a: Point, b: Point, p: Point): number
+    distanceFromLine (a: Point, b: Point, p: Point): number
     {
         const delta: Point = this.closestPointOnLineSegment(a, b, p);
         delta.x = delta.x - p.x;

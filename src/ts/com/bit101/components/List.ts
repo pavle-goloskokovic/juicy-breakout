@@ -20,7 +20,7 @@ export class List extends Component {
     protected _selectedColor: number = Style.LIST_SELECTED;
     protected _rolloverColor: number = Style.LIST_ROLLOVER;
     protected _alternateRows = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, items: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, items: any[] = null)
     {
         if (items != null )
         {
@@ -133,7 +133,7 @@ export class List extends Component {
         this.fillItems();
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._selectedIndex = Math.min(this._selectedIndex, this._items.length - 1);
@@ -151,7 +151,7 @@ export class List extends Component {
         this.scrollToSelection();
     }
 
-    public addItem (item: any): void
+    addItem (item: any): void
     {
         this._items.push(item);
         this.invalidate();
@@ -159,7 +159,7 @@ export class List extends Component {
         this.fillItems();
     }
 
-    public addItemAt (item: any, index: number): void
+    addItemAt (item: any, index: number): void
     {
         index = Math.max(0, index);
         index = Math.min(this._items.length, index);
@@ -168,13 +168,13 @@ export class List extends Component {
         this.fillItems();
     }
 
-    public removeItem (item: any): void
+    removeItem (item: any): void
     {
         const index: number = this._items.indexOf(item);
         this.removeItemAt(index);
     }
 
-    public removeItemAt (index: number): void
+    removeItemAt (index: number): void
     {
         if (index < 0 || index >= this._items.length )
         {
@@ -185,7 +185,7 @@ export class List extends Component {
         this.fillItems();
     }
 
-    public removeAll (): void
+    removeAll (): void
     {
         this._items.length = 0;
         this.invalidate();
@@ -228,7 +228,7 @@ export class List extends Component {
         this.fillItems();
     }
 
-    public set selectedIndex (value: number)
+    set selectedIndex (value: number)
     {
         if (value >= 0 && value < this._items.length )
         {
@@ -242,12 +242,12 @@ export class List extends Component {
         dispatchEvent(new Event(Event.SELECT));
     }
 
-    public get selectedIndex (): number
+    get selectedIndex (): number
     {
         return this._selectedIndex;
     }
 
-    public set selectedItem (item: any)
+    set selectedItem (item: any)
     {
         const index: number = this._items.indexOf(item);
         this.selectedIndex = index;
@@ -255,7 +255,7 @@ export class List extends Component {
         dispatchEvent(new Event(Event.SELECT));
     }
 
-    public get selectedItem (): any
+    get selectedItem (): any
     {
         if (this._selectedIndex >= 0 && this._selectedIndex < this._items.length )
         {
@@ -264,102 +264,102 @@ export class List extends Component {
         return null;
     }
 
-    public set defaultColor (value: number)
+    set defaultColor (value: number)
     {
         this._defaultColor = value;
         this.invalidate();
     }
 
-    public get defaultColor (): number
+    get defaultColor (): number
     {
         return this._defaultColor;
     }
 
-    public set selectedColor (value: number)
+    set selectedColor (value: number)
     {
         this._selectedColor = value;
         this.invalidate();
     }
 
-    public get selectedColor (): number
+    get selectedColor (): number
     {
         return this._selectedColor;
     }
 
-    public set rolloverColor (value: number)
+    set rolloverColor (value: number)
     {
         this._rolloverColor = value;
         this.invalidate();
     }
 
-    public get rolloverColor (): number
+    get rolloverColor (): number
     {
         return this._rolloverColor;
     }
 
-    public set listItemHeight (value: number)
+    set listItemHeight (value: number)
     {
         this._listItemHeight = value;
         this.makeListItems();
         this.invalidate();
     }
 
-    public get listItemHeight (): number
+    get listItemHeight (): number
     {
         return this._listItemHeight;
     }
 
-    public set items (value: any[])
+    set items (value: any[])
     {
         this._items = value;
         this.invalidate();
     }
 
-    public get items (): any[]
+    get items (): any[]
     {
         return this._items;
     }
 
-    public set listItemClass (value: Class)
+    set listItemClass (value: Class)
     {
         this._listItemClass = value;
         this.makeListItems();
         this.invalidate();
     }
 
-    public get listItemClass (): Class
+    get listItemClass (): Class
     {
         return this._listItemClass;
     }
 
-    public set alternateColor (value: number)
+    set alternateColor (value: number)
     {
         this._alternateColor = value;
         this.invalidate();
     }
 
-    public get alternateColor (): number
+    get alternateColor (): number
     {
         return this._alternateColor;
     }
 
-    public set alternateRows (value: boolean)
+    set alternateRows (value: boolean)
     {
         this._alternateRows = value;
         this.invalidate();
     }
 
-    public get alternateRows (): boolean
+    get alternateRows (): boolean
     {
         return this._alternateRows;
     }
 
-    public set autoHideScrollBar (value: boolean)
+    set autoHideScrollBar (value: boolean)
     {
         this._scrollbar.autoHide = value;
     }
 
-    public get autoHideScrollBar (): boolean
+    get autoHideScrollBar (): boolean
     {
         return this._scrollbar.autoHide;
     }

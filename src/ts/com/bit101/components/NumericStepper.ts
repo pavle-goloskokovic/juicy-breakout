@@ -23,7 +23,7 @@ export class NumericStepper extends Component {
     protected _delayTimer: Timer;
     protected _repeatTimer: Timer;
     protected _direction: string;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
         if (defaultHandler != null )
@@ -74,7 +74,7 @@ export class NumericStepper extends Component {
         }
     }
 
-    public draw (): void
+    draw (): void
     {
         this._plusBtn.x = this._width - 16;
         this._minusBtn.x = this._width - 32;
@@ -134,7 +134,7 @@ export class NumericStepper extends Component {
         }
     }
 
-    public set value (val: number)
+    set value (val: number)
     {
         if (val <= this._maximum && val >= this._minimum )
         {
@@ -143,12 +143,12 @@ export class NumericStepper extends Component {
         }
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._value;
     }
 
-    public set step (value: number)
+    set step (value: number)
     {
         if (this.value < 0 )
         {
@@ -157,23 +157,23 @@ export class NumericStepper extends Component {
         this._step = this.value;
     }
 
-    public get step (): number
+    get step (): number
     {
         return this._step;
     }
 
-    public set labelPrecision (value: number)
+    set labelPrecision (value: number)
     {
         this._labelPrecision = this.value;
         this.invalidate();
     }
 
-    public get labelPrecision (): number
+    get labelPrecision (): number
     {
         return this._labelPrecision;
     }
 
-    public set maximum (value: number)
+    set maximum (value: number)
     {
         this._maximum = this.value;
         if (this._value > this._maximum )
@@ -183,12 +183,12 @@ export class NumericStepper extends Component {
         }
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._maximum;
     }
 
-    public set minimum (value: number)
+    set minimum (value: number)
     {
         this._minimum = this.value;
         if (this._value < this._minimum )
@@ -198,17 +198,17 @@ export class NumericStepper extends Component {
         }
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._minimum;
     }
 
-    public get repeatTime (): number
+    get repeatTime (): number
     {
         return this._repeatTime;
     }
 
-    public set repeatTime (value: number)
+    set repeatTime (value: number)
     {
         this._repeatTime = Math.max(value, 10);
         this._repeatTimer.delay = this._repeatTime;

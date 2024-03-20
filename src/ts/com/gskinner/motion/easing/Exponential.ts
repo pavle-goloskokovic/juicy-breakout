@@ -1,15 +1,15 @@
 export class Exponential {
-    public static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         return ratio == 0 ? 0 : Math.pow(2, 10 * (ratio - 1));
     }
 
-    public static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         return ratio == 1 ? 1 : 1 - Math.pow(2, -10 * ratio);
     }
 
-    public static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         if (ratio == 0 || ratio == 1 )
         {

@@ -5,7 +5,7 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 export class TextArea extends Text {
     protected _scrollbar: VScrollBar;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         super(parent, xpos, ypos, text);
     }
@@ -32,7 +32,7 @@ export class TextArea extends Text {
         this._scrollbar.pageSize = visibleLines;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._tf.width = this._width - this._scrollbar.width - 4;
@@ -71,18 +71,18 @@ export class TextArea extends Text {
         this._tf.scrollV = Math.round(this._scrollbar.value);
     }
 
-    public set enabled (value: boolean)
+    set enabled (value: boolean)
     {
         super.enabled = value;
         this._tf.tabEnabled = value;
     }
 
-    public set autoHideScrollBar (value: boolean)
+    set autoHideScrollBar (value: boolean)
     {
         this._scrollbar.autoHide = value;
     }
 
-    public get autoHideScrollBar (): boolean
+    get autoHideScrollBar (): boolean
     {
         return this._scrollbar.autoHide;
     }

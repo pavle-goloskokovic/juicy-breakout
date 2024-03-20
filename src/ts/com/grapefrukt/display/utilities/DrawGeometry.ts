@@ -1,6 +1,6 @@
 import type { Graphics } from '../../../../flash/display/Graphics';
 export class DrawGeometry {
-    public static drawIrregularCircle (graphics: Graphics, x: number, y: number, radius: number, irregularity = .2, slices = -1): void
+    static drawIrregularCircle (graphics: Graphics, x: number, y: number, radius: number, irregularity = .2, slices = -1): void
     {
         if (slices < 0 )
         {
@@ -29,7 +29,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawDonut (graphics: Graphics, x: number, y: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
+    static drawDonut (graphics: Graphics, x: number, y: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
         let segAngle: number;
         let theta: number;
@@ -73,7 +73,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawWedge (graphics: Graphics, x: number, y: number, startAngle: number, arc: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
+    static drawWedge (graphics: Graphics, x: number, y: number, startAngle: number, arc: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
         let segAngle: number;
         let theta: number;
@@ -117,7 +117,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawTriangle (graphics: Graphics, x: number, y: number, size: number, invert = false): void
+    static drawTriangle (graphics: Graphics, x: number, y: number, size: number, invert = false): void
     {
         if (invert )
         {
@@ -133,7 +133,7 @@ export class DrawGeometry {
         }
     }
 
-    public static drawArrow (graphics: Graphics, size: number): void
+    static drawArrow (graphics: Graphics, size: number): void
     {
         DrawGeometry.drawTriangle(graphics, 0, size, size);
     }

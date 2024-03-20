@@ -20,7 +20,7 @@ export class SoundObject extends EventDispatcher {
     private _startTime: number;
     private _loops: number;
     private _embed_class: Class;
-    public constructor (id: string, file: string, volume: number, pan: number, startTime: number, loops: number, embedClass: Class = null)
+    constructor (id: string, file: string, volume: number, pan: number, startTime: number, loops: number, embedClass: Class = null)
     {
         super();
         this._id = id;
@@ -33,7 +33,7 @@ export class SoundObject extends EventDispatcher {
         this._sound_transform = new SoundTransform(this._volume, this._pan);
     }
 
-    public load (basePath: string): void
+    load (basePath: string): void
     {
         if (this._embed_class )
         {
@@ -60,12 +60,12 @@ export class SoundObject extends EventDispatcher {
         dispatchEvent(e);
     }
 
-    public play (): void
+    play (): void
     {
         this._sound_channel = this._sound.play(this._startTime, this._loops, this._sound_transform);
     }
 
-    public stop (): void
+    stop (): void
     {
         if (!this._sound_channel )
         {
@@ -86,22 +86,22 @@ export class SoundObject extends EventDispatcher {
         console.log('could not load sound: ', this._id);
     }
 
-    public get id (): string
+    get id (): string
     {
         return this._id;
     }
 
-    public get bytesTotal (): number
+    get bytesTotal (): number
     {
         return this._sound.bytesTotal;
     }
 
-    public get bytesLoaded (): number
+    get bytesLoaded (): number
     {
         return this._sound.bytesLoaded;
     }
 
-    public get isPlaying (): boolean
+    get isPlaying (): boolean
     {
         return this._sound_channel != null;
     }

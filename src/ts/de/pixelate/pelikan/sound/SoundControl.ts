@@ -6,7 +6,7 @@ import { URLLoader } from '../../../../flash/net/URLLoader';
 import { URLRequest } from '../../../../flash/net/URLRequest';
 import { Dictionary } from '../../../../flash/utils/Dictionary';
 export class SoundControl extends EventDispatcher {
-    public VERSION = '1.0.1-grapefrukt';
+    VERSION = '1.0.1-grapefrukt';
     private _sounds: Dictionary;
     private _groups: any;
     private _xml_config: XML;
@@ -18,21 +18,21 @@ export class SoundControl extends EventDispatcher {
     private _embed_class: Class;
     private _basePath = '';
     private _mute = false;
-    public constructor ()
+    constructor ()
     {
         super();
         this._sounds = new Dictionary();
         this._groups = new Object();
     }
 
-    public loadXMLConfig (url: string): void
+    loadXMLConfig (url: string): void
     {
         this._xml_config_loader = new URLLoader();
         this._xml_config_loader.addEventListener(Event.COMPLETE, this.onXMLConfigLoaded);
         this._xml_config_loader.load(new URLRequest(this._basePath + url));
     }
 
-    public play (id: string): void
+    play (id: string): void
     {
         if (this._mute || !this.loaded )
         {
@@ -47,7 +47,7 @@ export class SoundControl extends EventDispatcher {
         sound.play();
     }
 
-    public playSoundId (id: string, sound_id: number): void
+    playSoundId (id: string, sound_id: number): void
     {
         if (this._mute || !this.loaded )
         {
@@ -62,7 +62,7 @@ export class SoundControl extends EventDispatcher {
         sound.play();
     }
 
-    public stopSound (id: string): void
+    stopSound (id: string): void
     {
         const sound: SoundObject = this.getSound(id);
         sound.stop();
@@ -110,7 +110,7 @@ export class SoundControl extends EventDispatcher {
         }
     }
 
-    public getSound (id: string): SoundObject
+    getSound (id: string): SoundObject
     {
         if (this._sounds[id] == null )
         {
@@ -147,63 +147,63 @@ export class SoundControl extends EventDispatcher {
         }
     }
 
-    public setXMLConfig (xml: XML): void
+    setXMLConfig (xml: XML): void
     {
         this._xml_config = xml;
         this.parseXML();
     }
 
-    public get soundsLoaded (): number
+    get soundsLoaded (): number
     {
         return this._sounds_loaded;
     }
 
-    public get soundsTotal (): number
+    get soundsTotal (): number
     {
         return this._sounds_total;
     }
 
-    public set basePath (path: string)
+    set basePath (path: string)
     {
         this._basePath = path;
     }
 
-    public get basePath (): string
+    get basePath (): string
     {
         return this._basePath;
     }
 
-    public set embedSoundsClass (value: Class)
+    set embedSoundsClass (value: Class)
     {
         this._embed_class = value;
     }
 
-    public get embedSoundsClass (): Class
+    get embedSoundsClass (): Class
     {
         return this._embed_class;
     }
 
-    public get bytesTotal (): number
+    get bytesTotal (): number
     {
         return this._bytes_total;
     }
 
-    public get bytesLoaded (): number
+    get bytesLoaded (): number
     {
         return this._bytes_loaded;
     }
 
-    public get loaded (): boolean
+    get loaded (): boolean
     {
         return this._bytes_loaded == this._bytes_total;
     }
 
-    public get mute (): boolean
+    get mute (): boolean
     {
         return this._mute;
     }
 
-    public set mute (value: boolean)
+    set mute (value: boolean)
     {
         this._mute = value;
     }

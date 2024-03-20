@@ -14,7 +14,7 @@ export class Chart extends Component {
     protected _showScaleLabels = false;
     protected _labelPrecision = 0;
     protected _panel: Panel;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         this._data = data;
         super(parent, xpos, ypos);
@@ -75,7 +75,7 @@ export class Chart extends Component {
         return minValue;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._panel.setSize(this.width, this.height);
@@ -98,24 +98,24 @@ export class Chart extends Component {
         }
     }
 
-    public set data (value: any[])
+    set data (value: any[])
     {
         this._data = value;
         this.invalidate();
     }
 
-    public get data (): any[]
+    get data (): any[]
     {
         return this._data;
     }
 
-    public set maximum (value: number)
+    set maximum (value: number)
     {
         this._maximum = value;
         this.invalidate();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         if (this._autoScale )
         {
@@ -124,13 +124,13 @@ export class Chart extends Component {
         return this._maximum;
     }
 
-    public set minimum (value: number)
+    set minimum (value: number)
     {
         this._minimum = value;
         this.invalidate();
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         if (this._autoScale )
         {
@@ -139,18 +139,18 @@ export class Chart extends Component {
         return this._minimum;
     }
 
-    public set autoScale (value: boolean)
+    set autoScale (value: boolean)
     {
         this._autoScale = value;
         this.invalidate();
     }
 
-    public get autoScale (): boolean
+    get autoScale (): boolean
     {
         return this._autoScale;
     }
 
-    public set showScaleLabels (value: boolean)
+    set showScaleLabels (value: boolean)
     {
         this._showScaleLabels = value;
         if (this._showScaleLabels )
@@ -171,51 +171,51 @@ export class Chart extends Component {
         }
     }
 
-    public get showScaleLabels (): boolean
+    get showScaleLabels (): boolean
     {
         return this._showScaleLabels;
     }
 
-    public set labelPrecision (value: number)
+    set labelPrecision (value: number)
     {
         this._labelPrecision = value;
         this.invalidate();
     }
 
-    public get labelPrecision (): number
+    get labelPrecision (): number
     {
         return this._labelPrecision;
     }
 
-    public set gridSize (value: number)
+    set gridSize (value: number)
     {
         this._panel.gridSize = value;
         this.invalidate();
     }
 
-    public get gridSize (): number
+    get gridSize (): number
     {
         return this._panel.gridSize;
     }
 
-    public set showGrid (value: boolean)
+    set showGrid (value: boolean)
     {
         this._panel.showGrid = value;
         this.invalidate();
     }
 
-    public get showGrid (): boolean
+    get showGrid (): boolean
     {
         return this._panel.showGrid;
     }
 
-    public set gridColor (value: number)
+    set gridColor (value: number)
     {
         this._panel.gridColor = value;
         this.invalidate();
     }
 
-    public get gridColor (): number
+    get gridColor (): number
     {
         return this._panel.gridColor;
     }

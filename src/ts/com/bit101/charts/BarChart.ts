@@ -3,7 +3,7 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 export class BarChart extends Chart {
     protected _spacing = 2;
     protected _barColor = 0x999999;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         super(parent, xpos, ypos, data);
     }
@@ -32,24 +32,24 @@ export class BarChart extends Chart {
         }
     }
 
-    public set spacing (value: number)
+    set spacing (value: number)
     {
         this._spacing = value;
         this.invalidate();
     }
 
-    public get spacing (): number
+    get spacing (): number
     {
         return this._spacing;
     }
 
-    public set barColor (value: number)
+    set barColor (value: number)
     {
         this._barColor = value;
         this.invalidate();
     }
 
-    public get barColor (): number
+    get barColor (): number
     {
         return this._barColor;
     }

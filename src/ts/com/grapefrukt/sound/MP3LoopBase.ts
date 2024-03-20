@@ -9,7 +9,7 @@ import type { SoundChannel } from '../../../flash/media/SoundChannel';
 import { URLRequest } from '../../../flash/net/URLRequest';
 import { Timer } from '../../../flash/utils/Timer';
 export class MP3LoopBase extends EventDispatcher {
-    public static ASSET_CLASS: Class;
+    static ASSET_CLASS: Class;
     protected _out: Sound;
     protected _play_on_load = false;
     protected _state: number = NOT_LOADED;
@@ -22,7 +22,7 @@ export class MP3LoopBase extends EventDispatcher {
     protected static NOT_LOADED = 0;
     protected static LOADING = 1;
     protected static LOADED = 2;
-    public constructor (url: string, autoLoad = false, playOnLoad = false, loops = 0)
+    constructor (url: string, autoLoad = false, playOnLoad = false, loops = 0)
     {
         super();
         this._url = url;
@@ -35,7 +35,7 @@ export class MP3LoopBase extends EventDispatcher {
         }
     }
 
-    public load (): void
+    load (): void
     {
         console.log('MP3LoopBase, load()', this._state);
         if (this.loaded || this.loading )
@@ -82,7 +82,7 @@ export class MP3LoopBase extends EventDispatcher {
         }
     }
 
-    public play (): boolean
+    play (): boolean
     {
         console.log('playing loop, state:', this._state);
         if (this._playing || !this.loaded )
@@ -95,7 +95,7 @@ export class MP3LoopBase extends EventDispatcher {
         return true;
     }
 
-    public stop (): boolean
+    stop (): boolean
     {
         if (!this._playing )
         {
@@ -112,42 +112,42 @@ export class MP3LoopBase extends EventDispatcher {
         console.log(event);
     }
 
-    public get loaded (): boolean
+    get loaded (): boolean
     {
         return this._state == MP3LoopBase.LOADED;
     }
 
-    public get loading (): boolean
+    get loading (): boolean
     {
         return this._state == MP3LoopBase.LOADING;
     }
 
-    public get soundChannel (): SoundChannel
+    get soundChannel (): SoundChannel
     {
         return this._out_channel;
     }
 
-    public get playOnLoad (): boolean
+    get playOnLoad (): boolean
     {
         return this._play_on_load;
     }
 
-    public set playOnLoad (value: boolean)
+    set playOnLoad (value: boolean)
     {
         this._play_on_load = value;
     }
 
-    public get playing (): boolean
+    get playing (): boolean
     {
         return this._playing;
     }
 
-    public get bytesTotal (): number
+    get bytesTotal (): number
     {
         return this._bytes_total;
     }
 
-    public get bytesLoaded (): number
+    get bytesLoaded (): number
     {
         return this._bytes_loaded;
     }

@@ -12,7 +12,7 @@ export class RadioButton extends Component {
     protected _labelText = '';
     protected _groupName = 'defaultRadioGroup';
     protected static buttons: any[];
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', checked = false, defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', checked = false, defaultHandler: Function = null)
     {
         RadioButton.addButton(this);
         this._selected = checked;
@@ -67,7 +67,7 @@ export class RadioButton extends Component {
         this.mouseChildren = false;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._back.graphics.clear();
@@ -90,7 +90,7 @@ export class RadioButton extends Component {
         this.selected = true;
     }
 
-    public set selected (s: boolean)
+    set selected (s: boolean)
     {
         this._selected = s;
         this._button.visible = this._selected;
@@ -100,28 +100,28 @@ export class RadioButton extends Component {
         }
     }
 
-    public get selected (): boolean
+    get selected (): boolean
     {
         return this._selected;
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.invalidate();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public get groupName (): string
+    get groupName (): string
     {
         return this._groupName;
     }
 
-    public set groupName (value: string)
+    set groupName (value: string)
     {
         this._groupName = value;
     }

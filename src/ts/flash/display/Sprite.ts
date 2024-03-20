@@ -1,15 +1,15 @@
 import { DisplayObjectContainer } from './DisplayObjectContainer';
 export class Sprite extends DisplayObjectContainer {
-    public startDrag (lockCenter = false, bounds: Rectangle = null): void
+    startDrag (lockCenter = false, bounds: Rectangle = null): void
     {
 
     }
 
-    public stopDrag (): void
+    stopDrag (): void
     {
 
     }
 
-    public buttonMode: boolean;
-    public useHandCursor: boolean;
+    buttonMode: boolean;
+    useHandCursor: boolean;
 }

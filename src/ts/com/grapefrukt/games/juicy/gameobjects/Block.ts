@@ -26,7 +26,7 @@ export class Block extends GameObject {
     protected _collidable = true;
     protected _gfx: Sprite;
     private _sliceEffect: SliceEffect;
-    public constructor (x: number, y: number)
+    constructor (x: number, y: number)
     {
         super();
         this.x = x;
@@ -59,7 +59,7 @@ export class Block extends GameObject {
         }
     }
 
-    public collide (ball: Ball): void
+    collide (ball: Ball): void
     {
         this._collidable = false;
         let delayDestruction = false;
@@ -109,7 +109,7 @@ export class Block extends GameObject {
         }
     }
 
-    public jellyEffect (strength = .2, delay = 0): void
+    jellyEffect (strength = .2, delay = 0): void
     {
         new GTween(this._gfx, .05, { scaleX: 1 + strength }, { delay: delay, ease: Quadratic.easeInOut, onComplete: function (gt: GTween): void
         {
@@ -121,7 +121,7 @@ export class Block extends GameObject {
         } });
     }
 
-    public update (timeDelta = 1): void
+    update (timeDelta = 1): void
     {
         super.update(timeDelta);
         if (this._sliceEffect )
@@ -146,17 +146,17 @@ export class Block extends GameObject {
         this._gfx.graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
     }
 
-    public get collidable (): boolean
+    get collidable (): boolean
     {
         return this._collidable;
     }
 
-    public get collisionW (): number
+    get collisionW (): number
     {
         return this._collisionW;
     }
 
-    public get collisionH (): number
+    get collisionH (): number
     {
         return this._collisionH;
     }

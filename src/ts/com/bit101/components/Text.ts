@@ -15,7 +15,7 @@ export class Text extends Component {
     protected _selectable = true;
     protected _html = false;
     protected _format: TextFormat;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         this.text = text;
         super(parent, xpos, ypos);
@@ -46,7 +46,7 @@ export class Text extends Component {
         this.addChild(this._tf);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._panel.setSize(this._width, this._height);
@@ -82,7 +82,7 @@ export class Text extends Component {
         dispatchEvent(event);
     }
 
-    public set text (t: string)
+    set text (t: string)
     {
         this._text = t;
         if (this._text == null )
@@ -92,50 +92,50 @@ export class Text extends Component {
         this.invalidate();
     }
 
-    public get text (): string
+    get text (): string
     {
         return this._text;
     }
 
-    public get textField (): TextField
+    get textField (): TextField
     {
         return this._tf;
     }
 
-    public set editable (b: boolean)
+    set editable (b: boolean)
     {
         this._editable = b;
         this.invalidate();
     }
 
-    public get editable (): boolean
+    get editable (): boolean
     {
         return this._editable;
     }
 
-    public set selectable (b: boolean)
+    set selectable (b: boolean)
     {
         this._selectable = b;
         this.invalidate();
     }
 
-    public get selectable (): boolean
+    get selectable (): boolean
     {
         return this._selectable;
     }
 
-    public set html (b: boolean)
+    set html (b: boolean)
     {
         this._html = b;
         this.invalidate();
     }
 
-    public get html (): boolean
+    get html (): boolean
     {
         return this._html;
     }
 
-    public set enabled (value: boolean)
+    set enabled (value: boolean)
     {
         super.enabled = value;
         this._tf.tabEnabled = value;

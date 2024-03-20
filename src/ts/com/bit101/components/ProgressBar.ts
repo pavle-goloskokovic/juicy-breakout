@@ -7,7 +7,7 @@ export class ProgressBar extends Component {
     protected _bar: Sprite;
     protected _value = 0;
     protected _max = 1;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -35,7 +35,7 @@ export class ProgressBar extends Component {
         this._bar.scaleX = this._value / this._max;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._back.graphics.clear();
@@ -49,25 +49,25 @@ export class ProgressBar extends Component {
         this.update();
     }
 
-    public set maximum (m: number)
+    set maximum (m: number)
     {
         this._max = m;
         this._value = Math.min(this._value, this._max);
         this.update();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._max;
     }
 
-    public set value (v: number)
+    set value (v: number)
     {
         this._value = Math.min(v, this._max);
         this.update();
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._value;
     }

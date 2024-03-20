@@ -20,7 +20,7 @@ export class Meter extends Component {
     protected _targetRotation = 0;
     protected _value = 0.0;
     protected _velocity = 0;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         this._labelText = text;
         super(parent, xpos, ypos);
@@ -52,7 +52,7 @@ export class Meter extends Component {
         this._label.text = this._labelText;
     }
 
-    public draw (): void
+    draw (): void
     {
         const startAngle: number = -140 * Math.PI / 180;
         const endAngle: number = -40 * Math.PI / 180;
@@ -66,7 +66,7 @@ export class Meter extends Component {
         this.update();
     }
 
-    public setSize (w: number, h: number): void
+    setSize (w: number, h: number): void
     {
         h = w / 2;
         super.setSize(w, h);
@@ -164,70 +164,70 @@ export class Meter extends Component {
         }
     }
 
-    public set maximum (value: number)
+    set maximum (value: number)
     {
         this._maximum = this.value;
         this._maxLabel.text = this._maximum.toString();
         this.update();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._maximum;
     }
 
-    public set minimum (value: number)
+    set minimum (value: number)
     {
         this._minimum = this.value;
         this._minLabel.text = this._minimum.toString();
         this.update();
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._minimum;
     }
 
-    public set value (val: number)
+    set value (val: number)
     {
         this._value = val;
         this.update();
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._value;
     }
 
-    public set label (value: string)
+    set label (value: string)
     {
         this._labelText = this.value;
         this._label.text = this._labelText;
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public set showValues (value: boolean)
+    set showValues (value: boolean)
     {
         this._showValues = this.value;
         this._minLabel.visible = this._showValues;
         this._maxLabel.visible = this._showValues;
     }
 
-    public get showValues (): boolean
+    get showValues (): boolean
     {
         return this._showValues;
     }
 
-    public set damp (value: number)
+    set damp (value: number)
     {
         this._damp = this.value;
     }
 
-    public get damp (): number
+    get damp (): number
     {
         return this._damp;
     }

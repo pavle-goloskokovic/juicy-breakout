@@ -13,8 +13,8 @@ export class Component extends Sprite {
     protected _height = 0;
     protected _tag = -1;
     protected _enabled = true;
-    public static DRAW = 'draw';
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    static DRAW = 'draw';
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super();
         this.move(xpos, ypos);
@@ -46,19 +46,19 @@ export class Component extends Sprite {
         this.addEventListener(Event.ENTER_FRAME, this.onInvalidate);
     }
 
-    public static initStage (stage: Stage): void
+    static initStage (stage: Stage): void
     {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
     }
 
-    public move (xpos: number, ypos: number): void
+    move (xpos: number, ypos: number): void
     {
         this.x = Math.round(xpos);
         this.y = Math.round(ypos);
     }
 
-    public setSize (w: number, h: number): void
+    setSize (w: number, h: number): void
     {
         this._width = w;
         this._height = h;
@@ -66,7 +66,7 @@ export class Component extends Sprite {
         this.invalidate();
     }
 
-    public draw (): void
+    draw (): void
     {
         dispatchEvent(new Event(Component.DRAW));
     }
@@ -77,51 +77,51 @@ export class Component extends Sprite {
         this.draw();
     }
 
-    public set width (w: number)
+    set width (w: number)
     {
         this._width = w;
         this.invalidate();
         dispatchEvent(new Event(Event.RESIZE));
     }
 
-    public get width (): number
+    get width (): number
     {
         return this._width;
     }
 
-    public set height (h: number)
+    set height (h: number)
     {
         this._height = h;
         this.invalidate();
         dispatchEvent(new Event(Event.RESIZE));
     }
 
-    public get height (): number
+    get height (): number
     {
         return this._height;
     }
 
-    public set tag (value: number)
+    set tag (value: number)
     {
         this._tag = value;
     }
 
-    public get tag (): number
+    get tag (): number
     {
         return this._tag;
     }
 
-    public set x (value: number)
+    set x (value: number)
     {
         super.x = Math.round(value);
     }
 
-    public set y (value: number)
+    set y (value: number)
     {
         super.y = Math.round(value);
     }
 
-    public set enabled (value: boolean)
+    set enabled (value: boolean)
     {
         this._enabled = value;
         this.mouseEnabled = (this.mouseChildren = this._enabled);
@@ -129,7 +129,7 @@ export class Component extends Sprite {
         this.alpha = this._enabled ? 1.0 : 0.5;
     }
 
-    public get enabled (): boolean
+    get enabled (): boolean
     {
         return this._enabled;
     }

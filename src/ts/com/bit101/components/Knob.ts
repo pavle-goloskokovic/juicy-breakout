@@ -7,9 +7,9 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class Knob extends Component {
-    public static VERTICAL = 'vertical';
-    public static HORIZONTAL = 'horizontal';
-    public static ROTATE = 'rotate';
+    static VERTICAL = 'vertical';
+    static HORIZONTAL = 'horizontal';
+    static ROTATE = 'rotate';
     protected _knob: Sprite;
     protected _label: Label;
     protected _labelText = '';
@@ -23,7 +23,7 @@ export class Knob extends Component {
     protected _startY: number;
     protected _value = 0;
     protected _valueLabel: Label;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -121,7 +121,7 @@ export class Knob extends Component {
         this._valueLabel.x = this.width / 2 - this._valueLabel.width / 2;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this.drawKnob();
@@ -211,99 +211,99 @@ export class Knob extends Component {
         this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
 
-    public set maximum (m: number)
+    set maximum (m: number)
     {
         this._max = m;
         this.correctValue();
         this.updateKnob();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._max;
     }
 
-    public set minimum (m: number)
+    set minimum (m: number)
     {
         this._min = m;
         this.correctValue();
         this.updateKnob();
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._min;
     }
 
-    public set value (v: number)
+    set value (v: number)
     {
         this._value = v;
         this.correctValue();
         this.updateKnob();
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._value;
     }
 
-    public set mouseRange (value: number)
+    set mouseRange (value: number)
     {
         this._mouseRange = this.value;
     }
 
-    public get mouseRange (): number
+    get mouseRange (): number
     {
         return this._mouseRange;
     }
 
-    public set labelPrecision (decimals: number)
+    set labelPrecision (decimals: number)
     {
         this._precision = decimals;
     }
 
-    public get labelPrecision (): number
+    get labelPrecision (): number
     {
         return this._precision;
     }
 
-    public set showValue (value: boolean)
+    set showValue (value: boolean)
     {
         this._valueLabel.visible = this.value;
     }
 
-    public get showValue (): boolean
+    get showValue (): boolean
     {
         return this._valueLabel.visible;
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.draw();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public set mode (value: string)
+    set mode (value: string)
     {
         this._mode = this.value;
     }
 
-    public get mode (): string
+    get mode (): string
     {
         return this._mode;
     }
 
-    public get radius (): number
+    get radius (): number
     {
         return this._radius;
     }
 
-    public set radius (value: number)
+    set radius (value: number)
     {
         this._radius = value;
         this._width = this._radius * 2;

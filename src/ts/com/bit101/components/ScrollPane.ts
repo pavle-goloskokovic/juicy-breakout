@@ -12,7 +12,7 @@ export class ScrollPane extends Panel {
     protected _hScrollbar: HScrollBar;
     protected _corner: Shape;
     protected _dragContent = true;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -41,7 +41,7 @@ export class ScrollPane extends Panel {
         this.addRawChild(this._corner);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         const vPercent: number = (this._height - 10) / this.content.height;
@@ -81,7 +81,7 @@ export class ScrollPane extends Panel {
         this.content.y = -this._vScrollbar.value;
     }
 
-    public update (): void
+    update (): void
     {
         this.invalidate();
     }
@@ -117,7 +117,7 @@ export class ScrollPane extends Panel {
         this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
 
-    public set dragContent (value: boolean)
+    set dragContent (value: boolean)
     {
         this._dragContent = value;
         if (this._dragContent )
@@ -134,18 +134,18 @@ export class ScrollPane extends Panel {
         }
     }
 
-    public get dragContent (): boolean
+    get dragContent (): boolean
     {
         return this._dragContent;
     }
 
-    public set autoHideScrollBar (value: boolean)
+    set autoHideScrollBar (value: boolean)
     {
         this._vScrollbar.autoHide = value;
         this._hScrollbar.autoHide = value;
     }
 
-    public get autoHideScrollBar (): boolean
+    get autoHideScrollBar (): boolean
     {
         return this._vScrollbar.autoHide;
     }

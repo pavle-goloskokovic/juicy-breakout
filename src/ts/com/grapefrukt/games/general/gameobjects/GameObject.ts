@@ -6,27 +6,27 @@ import { Point } from '../../../../../flash/geom/Point';
 import { Rectangle } from '../../../../../flash/geom/Rectangle';
 [Event(name = 'gameobjectevent_detach', type = 'com.grapefrukt.games.general.events.GameObjectEvent')];
 export class GameObject extends Sprite {
-    public velocityX = 0;
-    public velocityY = 0;
+    velocityX = 0;
+    velocityY = 0;
     protected _flagged_for_removal = false;
     protected _auto_remove = true;
-    public constructor ()
+    constructor ()
     {
         super();
     }
 
-    public update (timeDelta = 1): void
+    update (timeDelta = 1): void
     {
         this.x += this.velocityX * timeDelta;
         this.y += this.velocityY * timeDelta;
     }
 
-    public get flaggedForRemoval (): boolean
+    get flaggedForRemoval (): boolean
     {
         return this._flagged_for_removal;
     }
 
-    public remove (): void
+    remove (): void
     {
         this._flagged_for_removal = true;
         dispatchEvent(new GameObjectEvent(GameObjectEvent.REMOVE, this, null));
@@ -49,17 +49,17 @@ export class GameObject extends Sprite {
         dispatchEvent(new GameObjectEvent(GameObjectEvent.DETACH, this, collection));
     }
 
-    public getDistance (other: GameObject): number
+    getDistance (other: GameObject): number
     {
         return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y));
     }
 
-    public get velocity (): number
+    get velocity (): number
     {
         return Math.sqrt(this.velocityX * this.velocityX + this.velocityY * this.velocityY);
     }
 
-    public set velocity (value: number)
+    set velocity (value: number)
     {
         const ratio: number = value / this.velocity;
         this.velocityX = this.velocityX * ratio;

@@ -3,7 +3,7 @@ import { Settings } from '../../Settings';
 import { Quadratic } from '../../../../../gskinner/motion/easing/Quadratic';
 import { ColorTransform } from '../../../../../../flash/geom/ColorTransform';
 export class BlockShatterParticle extends Particle {
-    public constructor ()
+    constructor ()
     {
         super(.3 + Math.random() * .3);
         this.graphics.beginFill(Settings.COLOR_BLOCK);
@@ -14,7 +14,7 @@ export class BlockShatterParticle extends Particle {
         this.transform.colorTransform = new ColorTransform(shade, shade, shade);
     }
 
-    public init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
+    init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
         super.init(xPos, yPos, vectorX, vectorY);
         this.scaleX = (this.scaleY = 1);

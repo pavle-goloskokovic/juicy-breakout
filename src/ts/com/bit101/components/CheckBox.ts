@@ -10,7 +10,7 @@ export class CheckBox extends Component {
     protected _label: Label;
     protected _labelText = '';
     protected _selected = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -42,7 +42,7 @@ export class CheckBox extends Component {
         this.addEventListener(MouseEvent.CLICK, this.onClick);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._back.graphics.clear();
@@ -66,29 +66,29 @@ export class CheckBox extends Component {
         this._button.visible = this._selected;
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.invalidate();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public set selected (s: boolean)
+    set selected (s: boolean)
     {
         this._selected = s;
         this._button.visible = this._selected;
     }
 
-    public get selected (): boolean
+    get selected (): boolean
     {
         return this._selected;
     }
 
-    public set enabled (value: boolean)
+    set enabled (value: boolean)
     {
         super.enabled = value;
         this.mouseChildren = false;

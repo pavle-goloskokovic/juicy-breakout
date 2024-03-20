@@ -15,9 +15,9 @@ export class Slider extends Component {
     protected _min = 0;
     protected _orientation: string;
     protected _tick = 0.01;
-    public static HORIZONTAL = 'horizontal';
-    public static VERTICAL = 'vertical';
-    public constructor (orientation: string = Slider.HORIZONTAL, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
+    static HORIZONTAL = 'horizontal';
+    static VERTICAL = 'vertical';
+    constructor (orientation: string = Slider.HORIZONTAL, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
@@ -114,14 +114,14 @@ export class Slider extends Component {
         }
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this.drawBack();
         this.drawHandle();
     }
 
-    public setSliderParams (min: number, max: number, value: number): void
+    setSliderParams (min: number, max: number, value: number): void
     {
         this.minimum = min;
         this.maximum = max;
@@ -185,64 +185,64 @@ export class Slider extends Component {
         }
     }
 
-    public set backClick (b: boolean)
+    set backClick (b: boolean)
     {
         this._backClick = b;
         this.invalidate();
     }
 
-    public get backClick (): boolean
+    get backClick (): boolean
     {
         return this._backClick;
     }
 
-    public set value (v: number)
+    set value (v: number)
     {
         this._value = v;
         this.correctValue();
         this.positionHandle();
     }
 
-    public get value (): number
+    get value (): number
     {
         return Math.round(this._value / this._tick) * this._tick;
     }
 
-    public get rawValue (): number
+    get rawValue (): number
     {
         return this._value;
     }
 
-    public set maximum (m: number)
+    set maximum (m: number)
     {
         this._max = m;
         this.correctValue();
         this.positionHandle();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._max;
     }
 
-    public set minimum (m: number)
+    set minimum (m: number)
     {
         this._min = m;
         this.correctValue();
         this.positionHandle();
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._min;
     }
 
-    public set tick (t: number)
+    set tick (t: number)
     {
         this._tick = t;
     }
 
-    public get tick (): number
+    get tick (): number
     {
         return this._tick;
     }

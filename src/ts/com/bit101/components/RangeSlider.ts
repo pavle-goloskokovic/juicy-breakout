@@ -22,16 +22,16 @@ export class RangeSlider extends Component {
     protected _minHandle: Sprite;
     protected _orientation: string = VERTICAL;
     protected _tick = 1;
-    public static ALWAYS = 'always';
-    public static BOTTOM = 'bottom';
-    public static HORIZONTAL = 'horizontal';
-    public static LEFT = 'left';
-    public static MOVE = 'move';
-    public static NEVER = 'never';
-    public static RIGHT = 'right';
-    public static TOP = 'top';
-    public static VERTICAL = 'vertical';
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
+    static ALWAYS = 'always';
+    static BOTTOM = 'bottom';
+    static HORIZONTAL = 'horizontal';
+    static LEFT = 'left';
+    static MOVE = 'move';
+    static NEVER = 'never';
+    static RIGHT = 'right';
+    static TOP = 'top';
+    static VERTICAL = 'vertical';
+    constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
@@ -181,7 +181,7 @@ export class RangeSlider extends Component {
         return str;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this.drawBack();
@@ -275,7 +275,7 @@ export class RangeSlider extends Component {
         this.updateLabels();
     }
 
-    public set minimum (value: number)
+    set minimum (value: number)
     {
         this._minimum = value;
         this._maximum = Math.max(this._maximum, this._minimum);
@@ -284,12 +284,12 @@ export class RangeSlider extends Component {
         this.positionHandles();
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._minimum;
     }
 
-    public set maximum (value: number)
+    set maximum (value: number)
     {
         this._maximum = value;
         this._minimum = Math.min(this._minimum, this._maximum);
@@ -298,12 +298,12 @@ export class RangeSlider extends Component {
         this.positionHandles();
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._maximum;
     }
 
-    public set lowValue (value: number)
+    set lowValue (value: number)
     {
         this._lowValue = value;
         this._lowValue = Math.min(this._lowValue, this._highValue);
@@ -312,12 +312,12 @@ export class RangeSlider extends Component {
         dispatchEvent(new Event(Event.CHANGE));
     }
 
-    public get lowValue (): number
+    get lowValue (): number
     {
         return Math.round(this._lowValue / this._tick) * this._tick;
     }
 
-    public set highValue (value: number)
+    set highValue (value: number)
     {
         this._highValue = value;
         this._highValue = Math.max(this._highValue, this._lowValue);
@@ -326,52 +326,52 @@ export class RangeSlider extends Component {
         dispatchEvent(new Event(Event.CHANGE));
     }
 
-    public get highValue (): number
+    get highValue (): number
     {
         return Math.round(this._highValue / this._tick) * this._tick;
     }
 
-    public set labelMode (value: string)
+    set labelMode (value: string)
     {
         this._labelMode = value;
         this._highLabel.visible = this._labelMode == RangeSlider.ALWAYS;
         this._lowLabel.visible = this._labelMode == RangeSlider.ALWAYS;
     }
 
-    public get labelMode (): string
+    get labelMode (): string
     {
         return this._labelMode;
     }
 
-    public set labelPosition (value: string)
+    set labelPosition (value: string)
     {
         this._labelPosition = value;
         this.updateLabels();
     }
 
-    public get labelPosition (): string
+    get labelPosition (): string
     {
         return this._labelPosition;
     }
 
-    public set labelPrecision (value: number)
+    set labelPrecision (value: number)
     {
         this._labelPrecision = value;
         this.updateLabels();
     }
 
-    public get labelPrecision (): number
+    get labelPrecision (): number
     {
         return this._labelPrecision;
     }
 
-    public set tick (value: number)
+    set tick (value: number)
     {
         this._tick = value;
         this.updateLabels();
     }
 
-    public get tick (): number
+    get tick (): number
     {
         return this._tick;
     }

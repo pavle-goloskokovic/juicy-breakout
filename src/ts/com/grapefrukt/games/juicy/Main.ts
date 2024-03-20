@@ -52,7 +52,7 @@ export class Main extends Sprite {
     private _background: Shape;
     private _useColors: boolean;
     private _preload: TXT;
-    public constructor ()
+    constructor ()
     {
         super();
         ColorTransformPlugin.install();
@@ -108,7 +108,7 @@ export class Main extends Sprite {
         t.start();
     }
 
-    public drawBackground (): void
+    drawBackground (): void
     {
         this._background.graphics.clear();
         if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this._backgroundGlitchForce > 0.01 )
@@ -123,7 +123,7 @@ export class Main extends Sprite {
         this._background.graphics.drawRect(5, 5, Settings.STAGE_W - 10, Settings.STAGE_H);
     }
 
-    public reset (): void
+    reset (): void
     {
         this._soundBlockHitCounter = 0;
         this.drawBackground();

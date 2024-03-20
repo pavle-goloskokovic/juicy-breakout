@@ -3,7 +3,7 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 export class LineChart extends Chart {
     protected _lineWidth = 1;
     protected _lineColor = 0x999999;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         super(parent, xpos, ypos, data);
     }
@@ -32,24 +32,24 @@ export class LineChart extends Chart {
         }
     }
 
-    public set lineWidth (value: number)
+    set lineWidth (value: number)
     {
         this._lineWidth = value;
         this.invalidate();
     }
 
-    public get lineWidth (): number
+    get lineWidth (): number
     {
         return this._lineWidth;
     }
 
-    public set lineColor (value: number)
+    set lineColor (value: number)
     {
         this._lineColor = value;
         this.invalidate();
     }
 
-    public get lineColor (): number
+    get lineColor (): number
     {
         return this._lineColor;
     }

@@ -12,7 +12,7 @@ export class UISlider extends Component {
     protected _sliderClass: Class;
     protected _labelText: string;
     protected _tick = 1;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -67,7 +67,7 @@ export class UISlider extends Component {
 
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._label.text = this._labelText;
@@ -75,7 +75,7 @@ export class UISlider extends Component {
         this.formatValueLabel();
     }
 
-    public setSliderParams (min: number, max: number, value: number): void
+    setSliderParams (min: number, max: number, value: number): void
     {
         this._slider.setSliderParams(min, max, value);
     }
@@ -86,65 +86,65 @@ export class UISlider extends Component {
         dispatchEvent(new Event(Event.CHANGE));
     }
 
-    public set value (v: number)
+    set value (v: number)
     {
         this._slider.value = v;
         this.formatValueLabel();
     }
 
-    public get value (): number
+    get value (): number
     {
         return this._slider.value;
     }
 
-    public set maximum (m: number)
+    set maximum (m: number)
     {
         this._slider.maximum = m;
     }
 
-    public get maximum (): number
+    get maximum (): number
     {
         return this._slider.maximum;
     }
 
-    public set minimum (m: number)
+    set minimum (m: number)
     {
         this._slider.minimum = m;
     }
 
-    public get minimum (): number
+    get minimum (): number
     {
         return this._slider.minimum;
     }
 
-    public set labelPrecision (decimals: number)
+    set labelPrecision (decimals: number)
     {
         this._precision = decimals;
     }
 
-    public get labelPrecision (): number
+    get labelPrecision (): number
     {
         return this._precision;
     }
 
-    public set label (str: string)
+    set label (str: string)
     {
         this._labelText = str;
         this.draw();
     }
 
-    public get label (): string
+    get label (): string
     {
         return this._labelText;
     }
 
-    public set tick (t: number)
+    set tick (t: number)
     {
         this._tick = t;
         this._slider.tick = this._tick;
     }
 
-    public get tick (): number
+    get tick (): number
     {
         return this._tick;
     }

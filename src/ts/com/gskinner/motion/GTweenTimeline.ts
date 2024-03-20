@@ -1,17 +1,17 @@
 import { GTween } from './GTween';
 import { Dictionary } from '../../../flash/utils/Dictionary';
 export class GTweenTimeline extends GTween {
-    public static setPropertyValue (target: any, propertyName: string, value: any): void
+    static setPropertyValue (target: any, propertyName: string, value: any): void
     {
         target[propertyName] = value;
     }
 
-    public suppressCallbacks: boolean;
+    suppressCallbacks: boolean;
     protected callbacks: any[];
     protected labels: any;
     protected tweens: any[];
     protected tweenStartPositions: any[];
-    public constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null, tweens: any[] = null)
+    constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null, tweens: any[] = null)
     {
         this.tweens = [];
         this.tweenStartPositions = [];
@@ -25,7 +25,7 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public set position (value: number)
+    set position (value: number)
     {
         const tmpSuppressEvents: boolean = this.suppressEvents;
         this.suppressEvents = true;
@@ -63,7 +63,7 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public addTween (position: number, tween: GTween): void
+    addTween (position: number, tween: GTween): void
     {
         if (tween == null || isNaN(position) )
         {
@@ -81,7 +81,7 @@ export class GTweenTimeline extends GTween {
         tween.position = this.calculatedPosition - position;
     }
 
-    public addTweens (tweens: any[]): void
+    addTweens (tweens: any[]): void
     {
         if (tweens == null )
         {
@@ -93,7 +93,7 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public removeTween (tween: GTween): void
+    removeTween (tween: GTween): void
     {
         for (let i: number = this.tweens.length; i >= 0; i--)
         {
@@ -105,17 +105,17 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public addLabel (position: number, label: string): void
+    addLabel (position: number, label: string): void
     {
         this.labels[label] = position;
     }
 
-    public removeLabel (label: string): void
+    removeLabel (label: string): void
     {
         delete this.labels[label];
     }
 
-    public addCallback (labelOrPosition: any, forwardCallback: Function, forwardParameters: any[] = null, reverseCallback: Function = null, reverseParameters: any[] = null): void
+    addCallback (labelOrPosition: any, forwardCallback: Function, forwardParameters: any[] = null, reverseCallback: Function = null, reverseParameters: any[] = null): void
     {
         const position: number = this.resolveLabelOrPosition(labelOrPosition);
         if (isNaN(position) )
@@ -139,7 +139,7 @@ export class GTweenTimeline extends GTween {
         this.callbacks.splice(i + 1, 0, callback);
     }
 
-    public removeCallback (labelOrPosition: any): void
+    removeCallback (labelOrPosition: any): void
     {
         const position: number = this.resolveLabelOrPosition(labelOrPosition);
         if (isNaN(position) )
@@ -157,19 +157,19 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public gotoAndPlay (labelOrPosition: any): void
+    gotoAndPlay (labelOrPosition: any): void
     {
         this.goto(labelOrPosition);
         this.paused = false;
     }
 
-    public gotoAndStop (labelOrPosition: any): void
+    gotoAndStop (labelOrPosition: any): void
     {
         this.goto(labelOrPosition);
         this.paused = true;
     }
 
-    public goto (labelOrPosition: any): void
+    goto (labelOrPosition: any): void
     {
         const pos: number = this.resolveLabelOrPosition(labelOrPosition);
         if (!isNaN(pos) )
@@ -178,12 +178,12 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    public resolveLabelOrPosition (labelOrPosition: any): number
+    resolveLabelOrPosition (labelOrPosition: any): number
     {
         return isNaN(labelOrPosition) ? this.labels[String(labelOrPosition)] : labelOrPosition;
     }
 
-    public calculateDuration (): void
+    calculateDuration (): void
     {
         let d = 0;
         if (this.callbacks.length > 0 )
@@ -260,12 +260,12 @@ export class GTweenTimeline extends GTween {
     }
 }
 class Callback {
-    public position: number;
-    public forward: Function;
-    public reverse: Function;
-    public forwardParams: any[];
-    public reverseParams: any[];
-    public constructor (position: number, forward: Function, forwardParams: any[], reverse: Function, reverseParams: any[])
+    position: number;
+    forward: Function;
+    reverse: Function;
+    forwardParams: any[];
+    reverseParams: any[];
+    constructor (position: number, forward: Function, forwardParams: any[], reverse: Function, reverseParams: any[])
     {
         this.position = position;
         this.forward = forward;

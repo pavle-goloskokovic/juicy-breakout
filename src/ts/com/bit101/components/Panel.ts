@@ -11,8 +11,8 @@ export class Panel extends Component {
     protected _gridSize = 10;
     protected _showGrid = false;
     protected _gridColor = 0xd0d0d0;
-    public content: Sprite;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
+    content: Sprite;
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -36,19 +36,19 @@ export class Panel extends Component {
         this.filters = [this.getShadow(2, true)];
     }
 
-    public addChild (child: DisplayObject): DisplayObject
+    addChild (child: DisplayObject): DisplayObject
     {
         this.content.addChild(child);
         return child;
     }
 
-    public addRawChild (child: DisplayObject): DisplayObject
+    addRawChild (child: DisplayObject): DisplayObject
     {
         super.addChild(child);
         return child;
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._background.graphics.clear();
@@ -89,7 +89,7 @@ export class Panel extends Component {
         }
     }
 
-    public set shadow (b: boolean)
+    set shadow (b: boolean)
     {
         this._shadow = b;
         if (this._shadow )
@@ -102,51 +102,51 @@ export class Panel extends Component {
         }
     }
 
-    public get shadow (): boolean
+    get shadow (): boolean
     {
         return this._shadow;
     }
 
-    public set color (c: number)
+    set color (c: number)
     {
         this._color = c;
         this.invalidate();
     }
 
-    public get color (): number
+    get color (): number
     {
         return this._color;
     }
 
-    public set gridSize (value: number)
+    set gridSize (value: number)
     {
         this._gridSize = value;
         this.invalidate();
     }
 
-    public get gridSize (): number
+    get gridSize (): number
     {
         return this._gridSize;
     }
 
-    public set showGrid (value: boolean)
+    set showGrid (value: boolean)
     {
         this._showGrid = value;
         this.invalidate();
     }
 
-    public get showGrid (): boolean
+    get showGrid (): boolean
     {
         return this._showGrid;
     }
 
-    public set gridColor (value: number)
+    set gridColor (value: number)
     {
         this._gridColor = value;
         this.invalidate();
     }
 
-    public get gridColor (): number
+    get gridColor (): number
     {
         return this._gridColor;
     }

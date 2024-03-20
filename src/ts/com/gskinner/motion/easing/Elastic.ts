@@ -2,7 +2,7 @@ export class Elastic {
     protected static a = 1;
     protected static p = 0.3;
     protected static s: number = p / 4;
-    public static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         if (ratio == 0 || ratio == 1 )
         {
@@ -11,7 +11,7 @@ export class Elastic {
         return -(Elastic.a * Math.pow(2, 10 * (ratio -= 1)) * Math.sin((ratio - Elastic.s) * (2 * Math.PI) / Elastic.p));
     }
 
-    public static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         if (ratio == 0 || ratio == 1 )
         {
@@ -20,7 +20,7 @@ export class Elastic {
         return Elastic.a * Math.pow(2, -10 * ratio) * Math.sin((ratio - Elastic.s) * (2 * Math.PI) / Elastic.p) + 1;
     }
 
-    public static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
+    static easeInOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         if (ratio == 0 || ratio == 1 )
         {

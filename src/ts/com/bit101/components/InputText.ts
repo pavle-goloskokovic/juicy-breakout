@@ -11,7 +11,7 @@ export class InputText extends Component {
     protected _password = false;
     protected _text = '';
     protected _tf: TextField;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '', defaultHandler: Function = null)
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '', defaultHandler: Function = null)
     {
         this.text = text;
         super(parent, xpos, ypos);
@@ -41,7 +41,7 @@ export class InputText extends Component {
         this._tf.addEventListener(Event.CHANGE, this.onChange);
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._back.graphics.clear();
@@ -79,7 +79,7 @@ export class InputText extends Component {
         dispatchEvent(event);
     }
 
-    public set text (t: string)
+    set text (t: string)
     {
         this._text = t;
         if (this._text == null )
@@ -89,48 +89,48 @@ export class InputText extends Component {
         this.invalidate();
     }
 
-    public get text (): string
+    get text (): string
     {
         return this._text;
     }
 
-    public get textField (): TextField
+    get textField (): TextField
     {
         return this._tf;
     }
 
-    public set restrict (str: string)
+    set restrict (str: string)
     {
         this._tf.restrict = str;
     }
 
-    public get restrict (): string
+    get restrict (): string
     {
         return this._tf.restrict;
     }
 
-    public set maxChars (max: number)
+    set maxChars (max: number)
     {
         this._tf.maxChars = max;
     }
 
-    public get maxChars (): number
+    get maxChars (): number
     {
         return this._tf.maxChars;
     }
 
-    public set password (b: boolean)
+    set password (b: boolean)
     {
         this._password = b;
         this.invalidate();
     }
 
-    public get password (): boolean
+    get password (): boolean
     {
         return this._password;
     }
 
-    public set enabled (value: boolean)
+    set enabled (value: boolean)
     {
         super.enabled = value;
         this._tf.tabEnabled = value;

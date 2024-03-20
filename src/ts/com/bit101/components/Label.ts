@@ -10,7 +10,7 @@ export class Label extends Component {
     protected _autoSize = true;
     protected _text = '';
     protected _tf: TextField;
-    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
+    constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         this.text = text;
         super(parent, xpos, ypos);
@@ -37,7 +37,7 @@ export class Label extends Component {
         this.draw();
     }
 
-    public draw (): void
+    draw (): void
     {
         super.draw();
         this._tf.text = this._text;
@@ -55,7 +55,7 @@ export class Label extends Component {
         this._height = (this._tf.height = 18);
     }
 
-    public set text (t: string)
+    set text (t: string)
     {
         this._text = t;
         if (this._text == null )
@@ -65,22 +65,22 @@ export class Label extends Component {
         this.invalidate();
     }
 
-    public get text (): string
+    get text (): string
     {
         return this._text;
     }
 
-    public set autoSize (b: boolean)
+    set autoSize (b: boolean)
     {
         this._autoSize = b;
     }
 
-    public get autoSize (): boolean
+    get autoSize (): boolean
     {
         return this._autoSize;
     }
 
-    public get textField (): TextField
+    get textField (): TextField
     {
         return this._tf;
     }

@@ -6,7 +6,7 @@ import { KeyboardEvent } from '../../../../flash/events/KeyboardEvent';
 import { Keyboard } from '../../../../flash/ui/Keyboard';
 export class Slides extends Sprite {
     private _slides: SlidesClip;
-    public constructor ()
+    constructor ()
     {
         super();
         this._slides = new SlidesClip();
