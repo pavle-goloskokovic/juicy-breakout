@@ -42,8 +42,8 @@ export class HBox extends Component {
     }
     protected doAlignment(): void {
         if(this._alignment != HBox.NONE ) {
-            for(let i: number = 0; i < numChildren; i++) {
-                let child: DisplayObject = getChildAt(i);
+            for(let i: number = 0; i < this.numChildren; i++) {
+                let child: DisplayObject = this.getChildAt(i);
                 if(this._alignment == HBox.TOP ) {
                     child.y = 0;
                 } else if(this._alignment == HBox.BOTTOM ) {
@@ -58,8 +58,8 @@ export class HBox extends Component {
         this._width = 0;
         this._height = 0;
         let xpos: number = 0;
-        for(let i: number = 0; i < numChildren; i++) {
-            let child: DisplayObject = getChildAt(i);
+        for(let i: number = 0; i < this.numChildren; i++) {
+            let child: DisplayObject = this.getChildAt(i);
             child.x = xpos;
             xpos += child.width;
             xpos += this._spacing;
@@ -67,7 +67,7 @@ export class HBox extends Component {
             this._height = Math.max(this._height, child.height);
         }
         this.doAlignment();
-        this._width += this._spacing * (numChildren - 1);
+        this._width += this._spacing * (this.numChildren - 1);
         dispatchEvent(new Event(Event.RESIZE));
     }
     public set spacing(s: number) {

@@ -21,17 +21,17 @@ export class WheelMenu extends Component {
         this._outerRadius = outerRadius;
         this._iconRadius = iconRadius;
         this._innerRadius = innerRadius;
-        addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
+        this.addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         super(parent);
         if(defaultHandler != null ) {
-            addEventListener(Event.SELECT, defaultHandler);
+            this.addEventListener(Event.SELECT, defaultHandler);
         } 
     }
     protected init(): void {
         super.init();
         this._items = [];
         this.makeButtons();
-        filters = [new DropShadowFilter(4, 45, 0, 1, 4, 4, .2, 4)];
+        this.filters = [new DropShadowFilter(4, 45, 0, 1, 4, 4, .2, 4)];
     }
     protected makeButtons(): void {
         this._buttons = [];
@@ -40,14 +40,14 @@ export class WheelMenu extends Component {
             btn.id = i;
             btn.rotation = this._startingAngle + 360 / this._numButtons * i;
             btn.addEventListener(Event.SELECT, this.onSelect);
-            addChild(btn);
+            this.addChild(btn);
             this._buttons.push(btn);
         }
     }
     public hide(): void {
-        visible = false;
-        if(stage != null ) {
-            stage.removeEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp);
+        this.visible = false;
+        if(this.stage != null ) {
+            this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp);
         } 
     }
     public setItem(index: number, iconOrLabel: any, data: any = null): void {
@@ -55,20 +55,20 @@ export class WheelMenu extends Component {
         this._items[index] = data;
     }
     public show(): void {
-        parent.addChild(this);
-        this.x = Math.round(parent.mouseX);
-        this.y = Math.round(parent.mouseY);
+        this.parent.addChild(this);
+        this.x = Math.round(this.parent.mouseX);
+        this.y = Math.round(this.parent.mouseY);
         this._selectedIndex = -1;
-        visible = true;
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp, true);
+        this.visible = true;
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp, true);
     }
     protected onAddedToStage(event: Event): void {
         this.hide();
-        addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+        this.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     protected onRemovedFromStage(event: Event): void {
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp);
-        removeEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp);
+        this.removeEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     protected onSelect(event: Event): void {
         this._selectedIndex = event.target.id;
@@ -134,13 +134,13 @@ class ArcButton extends Sprite {
         this._iconRadius = iconRadius;
         this._innerRadius = innerRadius;
         this._bg = new Shape();
-        addChild(this._bg);
+        this.addChild(this._bg);
         this._iconHolder = new Sprite();
-        addChild(this._iconHolder);
+        this.addChild(this._iconHolder);
         this.drawArc(0xffffff);
-        addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
-        addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
-        addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
+        this.addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
+        this.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected drawArc(color: number): void {
         this._bg.graphics.clear();
@@ -157,7 +157,7 @@ class ArcButton extends Sprite {
             this._bg.graphics.lineTo(Math.cos(i) * this._innerRadius, Math.sin(i) * this._innerRadius);
         }
         this._bg.graphics.lineTo(this._innerRadius, 0);
-        graphics.endFill();
+        this.graphics.endFill();
     }
     public setIcon(iconOrLabel: any): void {
         if(iconOrLabel == null ) {

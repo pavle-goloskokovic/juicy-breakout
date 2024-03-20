@@ -25,7 +25,7 @@ export class IndicatorLight extends Component {
     }
     protected addChildren(): void {
         this._lite = new Shape();
-        addChild(this._lite);
+        this.addChild(this._lite);
         this._label = new Label(this, 0, 0, this._labelText);
         this.draw();
     }

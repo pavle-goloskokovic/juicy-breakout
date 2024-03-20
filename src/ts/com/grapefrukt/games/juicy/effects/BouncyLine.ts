@@ -41,14 +41,14 @@ export class BouncyLine extends GameObject {
             this.wobble_middle.x *= 0.95;
         } 
         this.wobble_middle = this.wobble_middle.add(this.wobble_velocity);
-        graphics.clear();
-        graphics.lineStyle(Settings.EFFECT_BOUNCY_LINES_WIDTH, Settings.COLOR_BOUNCY_LINES, 1, false, "normal", CapsStyle.SQUARE);
-        graphics.moveTo(this.pos1.x, this.pos1.y);
+        this.graphics.clear();
+        this.graphics.lineStyle(Settings.EFFECT_BOUNCY_LINES_WIDTH, Settings.COLOR_BOUNCY_LINES, 1, false, "normal", CapsStyle.SQUARE);
+        this.graphics.moveTo(this.pos1.x, this.pos1.y);
         let m: Point = this.middle;
         if(Settings.EFFECT_BOUNCY_LINES_ENABLED ) {
-            graphics.curveTo(m.x, m.y, this.pos2.x, this.pos2.y)
+            this.graphics.curveTo(m.x, m.y, this.pos2.x, this.pos2.y)
         } else {
-            graphics.lineTo(this.pos2.x, this.pos2.y)
+            this.graphics.lineTo(this.pos2.x, this.pos2.y)
         }
         if(this.collisionCounter > 0 ) {
             this.collisionCounter--

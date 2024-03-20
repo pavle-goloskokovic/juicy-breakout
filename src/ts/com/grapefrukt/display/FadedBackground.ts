@@ -30,31 +30,31 @@ export class FadedBackground extends Sprite {
         } 
         this._ratios = ratios;
         this._gfx = new Shape();
-        addChild(this._gfx);
-        addEventListener(Event.ADDED_TO_STAGE, this.addedToStageHandler);
+        this.addChild(this._gfx);
+        this.addEventListener(Event.ADDED_TO_STAGE, this.addedToStageHandler);
     }
     private resizeHandler(event: Event): void {
-        let stageRatio: number = stage.stageWidth / stage.stageHeight;
+        let stageRatio: number = this.stage.stageWidth / this.stage.stageHeight;
         let bkgRatio: number = this._baseWidth / this._baseWidth;
         if(stageRatio >= bkgRatio ) {
-            width = stage.stageWidth;
-            height = width / this._baseWidth * this._baseWidth;
+            this.width = this.stage.stageWidth;
+            this.height = this.width / this._baseWidth * this._baseWidth;
         } else {
-            height = stage.stageHeight;
-            width = height / this._baseWidth * this._baseWidth;
+            this.height = this.stage.stageHeight;
+            this.width = this.height / this._baseWidth * this._baseWidth;
         }
     }
     private addedToStageHandler(event: Event): void {
-        removeEventListener(Event.ADDED_TO_STAGE, this.addedToStageHandler);
+        this.removeEventListener(Event.ADDED_TO_STAGE, this.addedToStageHandler);
         this.redraw();
         this.resizeHandler(null);
-        stage.addEventListener(Event.RESIZE, this.resizeHandler);
+        this.stage.addEventListener(Event.RESIZE, this.resizeHandler);
     }
     public redraw(newColor: number = -1): void {
         if(newColor >= 0 ) {
             this._base_color = newColor
         } 
-        graphics.clear();
+        this.graphics.clear();
         let fillType: string = GradientType.RADIAL;
         let colors: any[] = [this._base_color, this._faded_color];
         let alphas: any[] = [1, 1];
@@ -68,7 +68,7 @@ export class FadedBackground extends Sprite {
         this._baseWidth = this._gfx.height;
         this._gfx.x = -this._baseWidth / 2;
         this._gfx.y = -this._baseWidth / 2;
-        x = this._stageNormalWidth / 2;
-        y = this._stageNormalHeight / 2;
+        this.x = this._stageNormalWidth / 2;
+        this.y = this._stageNormalHeight / 2;
     }
 }

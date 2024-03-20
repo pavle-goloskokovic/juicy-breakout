@@ -14,8 +14,8 @@ export class Particle extends Sprite {
         this._gtween.position = -this._gtween.delay;
     }
     public init(xPos: number, yPos: number, vectorX: number = 0, vectorY: number = 0): void {
-        x = xPos;
-        y = yPos;
+        this.x = xPos;
+        this.y = yPos;
         this._gtween.proxy.x = xPos + vectorX;
         this._gtween.proxy.y = yPos + vectorY;
     }
@@ -28,11 +28,11 @@ export class Particle extends Sprite {
     public set scale(value: number) {
         this._scale = value;
         if(this._scale < .5 ) {
-            scaleX = this._scale * 2;
-            scaleY = this._scale * 2;
+            this.scaleX = this._scale * 2;
+            this.scaleY = this._scale * 2;
         } else {
-            scaleX = 2 - this._scale * 2;
-            scaleY = 2 - this._scale * 2;
+            this.scaleX = 2 - this._scale * 2;
+            this.scaleY = 2 - this._scale * 2;
         }
     }
 }

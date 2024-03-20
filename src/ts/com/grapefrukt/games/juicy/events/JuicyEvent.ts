@@ -12,10 +12,10 @@ export class JuicyEvent extends Event {
         this._block = block;
     }
     public clone(): Event {
-        return new JuicyEvent(type);
+        return new JuicyEvent(this.type);
     }
     public toString(): string {
-        return formatToString("JuicyEvent", "type", "bubbles", "cancelable", "eventPhase");
+        return this.formatToString("JuicyEvent", "type", "bubbles", "cancelable", "eventPhase");
     }
     public get ball(): Ball {
         return this._ball;

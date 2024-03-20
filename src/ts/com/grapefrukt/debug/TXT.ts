@@ -12,9 +12,9 @@ export class TXT extends Sprite {
         this.txt_text.selectable = false;
         this.txt_text.setTextFormat(textformat);
         this.txt_text.defaultTextFormat = textformat;
-        addChild(this.txt_text);
-        mouseChildren = false;
-        mouseEnabled = false;
+        this.addChild(this.txt_text);
+        this.mouseChildren = false;
+        this.mouseEnabled = false;
         this.txt_text.mouseWheelEnabled = true;
         this.txt_text.height = 580;
         this.txt_text.width = 400;

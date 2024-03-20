@@ -14,26 +14,26 @@ export class CheckBox extends Component {
         this._labelText = label;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(MouseEvent.CLICK, defaultHandler);
+            this.addEventListener(MouseEvent.CLICK, defaultHandler);
         } 
     }
     protected init(): void {
         super.init();
-        buttonMode = true;
-        useHandCursor = true;
-        mouseChildren = false;
+        this.buttonMode = true;
+        this.useHandCursor = true;
+        this.mouseChildren = false;
     }
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._button = new Sprite();
         this._button.filters = [this.getShadow(1)];
         this._button.visible = false;
-        addChild(this._button);
+        this.addChild(this._button);
         this._label = new Label(this, 0, 0, this._labelText);
         this.draw();
-        addEventListener(MouseEvent.CLICK, this.onClick);
+        this.addEventListener(MouseEvent.CLICK, this.onClick);
     }
     public draw(): void {
         super.draw();
@@ -71,6 +71,6 @@ export class CheckBox extends Component {
     }
     public set enabled(value: boolean) {
         super.enabled = value;
-        mouseChildren = false;
+        this.mouseChildren = false;
     }
 }

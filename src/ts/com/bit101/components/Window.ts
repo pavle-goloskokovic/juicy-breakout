@@ -71,7 +71,7 @@ export class Window extends Component {
         this._minimizeButton.addEventListener(MouseEvent.CLICK, this.onMinimize);
         this._closeButton = new PushButton(null, 86, 6, "", this.onClose);
         this._closeButton.setSize(8, 8);
-        filters = [this.getShadow(4, false)];
+        this.filters = [this.getShadow(4, false)];
     }
     public addChild(child: DisplayObject): DisplayObject {
         this.content.addChild(child);
@@ -101,14 +101,14 @@ export class Window extends Component {
     protected onMouseGoDown(event: MouseEvent): void {
         if(this._draggable ) {
             this.startDrag();
-            stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
-            parent.addChild(this);
+            this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+            this.parent.addChild(this);
         } 
         dispatchEvent(new Event(Event.SELECT));
     }
     protected onMouseGoUp(event: MouseEvent): void {
         this.stopDrag();
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onMinimize(event: MouseEvent): void {
         this.minimized = !this.minimized;
@@ -119,9 +119,9 @@ export class Window extends Component {
     public set shadow(b: boolean) {
         this._shadow = b;
         if(this._shadow ) {
-            filters = [this.getShadow(4, false)];
+            this.filters = [this.getShadow(4, false)];
         } else {
-            filters = [];
+            this.filters = [];
         }
     }
     public get shadow(): boolean {
@@ -156,8 +156,8 @@ export class Window extends Component {
         this._hasMinimizeButton = b;
         if(this._hasMinimizeButton ) {
             super.addChild(this._minimizeButton);
-        } else if(contains(this._minimizeButton) ) {
-            removeChild(this._minimizeButton);
+        } else if(this.contains(this._minimizeButton) ) {
+            this.removeChild(this._minimizeButton);
         } 
         this.invalidate();
     }
@@ -167,12 +167,12 @@ export class Window extends Component {
     public set minimized(value: boolean) {
         this._minimized = value;
         if(this._minimized ) {
-            if(contains(this._panel) ) {
-                removeChild(this._panel)
+            if(this.contains(this._panel) ) {
+                this.removeChild(this._panel)
             } 
             this._minimizeButton.rotation = -90;
         } else {
-            if(!contains(this._panel) ) {
+            if(!this.contains(this._panel) ) {
                 super.addChild(this._panel)
             } 
             this._minimizeButton.rotation = 0;
@@ -183,7 +183,7 @@ export class Window extends Component {
         return this._minimized;
     }
     public get height(): number {
-        if(contains(this._panel) ) {
+        if(this.contains(this._panel) ) {
             return super.height;
         } else {
             return 20;

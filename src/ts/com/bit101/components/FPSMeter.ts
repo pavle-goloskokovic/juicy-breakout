@@ -15,10 +15,10 @@ export class FPSMeter extends Component {
         this._frames = 0;
         this._startTime = getTimer();
         this.setSize(50, 20);
-        if(stage != null ) {
-            addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+        if(this.stage != null ) {
+            this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
         } 
-        addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+        this.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     protected addChildren(): void {
         super.addChildren();
@@ -42,10 +42,10 @@ export class FPSMeter extends Component {
         this.stop();
     }
     public stop(): void {
-        removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+        this.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
     public start(): void {
-        addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+        this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
     public set prefix(value: string) {
         this._prefix = value;

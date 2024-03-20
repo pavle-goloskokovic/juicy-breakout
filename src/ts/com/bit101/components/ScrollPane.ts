@@ -17,7 +17,7 @@ export class ScrollPane extends Panel {
     }
     protected init(): void {
         super.init();
-        addEventListener(Event.RESIZE, this.onResize);
+        this.addEventListener(Event.RESIZE, this.onResize);
         this._background.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseGoDown);
         this._background.useHandCursor = true;
         this._background.buttonMode = true;
@@ -79,8 +79,8 @@ export class ScrollPane extends Panel {
     }
     protected onMouseGoDown(event: MouseEvent): void {
         this.content.startDrag(false, new Rectangle(0, 0, Math.min(0, this._width - this.content.width - 10), Math.min(0, this._height - this.content.height - 10)));
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMove);
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMove);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onMouseMove(event: MouseEvent): void {
         this._hScrollbar.value = -this.content.x;
@@ -88,8 +88,8 @@ export class ScrollPane extends Panel {
     }
     protected onMouseGoUp(event: MouseEvent): void {
         this.content.stopDrag();
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMove);
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMove);
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     public set dragContent(value: boolean) {
         this._dragContent = value;

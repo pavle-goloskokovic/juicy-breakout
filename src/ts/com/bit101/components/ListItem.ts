@@ -16,7 +16,7 @@ export class ListItem extends Component {
     }
     protected init(): void {
         super.init();
-        addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
+        this.addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
         this.setSize(100, 20);
     }
     protected addChildren(): void {
@@ -26,16 +26,16 @@ export class ListItem extends Component {
     }
     public draw(): void {
         super.draw();
-        graphics.clear();
+        this.graphics.clear();
         if(this._selected ) {
-            graphics.beginFill(this._selectedColor);
+            this.graphics.beginFill(this._selectedColor);
         } else if(this._mouseOver ) {
-            graphics.beginFill(this._rolloverColor);
+            this.graphics.beginFill(this._rolloverColor);
         } else {
-            graphics.beginFill(this._defaultColor);
+            this.graphics.beginFill(this._defaultColor);
         }
-        graphics.drawRect(0, 0, this.width, this.height);
-        graphics.endFill();
+        this.graphics.drawRect(0, 0, this.width, this.height);
+        this.graphics.endFill();
         if(this._data == null ) {
             return
         } 
@@ -48,12 +48,12 @@ export class ListItem extends Component {
         }
     }
     protected onMouseOver(event: MouseEvent): void {
-        addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
+        this.addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
         this._mouseOver = true;
         this.invalidate();
     }
     protected onMouseOut(event: MouseEvent): void {
-        removeEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
+        this.removeEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
         this._mouseOver = false;
         this.invalidate();
     }

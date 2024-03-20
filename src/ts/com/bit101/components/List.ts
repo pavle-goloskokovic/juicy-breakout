@@ -31,8 +31,8 @@ export class List extends Component {
     protected init(): void {
         super.init();
         this.setSize(100, 100);
-        addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
-        addEventListener(Event.RESIZE, this.onResize);
+        this.addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
+        this.addEventListener(Event.RESIZE, this.onResize);
         this.makeListItems();
         this.fillItems();
     }

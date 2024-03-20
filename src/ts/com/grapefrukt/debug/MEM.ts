@@ -19,7 +19,7 @@ export class MEM extends Sprite {
         this.mem_text.autoSize = TextFieldAutoSize.LEFT;
         this.mem_text.setTextFormat(textformat);
         this.mem_text.defaultTextFormat = textformat;
-        addChild(this.mem_text);
+        this.addChild(this.mem_text);
         this.update_timer = new Timer(250);
         this.update_timer.start();
         this.update_timer.addEventListener(TimerEvent.TIMER, this.onTimerCallback);

@@ -16,8 +16,8 @@ export class Label extends Component {
     }
     protected init(): void {
         super.init();
-        mouseEnabled = false;
-        mouseChildren = false;
+        this.mouseEnabled = false;
+        this.mouseChildren = false;
     }
     protected addChildren(): void {
         this._height = 18;
@@ -28,7 +28,7 @@ export class Label extends Component {
         this._tf.mouseEnabled = false;
         this._tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
         this._tf.text = this._text;
-        addChild(this._tf);
+        this.addChild(this._tf);
         this.draw();
     }
     public draw(): void {

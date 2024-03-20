@@ -27,7 +27,7 @@ export class Knob extends Component {
         this._labelText = label;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -38,13 +38,13 @@ export class Knob extends Component {
         this._knob.buttonMode = true;
         this._knob.useHandCursor = true;
         this._knob.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseGoDown);
-        addChild(this._knob);
+        this.addChild(this._knob);
         this._label = new Label();
         this._label.autoSize = true;
-        addChild(this._label);
+        this.addChild(this._label);
         this._valueLabel = new Label();
         this._valueLabel.autoSize = true;
-        addChild(this._valueLabel);
+        this.addChild(this._valueLabel);
         this._width = this._radius * 2;
         this._height = this._radius * 2 + 40;
     }
@@ -111,15 +111,15 @@ export class Knob extends Component {
         this._height = this._radius * 2 + 40;
     }
     protected onMouseGoDown(event: MouseEvent): void {
-        this._startX = mouseX;
-        this._startY = mouseY;
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMoved);
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this._startX = this.mouseX;
+        this._startY = this.mouseY;
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMoved);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onMouseMoved(event: MouseEvent): void {
         let oldValue: number = this._value;
         if(this._mode == Knob.ROTATE ) {
-            let angle: number = Math.atan2(mouseY - this._knob.y, mouseX - this._knob.x);
+            let angle: number = Math.atan2(this.mouseY - this._knob.y, this.mouseX - this._knob.x);
             let rot: number = angle * 180 / Math.PI - 135;
             while(rot > 360) {
                 rot -= 360
@@ -140,7 +140,7 @@ export class Knob extends Component {
             this._knob.rotation = rot + 135;
             this.formatValueLabel();
         } else if(this._mode == Knob.VERTICAL ) {
-            let diff: number = this._startY - mouseY;
+            let diff: number = this._startY - this.mouseY;
             let range: number = this._max - this._min;
             let percent: number = range / this._mouseRange;
             this._value += percent * diff;
@@ -149,9 +149,9 @@ export class Knob extends Component {
                 this.updateKnob();
                 dispatchEvent(new Event(Event.CHANGE));
             } 
-            this._startY = mouseY;
+            this._startY = this.mouseY;
         } else if(this._mode == Knob.HORIZONTAL ) {
-            diff = this._startX - mouseX;
+            diff = this._startX - this.mouseX;
             range = this._max - this._min;
             percent = range / this._mouseRange;
             this._value -= percent * diff;
@@ -160,12 +160,12 @@ export class Knob extends Component {
                 this.updateKnob();
                 dispatchEvent(new Event(Event.CHANGE));
             } 
-            this._startX = mouseX;
+            this._startX = this.mouseX;
         } 
     }
     protected onMouseGoUp(event: MouseEvent): void {
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMoved);
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMouseMoved);
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     public set maximum(m: number) {
         this._max = m;

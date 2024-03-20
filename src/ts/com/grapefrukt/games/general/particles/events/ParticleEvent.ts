@@ -5,9 +5,9 @@ export class ParticleEvent extends Event {
         super(type, bubbles, cancelable);
     }
     public clone(): Event {
-        return new ParticleEvent(type);
+        return new ParticleEvent(this.type);
     }
     public toString(): string {
-        return formatToString("ParticleEvent", "type", "bubbles", "cancelable", "eventPhase");
+        return this.formatToString("ParticleEvent", "type", "bubbles", "cancelable", "eventPhase");
     }
 }

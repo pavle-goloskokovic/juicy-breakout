@@ -23,8 +23,8 @@ export class ComboBox extends Component {
     public constructor(parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultLabel: string = "", items: any[] = null) {
         this._defaultLabel = defaultLabel;
         this._items = items;
-        addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
-        addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+        this.addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
+        this.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
         super(parent, xpos, ypos);
     }
     protected init(): void {
@@ -113,14 +113,14 @@ export class ComboBox extends Component {
     protected onSelect(event: Event): void {
         this._open = false;
         this._dropDownButton.label = "+";
-        if(stage != null && stage.contains(this._list) ) {
-            stage.removeChild(this._list);
+        if(this.stage != null && this.stage.contains(this._list) ) {
+            this.stage.removeChild(this._list);
         } 
         this.setLabelButtonLabel();
         dispatchEvent(event);
     }
     protected onAddedToStage(event: Event): void {
-        this._stage = stage;
+        this._stage = this.stage;
     }
     protected onRemovedFromStage(event: Event): void {
         this.removeList();

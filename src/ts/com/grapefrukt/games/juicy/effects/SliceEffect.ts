@@ -26,7 +26,7 @@ export class SliceEffect extends Sprite {
         let bmp: BitmapData = new BitmapData(bounds.width, bounds.height, true, 0x00000000);
         bmp.draw(source, matrix);
         this._container = new Sprite();
-        addChild(this._container);
+        this.addChild(this._container);
         this._slices = [];
         this._container.addEventListener(Event.ADDED, this.handleAdded);
         this._container.addEventListener(Event.REMOVED, this.handleRemoved);
@@ -91,17 +91,17 @@ class LineSliceObject extends Shape {
         this.render();
     }
     private render(): void {
-        graphics.beginBitmapFill(this._texture, new Matrix(1, 0, 0, 1, this._textureOffset.x, this._textureOffset.y), false, true);
-        graphics.moveTo(this._points[0].x, this._points[0].y);
+        this.graphics.beginBitmapFill(this._texture, new Matrix(1, 0, 0, 1, this._textureOffset.x, this._textureOffset.y), false, true);
+        this.graphics.moveTo(this._points[0].x, this._points[0].y);
         this._length = this._points.length;
         for(let i: number = 1; i < this._length; i++) {
-            graphics.lineTo(this._points[i].x, this._points[i].y);
+            this.graphics.lineTo(this._points[i].x, this._points[i].y);
         }
-        graphics.endFill();
+        this.graphics.endFill();
     }
     public slice(point1: Point, point2: Point): void {
-        let _pt1: Point = globalToLocal(parent.localToGlobal(point1));
-        let _pt2: Point = globalToLocal(parent.localToGlobal(point2));
+        let _pt1: Point = this.globalToLocal(this.parent.localToGlobal(point1));
+        let _pt2: Point = this.globalToLocal(this.parent.localToGlobal(point2));
         let newPoints: Array<Array<Point>> = [] < Array < Point >> [[], []];
         let _numCross: number = 0;
         for(let i: number = 0; i < this._length; i++) {
@@ -122,9 +122,9 @@ class LineSliceObject extends Shape {
             slice1.x = (slice2.x = this.x);
             slice1.y = (slice2.y = this.y);
             slice1.rotation = (slice2.rotation = this.rotation);
-            parent.addChild(slice1);
-            parent.addChild(slice2);
-            parent.removeChild(this);
+            this.parent.addChild(slice1);
+            this.parent.addChild(slice2);
+            this.parent.removeChild(this);
             let vector: Point = _pt2.subtract(_pt1);
             let angle: number = Math.atan2(vector.y, vector.x);
             let force: number = Settings.EFFECT_BLOCK_SHATTER_FORCE;

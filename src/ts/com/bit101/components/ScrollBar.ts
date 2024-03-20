@@ -26,7 +26,7 @@ export class ScrollBar extends Component {
         this._orientation = orientation;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected addChildren(): void {
@@ -102,9 +102,9 @@ export class ScrollBar extends Component {
         }
         this._scrollSlider.draw();
         if(this._autoHide ) {
-            visible = this._scrollSlider.thumbPercent < 1.0;
+            this.visible = this._scrollSlider.thumbPercent < 1.0;
         } else {
-            visible = true;
+            this.visible = true;
         }
     }
     public set autoHide(value: boolean) {
@@ -150,7 +150,7 @@ export class ScrollBar extends Component {
         this._shouldRepeat = true;
         this._direction = this.UP;
         this._delayTimer.start();
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected goUp(): void {
         this._scrollSlider.value -= this._lineSize;
@@ -161,7 +161,7 @@ export class ScrollBar extends Component {
         this._shouldRepeat = true;
         this._direction = this.DOWN;
         this._delayTimer.start();
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected goDown(): void {
         this._scrollSlider.value += this._lineSize;
@@ -197,7 +197,7 @@ class ScrollSlider extends Slider {
     public constructor(orientation: string, parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null) {
         super(orientation, parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -244,7 +244,7 @@ class ScrollSlider extends Slider {
     }
     protected onBackClick(event: MouseEvent): void {
         if(this._orientation == Slider.HORIZONTAL ) {
-            if(mouseX < this._handle.x ) {
+            if(this.mouseX < this._handle.x ) {
                 if(this._max > this._min ) {
                     this._value -= this._pageSize;
                 } else {
@@ -261,7 +261,7 @@ class ScrollSlider extends Slider {
             }
             this.positionHandle();
         } else {
-            if(mouseY < this._handle.y ) {
+            if(this.mouseY < this._handle.y ) {
                 if(this._max > this._min ) {
                     this._value -= this._pageSize;
                 } else {
@@ -281,8 +281,8 @@ class ScrollSlider extends Slider {
         dispatchEvent(new Event(Event.CHANGE));
     }
     protected onDrag(event: MouseEvent): void {
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
         if(this._orientation == Slider.HORIZONTAL ) {
             this._handle.startDrag(false, new Rectangle(0, 0, this._width - this._handle.width, 0));
         } else {

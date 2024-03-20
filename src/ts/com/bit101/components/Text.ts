@@ -38,7 +38,7 @@ export class Text extends Component {
         this._tf.type = TextFieldType.INPUT;
         this._tf.defaultTextFormat = this._format;
         this._tf.addEventListener(Event.CHANGE, this.onChange);
-        addChild(this._tf);
+        this.addChild(this._tf);
     }
     public draw(): void {
         super.draw();

@@ -21,7 +21,7 @@ export class Slider extends Component {
         this._orientation = orientation;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -35,13 +35,13 @@ export class Slider extends Component {
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._handle = new Sprite();
         this._handle.filters = [this.getShadow(1)];
         this._handle.addEventListener(MouseEvent.MOUSE_DOWN, this.onDrag);
         this._handle.buttonMode = true;
         this._handle.useHandCursor = true;
-        addChild(this._handle);
+        this.addChild(this._handle);
     }
     protected drawBack(): void {
         this._back.graphics.clear();
@@ -96,12 +96,12 @@ export class Slider extends Component {
     }
     protected onBackClick(event: MouseEvent): void {
         if(this._orientation == Slider.HORIZONTAL ) {
-            this._handle.x = mouseX - this._height / 2;
+            this._handle.x = this.mouseX - this._height / 2;
             this._handle.x = Math.max(this._handle.x, 0);
             this._handle.x = Math.min(this._handle.x, this._width - this._height);
             this._value = this._handle.x / (this.width - this._height) * (this._max - this._min) + this._min;
         } else {
-            this._handle.y = mouseY - this._width / 2;
+            this._handle.y = this.mouseY - this._width / 2;
             this._handle.y = Math.max(this._handle.y, 0);
             this._handle.y = Math.min(this._handle.y, this._height - this._width);
             this._value = (this._height - this._width - this._handle.y) / (this.height - this._width) * (this._max - this._min) + this._min;
@@ -109,8 +109,8 @@ export class Slider extends Component {
         dispatchEvent(new Event(Event.CHANGE));
     }
     protected onDrag(event: MouseEvent): void {
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
         if(this._orientation == Slider.HORIZONTAL ) {
             this._handle.startDrag(false, new Rectangle(0, 0, this._width - this._height, 0));
         } else {
@@ -118,9 +118,9 @@ export class Slider extends Component {
         }
     }
     protected onDrop(event: MouseEvent): void {
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
-        stopDrag();
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
+        this.stopDrag();
     }
     protected onSlide(event: MouseEvent): void {
         let oldValue: number = this._value;

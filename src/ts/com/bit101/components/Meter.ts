@@ -31,12 +31,12 @@ export class Meter extends Component {
     }
     protected addChildren(): void {
         this._dial = new Sprite();
-        addChild(this._dial);
+        this.addChild(this._dial);
         this._needle = new Sprite();
         this._needle.rotation = -50;
         this._dial.addChild(this._needle);
         this._needleMask = new Sprite();
-        addChild(this._needleMask);
+        this.addChild(this._needleMask);
         this._dial.mask = this._needleMask;
         this._minLabel = new Label(this);
         this._minLabel.text = this._minimum.toString();
@@ -63,13 +63,13 @@ export class Meter extends Component {
         super.setSize(w, h);
     }
     protected drawBackground(): void {
-        graphics.clear();
-        graphics.beginFill(Style.BACKGROUND);
-        graphics.drawRect(0, 0, this._width, this._height);
-        graphics.endFill();
-        graphics.beginFill(Style.PANEL);
-        graphics.drawRect(1, 1, this._width - 2, this._height - 2);
-        graphics.endFill();
+        this.graphics.clear();
+        this.graphics.beginFill(Style.BACKGROUND);
+        this.graphics.drawRect(0, 0, this._width, this._height);
+        this.graphics.endFill();
+        this.graphics.beginFill(Style.PANEL);
+        this.graphics.drawRect(1, 1, this._width - 2, this._height - 2);
+        this.graphics.endFill();
     }
     protected drawDial(startAngle: number, endAngle: number): void {
         this._dial.x = this._width / 2;
@@ -120,7 +120,7 @@ export class Meter extends Component {
         this._value = Math.max(this._value, this._minimum);
         this._value = Math.min(this._value, this._maximum);
         this._targetRotation = -50 + (this._value - this._minimum) / (this._maximum - this._minimum) * 100;
-        addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+        this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
     protected onEnterFrame(event: Event): void {
         let dist: number = this._targetRotation - this._needle.rotation;
@@ -128,7 +128,7 @@ export class Meter extends Component {
         this._velocity *= this._damp;
         if(Math.abs(this._velocity) < .1 && Math.abs(dist) < .1 ) {
             this._needle.rotation = this._targetRotation;
-            removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+            this.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
         } else {
             this._needle.rotation += this._velocity;
         }

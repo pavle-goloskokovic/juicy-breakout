@@ -17,12 +17,12 @@ export class ProgressBar extends Component {
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._bar = new Sprite();
         this._bar.x = 1;
         this._bar.y = 1;
         this._bar.filters = [this.getShadow(1)];
-        addChild(this._bar);
+        this.addChild(this._bar);
     }
     protected update(): void {
         this._bar.scaleX = this._value / this._max;

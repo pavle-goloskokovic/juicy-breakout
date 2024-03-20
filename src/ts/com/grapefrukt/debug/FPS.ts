@@ -35,9 +35,9 @@ export class FPS extends Sprite {
         this.fps_text.autoSize = TextFieldAutoSize.LEFT;
         this.fps_text.setTextFormat(textformat);
         this.fps_text.defaultTextFormat = textformat;
-        addChild(this.fps_text);
+        this.addChild(this.fps_text);
         if(this.manual_update == false ) {
-            addEventListener(Event.ENTER_FRAME, this.tick)
+            this.addEventListener(Event.ENTER_FRAME, this.tick)
         } 
     }
     public tick(event: Event = null): void {

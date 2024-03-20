@@ -10,10 +10,10 @@ export class MP3LoopEvent extends Event {
         this._loop = loop;
     }
     public clone(): Event {
-        return new MP3LoopEvent(type, this._loop);
+        return new MP3LoopEvent(this.type, this._loop);
     }
     public toString(): string {
-        return formatToString("MP3LoopEvent", "type", "bubbles", "cancelable", "eventPhase");
+        return this.formatToString("MP3LoopEvent", "type", "bubbles", "cancelable", "eventPhase");
     }
     public get loop(): MP3LoopBase {
         return this._loop;

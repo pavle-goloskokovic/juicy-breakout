@@ -22,7 +22,7 @@ export class RotarySelector extends Component {
         this._labelText = label;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -33,12 +33,12 @@ export class RotarySelector extends Component {
         this._knob = new Sprite();
         this._knob.buttonMode = true;
         this._knob.useHandCursor = true;
-        addChild(this._knob);
+        this.addChild(this._knob);
         this._label = new Label();
         this._label.autoSize = true;
-        addChild(this._label);
+        this.addChild(this._label);
         this._labels = new Sprite();
-        addChild(this._labels);
+        this.addChild(this._labels);
         this._knob.addEventListener(MouseEvent.CLICK, this.onClick);
     }
     protected decrement(): void {
@@ -79,14 +79,14 @@ export class RotarySelector extends Component {
         this.resetLabels();
         let arc: number = Math.PI * 1.5 / this._numChoices;
         let start: number = -Math.PI / 2 - arc * (this._numChoices - 1) / 2;
-        graphics.clear();
-        graphics.lineStyle(4, Style.BACKGROUND, .5);
+        this.graphics.clear();
+        this.graphics.lineStyle(4, Style.BACKGROUND, .5);
         for(let i: number = 0; i < this._numChoices; i++) {
             let angle: number = start + arc * i;
             let sin: number = Math.sin(angle);
             let cos: number = Math.cos(angle);
-            graphics.moveTo(this._knob.x, this._knob.y);
-            graphics.lineTo(this._knob.x + cos * (radius + 2), this._knob.y + sin * (radius + 2));
+            this.graphics.moveTo(this._knob.x, this._knob.y);
+            this.graphics.lineTo(this._knob.x + cos * (radius + 2), this._knob.y + sin * (radius + 2));
             let lab: Label = new Label(this._labels, cos * (radius + 10), sin * (radius + 10));
             lab.mouseEnabled = true;
             lab.buttonMode = true;
@@ -105,16 +105,16 @@ export class RotarySelector extends Component {
             } 
         }
         angle = start + arc * this._choice;
-        graphics.lineStyle(4, Style.LABEL_TEXT);
-        graphics.moveTo(this._knob.x, this._knob.y);
-        graphics.lineTo(this._knob.x + Math.cos(angle) * (radius + 2), this._knob.y + Math.sin(angle) * (radius + 2));
+        this.graphics.lineStyle(4, Style.LABEL_TEXT);
+        this.graphics.moveTo(this._knob.x, this._knob.y);
+        this.graphics.lineTo(this._knob.x + Math.cos(angle) * (radius + 2), this._knob.y + Math.sin(angle) * (radius + 2));
         this._label.text = this._labelText;
         this._label.draw();
         this._label.x = this._width / 2 - this._label.width / 2;
         this._label.y = this._height + 2;
     }
     protected onClick(event: MouseEvent): void {
-        if(mouseX < this._width / 2 ) {
+        if(this.mouseX < this._width / 2 ) {
             this.decrement();
         } else {
             this.increment();

@@ -23,7 +23,7 @@ export class Rainbow extends Shape {
         this._segments.push(seg);
     }
     public redrawSegments(offsetX: number = 0, offsetY: number = 0): void {
-        graphics.clear();
+        this.graphics.clear();
         if(!Settings.EFFECT_BALL_TRAIL ) {
             return
         } 
@@ -63,8 +63,8 @@ export class Rainbow extends Shape {
                 this._indices[k * 6 + 4] = k * 2 + 2;
                 this._indices[k * 6 + 5] = k * 2 + 3;
             }
-            graphics.beginFill(Settings.COLOR_TRAIL);
-            graphics.drawTriangles(this._verts, this._indices);
+            this.graphics.beginFill(Settings.COLOR_TRAIL);
+            this.graphics.drawTriangles(this._verts, this._indices);
         } 
     }
     private get head(): Segment {

@@ -15,7 +15,7 @@ export class InputText extends Component {
         this.text = text;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -25,13 +25,13 @@ export class InputText extends Component {
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._tf = new TextField();
         this._tf.embedFonts = Style.embedFonts;
         this._tf.selectable = true;
         this._tf.type = TextFieldType.INPUT;
         this._tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.INPUT_TEXT);
-        addChild(this._tf);
+        this.addChild(this._tf);
         this._tf.addEventListener(Event.CHANGE, this.onChange);
     }
     public draw(): void {

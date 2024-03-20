@@ -28,10 +28,10 @@ export class Ball extends GameObject {
         this.x = x;
         this.y = y;
         this._trail = new Rainbow();
-        addChild(this._trail);
+        this.addChild(this._trail);
         this._gfx = new Shape();
         this.drawBall();
-        addChild(this._gfx);
+        this.addChild(this._gfx);
         let v: Point = Point.polar(5, Math.random() * Math.PI * 2);
         this.velocityX = v.x;
         this.velocityY = v.y;
@@ -46,8 +46,8 @@ export class Ball extends GameObject {
         this._gfx.graphics.drawRect(-Ball.SIZE / 2, -Ball.SIZE / 2, Ball.SIZE, Ball.SIZE);
     }
     public update(timeDelta: number = 1): void {
-        this.exX = x;
-        this.exY = y;
+        this.exX = this.x;
+        this.exY = this.y;
         super.update(timeDelta);
         if(Settings.EFFECT_BALL_ROTATE ) {
             let target_rotation: number = Math.atan2(this.velocityY, this.velocityX) / Math.PI * 180;
@@ -91,10 +91,10 @@ export class Ball extends GameObject {
             this._ball_extra_scale = 0;
         }
         if((this._trailCooldown -= timeDelta) < 0 ) {
-            this._trail.addSegment(x, y);
+            this._trail.addSegment(this.x, this.y);
             this._trailCooldown = 3;
         } 
-        this._trail.redrawSegments(x, y);
+        this._trail.redrawSegments(this.x, this.y);
     }
     private doCollisionEffects(block: Block = null): void {
         dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
@@ -105,7 +105,7 @@ export class Ball extends GameObject {
             if(!this._tween_brightness ) {
                 this._tween_brightness = new GTween(this, 0.7, null, {ease: Back.easeOut})
             } 
-            transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
+            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
             this._tween_brightness.proxy.redOffset = (this._tween_brightness.proxy.greenOffset = (this._tween_brightness.proxy.blueOffset = 1));
         } 
     }

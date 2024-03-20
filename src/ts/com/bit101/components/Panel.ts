@@ -28,7 +28,7 @@ export class Panel extends Component {
         this.content = new Sprite();
         super.addChild(this.content);
         this.content.mask = this._mask;
-        filters = [this.getShadow(2, true)];
+        this.filters = [this.getShadow(2, true)];
     }
     public addChild(child: DisplayObject): DisplayObject {
         this.content.addChild(child);
@@ -72,9 +72,9 @@ export class Panel extends Component {
     public set shadow(b: boolean) {
         this._shadow = b;
         if(this._shadow ) {
-            filters = [this.getShadow(2, true)];
+            this.filters = [this.getShadow(2, true)];
         } else {
-            filters = [];
+            this.filters = [];
         }
     }
     public get shadow(): boolean {

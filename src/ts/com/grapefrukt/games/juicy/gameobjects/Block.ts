@@ -31,7 +31,7 @@ export class Block extends GameObject {
         this.x = x;
         this.y = y;
         this._gfx = new Sprite();
-        addChild(this._gfx);
+        this.addChild(this._gfx);
         this.render(Settings.COLOR_BLOCK);
         if(Settings.EFFECT_TWEENIN_ENABLED ) {
             if(Settings.EFFECT_TWEENIN_PROPERTY_Y ) {
@@ -57,7 +57,7 @@ export class Block extends GameObject {
         this._collidable = false;
         let delayDestruction: boolean = false;
         if(Settings.EFFECT_BLOCK_DARKEN ) {
-            transform.colorTransform = new ColorTransform(.7, .7, .8)
+            this.transform.colorTransform = new ColorTransform(.7, .7, .8)
         } 
         if(Settings.EFFECT_BLOCK_PUSH ) {
             let v: Point = new Point(this.x - ball.x, this.y - ball.y);
@@ -66,9 +66,9 @@ export class Block extends GameObject {
             this.velocityY += v.y;
             delayDestruction = true;
         } 
-        parent.setChildIndex(this, parent.numChildren - 1);
+        this.parent.setChildIndex(this, this.parent.numChildren - 1);
         this._sliceEffect = new SliceEffect(this._gfx, null);
-        addChild(this._sliceEffect);
+        this.addChild(this._sliceEffect);
         this._gfx.visible = false;
         Freezer.freeze();
         if(Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER ) {

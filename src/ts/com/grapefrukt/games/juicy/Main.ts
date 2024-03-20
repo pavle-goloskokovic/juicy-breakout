@@ -59,47 +59,47 @@ export class Main extends Sprite {
         SoundManager.soundControl.addEventListener(Event.INIT, this.handleInit);
         this._preload = new TXT();
         this._preload.setText("Loading sounds...");
-        addChild(this._preload);
-        tabEnabled = false;
-        tabChildren = false;
+        this.addChild(this._preload);
+        this.tabEnabled = false;
+        this.tabChildren = false;
     }
     private handleInit(e: Event): void {
-        removeChild(this._preload);
+        this.removeChild(this._preload);
         this._particles_confetti = new ParticlePool(ConfettiParticle);
-        addChild(this._particles_confetti);
+        this.addChild(this._particles_confetti);
         this._blocks = new GameObjectCollection();
         this._blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, true);
-        addChild(this._blocks);
+        this.addChild(this._blocks);
         this._lines = new GameObjectCollection();
-        addChild(this._lines);
+        this.addChild(this._lines);
         this._balls = new GameObjectCollection();
         this._balls.addEventListener(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, true);
-        addChild(this._balls);
+        this.addChild(this._balls);
         this._particles_impact = new ParticlePool(BallImpactParticle);
-        addChild(this._particles_impact);
+        this.addChild(this._particles_impact);
         this._particles_shatter = new ParticlePool(BlockShatterParticle);
-        addChild(this._particles_shatter);
-        addEventListener(Event.ENTER_FRAME, this.handleEnterFrame);
-        stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
-        stage.addEventListener(MouseEvent.MOUSE_DOWN, this.handleMouseToggle);
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.handleMouseToggle);
+        this.addChild(this._particles_shatter);
+        this.addEventListener(Event.ENTER_FRAME, this.handleEnterFrame);
+        this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
+        this.stage.addEventListener(MouseEvent.MOUSE_DOWN, this.handleMouseToggle);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.handleMouseToggle);
         this._timestep = new Timestep();
         this._timestep.gameSpeed = 1;
         this._mouseVector = new Point();
         this._screenshake = new Shaker(this);
         this._background = new Shape();
-        parent.addChildAt(this._background, 0);
+        this.parent.addChildAt(this._background, 0);
         this._toggler = new Toggler(Settings);
-        parent.addChild(this._toggler);
+        this.parent.addChild(this._toggler);
         this._slides = new Slides();
         this._slides.visible = false;
-        parent.addChild(this._slides);
-        this._keyboard = new LazyKeyboard(stage);
+        this.parent.addChild(this._slides);
+        this._keyboard = new LazyKeyboard(this.stage);
         this.updateColorUse();
         this.reset();
         let t: Timer = new Timer(50, 0);
         t.addEventListener(TimerEvent.TIMER, function(e: Event): void {
-            stage.focus = stage;
+            this.stage.focus = this.stage;
         });
         t.start();
     }
@@ -163,12 +163,12 @@ export class Main extends Sprite {
             this._paddle.lookAt(Ball(this._balls.collection[0]))
         } 
         if(Settings.EFFECT_PADDLE_STRETCH ) {
-            this._paddle.scaleX = 1 + Math.abs(this._paddle.x - mouseX) / 100;
+            this._paddle.scaleX = 1 + Math.abs(this._paddle.x - this.mouseX) / 100;
             this._paddle.scaleY = 1.5 - this._paddle.scaleX * .5;
         } else {
             this._paddle.scaleX = (this._paddle.scaleY = 1);
         }
-        this._paddle.x = mouseX;
+        this._paddle.x = this.mouseX;
         let screen_buffer: number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
         for(let ball of this._balls.collection) {
             if(ball.x < screen_buffer && ball.velocityX < 0 ) {
@@ -188,8 +188,8 @@ export class Main extends Sprite {
                 line.checkCollision(ball);
             }
             if(this._mouseDown ) {
-                _mouseArrayx = (ball.x - mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
-                _mouseArrayy = (ball.y - mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
+                _mouseArrayx = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
+                _mouseArrayy = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
                 if(_mouseArraylength > Settings.MOUSE_GRAVITY_MAX ) {
                     _mouseArraynormalize(Settings.MOUSE_GRAVITY_MAX)
                 } 
@@ -302,10 +302,10 @@ export class Main extends Sprite {
     }
     private updateColorUse(): void {
         if(Settings.EFFECT_SCREEN_COLORS ) {
-            transform.colorTransform = new ColorTransform();
+            this.transform.colorTransform = new ColorTransform();
             this._background.transform.colorTransform = new ColorTransform();
         } else {
-            transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
+            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
             this._background.transform.colorTransform = new ColorTransform(0, 0, 0);
         }
         this._useColors = Settings.EFFECT_SCREEN_COLORS;

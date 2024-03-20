@@ -12,10 +12,10 @@ export class GameObjectEvent extends Event {
         this._collection = collection;
     }
     public clone(): Event {
-        return new GameObjectEvent(type, this.gameObject, this.collection);
+        return new GameObjectEvent(this.type, this.gameObject, this.collection);
     }
     public toString(): string {
-        return formatToString("GameObjectEvent", "type", "bubbles", "cancelable", "eventPhase");
+        return this.formatToString("GameObjectEvent", "type", "bubbles", "cancelable", "eventPhase");
     }
     public get gameObject(): GameObject {
         return this._game_object;

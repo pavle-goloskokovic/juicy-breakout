@@ -26,7 +26,7 @@ export class NumericStepper extends Component {
     public constructor(parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null) {
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -72,13 +72,13 @@ export class NumericStepper extends Component {
         this.decrement();
         this._direction = this.DOWN;
         this._delayTimer.start();
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onPlus(event: MouseEvent): void {
         this.increment();
         this._direction = this.UP;
         this._delayTimer.start();
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onMouseGoUp(event: MouseEvent): void {
         this._delayTimer.stop();

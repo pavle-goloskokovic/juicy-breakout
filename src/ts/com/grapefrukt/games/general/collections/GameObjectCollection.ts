@@ -8,7 +8,7 @@ export class GameObjectCollection extends Sprite {
     public constructor() {
         super();
         this._collection = [];
-        addEventListener(GameObjectEvent.REMOVE, this.handleRemove, true);
+        this.addEventListener(GameObjectEvent.REMOVE, this.handleRemove, true);
     }
     protected handleRemove(e: GameObjectEvent): void {
         this.remove(GameObject(e.target), false);
@@ -33,12 +33,12 @@ export class GameObjectCollection extends Sprite {
     }
     public add(go: GameObject): GameObject {
         this._collection.push(go);
-        addChild(go);
+        this.addChild(go);
         return go;
     }
     public addAt(go: GameObject, index: number): GameObject {
         this._collection.splice(index - 1, 0, go);
-        addChild(go);
+        this.addChild(go);
         return go;
     }
     public removeAtIndex(pos: number, doRemove: boolean): GameObject {

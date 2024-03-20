@@ -15,7 +15,7 @@ export class ConfettiParticle extends Particle {
     public constructor(lifespan: number = 2) {
         super(lifespan);
         this._gfx = new ConfettiParticleGfx();
-        addChild(this._gfx);
+        this.addChild(this._gfx);
         this._gfx.rotation = Math.random() * 360;
         this._gtween.onChange = this.update;
         let colors: any[] = ColorConverter.HSBtoRGB(Math.random(), 1, 1);
@@ -24,11 +24,11 @@ export class ConfettiParticle extends Particle {
     public init(xPos: number, yPos: number, vectorX: number = 0, vectorY: number = 0): void {
         this._vectorY = vectorY;
         this._vectorX = vectorX;
-        x = xPos;
-        y = yPos;
-        rotation = 0;
+        this.x = xPos;
+        this.y = yPos;
+        this.rotation = 0;
         this.scale = .8;
-        alpha = 1;
+        this.alpha = 1;
         this._gtween.delay = Math.random() * .3;
         this._gtween.proxy.scaleX = (this._gtween.proxy.scaleY = .01);
         this._gtween.proxy.rotation = Math.random() * 360;
@@ -38,8 +38,8 @@ export class ConfettiParticle extends Particle {
         let timeDelta: number = GTween.timeScaleAll;
         this._age += timeDelta;
         this._gfx.gotoAndPlay(1 + (int(this._age) % this._gfx.totalFrames - 1));
-        x += this._vectorX / 100 * timeDelta;
-        y += this._vectorY / 100 * timeDelta;
+        this.x += this._vectorX / 100 * timeDelta;
+        this.y += this._vectorY / 100 * timeDelta;
         this._vectorY += 10 * timeDelta;
         this._vectorX -= this._vectorX * .05 * timeDelta;
         this._vectorY -= this._vectorY * .05 * timeDelta;

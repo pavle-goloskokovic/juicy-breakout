@@ -18,7 +18,7 @@ export class RadioButton extends Component {
         this._labelText = label;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(MouseEvent.CLICK, defaultHandler);
+            this.addEventListener(MouseEvent.CLICK, defaultHandler);
         } 
     }
     protected static addButton(rb: RadioButton): void {
@@ -36,22 +36,22 @@ export class RadioButton extends Component {
     }
     protected init(): void {
         super.init();
-        buttonMode = true;
-        useHandCursor = true;
-        addEventListener(MouseEvent.CLICK, this.onClick, false, 1);
+        this.buttonMode = true;
+        this.useHandCursor = true;
+        this.addEventListener(MouseEvent.CLICK, this.onClick, false, 1);
         this.selected = this._selected;
     }
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._button = new Sprite();
         this._button.filters = [this.getShadow(1)];
         this._button.visible = false;
-        addChild(this._button);
+        this.addChild(this._button);
         this._label = new Label(this, 0, 0, this._labelText);
         this.draw();
-        mouseChildren = false;
+        this.mouseChildren = false;
     }
     public draw(): void {
         super.draw();

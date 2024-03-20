@@ -42,8 +42,8 @@ export class VBox extends Component {
     }
     protected doAlignment(): void {
         if(this._alignment != VBox.NONE ) {
-            for(let i: number = 0; i < numChildren; i++) {
-                let child: DisplayObject = getChildAt(i);
+            for(let i: number = 0; i < this.numChildren; i++) {
+                let child: DisplayObject = this.getChildAt(i);
                 if(this._alignment == VBox.LEFT ) {
                     child.x = 0;
                 } else if(this._alignment == VBox.RIGHT ) {
@@ -58,8 +58,8 @@ export class VBox extends Component {
         this._width = 0;
         this._height = 0;
         let ypos: number = 0;
-        for(let i: number = 0; i < numChildren; i++) {
-            let child: DisplayObject = getChildAt(i);
+        for(let i: number = 0; i < this.numChildren; i++) {
+            let child: DisplayObject = this.getChildAt(i);
             child.y = ypos;
             ypos += child.height;
             ypos += this._spacing;
@@ -67,7 +67,7 @@ export class VBox extends Component {
             this._width = Math.max(this._width, child.width);
         }
         this.doAlignment();
-        this._height += this._spacing * (numChildren - 1);
+        this._height += this._spacing * (this.numChildren - 1);
     }
     public set spacing(s: number) {
         this._spacing = s;

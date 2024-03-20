@@ -22,7 +22,7 @@ export class Toggler extends Sprite {
         this._targetClass = targetClass;
         this.visible = visible;
         this.reset();
-        addEventListener(Event.ADDED_TO_STAGE, this.handleAddedToStage);
+        this.addEventListener(Event.ADDED_TO_STAGE, this.handleAddedToStage);
     }
     private reset(): void {
         let typeXML: XML = describeType(this._targetClass);
@@ -56,8 +56,8 @@ export class Toggler extends Sprite {
             this._properties.push(property);
         }
         this._properties.sort(this._sort);
-        while(numChildren) {
-            removeChildAt(0)
+        while(this.numChildren) {
+            this.removeChildAt(0)
         }
         let settingWindow: Window = new Window(this, 10, 10);
         settingWindow.title = "JUICEATRON 5002 XX";
@@ -140,12 +140,12 @@ export class Toggler extends Sprite {
         };
     }
     private handleAddedToStage(e: Event): void {
-        removeEventListener(Event.ADDED_TO_STAGE, this.handleAddedToStage);
-        stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
+        this.removeEventListener(Event.ADDED_TO_STAGE, this.handleAddedToStage);
+        this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
     }
     private handleKeyDown(e: KeyboardEvent): void {
         if(e.keyCode == Keyboard.TAB ) {
-            visible = !visible
+            this.visible = !this.visible
         } 
     }
     private _sort(p1: Property, p2: Property): number {

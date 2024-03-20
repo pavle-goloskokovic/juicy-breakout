@@ -35,7 +35,7 @@ export class ColorChooser extends Component {
         this._oldColorChoice = (this._tmpColorChoice = (this._value = value));
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -49,12 +49,12 @@ export class ColorChooser extends Component {
         this._input.width = 45;
         this._input.restrict = "0123456789ABCDEFabcdef";
         this._input.maxChars = 6;
-        addChild(this._input);
+        this.addChild(this._input);
         this._input.addEventListener(Event.CHANGE, this.onChange);
         this._swatch = new Sprite();
         this._swatch.x = 50;
         this._swatch.filters = [this.getShadow(2, true)];
-        addChild(this._swatch);
+        this.addChild(this._swatch);
         this._colorsContainer = new Sprite();
         this._colorsContainer.addEventListener(Event.ADDED_TO_STAGE, this.onColorsAddedToStage);
         this._colorsContainer.addEventListener(Event.REMOVED_FROM_STAGE, this.onColorsRemovedFromStage);
@@ -144,7 +144,7 @@ export class ColorChooser extends Component {
         this._stage.removeEventListener(MouseEvent.CLICK, this.onStageClick);
     }
     protected onColorsAddedToStage(e: Event): void {
-        this._stage = stage;
+        this._stage = this.stage;
         this._stage.addEventListener(MouseEvent.CLICK, this.onStageClick);
     }
     protected onStageClick(e: MouseEvent): void {
@@ -172,13 +172,13 @@ export class ColorChooser extends Component {
         if(this._colorsContainer.parent ) {
             this._colorsContainer.parent.removeChild(this._colorsContainer)
         } else {
-            stage.addChild(this._colorsContainer)
+            this.stage.addChild(this._colorsContainer)
         }
     }
     protected placeColors(): void {
         let point: Point = new Point(this.x, this.y);
-        if(parent ) {
-            point = parent.localToGlobal(point)
+        if(this.parent ) {
+            point = this.parent.localToGlobal(point)
         } 
         switch(this._popupAlign) {
             case ColorChooser.TOP:

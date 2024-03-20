@@ -14,8 +14,8 @@ export class GameObject extends Sprite {
         super();
     }
     public update(timeDelta: number = 1): void {
-        x += this.velocityX * timeDelta;
-        y += this.velocityY * timeDelta;
+        this.x += this.velocityX * timeDelta;
+        this.y += this.velocityY * timeDelta;
     }
     public get flaggedForRemoval(): boolean {
         return this._flagged_for_removal;
@@ -28,8 +28,8 @@ export class GameObject extends Sprite {
         } 
     }
     protected handleRemoveComplete(): void {
-        if(parent ) {
-            parent.removeChild(this)
+        if(this.parent ) {
+            this.parent.removeChild(this)
         } 
     }
     protected handleDetach(collection: GameObjectCollection): void {

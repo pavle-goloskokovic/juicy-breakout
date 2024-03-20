@@ -33,7 +33,7 @@ export class Component extends Sprite {
         return new DropShadowFilter(dist, 45, Style.DROPSHADOW, 1, dist, dist, .3, 1, knockout);
     }
     protected invalidate(): void {
-        addEventListener(Event.ENTER_FRAME, this.onInvalidate);
+        this.addEventListener(Event.ENTER_FRAME, this.onInvalidate);
     }
     public static initStage(stage: Stage): void {
         stage.align = StageAlign.TOP_LEFT;
@@ -53,7 +53,7 @@ export class Component extends Sprite {
         dispatchEvent(new Event(Component.DRAW));
     }
     protected onInvalidate(event: Event): void {
-        removeEventListener(Event.ENTER_FRAME, this.onInvalidate);
+        this.removeEventListener(Event.ENTER_FRAME, this.onInvalidate);
         this.draw();
     }
     public set width(w: number) {
@@ -86,9 +86,9 @@ export class Component extends Sprite {
     }
     public set enabled(value: boolean) {
         this._enabled = value;
-        mouseEnabled = (mouseChildren = this._enabled);
-        tabEnabled = value;
-        alpha = this._enabled ? 1.0 : 0.5;
+        this.mouseEnabled = (this.mouseChildren = this._enabled);
+        this.tabEnabled = value;
+        this.alpha = this._enabled ? 1.0 : 0.5;
     }
     public get enabled(): boolean {
         return this._enabled;

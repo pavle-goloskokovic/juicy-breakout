@@ -16,31 +16,31 @@ export class PushButton extends Component {
     public constructor(parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = "", defaultHandler: Function = null) {
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(MouseEvent.CLICK, defaultHandler);
+            this.addEventListener(MouseEvent.CLICK, defaultHandler);
         } 
         this.label = label;
     }
     protected init(): void {
         super.init();
-        buttonMode = true;
-        useHandCursor = true;
+        this.buttonMode = true;
+        this.useHandCursor = true;
         this.setSize(100, 20);
     }
     protected addChildren(): void {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
         this._back.mouseEnabled = false;
-        addChild(this._back);
+        this.addChild(this._back);
         this._face = new Sprite();
         this._face.mouseEnabled = false;
         this._face.filters = [this.getShadow(1)];
         this._face.x = 1;
         this._face.y = 1;
-        addChild(this._face);
+        this.addChild(this._face);
         this._label = new Label();
-        addChild(this._label);
-        addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseGoDown);
-        addEventListener(MouseEvent.ROLL_OVER, this.onMouseOver);
+        this.addChild(this._label);
+        this.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseGoDown);
+        this.addEventListener(MouseEvent.ROLL_OVER, this.onMouseOver);
     }
     protected drawFace(): void {
         this._face.graphics.clear();
@@ -73,20 +73,20 @@ export class PushButton extends Component {
     }
     protected onMouseOver(event: MouseEvent): void {
         this._over = true;
-        addEventListener(MouseEvent.ROLL_OUT, this.onMouseOut);
+        this.addEventListener(MouseEvent.ROLL_OUT, this.onMouseOut);
     }
     protected onMouseOut(event: MouseEvent): void {
         this._over = false;
         if(!this._down ) {
             this._face.filters = [this.getShadow(1)];
         } 
-        removeEventListener(MouseEvent.ROLL_OUT, this.onMouseOut);
+        this.removeEventListener(MouseEvent.ROLL_OUT, this.onMouseOut);
     }
     protected onMouseGoDown(event: MouseEvent): void {
         this._down = true;
         this.drawFace();
         this._face.filters = [this.getShadow(1, true)];
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     protected onMouseGoUp(event: MouseEvent): void {
         if(this._toggle && this._over ) {
@@ -95,7 +95,7 @@ export class PushButton extends Component {
         this._down = this._selected;
         this.drawFace();
         this._face.filters = [this.getShadow(1, this._selected)];
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
     }
     public set label(str: string) {
         this._labelText = str;

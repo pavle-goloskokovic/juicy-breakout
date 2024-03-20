@@ -114,14 +114,14 @@ export class Chart extends Component {
     public set showScaleLabels(value: boolean) {
         this._showScaleLabels = value;
         if(this._showScaleLabels ) {
-            addChild(this._maxLabel);
-            addChild(this._minLabel);
+            this.addChild(this._maxLabel);
+            this.addChild(this._minLabel);
         } else {
-            if(contains(this._maxLabel) ) {
-                removeChild(this._maxLabel)
+            if(this.contains(this._maxLabel) ) {
+                this.removeChild(this._maxLabel)
             } 
-            if(contains(this._minLabel) ) {
-                removeChild(this._minLabel)
+            if(this.contains(this._minLabel) ) {
+                this.removeChild(this._minLabel)
             } 
         }
     }

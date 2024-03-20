@@ -35,7 +35,7 @@ export class RangeSlider extends Component {
         this._orientation = orientation;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
     }
     protected init(): void {
@@ -52,19 +52,19 @@ export class RangeSlider extends Component {
         super.addChildren();
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
-        addChild(this._back);
+        this.addChild(this._back);
         this._minHandle = new Sprite();
         this._minHandle.filters = [this.getShadow(1)];
         this._minHandle.addEventListener(MouseEvent.MOUSE_DOWN, this.onDragMin);
         this._minHandle.buttonMode = true;
         this._minHandle.useHandCursor = true;
-        addChild(this._minHandle);
+        this.addChild(this._minHandle);
         this._maxHandle = new Sprite();
         this._maxHandle.filters = [this.getShadow(1)];
         this._maxHandle.addEventListener(MouseEvent.MOUSE_DOWN, this.onDragMax);
         this._maxHandle.buttonMode = true;
         this._maxHandle.useHandCursor = true;
-        addChild(this._maxHandle);
+        this.addChild(this._maxHandle);
         this._lowLabel = new Label(this);
         this._highLabel = new Label(this);
         this._lowLabel.visible = this._labelMode == RangeSlider.ALWAYS;
@@ -149,8 +149,8 @@ export class RangeSlider extends Component {
         this.drawHandles();
     }
     protected onDragMin(event: MouseEvent): void {
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
         if(this._orientation == RangeSlider.HORIZONTAL ) {
             this._minHandle.startDrag(false, new Rectangle(0, 0, this._maxHandle.x - this._height, 0));
         } else {
@@ -162,8 +162,8 @@ export class RangeSlider extends Component {
         } 
     }
     protected onDragMax(event: MouseEvent): void {
-        stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
+        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
         if(this._orientation == RangeSlider.HORIZONTAL ) {
             this._maxHandle.startDrag(false, new Rectangle(this._minHandle.x + this._height, 0, this._width - this._height - this._minHandle.x - this._height, 0));
         } else {
@@ -175,10 +175,10 @@ export class RangeSlider extends Component {
         } 
     }
     protected onDrop(event: MouseEvent): void {
-        stage.removeEventListener(MouseEvent.MOUSE_UP, this.onDrop);
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
-        stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
-        stopDrag();
+        this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onDrop);
+        this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
+        this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
+        this.stopDrag();
         if(this._labelMode == RangeSlider.MOVE ) {
             this._lowLabel.visible = false;
             this._highLabel.visible = false;

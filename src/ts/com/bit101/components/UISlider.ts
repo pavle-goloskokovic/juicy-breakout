@@ -16,7 +16,7 @@ export class UISlider extends Component {
         this._labelText = label;
         super(parent, xpos, ypos);
         if(defaultHandler != null ) {
-            addEventListener(Event.CHANGE, defaultHandler);
+            this.addEventListener(Event.CHANGE, defaultHandler);
         } 
         this.formatValueLabel();
     }

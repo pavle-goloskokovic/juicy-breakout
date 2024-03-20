@@ -10,7 +10,7 @@ export class TextArea extends Text {
     }
     protected init(): void {
         super.init();
-        addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
+        this.addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
     }
     protected addChildren(): void {
         super.addChildren();
@@ -30,10 +30,10 @@ export class TextArea extends Text {
         this._scrollbar.x = this._width - this._scrollbar.width;
         this._scrollbar.height = this._height;
         this._scrollbar.draw();
-        addEventListener(Event.ENTER_FRAME, this.onTextScrollDelay);
+        this.addEventListener(Event.ENTER_FRAME, this.onTextScrollDelay);
     }
     protected onTextScrollDelay(event: Event): void {
-        removeEventListener(Event.ENTER_FRAME, this.onTextScrollDelay);
+        this.removeEventListener(Event.ENTER_FRAME, this.onTextScrollDelay);
         this.updateScrollbar();
     }
     protected onChange(event: Event): void {
