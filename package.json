@@ -8,7 +8,8 @@
         "build:dev": "webpack",
         "build:prod": "webpack --config webpack.config.prod.ts",
         "eslint": "eslint **/*.ts",
-        "eslint:fix": "eslint --fix **/*.ts"
+        "eslint:fix": "eslint --fix **/*.ts",
+        "as2ts": "node ./node_modules/as2ts-smart/bin/index.js -s src/as --dist src/ts"
     },
     "repository": {
         "type": "git",
@@ -39,6 +40,7 @@
         "@types/node": "^20.10.4",
         "@types/stats.js": "^0.17.3",
         "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "as2ts-smart": "^1.0.13",
         "css-loader": "^6.8.1",
         "css-minimizer-webpack-plugin": "^5.0.1",
         "ejs-compiled-loader": "^3.1.0",

@@ -2,21 +2,21 @@
  * Component.as
  * Keith Peters
  * version 0.9.10
- * 
+ *
  * Base class for all components
- * 
+ *
  * Copyright (c) 2011 Keith Peters
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,13 +24,13 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
- * 
- * 
+ *
+ *
+ *
  * Components with text make use of the font PF Ronda Seven by Yuusuke Kamiyamane
  * This is a free font obtained from http://www.dafont.com/pf-ronda-seven.font
  */
- 
+
 package com.bit101.components
 {
 	import flash.display.DisplayObjectContainer;
@@ -48,18 +48,18 @@ package com.bit101.components
 		// NOTE: Flex 4 introduces DefineFont4, which is used by default and does not work in native text fields.
 		// Use the embedAsCFF="false" param to switch back to DefineFont4. In earlier Flex 4 SDKs this was cff="false".
 		// So if you are using the Flex 3.x sdk compiler, switch the embed statment below to expose the correct version.
-		
+
 		// Flex 4.x sdk:
-		[Embed(source="/assets/pf_ronda_seven.ttf", embedAsCFF="false", fontName="PF Ronda Seven", mimeType="application/x-font")]
+		// [Embed(source="/assets/pf_ronda_seven.ttf", embedAsCFF="false", fontName="PF Ronda Seven", mimeType="application/x-font")]
 		// Flex 3.x sdk:
 //		[Embed(source="/assets/pf_ronda_seven.ttf", fontName="PF Ronda Seven", mimeType="application/x-font")]
 		protected var Ronda:Class;
-		
+
 		protected var _width:Number = 0;
 		protected var _height:Number = 0;
 		protected var _tag:int = -1;
 		protected var _enabled:Boolean = true;
-		
+
 		public static const DRAW:String = "draw";
 
 		/**
@@ -77,7 +77,7 @@ package com.bit101.components
 				parent.addChild(this);
 			}
 		}
-		
+
 		/**
 		 * Initilizes the component.
 		 */
@@ -86,15 +86,15 @@ package com.bit101.components
 			addChildren();
 			invalidate();
 		}
-		
+
 		/**
 		 * Overriden in subclasses to create child display objects.
 		 */
 		protected function addChildren():void
 		{
-			
+
 		}
-		
+
 		/**
 		 * DropShadowFilter factory method, used in many of the components.
 		 * @param dist The distance of the shadow.
@@ -104,7 +104,7 @@ package com.bit101.components
 		{
 			return new DropShadowFilter(dist, 45, Style.DROPSHADOW, 1, dist, dist, .3, 1, knockout);
 		}
-		
+
 		/**
 		 * Marks the component to be redrawn on the next frame.
 		 */
@@ -113,14 +113,14 @@ package com.bit101.components
 //			draw();
 			addEventListener(Event.ENTER_FRAME, onInvalidate);
 		}
-		
-		
-		
-		
+
+
+
+
 		///////////////////////////////////
 		// public methods
 		///////////////////////////////////
-		
+
 		/**
 		 * Utility method to set up usual stage align and scaling.
 		 */
@@ -129,7 +129,7 @@ package com.bit101.components
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
-		
+
 		/**
 		 * Moves the component to the specified position.
 		 * @param xpos the x position to move the component
@@ -140,7 +140,7 @@ package com.bit101.components
 			x = Math.round(xpos);
 			y = Math.round(ypos);
 		}
-		
+
 		/**
 		 * Sets the size of the component.
 		 * @param w The width of the component.
@@ -153,7 +153,7 @@ package com.bit101.components
 			dispatchEvent(new Event(Event.RESIZE));
 			invalidate();
 		}
-		
+
 		/**
 		 * Abstract draw function.
 		 */
@@ -161,14 +161,14 @@ package com.bit101.components
 		{
 			dispatchEvent(new Event(Component.DRAW));
 		}
-		
-		
-		
-		
+
+
+
+
 		///////////////////////////////////
 		// event handlers
 		///////////////////////////////////
-		
+
 		/**
 		 * Called one frame after invalidate is called.
 		 */
@@ -177,14 +177,14 @@ package com.bit101.components
 			removeEventListener(Event.ENTER_FRAME, onInvalidate);
 			draw();
 		}
-		
-		
-		
-		
+
+
+
+
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
-		
+
 		/**
 		 * Sets/gets the width of the component.
 		 */
@@ -198,7 +198,7 @@ package com.bit101.components
 		{
 			return _width;
 		}
-		
+
 		/**
 		 * Sets/gets the height of the component.
 		 */
@@ -212,7 +212,7 @@ package com.bit101.components
 		{
 			return _height;
 		}
-		
+
 		/**
 		 * Sets/gets in integer that can identify the component.
 		 */
@@ -224,7 +224,7 @@ package com.bit101.components
 		{
 			return _tag;
 		}
-		
+
 		/**
 		 * Overrides the setter for x to always place the component on a whole pixel.
 		 */
@@ -232,7 +232,7 @@ package com.bit101.components
 		{
 			super.x = Math.round(value);
 		}
-		
+
 		/**
 		 * Overrides the setter for y to always place the component on a whole pixel.
 		 */

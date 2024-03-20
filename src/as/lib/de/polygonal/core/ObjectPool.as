@@ -19,34 +19,34 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.polygonal.core 
+package de.polygonal.core
 {
 	public class ObjectPool
 	{
 		private var _obj:Class;
-		
+
 		private var _initSize:int;
 		private var _currSize:int;
 		private var _usageCount:int;
-		
+
 		private var _grow:Boolean = true;
-		
+
 		private var _head:ObjNode;
 		private var _tail:ObjNode;
-		
+
 		private var _emptyNode:ObjNode;
 		private var _allocNode:ObjNode;
-		
+
 		/**
 		 * Creates a new object pool.
-		 * 
+		 *
 		 * @param grow If true, the pool grows the first time it becomes empty.
 		 */
 		public function ObjectPool(grow:Boolean = false)
 		{
 			_grow = grow;
 		}
-		
+
 		/**
 		 * Unlock all ressources for the garbage collector.
 		 */
@@ -61,10 +61,10 @@ package de.polygonal.core
 				node.data = null;
 				node = t;
 			}
-			
+
 			_head = _tail = _emptyNode = _allocNode = null;
 		}
-		
+
 		/**
 		 * The pool size.
 		 */
@@ -72,7 +72,7 @@ package de.polygonal.core
 		{
 			return _currSize;
 		}
-		
+
 		/**
 		 * The total number of 'checked out' objects currently in use.
 		 */
@@ -80,18 +80,18 @@ package de.polygonal.core
 		{
 			return _usageCount;
 		}
-		
+
 		/**
 		 * The total number of unused thus wasted objects. Use the purge()
 		 * method to compact the pool.
-		 * 
+		 *
 		 * @see #purge
 		 */
 		public function get wasteCount():int
 		{
-			return _currSize - _usageCount;	
+			return _currSize - _usageCount;
 		}
-		
+
 		/**
 		 * Get the next available object from the pool or put it back for the
 		 * next use. If the pool is empty and resizable, an error is thrown.
@@ -103,22 +103,22 @@ package de.polygonal.core
 				if (_grow)
 				{
 					_currSize += _initSize;
-					
+
 					var n:ObjNode = _tail;
 					var t:ObjNode = _tail;
-					
+
 					var node:ObjNode;
 					for (var i:int = 0; i < _initSize; i++)
 					{
 						node = new ObjNode();
 						node.data = new _obj();
-						
+
 						t.next = node;
-						t = node; 
+						t = node;
 					}
-					
+
 					_tail = t;
-					
+
 					_tail.next = _emptyNode = _head;
 					_allocNode = n.next;
 					return object;
@@ -135,7 +135,7 @@ package de.polygonal.core
 				return o;
 			}
 		}
-		
+
 		/**
 		 * @private
 		 */
@@ -148,25 +148,25 @@ package de.polygonal.core
 				_emptyNode = _emptyNode.next;
 			}
 		}
-		
+
 		/**
 		 * Allocate the pool by creating all objects from the given class.
-		 * 
+		 *
 		 * @param C    The class to instantiate for each object in the pool.
 		 * @param size The number of objects to create.
 		 */
 		public function allocate(C:Class, size:uint):void
 		{
 			deconstruct();
-			
+
 			_obj = C;
 			_initSize = _currSize = size;
-			
+
 			_head = _tail = new ObjNode();
 			_head.data = new _obj();
-			
+
 			var n:ObjNode;
-			
+
 			for (var i:int = 1; i < _initSize; i++)
 			{
 				n = new ObjNode();
@@ -174,14 +174,14 @@ package de.polygonal.core
 				n.next = _head;
 				_head = n;
 			}
-			
+
 			_emptyNode = _allocNode = _head;
 			_tail.next = _head;
 		}
-		
+
 		/**
 		 * Helper method for applying a function to all objects in the pool.
-		 * 
+		 *
 		 * @param func The function's name.
 		 * @param args The function's arguments.
 		 */
@@ -192,37 +192,37 @@ package de.polygonal.core
 			{
 				n.data[func].apply(n.data, args);
 				if (n == _tail) break;
-				n = n.next;	
+				n = n.next;
 			}
 		}
-		
+
 		/**
 		 * Remove all unused objects from the pool. If the number of remaining
 		 * used objects is smaller than the initial capacity defined by the
-		 * allocate() method, new objects are created to refill the pool. 
+		 * allocate() method, new objects are created to refill the pool.
 		 */
 		public function purge():void
 		{
 			var i:int;
 			var node:ObjNode;
-			
+
 			if (_usageCount == 0)
 			{
 				if (_currSize == _initSize)
 					return;
-					
+
 				if (_currSize > _initSize)
 				{
-					i = 0; 
+					i = 0;
 					node = _head;
 					while (++i < _initSize)
-						node = node.next;	
-					
+						node = node.next;
+
 					_tail = node;
 					_allocNode = _emptyNode = _head;
-					
+
 					_currSize = _initSize;
-					return;	
+					return;
 				}
 			}
 			else
@@ -233,12 +233,12 @@ package de.polygonal.core
 				{
 					if (!node.data) a[int(i++)] = node;
 					if (node == _tail) break;
-					node = node.next;	
+					node = node.next;
 				}
-				
+
 				_currSize = a.length;
 				_usageCount = _currSize;
-				
+
 				_head = _tail = a[0];
 				for (i = 1; i < _currSize; i++)
 				{
@@ -246,14 +246,14 @@ package de.polygonal.core
 					node.next = _head;
 					_head = node;
 				}
-				
+
 				_emptyNode = _allocNode = _head;
 				_tail.next = _head;
-				
+
 				if (_usageCount < _initSize)
 				{
 					_currSize = _initSize;
-					
+
 					var n:ObjNode = _tail;
 					var t:ObjNode = _tail;
 					var k:int = _initSize - _usageCount;
@@ -261,25 +261,25 @@ package de.polygonal.core
 					{
 						node = new ObjNode();
 						node.data = new _obj();
-						
+
 						t.next = node;
-						t = node; 
+						t = node;
 					}
-					
+
 					_tail = t;
-					
+
 					_tail.next = _emptyNode = _head;
 					_allocNode = n.next;
-					
+
 				}
 			}
 		}
 	}
 }
 
-internal class ObjNode
+/*internal*/ class ObjNode
 {
 	public var next:ObjNode;
-	
+
 	public var data:*;
 }

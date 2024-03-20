@@ -2,21 +2,21 @@
  * MinimalConfigurator.as
  * Keith Peters
  * version 0.9.10
- * 
+ *
  * A class for parsing xml layout code to create minimal components declaratively.
- * 
+ *
  * Copyright (c) 2011 Keith Peters
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,7 +30,7 @@ package com.bit101.utils
 {
 	// usually don't use * but we really are importing everything here.
 	import com.bit101.components.*;
-	
+
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -46,7 +46,7 @@ package com.bit101.utils
 		protected var loader:URLLoader;
 		protected var parent:DisplayObjectContainer;
 		protected var idMap:Object;
-		
+
 		/**
 		 * Constructor.
 		 * @param parent The display object container on which to create components and look for ids and event handlers.
@@ -56,7 +56,7 @@ package com.bit101.utils
 			this.parent = parent;
 			idMap = new Object();
 		}
-		
+
 		/**
 		 * Loads an xml file from the specified url and attempts to parse it as a layout format for this class.
 		 * @param url The location of the xml file.
@@ -67,7 +67,7 @@ package com.bit101.utils
 			loader.addEventListener(Event.COMPLETE, onLoadComplete);
 			loader.load(new URLRequest(url));
 		}
-		
+
 		/**
 		 * Called when the xml has loaded. Will attempt to parse the loaded data as xml.
 		 */
@@ -75,11 +75,11 @@ package com.bit101.utils
 		{
 			parseXMLString(loader.data as String);
 		}
-		
+
 		/**
 		 * Parses a string as xml.
 		 * @param string The xml string to parse.
-		 */ 
+		 */
 		public function parseXMLString(string:String):void
 		{
 			try
@@ -89,11 +89,11 @@ package com.bit101.utils
 			}
 			catch(e:Error)
 			{
-				
+
 			}
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
-		
+
 		/**
 		 * Parses xml and creates componetns based on it.
 		 * @param xml The xml to parse.
@@ -113,7 +113,7 @@ package com.bit101.utils
 				}
 			}
 		}
-		
+
 		/**
 		 * Parses a single component's xml.
 		 * @param xml The xml definition for this component.
@@ -127,27 +127,27 @@ package com.bit101.utils
 			{
 				var classRef:Class = getDefinitionByName("com.bit101.components." + xml.name()) as Class;
 				compInst = new classRef();
-				
+
 				// id is special case, maps to name as well.
-				var id:String = trim(xml.@id.toString()); 
+				var id:String = trim(xml./*@*/id.toString());
 				if(id != "")
 				{
 					compInst.name = id;
 					idMap[id] = compInst;
-					
+
 					// if id exists on parent as a public property, assign this component to it.
 					if(parent.hasOwnProperty(id))
 					{
 						parent[id] = compInst;
 					}
 				}
-				
+
 				// event is another special case
-				if(xml.@event.toString() != "")
+				if(xml./*@*/event.toString() != "")
 				{
 					// events are in the format: event="eventName:eventHandler"
 					// i.e. event="click:onClick"
-					var parts:Array = xml.@event.split(":");
+					var parts:Array = xml./*@*/event.split(":");
 					var eventName:String = trim(parts[0]);
 					var handler:String = trim(parts[1]);
 					if(parent.hasOwnProperty(handler))
@@ -156,7 +156,7 @@ package com.bit101.utils
 						compInst.addEventListener(eventName, parent[handler]);
 					}
 				}
-				
+
 				// every other attribute handled essentially the same
 				for each(var attrib:XML in xml.attributes())
 				{
@@ -180,13 +180,13 @@ package com.bit101.utils
 						}
 					}
 				}
-				
+
 				// now handle special props
 				for(prop in specialProps)
 				{
 					compInst[prop] = specialProps[prop];
 				}
-				
+
 				// child nodes will be added as children to the instance just created.
 				for(var j:int = 0; j < xml.children().length(); j++)
 				{
@@ -199,11 +199,11 @@ package com.bit101.utils
 			}
 			catch(e:Error)
 			{
-				
+
 			}
 			return compInst as Component;
 		}
-		
+
 		/**
 		 * Returns the componet with the given id, if it exists.
 		 * @param id The id of the component you want.
@@ -213,7 +213,7 @@ package com.bit101.utils
 		{
 			return idMap[id];
 		}
-		
+
 		/**
 		 * Trims a string.
 		 * @param s The string to trim.
@@ -224,7 +224,7 @@ package com.bit101.utils
 			// http://jeffchannell.com/ActionScript-3/as3-trim.html
 			return s.replace(/^\s+|\s+$/gs, '');
 		}
-		
+
 		/**
 		 * We need to include all component classes in the swf.
 		 */
