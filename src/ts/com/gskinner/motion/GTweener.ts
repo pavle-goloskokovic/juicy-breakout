@@ -3,9 +3,6 @@ import {GTween} from "./GTween";
 export class GTweener {
     protected static tweens: Dictionary;
     protected static instance: GTweener;
-    staticInit() {
-    
-    }
     protected static staticInit(): void {
         GTweener.tweens = new Dictionary(true);
         GTweener.instance = new GTweener();

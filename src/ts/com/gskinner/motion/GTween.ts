@@ -33,9 +33,6 @@ export class GTween {
     public static linearEase(a: number, b: number, c: number, d: number): number {
         return a;
     }
-    staticInit() {
-    
-    }
     protected static staticInit(): void {
         (GTween.shape = new Shape()).addEventListener(Event.ENTER_FRAME, GTween.staticTick);
         GTween.time = getTimer() / 1000;
