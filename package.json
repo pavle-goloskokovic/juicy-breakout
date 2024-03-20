@@ -9,7 +9,7 @@
         "build:prod": "webpack --config webpack.config.prod.ts",
         "eslint": "eslint **/*.ts",
         "eslint:fix": "eslint --fix **/*.ts",
-        "as2ts": "node ./node_modules/as2ts-smart/bin/index.js -s src/as --dist src/ts"
+        "as2ts": "node ./node_modules/as2ts-smart/bin/index.js -s src\\as --dist src\\ts"
     },
     "repository": {
         "type": "git",
