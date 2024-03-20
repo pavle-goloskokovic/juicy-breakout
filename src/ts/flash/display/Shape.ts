@@ -1,4 +1,4 @@
-import {DisplayObject} from "./DisplayObject";
+import { DisplayObject } from './DisplayObject';
 export class Shape extends DisplayObject {
-    
+
 }

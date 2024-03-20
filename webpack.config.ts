@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import { type Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import type webpack from 'webpack';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import merge from 'webpack-merge';
 import { getPortHash } from './scripts/get-local-host';
 

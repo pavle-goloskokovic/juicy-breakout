@@ -1,13 +1,13 @@
-import {MP3LoopEvent} from "./event/MP3LoopEvent";
-import {Event} from "../../../flash/events/Event";
-import {EventDispatcher} from "../../../flash/events/EventDispatcher";
-import {IOErrorEvent} from "../../../flash/events/IOErrorEvent";
-import {ProgressEvent} from "../../../flash/events/ProgressEvent";
-import {TimerEvent} from "../../../flash/events/TimerEvent";
-import {Sound} from "../../../flash/media/Sound";
-import {SoundChannel} from "../../../flash/media/SoundChannel";
-import {URLRequest} from "../../../flash/net/URLRequest";
-import {Timer} from "../../../flash/utils/Timer";
+import { MP3LoopEvent } from './event/MP3LoopEvent';
+import { Event } from '../../../flash/events/Event';
+import { EventDispatcher } from '../../../flash/events/EventDispatcher';
+import { IOErrorEvent } from '../../../flash/events/IOErrorEvent';
+import { ProgressEvent } from '../../../flash/events/ProgressEvent';
+import { TimerEvent } from '../../../flash/events/TimerEvent';
+import { Sound } from '../../../flash/media/Sound';
+import type { SoundChannel } from '../../../flash/media/SoundChannel';
+import { URLRequest } from '../../../flash/net/URLRequest';
+import { Timer } from '../../../flash/utils/Timer';
 export class MP3LoopBase extends EventDispatcher {
     public static ASSET_CLASS: Class;
     protected _out: Sound;
@@ -15,38 +15,47 @@ export class MP3LoopBase extends EventDispatcher {
     protected _state: number = NOT_LOADED;
     protected _playing: boolean = false;
     protected _loops: number = 0;
-    protected _url: string = "";
+    protected _url: string = '';
     protected _out_channel: SoundChannel;
     protected _bytes_total: number = 0;
     protected _bytes_loaded: number = 0;
     protected static NOT_LOADED: number = 0;
     protected static LOADING: number = 1;
     protected static LOADED: number = 2;
-    public constructor(url: string, autoLoad: boolean = false, playOnLoad: boolean = false, loops: number = 0) {
+    public constructor (url: string, autoLoad: boolean = false, playOnLoad: boolean = false, loops: number = 0)
+    {
         super();
         this._url = url;
         this._loops = loops;
         this.playOnLoad = playOnLoad;
         this._out = new Sound();
-        if(autoLoad && this._url ) {
-            this.load()
-        } 
+        if (autoLoad && this._url )
+        {
+            this.load();
+        }
     }
-    public load(): void {
-        console.log("MP3LoopBase, load()", this._state);
-        if(this.loaded || this.loading ) {
-            return
-        } 
-        if(MP3LoopBase.ASSET_CLASS ) {
+
+    public load (): void
+    {
+        console.log('MP3LoopBase, load()', this._state);
+        if (this.loaded || this.loading )
+        {
+            return;
+        }
+        if (MP3LoopBase.ASSET_CLASS )
+        {
             this._state = MP3LoopBase.LOADING;
             this._out = new MP3LoopBase.ASSET_CLASS[this._url.substr(0, this._url.length - 4)]() as Sound;
-            let t: Timer = new Timer(100, 1);
-            t.addEventListener(TimerEvent.TIMER_COMPLETE, function(): void {
+            const t: Timer = new Timer(100, 1);
+            t.addEventListener(TimerEvent.TIMER_COMPLETE, function (): void
+            {
                 t.removeEventListener(TimerEvent.TIMER_COMPLETE, arguments.callee);
                 this.handleLoadComplete(null);
             });
             t.start();
-        } else {
+        }
+        else
+        {
             this._state = MP3LoopBase.LOADING;
             this._out.addEventListener(Event.COMPLETE, this.handleLoadComplete);
             this._out.addEventListener(ProgressEvent.PROGRESS, this.handleProgress);
@@ -54,63 +63,92 @@ export class MP3LoopBase extends EventDispatcher {
             this._out.load(new URLRequest(this._url));
         }
     }
-    private handleProgress(e: ProgressEvent): void {
+
+    private handleProgress (e: ProgressEvent): void
+    {
         this._bytes_total = this._out.bytesTotal;
         this._bytes_loaded = this._out.bytesLoaded;
         dispatchEvent(e);
     }
-    protected handleLoadComplete(event: Event): void {
-        console.log("MP3LoopBase, handleLoadComplete()", this._state);
+
+    protected handleLoadComplete (event: Event): void
+    {
+        console.log('MP3LoopBase, handleLoadComplete()', this._state);
         this._state = MP3LoopBase.LOADED;
         dispatchEvent(new MP3LoopEvent(MP3LoopEvent.COMPLETE, this));
-        if(this._play_on_load ) {
-            this.play()
-        } 
+        if (this._play_on_load )
+        {
+            this.play();
+        }
     }
-    public play(): boolean {
-        console.log("playing loop, state:", this._state);
-        if(this._playing || !this.loaded ) {
-            return false
-        } 
+
+    public play (): boolean
+    {
+        console.log('playing loop, state:', this._state);
+        if (this._playing || !this.loaded )
+        {
+            return false;
+        }
         this._out_channel = this._out.play(0, this._loops);
         this._playing = true;
         dispatchEvent(new MP3LoopEvent(MP3LoopEvent.PLAY, this));
         return true;
     }
-    public stop(): boolean {
-        if(!this._playing ) {
-            return false
-        } 
+
+    public stop (): boolean
+    {
+        if (!this._playing )
+        {
+            return false;
+        }
         this._out_channel.stop();
         this._playing = false;
         dispatchEvent(new MP3LoopEvent(MP3LoopEvent.STOP, this));
         return true;
     }
-    private handleLoadError(event: IOErrorEvent): void {
+
+    private handleLoadError (event: IOErrorEvent): void
+    {
         console.log(event);
     }
-    public get loaded(): boolean {
+
+    public get loaded (): boolean
+    {
         return this._state == MP3LoopBase.LOADED;
     }
-    public get loading(): boolean {
+
+    public get loading (): boolean
+    {
         return this._state == MP3LoopBase.LOADING;
     }
-    public get soundChannel(): SoundChannel {
+
+    public get soundChannel (): SoundChannel
+    {
         return this._out_channel;
     }
-    public get playOnLoad(): boolean {
+
+    public get playOnLoad (): boolean
+    {
         return this._play_on_load;
     }
-    public set playOnLoad(value: boolean) {
+
+    public set playOnLoad (value: boolean)
+    {
         this._play_on_load = value;
     }
-    public get playing(): boolean {
+
+    public get playing (): boolean
+    {
         return this._playing;
     }
-    public get bytesTotal(): number {
+
+    public get bytesTotal (): number
+    {
         return this._bytes_total;
     }
-    public get bytesLoaded(): number {
+
+    public get bytesLoaded (): number
+    {
         return this._bytes_loaded;
     }
 }

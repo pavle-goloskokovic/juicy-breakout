@@ -1,26 +1,34 @@
-import {GTween} from "../GTween";
-import {IGTweenPlugin} from "./IGTweenPlugin";
+import { GTween } from '../GTween';
+import type { IGTweenPlugin } from './IGTweenPlugin';
 export class CurrentFramePlugin implements IGTweenPlugin {
     public static enabled: boolean = true;
     protected static instance: CurrentFramePlugin;
-    public static install(): void {
-        if(CurrentFramePlugin.instance ) {
+    public static install (): void
+    {
+        if (CurrentFramePlugin.instance )
+        {
             return;
-        } 
+        }
         CurrentFramePlugin.instance = new CurrentFramePlugin();
-        GTween.installPlugin(CurrentFramePlugin.instance, ["currentFrame"]);
+        GTween.installPlugin(CurrentFramePlugin.instance, ['currentFrame']);
     }
-    public init(tween: GTween, name: string, value: number): number {
+
+    public init (tween: GTween, name: string, value: number): number
+    {
         return value;
     }
-    public tween(tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number {
-        if(!(tween.pluginData.CurrentFrameEnabled == null && CurrentFramePlugin.enabled || tween.pluginData.CurrentFrameEnabled) ) {
+
+    public tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
+    {
+        if (!(tween.pluginData.CurrentFrameEnabled == null && CurrentFramePlugin.enabled || tween.pluginData.CurrentFrameEnabled) )
+        {
             return value;
-        } 
-        let frame: number = Math.round(initValue + rangeValue * ratio);
-        if(tween.target.currentFrame != frame ) {
+        }
+        const frame: number = Math.round(initValue + rangeValue * ratio);
+        if (tween.target.currentFrame != frame )
+        {
             tween.target.gotoAndStop(frame);
-        } 
+        }
         return NaN;
     }
 }

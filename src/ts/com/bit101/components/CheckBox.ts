@@ -1,29 +1,35 @@
-import {Component} from "./Component";
-import {Label} from "./Label";
-import {Style} from "./Style";
-import {DisplayObjectContainer} from "../../../flash/display/DisplayObjectContainer";
-import {Sprite} from "../../../flash/display/Sprite";
-import {MouseEvent} from "../../../flash/events/MouseEvent";
+import { Component } from './Component';
+import { Label } from './Label';
+import { Style } from './Style';
+import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjectContainer';
+import { Sprite } from '../../../flash/display/Sprite';
+import { MouseEvent } from '../../../flash/events/MouseEvent';
 export class CheckBox extends Component {
     protected _back: Sprite;
     protected _button: Sprite;
     protected _label: Label;
-    protected _labelText: string = "";
+    protected _labelText: string = '';
     protected _selected: boolean = false;
-    public constructor(parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = "", defaultHandler: Function = null) {
+    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    {
         this._labelText = label;
         super(parent, xpos, ypos);
-        if(defaultHandler != null ) {
+        if (defaultHandler != null )
+        {
             this.addEventListener(MouseEvent.CLICK, defaultHandler);
-        } 
+        }
     }
-    protected init(): void {
+
+    protected init (): void
+    {
         super.init();
         this.buttonMode = true;
         this.useHandCursor = true;
         this.mouseChildren = false;
     }
-    protected addChildren(): void {
+
+    protected addChildren (): void
+    {
         this._back = new Sprite();
         this._back.filters = [this.getShadow(2, true)];
         this.addChild(this._back);
@@ -35,7 +41,9 @@ export class CheckBox extends Component {
         this.draw();
         this.addEventListener(MouseEvent.CLICK, this.onClick);
     }
-    public draw(): void {
+
+    public draw (): void
+    {
         super.draw();
         this._back.graphics.clear();
         this._back.graphics.beginFill(Style.BACKGROUND);
@@ -51,25 +59,37 @@ export class CheckBox extends Component {
         this._width = this._label.width + 12;
         this._height = 10;
     }
-    protected onClick(event: MouseEvent): void {
+
+    protected onClick (event: MouseEvent): void
+    {
         this._selected = !this._selected;
         this._button.visible = this._selected;
     }
-    public set label(str: string) {
+
+    public set label (str: string)
+    {
         this._labelText = str;
         this.invalidate();
     }
-    public get label(): string {
+
+    public get label (): string
+    {
         return this._labelText;
     }
-    public set selected(s: boolean) {
+
+    public set selected (s: boolean)
+    {
         this._selected = s;
         this._button.visible = this._selected;
     }
-    public get selected(): boolean {
+
+    public get selected (): boolean
+    {
         return this._selected;
     }
-    public set enabled(value: boolean) {
+
+    public set enabled (value: boolean)
+    {
         super.enabled = value;
         this.mouseChildren = false;
     }

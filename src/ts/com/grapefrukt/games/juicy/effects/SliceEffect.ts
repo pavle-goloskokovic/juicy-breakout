@@ -1,29 +1,30 @@
-import {BitmapData} from "../../../../../flash/display/BitmapData";
-import {DisplayObject} from "../../../../../flash/display/DisplayObject";
-import {Shape} from "../../../../../flash/display/Shape";
-import {Sprite} from "../../../../../flash/display/Sprite";
-import {StageScaleMode} from "../../../../../flash/display/StageScaleMode";
-import {Event} from "../../../../../flash/events/Event";
-import {KeyboardEvent} from "../../../../../flash/events/KeyboardEvent";
-import {MouseEvent} from "../../../../../flash/events/MouseEvent";
-import {Matrix} from "../../../../../flash/geom/Matrix";
-import {Point} from "../../../../../flash/geom/Point";
-import {Rectangle} from "../../../../../flash/geom/Rectangle";
-import {Keyboard} from "../../../../../flash/ui/Keyboard";
+import { BitmapData } from '../../../../../flash/display/BitmapData';
+import type { DisplayObject } from '../../../../../flash/display/DisplayObject';
+import { Shape } from '../../../../../flash/display/Shape';
+import { Sprite } from '../../../../../flash/display/Sprite';
+import { StageScaleMode } from '../../../../../flash/display/StageScaleMode';
+import { Event } from '../../../../../flash/events/Event';
+import { KeyboardEvent } from '../../../../../flash/events/KeyboardEvent';
+import { MouseEvent } from '../../../../../flash/events/MouseEvent';
+import { Matrix } from '../../../../../flash/geom/Matrix';
+import { Point } from '../../../../../flash/geom/Point';
+import type { Rectangle } from '../../../../../flash/geom/Rectangle';
+import { Keyboard } from '../../../../../flash/ui/Keyboard';
 export class SliceEffect extends Sprite {
     private _container: Sprite;
     private _slices: Array<LineSliceObject>;
-    public constructor(source: DisplayObject, bounds: Rectangle = null) {
+    public constructor (source: DisplayObject, bounds: Rectangle = null)
+    {
         super();
         let bounds: Rectangle = source.getBounds(source.parent);
-        let rp: Point = source.getBounds(source).topLeft;
+        const rp: Point = source.getBounds(source).topLeft;
         rp.x *= -1;
         rp.y *= -1;
-        let matrix: Matrix = new Matrix();
+        const matrix: Matrix = new Matrix();
         matrix.scale(source.scaleX, source.scaleY);
         matrix.rotate(source.rotation / 180 * Math.PI);
         matrix.translate(source.x - bounds.topLeft.x, source.y - bounds.topLeft.y);
-        let bmp: BitmapData = new BitmapData(bounds.width, bounds.height, true, 0x00000000);
+        const bmp: BitmapData = new BitmapData(bounds.width, bounds.height, true, 0x00000000);
         bmp.draw(source, matrix);
         this._container = new Sprite();
         this.addChild(this._container);
@@ -32,16 +33,20 @@ export class SliceEffect extends Sprite {
         this._container.addEventListener(Event.REMOVED, this.handleRemoved);
         this.x = source.x;
         this.y = source.y;
-        let points: Array<Point> = [new Point(0, 0), new Point(bmp.width, 0), new Point(bmp.width, bmp.height), new Point(0, bmp.height)];
-        let offset: Point = new Point(bounds.topLeft.x - source.x, bounds.topLeft.y - source.y);
-        for(let i: number = 0; i < points.length; i++) {
+        const points: Array<Point> = [new Point(0, 0), new Point(bmp.width, 0), new Point(bmp.width, bmp.height), new Point(0, bmp.height)];
+        const offset: Point = new Point(bounds.topLeft.x - source.x, bounds.topLeft.y - source.y);
+        for (let i: number = 0; i < points.length; i++)
+        {
             points[i] = points[i].add(offset);
         }
-        let lso: LineSliceObject = new LineSliceObject(points, bmp, offset);
+        const lso: LineSliceObject = new LineSliceObject(points, bmp, offset);
         this._container.addChild(lso);
     }
-    public update(timeDelta: number): void {
-        for(let slice of this._slices) {
+
+    public update (timeDelta: number): void
+    {
+        for (const slice of this._slices)
+        {
             slice.x += slice.velocity.x * timeDelta;
             slice.y += slice.velocity.y * timeDelta;
             slice.rotation += slice.velocityR * timeDelta;
@@ -50,29 +55,40 @@ export class SliceEffect extends Sprite {
             slice.velocityR -= slice.velocityR * 0.01 * timeDelta;
         }
     }
-    public slice(p1: Point, p2: Point): void {
-        let toSlice: Array<LineSliceObject> = this._slices.concat();
-        for(let slice of toSlice) {
+
+    public slice (p1: Point, p2: Point): void
+    {
+        const toSlice: Array<LineSliceObject> = this._slices.concat();
+        for (const slice of toSlice)
+        {
             slice.slice(p1, p2);
         }
     }
-    private handleAdded(e: Event): void {
-        if(!(e.target instanceof LineSliceObject) ) {
-            return
-        } 
+
+    private handleAdded (e: Event): void
+    {
+        if (!(e.target instanceof LineSliceObject) )
+        {
+            return;
+        }
         this._slices.push(e.target);
     }
-    private handleRemoved(e: Event): void {
-        if(!(e.target instanceof LineSliceObject) ) {
-            return
-        } 
+
+    private handleRemoved (e: Event): void
+    {
+        if (!(e.target instanceof LineSliceObject) )
+        {
+            return;
+        }
         this._slices.splice(this._slices.indexOf(e.target), 1);
     }
-    public get slices(): Array<LineSliceObject> {
+
+    public get slices (): Array<LineSliceObject>
+    {
         return this._slices;
     }
 }
-import {Settings} from "../Settings";
+import { Settings } from '../Settings';
 class LineSliceObject extends Shape {
     private _points: Array<Point>;
     private _point1: Point;
@@ -82,7 +98,8 @@ class LineSliceObject extends Shape {
     private _textureOffset: Point;
     public velocity: Point;
     public velocityR: number = 0;
-    public constructor(points: Array<Point>, texture: BitmapData, textureOffset: Point) {
+    public constructor (points: Array<Point>, texture: BitmapData, textureOffset: Point)
+    {
         super();
         this._textureOffset = textureOffset;
         this._texture = texture;
@@ -90,50 +107,58 @@ class LineSliceObject extends Shape {
         this.velocity = new Point();
         this.render();
     }
-    private render(): void {
+
+    private render (): void
+    {
         this.graphics.beginBitmapFill(this._texture, new Matrix(1, 0, 0, 1, this._textureOffset.x, this._textureOffset.y), false, true);
         this.graphics.moveTo(this._points[0].x, this._points[0].y);
         this._length = this._points.length;
-        for(let i: number = 1; i < this._length; i++) {
+        for (let i: number = 1; i < this._length; i++)
+        {
             this.graphics.lineTo(this._points[i].x, this._points[i].y);
         }
         this.graphics.endFill();
     }
-    public slice(point1: Point, point2: Point): void {
-        let _pt1: Point = this.globalToLocal(this.parent.localToGlobal(point1));
-        let _pt2: Point = this.globalToLocal(this.parent.localToGlobal(point2));
-        let newPoints: Array<Array<Point>> = [] < Array < Point >> [[], []];
+
+    public slice (point1: Point, point2: Point): void
+    {
+        const _pt1: Point = this.globalToLocal(this.parent.localToGlobal(point1));
+        const _pt2: Point = this.globalToLocal(this.parent.localToGlobal(point2));
+        const newPoints: Array<Array<Point>> = [] < Array < Point >> [[], []];
         let _numCross: number = 0;
-        for(let i: number = 0; i < this._length; i++) {
-            let _pt3: Point = this._points[i];
-            let _pt4: Point = this._points.length > i + 1 ? this._points[i + 1] : this._points[0];
-            let _crossPt: Point = this.crossPoint(_pt1, _pt2, _pt3, _pt4);
+        for (let i: number = 0; i < this._length; i++)
+        {
+            const _pt3: Point = this._points[i];
+            const _pt4: Point = this._points.length > i + 1 ? this._points[i + 1] : this._points[0];
+            const _crossPt: Point = this.crossPoint(_pt1, _pt2, _pt3, _pt4);
             newPoints[0].push(_pt3);
-            if(_crossPt ) {
+            if (_crossPt )
+            {
                 newPoints[0].push(_crossPt);
                 newPoints[1].push(_crossPt);
                 newPoints.reverse();
                 _numCross++;
-            } 
+            }
         }
-        if(_numCross == 2 ) {
-            let slice1: LineSliceObject = new LineSliceObject(newPoints[0], this._texture, this._textureOffset);
-            let slice2: LineSliceObject = new LineSliceObject(newPoints[1], this._texture, this._textureOffset);
+        if (_numCross == 2 )
+        {
+            const slice1: LineSliceObject = new LineSliceObject(newPoints[0], this._texture, this._textureOffset);
+            const slice2: LineSliceObject = new LineSliceObject(newPoints[1], this._texture, this._textureOffset);
             slice1.x = (slice2.x = this.x);
             slice1.y = (slice2.y = this.y);
             slice1.rotation = (slice2.rotation = this.rotation);
             this.parent.addChild(slice1);
             this.parent.addChild(slice2);
             this.parent.removeChild(this);
-            let vector: Point = _pt2.subtract(_pt1);
-            let angle: number = Math.atan2(vector.y, vector.x);
-            let force: number = Settings.EFFECT_BLOCK_SHATTER_FORCE;
-            let fx: number = Math.abs(Math.sin(angle));
-            let fy: number = Math.abs(Math.cos(angle));
-            let fx1: number = newPoints[0][0].x < newPoints[1][0].x ? -fx : fx;
-            let fx2: number = newPoints[1][0].x < newPoints[0][0].x ? -fx : fx;
-            let fy1: number = newPoints[0][0].y < newPoints[1][0].y ? -fy : fy;
-            let fy2: number = newPoints[1][0].y < newPoints[0][0].y ? -fy : fy;
+            const vector: Point = _pt2.subtract(_pt1);
+            const angle: number = Math.atan2(vector.y, vector.x);
+            const force: number = Settings.EFFECT_BLOCK_SHATTER_FORCE;
+            const fx: number = Math.abs(Math.sin(angle));
+            const fy: number = Math.abs(Math.cos(angle));
+            const fx1: number = newPoints[0][0].x < newPoints[1][0].x ? -fx : fx;
+            const fx2: number = newPoints[1][0].x < newPoints[0][0].x ? -fx : fx;
+            const fy1: number = newPoints[0][0].y < newPoints[1][0].y ? -fy : fy;
+            const fy2: number = newPoints[1][0].y < newPoints[0][0].y ? -fy : fy;
             slice1.velocity = this.velocity.clone();
             slice2.velocity = this.velocity.clone();
             slice1.velocityR = this.velocityR + Math.random() * Settings.EFFECT_BLOCK_SHATTER_ROTATION - Settings.EFFECT_BLOCK_SHATTER_ROTATION / 2;
@@ -142,28 +167,38 @@ class LineSliceObject extends Shape {
             slice1.velocity.y += fy1 * force;
             slice2.velocity.x += fx2 * force;
             slice2.velocity.y += fy2 * force;
-        } 
+        }
     }
-    private crossPoint(pt1: Point, pt2: Point, pt3: Point, pt4: Point): Point {
-        let _vector1: Point = pt2.subtract(pt1);
-        let _vector2: Point = pt4.subtract(pt3);
-        if(this.cross(_vector1, _vector2) == 0.0 ) {
-            return null
-        } 
-        let _s: number = this.cross(_vector2, pt3.subtract(pt1)) / this.cross(_vector2, _vector1);
-        let _t: number = this.cross(_vector1, pt1.subtract(pt3)) / this.cross(_vector1, _vector2);
-        if(LineSliceObject.isCross(_s) && LineSliceObject.isCross(_t) ) {
+
+    private crossPoint (pt1: Point, pt2: Point, pt3: Point, pt4: Point): Point
+    {
+        const _vector1: Point = pt2.subtract(pt1);
+        const _vector2: Point = pt4.subtract(pt3);
+        if (this.cross(_vector1, _vector2) == 0.0 )
+        {
+            return null;
+        }
+        const _s: number = this.cross(_vector2, pt3.subtract(pt1)) / this.cross(_vector2, _vector1);
+        const _t: number = this.cross(_vector1, pt1.subtract(pt3)) / this.cross(_vector1, _vector2);
+        if (LineSliceObject.isCross(_s) && LineSliceObject.isCross(_t) )
+        {
             _vector1.x *= _s;
             _vector1.y *= _s;
             return pt1.add(_vector1);
-        } else {
-            return null
+        }
+        else
+        {
+            return null;
         }
     }
-    private cross(vector1: Point, vector2: Point): number {
+
+    private cross (vector1: Point, vector2: Point): number
+    {
         return vector1.x * vector2.y - vector1.y * vector2.x;
     }
-    public static isCross(n: number): boolean {
+
+    public static isCross (n: number): boolean
+    {
         return 0 <= n && n <= 1;
     }
 }
