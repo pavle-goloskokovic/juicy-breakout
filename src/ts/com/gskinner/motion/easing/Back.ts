@@ -1,5 +1,5 @@
 export class Back {
-    protected static s: number = 1.70158;
+    protected static s = 1.70158;
     public static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
         return ratio * ratio * ((Back.s + 1) * ratio - Back.s);

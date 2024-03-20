@@ -5,12 +5,12 @@ import { KeyboardEvent } from '../../../flash/events/KeyboardEvent';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 import { Keyboard } from '../../../flash/ui/Keyboard';
 export class OneButtonInput extends EventDispatcher {
-    private _keyCode: number = 32;
-    private _resetChangedOnReadout: boolean = true;
-    private _keyState: boolean = false;
-    private _changedSinceLastReadout: boolean = false;
-    private _last_was_keyboard: boolean = true;
-    public constructor (stage: Stage, keyCode: number = 32, resetChangedOnReadout: boolean = true)
+    private _keyCode = 32;
+    private _resetChangedOnReadout = true;
+    private _keyState = false;
+    private _changedSinceLastReadout = false;
+    private _last_was_keyboard = true;
+    public constructor (stage: Stage, keyCode = 32, resetChangedOnReadout = true)
     {
         super();
         this._keyCode = keyCode;

@@ -12,7 +12,7 @@ export class LazyKeyboard {
 
     private handleKey (e: KeyboardEvent): void
     {
-        let keyState: boolean = false;
+        let keyState = false;
         if (e.type == KeyboardEvent.KEY_DOWN )
         {
             keyState = true;

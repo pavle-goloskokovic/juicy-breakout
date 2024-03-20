@@ -1,7 +1,7 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class CurrentFramePlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: CurrentFramePlugin;
     public static install (): void
     {

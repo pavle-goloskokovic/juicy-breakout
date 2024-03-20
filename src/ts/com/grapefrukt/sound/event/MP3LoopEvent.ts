@@ -1,9 +1,9 @@
 import type { MP3LoopBase } from '../MP3LoopBase';
 import { Event } from '../../../../flash/events/Event';
 export class MP3LoopEvent extends Event {
-    public static PLAY: string = 'mp3loopevent_play';
-    public static STOP: string = 'mp3loopevent_stop';
-    public static COMPLETE: string = 'mp3loopevent_complete';
+    public static PLAY = 'mp3loopevent_play';
+    public static STOP = 'mp3loopevent_stop';
+    public static COMPLETE = 'mp3loopevent_complete';
     private _loop: MP3LoopBase;
     public constructor (type: string, loop: MP3LoopBase)
     {

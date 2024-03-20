@@ -2,7 +2,7 @@ import { GTween } from '../GTween';
 import { BlurFilter } from '../../../../flash/filters/BlurFilter';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class BlurPlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: BlurPlugin;
     protected static tweenProperties: any[] = ['blurX', 'blurY', 'blur'];
     public static install (): void
@@ -22,7 +22,7 @@ export class BlurPlugin implements IGTweenPlugin {
             return value;
         }
         const f: any[] = tween.target.filters;
-        for (let i: number = 0; i < f.length; i++)
+        for (let i = 0; i < f.length; i++)
         {
             if (f[i] instanceof BlurFilter )
             {

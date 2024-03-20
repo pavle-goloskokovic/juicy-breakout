@@ -3,7 +3,7 @@ import { ColorMatrix } from '../../geom/ColorMatrix';
 import { ColorMatrixFilter } from '../../../../flash/filters/ColorMatrixFilter';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class ColorAdjustPlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: ColorAdjustPlugin;
     protected static tweenProperties: any[] = ['brightness', 'contrast', 'hue', 'saturation'];
     public static install (): void
@@ -25,7 +25,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         if (tween.pluginData.ColorAdjustData == null )
         {
             const f: any[] = tween.target.filters;
-            for (let i: number = 0; i < f.length; i++)
+            for (let i = 0; i < f.length; i++)
             {
                 if (f[i] instanceof ColorMatrixFilter )
                 {
@@ -73,7 +73,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         }
         const matrix: any[] = cmF.matrix;
         const l: number = matrix.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             matrix[i] = initMatrix[i] + (targMatrix[i] - initMatrix[i]) * ratio;
         }

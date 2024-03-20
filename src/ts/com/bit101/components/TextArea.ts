@@ -5,7 +5,7 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 export class TextArea extends Text {
     protected _scrollbar: VScrollBar;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, text: string = '')
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         super(parent, xpos, ypos, text);
     }

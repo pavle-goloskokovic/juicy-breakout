@@ -4,18 +4,18 @@ import { Dictionary } from '../../../flash/utils/Dictionary';
 import { getTimer } from '../../../flash/utils/getTimer';
 import { IEventDispatcher } from '../../../flash/events/IEventDispatcher';
 export class GTween {
-    public static pauseAll: boolean = false;
+    public static pauseAll = false;
     public static defaultEase: Function = linearEase;
-    public static timeScaleAll: number = 1;
-    protected static hasStarPlugins: boolean = false;
+    public static timeScaleAll = 1;
+    protected static hasStarPlugins = false;
     protected static plugins: any = {};
     protected static shape: Shape;
     protected static time: number;
     protected static tickList: Dictionary = new Dictionary(true);
     protected static gcLockList: Dictionary = new Dictionary(false);
-    public static installPlugin (plugin: any, propertyNames: any[], highPriority: boolean = false): void
+    public static installPlugin (plugin: any, propertyNames: any[], highPriority = false): void
     {
-        for (let i: number = 0; i < propertyNames.length; i++)
+        for (let i = 0; i < propertyNames.length; i++)
         {
             const propertyName: string = propertyNames[i];
             if (propertyName == '*' )
@@ -65,26 +65,26 @@ export class GTween {
         }
     }
 
-    protected _delay: number = 0;
+    protected _delay = 0;
     protected _values: any;
-    protected _paused: boolean = true;
-    protected _position: number = 0;
+    protected _paused = true;
+    protected _position = 0;
     protected _inited: boolean;
     protected _initValues: any;
     protected _rangeValues: any;
     protected _referenceTime: number;
     protected _proxy: TargetProxy;
-    public autoPlay: boolean = true;
+    public autoPlay = true;
     public data: any;
     public duration: number;
     public ease: Function;
     public nextTween: GTween;
     public pluginData: any;
     public reflect: boolean;
-    public repeatCount: number = 1;
+    public repeatCount = 1;
     public target: any;
     public useFrames: boolean;
-    public timeScale: number = 1;
+    public timeScale = 1;
     public positionOld: number;
     public ratio: number;
     public ratioOld: number;
@@ -94,7 +94,7 @@ export class GTween {
     public onComplete: Function;
     public onChange: Function;
     public onInit: Function;
-    public constructor (target: any = null, duration: number = 1, values: any = null, props: any = null, pluginData: any = null)
+    public constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null)
     {
         this.ease = GTween.defaultEase;
         this.target = target;
@@ -192,7 +192,7 @@ export class GTween {
                 if (pluginArr )
                 {
                     const l: number = pluginArr.length;
-                    for (let i: number = 0; i < l; i++)
+                    for (let i = 0; i < l; i++)
                     {
                         val = pluginArr[i].tween(this, n, val, initVal, rangeVal, this.ratio, end);
                     }
@@ -335,7 +335,7 @@ export class GTween {
                 const pluginArr: any[] = GTween.plugins[n];
                 const l: number = pluginArr.length;
                 let value: number = n in this.target ? this.target[n] : NaN;
-                for (let i: number = 0; i < l; i++)
+                for (let i = 0; i < l; i++)
                 {
                     value = pluginArr[i].init(this, n, value);
                 }
@@ -411,7 +411,7 @@ export class GTween {
         }
     }
 
-    protected copy (o1: any, o2: any, smart: boolean = false): any
+    protected copy (o1: any, o2: any, smart = false): any
     {
         for (const n in o1)
         {

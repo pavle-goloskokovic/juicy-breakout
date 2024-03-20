@@ -6,21 +6,21 @@ import { Sprite } from '../../../flash/display/Sprite';
 import { Event } from '../../../flash/events/Event';
 import { DropShadowFilter } from '../../../flash/filters/DropShadowFilter';
 export class Meter extends Component {
-    protected _damp: number = .8;
+    protected _damp = .8;
     protected _dial: Sprite;
     protected _label: Label;
     protected _labelText: string;
-    protected _maximum: number = 1.0;
+    protected _maximum = 1.0;
     protected _maxLabel: Label;
-    protected _minimum: number = 0.0;
+    protected _minimum = 0.0;
     protected _minLabel: Label;
     protected _needle: Sprite;
     protected _needleMask: Sprite;
-    protected _showValues: boolean = true;
-    protected _targetRotation: number = 0;
-    protected _value: number = 0.0;
-    protected _velocity: number = 0;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, text: string = '')
+    protected _showValues = true;
+    protected _targetRotation = 0;
+    protected _value = 0.0;
+    protected _velocity = 0;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         this._labelText = text;
         super(parent, xpos, ypos);
@@ -112,8 +112,8 @@ export class Meter extends Component {
         const r1: number = this._height * 1.05;
         const r2: number = this._height * 0.96;
         const r3: number = this._height * 1.13;
-        let tick: number = 0;
-        for (let i: number = 0; i < 9; i++)
+        let tick = 0;
+        for (let i = 0; i < 9; i++)
         {
             const angle: number = startAngle + i * (endAngle - startAngle) / 8;
             this._dial.graphics.moveTo(Math.cos(angle) * r2, Math.sin(angle) * r2);

@@ -1,6 +1,6 @@
 import type { Graphics } from '../../../../flash/display/Graphics';
 export class DrawGeometry {
-    public static drawIrregularCircle (graphics: Graphics, x: number, y: number, radius: number, irregularity: number = .2, slices: number = -1): void
+    public static drawIrregularCircle (graphics: Graphics, x: number, y: number, radius: number, irregularity = .2, slices = -1): void
     {
         if (slices < 0 )
         {
@@ -11,10 +11,10 @@ export class DrawGeometry {
             }
         }
         let angle: number = Math.random() * 2 * Math.PI;
-        let px: number = 0;
-        let py: number = 0;
-        let rndRadius: number = 0;
-        for (let i: number = 0; i < slices; i++)
+        let px = 0;
+        let py = 0;
+        let rndRadius = 0;
+        for (let i = 0; i < slices; i++)
         {
             rndRadius = radius * (1 + Math.random() * irregularity * 2 - irregularity / 2);
             px = x + Math.cos(angle) * rndRadius;
@@ -29,7 +29,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawDonut (graphics: Graphics, x: number, y: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color: number = 0xFF0000, fillAlpha: number = 1): void
+    public static drawDonut (graphics: Graphics, x: number, y: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
         let segAngle: number;
         let theta: number;
@@ -47,7 +47,7 @@ export class DrawGeometry {
         graphics.beginFill(color, fillAlpha);
         graphics.moveTo(x + Math.cos(0) * innerXRadius, y + Math.sin(0) * innerYRadius);
         graphics.lineTo(x + Math.cos(0) * xRadius, y + Math.sin(0) * yRadius);
-        for (let i: number = 0; i < segs; i++)
+        for (let i = 0; i < segs; i++)
         {
             angle += theta;
             angleMid = angle - theta / 2;
@@ -60,7 +60,7 @@ export class DrawGeometry {
         graphics.lineTo(x + Math.cos(2 * Math.PI) * innerXRadius, y + Math.sin(-2 * Math.PI) * innerYRadius);
         theta = -(segAngle / 180) * Math.PI;
         angle = -2 * Math.PI;
-        for (let j: number = 0; j < segs; j++)
+        for (let j = 0; j < segs; j++)
         {
             angle -= theta;
             angleMid = angle + theta / 2;
@@ -73,7 +73,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawWedge (graphics: Graphics, x: number, y: number, startAngle: number, arc: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color: number = 0xFF0000, fillAlpha: number = 1): void
+    public static drawWedge (graphics: Graphics, x: number, y: number, startAngle: number, arc: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
         let segAngle: number;
         let theta: number;
@@ -91,7 +91,7 @@ export class DrawGeometry {
         graphics.beginFill(color, fillAlpha);
         graphics.moveTo(x + Math.cos(startAngle / 180 * Math.PI) * innerXRadius, y + Math.sin(-startAngle / 180 * Math.PI) * innerYRadius);
         graphics.lineTo(x + Math.cos(startAngle / 180 * Math.PI) * xRadius, y + Math.sin(-startAngle / 180 * Math.PI) * yRadius);
-        for (let i: number = 0; i < segs; i++)
+        for (let i = 0; i < segs; i++)
         {
             angle += theta;
             angleMid = angle - theta / 2;
@@ -104,7 +104,7 @@ export class DrawGeometry {
         graphics.lineTo(x + Math.cos((startAngle + arc) / 180 * Math.PI) * innerXRadius, y + Math.sin(-(startAngle + arc) / 180 * Math.PI) * innerYRadius);
         theta = -(segAngle / 180) * Math.PI;
         angle = -((startAngle + arc) / 180) * Math.PI;
-        for (let j: number = 0; j < segs; j++)
+        for (let j = 0; j < segs; j++)
         {
             angle -= theta;
             angleMid = angle + theta / 2;
@@ -117,7 +117,7 @@ export class DrawGeometry {
         graphics.endFill();
     }
 
-    public static drawTriangle (graphics: Graphics, x: number, y: number, size: number, invert: boolean = false): void
+    public static drawTriangle (graphics: Graphics, x: number, y: number, size: number, invert = false): void
     {
         if (invert )
         {

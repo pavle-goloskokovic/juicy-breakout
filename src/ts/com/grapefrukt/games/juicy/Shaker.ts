@@ -4,8 +4,8 @@ export class Shaker {
     private _velocity: Point;
     private _position: Point;
     private _target: DisplayObject;
-    private _drag: number = .1;
-    private _elasticity: number = .1;
+    private _drag = .1;
+    private _elasticity = .1;
     public constructor (target: DisplayObject)
     {
         this._target = target;

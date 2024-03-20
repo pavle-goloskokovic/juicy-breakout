@@ -11,12 +11,12 @@ import { SoundChannel } from '../../../flash/media/SoundChannel';
 import { URLRequest } from '../../../flash/net/URLRequest';
 import type { ByteArray } from '../../../flash/utils/ByteArray';
 export class MP3LoopGapless extends MP3LoopBase {
-    private MAGIC_DELAY: number = 2257.0;
-    private BUFFER_SIZE: number = 2048;
-    private _samples_total: number = 0;
+    private MAGIC_DELAY = 2257.0;
+    private BUFFER_SIZE = 2048;
+    private _samples_total = 0;
     private _mp3: Sound;
-    private _samples_position: number = 0;
-    public constructor (samplesTotal: number, url: string = '', autoLoad: boolean = false, playOnLoad: boolean = false)
+    private _samples_position = 0;
+    public constructor (samplesTotal: number, url = '', autoLoad = false, playOnLoad = false)
     {
         super(url, autoLoad, playOnLoad);
         this._samples_total = samplesTotal;

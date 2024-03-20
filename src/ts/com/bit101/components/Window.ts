@@ -14,16 +14,16 @@ export class Window extends Component {
     protected _titleBar: Panel;
     protected _titleLabel: Label;
     protected _panel: Panel;
-    protected _color: number = -1;
-    protected _shadow: boolean = true;
-    protected _draggable: boolean = true;
+    protected _color = -1;
+    protected _shadow = true;
+    protected _draggable = true;
     protected _minimizeButton: Sprite;
-    protected _hasMinimizeButton: boolean = false;
-    protected _minimized: boolean = false;
+    protected _hasMinimizeButton = false;
+    protected _minimized = false;
     protected _hasCloseButton: boolean;
     protected _closeButton: PushButton;
     protected _grips: Shape;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, title: string = 'Window')
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, title = 'Window')
     {
         this._title = title;
         super(parent, xpos, ypos);
@@ -46,7 +46,7 @@ export class Window extends Component {
         super.addChild(this._titleBar);
         this._titleLabel = new Label(this._titleBar.content, 5, 1, this._title);
         this._grips = new Shape();
-        for (let i: number = 0; i < 4; i++)
+        for (let i = 0; i < 4; i++)
         {
             this._grips.graphics.lineStyle(1, 0xffffff, .55);
             this._grips.graphics.moveTo(0, 3 + i * 4);

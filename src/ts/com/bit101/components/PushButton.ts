@@ -8,12 +8,12 @@ export class PushButton extends Component {
     protected _back: Sprite;
     protected _face: Sprite;
     protected _label: Label;
-    protected _labelText: string = '';
-    protected _over: boolean = false;
-    protected _down: boolean = false;
-    protected _selected: boolean = false;
-    protected _toggle: boolean = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    protected _labelText = '';
+    protected _over = false;
+    protected _down = false;
+    protected _selected = false;
+    protected _toggle = false;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
         if (defaultHandler != null )

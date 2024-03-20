@@ -23,7 +23,7 @@ import { Timer } from '../../../../../flash/utils/Timer';
 export class Block extends GameObject {
     protected _collisionW: number = Settings.BLOCK_W;
     protected _collisionH: number = Settings.BLOCK_H;
-    protected _collidable: boolean = true;
+    protected _collidable = true;
     protected _gfx: Sprite;
     private _sliceEffect: SliceEffect;
     public constructor (x: number, y: number)
@@ -62,7 +62,7 @@ export class Block extends GameObject {
     public collide (ball: Ball): void
     {
         this._collidable = false;
-        let delayDestruction: boolean = false;
+        let delayDestruction = false;
         if (Settings.EFFECT_BLOCK_DARKEN )
         {
             this.transform.colorTransform = new ColorTransform(.7, .7, .8);
@@ -109,7 +109,7 @@ export class Block extends GameObject {
         }
     }
 
-    public jellyEffect (strength: number = .2, delay: number = 0): void
+    public jellyEffect (strength = .2, delay = 0): void
     {
         new GTween(this._gfx, .05, { scaleX: 1 + strength }, { delay: delay, ease: Quadratic.easeInOut, onComplete: function (gt: GTween): void
         {
@@ -121,7 +121,7 @@ export class Block extends GameObject {
         } });
     }
 
-    public update (timeDelta: number = 1): void
+    public update (timeDelta = 1): void
     {
         super.update(timeDelta);
         if (this._sliceEffect )

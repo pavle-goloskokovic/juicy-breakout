@@ -8,22 +8,22 @@ import { TimerEvent } from '../../../flash/events/TimerEvent';
 import { Timer } from '../../../flash/utils/Timer';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class NumericStepper extends Component {
-    protected DELAY_TIME: number = 500;
-    protected UP: string = 'up';
-    protected DOWN: string = 'down';
+    protected DELAY_TIME = 500;
+    protected UP = 'up';
+    protected DOWN = 'down';
     protected _minusBtn: PushButton;
-    protected _repeatTime: number = 100;
+    protected _repeatTime = 100;
     protected _plusBtn: PushButton;
     protected _valueText: InputText;
-    protected _value: number = 0;
-    protected _step: number = 1;
-    protected _labelPrecision: number = 1;
+    protected _value = 0;
+    protected _step = 1;
+    protected _labelPrecision = 1;
     protected _maximum: number = Number.POSITIVE_INFINITY;
     protected _minimum: number = Number.NEGATIVE_INFINITY;
     protected _delayTimer: Timer;
     protected _repeatTimer: Timer;
     protected _direction: string;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
         if (defaultHandler != null )
@@ -108,7 +108,7 @@ export class NumericStepper extends Component {
     protected onValueTextChange (event: Event): void
     {
         event.stopImmediatePropagation();
-        const newVal: number = Number(this._valueText.text);
+        const newVal = Number(this._valueText.text);
         if (newVal <= this._maximum && newVal >= this._minimum )
         {
             this._value = newVal;

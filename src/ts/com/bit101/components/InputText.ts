@@ -8,10 +8,10 @@ import { TextFieldType } from '../../../flash/text/TextFieldType';
 import { TextFormat } from '../../../flash/text/TextFormat';
 export class InputText extends Component {
     protected _back: Sprite;
-    protected _password: boolean = false;
-    protected _text: string = '';
+    protected _password = false;
+    protected _text = '';
     protected _tf: TextField;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, text: string = '', defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '', defaultHandler: Function = null)
     {
         this.text = text;
         super(parent, xpos, ypos);

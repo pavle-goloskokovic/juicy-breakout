@@ -4,7 +4,7 @@ import { Sound } from '../../../../flash/media/Sound';
 import { SoundChannel } from '../../../../flash/media/SoundChannel';
 import type { SoundTransform } from '../../../../flash/media/SoundTransform';
 export class SoundTransformPlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: SoundTransformPlugin;
     protected static tweenProperties: any[] = ['leftToLeft', 'leftToRight', 'pan', 'rightToLeft', 'rightToRight', 'volume'];
     public static install (): void

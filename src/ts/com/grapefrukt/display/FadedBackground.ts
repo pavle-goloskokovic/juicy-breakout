@@ -6,15 +6,15 @@ import { Sprite } from '../../../flash/display/Sprite';
 import { Event } from '../../../flash/events/Event';
 import { Matrix } from '../../../flash/geom/Matrix';
 export class FadedBackground extends Sprite {
-    private _base_color: number = 0x619928;
+    private _base_color = 0x619928;
     private _faded_color: number;
     private _gfx: Shape;
-    private _baseWidth: number = 0;
-    private _baseHeight: number = 0;
-    private _stageNormalWidth: number = 0;
-    private _stageNormalHeight: number = 0;
+    private _baseWidth = 0;
+    private _baseHeight = 0;
+    private _stageNormalWidth = 0;
+    private _stageNormalHeight = 0;
     private _ratios: any[];
-    public constructor (newColor: number, stageNormalWidth: number, stageNormalHeight: number, fadedColor: number = 0x000000, ratios: any[] = null)
+    public constructor (newColor: number, stageNormalWidth: number, stageNormalHeight: number, fadedColor = 0x000000, ratios: any[] = null)
     {
         super();
         this._base_color = newColor;
@@ -61,7 +61,7 @@ export class FadedBackground extends Sprite {
         this.stage.addEventListener(Event.RESIZE, this.resizeHandler);
     }
 
-    public redraw (newColor: number = -1): void
+    public redraw (newColor = -1): void
     {
         if (newColor >= 0 )
         {

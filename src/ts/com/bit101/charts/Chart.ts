@@ -6,15 +6,15 @@ import { Shape } from '../../../flash/display/Shape';
 export class Chart extends Component {
     protected _data: any[];
     protected _chartHolder: Shape;
-    protected _maximum: number = 100;
-    protected _minimum: number = 0;
-    protected _autoScale: boolean = true;
+    protected _maximum = 100;
+    protected _minimum = 0;
+    protected _autoScale = true;
     protected _maxLabel: Label;
     protected _minLabel: Label;
-    protected _showScaleLabels: boolean = false;
-    protected _labelPrecision: number = 0;
+    protected _showScaleLabels = false;
+    protected _labelPrecision = 0;
     protected _panel: Panel;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, data: any[] = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         this._data = data;
         super(parent, xpos, ypos);
@@ -48,7 +48,7 @@ export class Chart extends Component {
             return this._maximum;
         }
         let maxValue: number = Number.NEGATIVE_INFINITY;
-        for (let i: number = 0; i < this._data.length; i++)
+        for (let i = 0; i < this._data.length; i++)
         {
             if (this._data[i] != null )
             {
@@ -65,7 +65,7 @@ export class Chart extends Component {
             return this._minimum;
         }
         let minValue: number = Number.POSITIVE_INFINITY;
-        for (let i: number = 0; i < this._data.length; i++)
+        for (let i = 0; i < this._data.length; i++)
         {
             if (this._data[i] != null )
             {

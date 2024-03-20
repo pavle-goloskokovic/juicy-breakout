@@ -8,21 +8,21 @@ import { TimerEvent } from '../../../flash/events/TimerEvent';
 import { Timer } from '../../../flash/utils/Timer';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class ScrollBar extends Component {
-    protected DELAY_TIME: number = 500;
-    protected REPEAT_TIME: number = 100;
-    protected UP: string = 'up';
-    protected DOWN: string = 'down';
-    protected _autoHide: boolean = false;
+    protected DELAY_TIME = 500;
+    protected REPEAT_TIME = 100;
+    protected UP = 'up';
+    protected DOWN = 'down';
+    protected _autoHide = false;
     protected _upButton: PushButton;
     protected _downButton: PushButton;
     protected _scrollSlider: ScrollSlider;
     protected _orientation: string;
-    protected _lineSize: number = 1;
+    protected _lineSize = 1;
     protected _delayTimer: Timer;
     protected _repeatTimer: Timer;
     protected _direction: string;
-    protected _shouldRepeat: boolean = false;
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null)
+    protected _shouldRepeat = false;
+    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
@@ -260,9 +260,9 @@ import { Rectangle } from '../../../flash/geom/Rectangle';
 import { Slider } from './Slider';
 import { Style } from './Style';
 class ScrollSlider extends Slider {
-    protected _thumbPercent: number = 1.0;
-    protected _pageSize: number = 1;
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null)
+    protected _thumbPercent = 1.0;
+    protected _pageSize = 1;
+    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(orientation, parent, xpos, ypos);
         if (defaultHandler != null )

@@ -5,7 +5,7 @@ export class MP3LoopController {
     private _loop: MP3LoopBase;
     private _next_music: MP3LoopBase;
     private _gtween: GTween;
-    private _volume: number = 0;
+    private _volume = 0;
     public constructor (loop: MP3LoopBase)
     {
         this._loop = loop;

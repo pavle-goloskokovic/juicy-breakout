@@ -5,9 +5,9 @@ import { Sprite } from '../../../flash/display/Sprite';
 export class ProgressBar extends Component {
     protected _back: Sprite;
     protected _bar: Sprite;
-    protected _value: number = 0;
-    protected _max: number = 1;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    protected _value = 0;
+    protected _max = 1;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }

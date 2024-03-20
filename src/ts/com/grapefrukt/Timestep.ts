@@ -1,13 +1,13 @@
 import { getTimer } from '../../flash/utils/getTimer';
 export class Timestep {
-    private _game_speed: number = 1;
-    private _target_frametime: number = 0.6;
-    private _max_speed: number = 3;
-    private _smoothing: number = .5;
-    private _real_speed: number = 0.0;
-    private _last_frame_time: number = 0.0;
-    private _delta: number = 0.0;
-    public constructor (fps: number = 60, gameSpeed: number = 1.0, maxSpeed: number = 3.0, smoothing: number = 0.5)
+    private _game_speed = 1;
+    private _target_frametime = 0.6;
+    private _max_speed = 3;
+    private _smoothing = .5;
+    private _real_speed = 0.0;
+    private _last_frame_time = 0.0;
+    private _delta = 0.0;
+    public constructor (fps = 60, gameSpeed = 1.0, maxSpeed = 3.0, smoothing = 0.5)
     {
         this._target_frametime = 1000 / fps;
         this._smoothing = smoothing;

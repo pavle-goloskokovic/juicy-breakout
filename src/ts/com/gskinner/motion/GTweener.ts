@@ -24,14 +24,14 @@ export class GTweener {
         return value;
     }
 
-    public static to (target: any = null, duration: number = 1, values: any = null, props: any = null, pluginData: any = null): GTween
+    public static to (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
     {
         const tween: GTween = new GTween(target, duration, values, props, pluginData);
         GTweener.add(tween);
         return tween;
     }
 
-    public static from (target: any = null, duration: number = 1, values: any = null, props: any = null, pluginData: any = null): GTween
+    public static from (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null): GTween
     {
         const tween: GTween = GTweener.to(target, duration, values, props, pluginData);
         tween.swapValues();
@@ -62,7 +62,7 @@ export class GTweener {
             return null;
         }
         const l: number = list.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             const tween: GTween = list[i];
             if (!isNaN(tween.getValue(name)) )
@@ -78,7 +78,7 @@ export class GTweener {
         return GTweener.tweens[target] || [];
     }
 
-    public static pauseTweens (target: any, paused: boolean = true): void
+    public static pauseTweens (target: any, paused = true): void
     {
         const list: any[] = GTweener.tweens[target];
         if (list == null )
@@ -86,7 +86,7 @@ export class GTweener {
             return;
         }
         const l: number = list.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             list[i].paused = paused;
         }
@@ -106,7 +106,7 @@ export class GTweener {
             return;
         }
         const l: number = list.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             if (list[i] == tween )
             {
@@ -125,7 +125,7 @@ export class GTweener {
             return;
         }
         const l: number = list.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             delete list[i].pluginData.GTweener;
         }

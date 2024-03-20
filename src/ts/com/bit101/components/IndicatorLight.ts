@@ -8,12 +8,12 @@ import { Matrix } from '../../../flash/geom/Matrix';
 import { Timer } from '../../../flash/utils/Timer';
 export class IndicatorLight extends Component {
     protected _color: number;
-    protected _lit: boolean = false;
+    protected _lit = false;
     protected _label: Label;
-    protected _labelText: string = '';
+    protected _labelText = '';
     protected _lite: Shape;
     protected _timer: Timer;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, color: number = 0xff0000, label: string = '')
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, color = 0xff0000, label = '')
     {
         this._color = color;
         this._labelText = label;
@@ -71,7 +71,7 @@ export class IndicatorLight extends Component {
         this._height = 10;
     }
 
-    public flash (interval: number = 500): void
+    public flash (interval = 500): void
     {
         if (interval < 1 )
         {

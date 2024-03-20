@@ -11,7 +11,7 @@ export class ColorMatrix extends Array {
 
     public reset (): void
     {
-        for (let i: number = 0; i < ColorMatrix.LENGTH; i++)
+        for (let i = 0; i < ColorMatrix.LENGTH; i++)
         {
             this[i] = ColorMatrix.IDENTITY_MATRIX[i];
         }
@@ -71,9 +71,9 @@ export class ColorMatrix extends Array {
             return;
         }
         const x: number = 1 + (value > 0 ? 3 * value / 100 : value / 100);
-        const lumR: number = 0.3086;
-        const lumG: number = 0.6094;
-        const lumB: number = 0.0820;
+        const lumR = 0.3086;
+        const lumG = 0.6094;
+        const lumB = 0.0820;
         this.multiplyMatrix([lumR * (1 - x) + x, lumG * (1 - x), lumB * (1 - x), 0, 0, lumR * (1 - x), lumG * (1 - x) + x, lumB * (1 - x), 0, 0, lumR * (1 - x), lumG * (1 - x), lumB * (1 - x) + x, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1]);
     }
 
@@ -86,9 +86,9 @@ export class ColorMatrix extends Array {
         }
         const cosVal: number = Math.cos(value);
         const sinVal: number = Math.sin(value);
-        const lumR: number = 0.213;
-        const lumG: number = 0.715;
-        const lumB: number = 0.072;
+        const lumR = 0.213;
+        const lumG = 0.715;
+        const lumB = 0.072;
         this.multiplyMatrix([lumR + cosVal * (1 - lumR) + sinVal * -lumR, lumG + cosVal * -lumG + sinVal * -lumG, lumB + cosVal * -lumB + sinVal * (1 - lumB), 0, 0, lumR + cosVal * -lumR + sinVal * 0.143, lumG + cosVal * (1 - lumG) + sinVal * 0.140, lumB + cosVal * -lumB + sinVal * -0.283, 0, 0, lumR + cosVal * -lumR + sinVal * -(1 - lumR), lumG + cosVal * -lumG + sinVal * lumG, lumB + cosVal * (1 - lumB) + sinVal * lumB, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1]);
     }
 
@@ -120,7 +120,7 @@ export class ColorMatrix extends Array {
     protected copyMatrix (matrix: any[]): void
     {
         const l: number = ColorMatrix.LENGTH;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             this[i] = matrix[i];
         }
@@ -129,16 +129,16 @@ export class ColorMatrix extends Array {
     protected multiplyMatrix (matrix: any[]): void
     {
         const col: any[] = [];
-        for (let i: number = 0; i < 5; i++)
+        for (let i = 0; i < 5; i++)
         {
-            for (let j: number = 0; j < 5; j++)
+            for (let j = 0; j < 5; j++)
             {
                 col[j] = this[j + i * 5];
             }
             for (j = 0; j < 5; j++)
             {
-                let val: number = 0;
-                for (let k: number = 0; k < 5; k++)
+                let val = 0;
+                for (let k = 0; k < 5; k++)
                 {
                     val += matrix[j + k * 5] * col[k];
                 }

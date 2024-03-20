@@ -11,8 +11,8 @@ export class ScrollPane extends Panel {
     protected _vScrollbar: VScrollBar;
     protected _hScrollbar: HScrollBar;
     protected _corner: Shape;
-    protected _dragContent: boolean = true;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    protected _dragContent = true;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }

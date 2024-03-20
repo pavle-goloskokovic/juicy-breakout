@@ -14,7 +14,7 @@ export class BlockShatterParticle extends Particle {
         this.transform.colorTransform = new ColorTransform(shade, shade, shade);
     }
 
-    public init (xPos: number, yPos: number, vectorX: number = 0, vectorY: number = 0): void
+    public init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
         super.init(xPos, yPos, vectorX, vectorY);
         this.scaleX = (this.scaleY = 1);

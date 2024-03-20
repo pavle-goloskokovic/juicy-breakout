@@ -4,7 +4,7 @@ import { TextFieldAutoSize } from '../../../flash/text/TextFieldAutoSize';
 import { TextFormat } from '../../../flash/text/TextFormat';
 export class TXT extends Sprite {
     private txt_text: TextField;
-    public constructor (color: number = 0xffffff, size: number = 12)
+    public constructor (color = 0xffffff, size = 12)
     {
         super();
         const textformat: TextFormat = new TextFormat('Arial', size);

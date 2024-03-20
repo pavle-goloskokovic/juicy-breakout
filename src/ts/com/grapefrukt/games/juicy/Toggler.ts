@@ -17,7 +17,7 @@ import { describeType } from '../../../../flash/utils/describeType';
 export class Toggler extends Sprite {
     private _targetClass: Class;
     private _properties: Array<Property>;
-    public constructor (targetClass: Class, visible: boolean = false)
+    public constructor (targetClass: Class, visible = false)
     {
         super();
         this._targetClass = targetClass;
@@ -225,6 +225,6 @@ class Property {
     public value: any;
     public max: number;
     public min: number;
-    public order: string = '';
-    public header: string = '';
+    public order = '';
+    public header = '';
 }

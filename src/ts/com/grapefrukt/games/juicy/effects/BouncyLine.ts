@@ -6,7 +6,7 @@ import { CapsStyle } from '../../../../../flash/display/CapsStyle';
 import { Shape } from '../../../../../flash/display/Shape';
 import { Point } from '../../../../../flash/geom/Point';
 export class BouncyLine extends GameObject {
-    public constructor (x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0)
+    public constructor (x1 = 0, y1 = 0, x2 = 0, y2 = 0)
     {
         super();
         this.set(x1, y1, x2, y2);
@@ -38,7 +38,7 @@ export class BouncyLine extends GameObject {
         this.wobble_middle = wobble_pos;
     }
 
-    public update (imeDelta: number = 1): void
+    public update (imeDelta = 1): void
     {
         if (Math.abs(this.wobble_middle.y) > 0 )
         {
@@ -139,7 +139,7 @@ export class BouncyLine extends GameObject {
         return delta.length;
     }
 
-    private lineIntersectLine (A: Point, B: Point, E: Point, F: Point, as_seg: boolean = true): Point
+    private lineIntersectLine (A: Point, B: Point, E: Point, F: Point, as_seg = true): Point
     {
         let ip: Point;
         let a1: number;
@@ -187,11 +187,11 @@ export class BouncyLine extends GameObject {
     private pos1: Point = new Point();
     private pos2: Point = new Point();
     private pos_middle: Point = new Point();
-    private length: number = 0;
+    private length = 0;
     private wobble_middle: Point = new Point();
     private wobble_velocity: Point = new Point();
-    private line_rotation: number = 0;
-    private bounce_speed: number = 0.25;
-    private bounciness: number = 0.85;
-    private collisionCounter: number = 0;
+    private line_rotation = 0;
+    private bounce_speed = 0.25;
+    private bounciness = 0.85;
+    private collisionCounter = 0;
 }

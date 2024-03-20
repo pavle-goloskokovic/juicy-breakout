@@ -19,7 +19,7 @@ export class GameObjectCollection extends Sprite {
 
     public getClosest (x: number, y: number, maxDistance: number = Number.MAX_VALUE, classFilter: Class = null, filterObject: GameObject = null): GameObject
     {
-        let dist: number = 0.0;
+        let dist = 0.0;
         let minDist: number = maxDistance;
         if (minDist != Number.MAX_VALUE )
         {
@@ -102,7 +102,7 @@ export class GameObjectCollection extends Sprite {
             return null;
         }
         let go: GameObject;
-        let tries: number = 0;
+        let tries = 0;
         while (!go && tries < 10)
         {
             go = this._collection[int(Math.random() * this._collection.length)];
@@ -133,7 +133,7 @@ export class GameObjectCollection extends Sprite {
         return false;
     }
 
-    public update (timeDelta: number = 1): void
+    public update (timeDelta = 1): void
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {

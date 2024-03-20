@@ -5,10 +5,10 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 import { Event } from '../../../flash/events/Event';
 export class Accordion extends Component {
     protected _windows: any[];
-    protected _winWidth: number = 100;
-    protected _winHeight: number = 100;
+    protected _winWidth = 100;
+    protected _winHeight = 100;
     protected _vbox: VBox;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -57,7 +57,7 @@ export class Accordion extends Component {
     public draw (): void
     {
         this._winHeight = Math.max(this._winHeight, 40);
-        for (let i: number = 0; i < this._windows.length; i++)
+        for (let i = 0; i < this._windows.length; i++)
         {
             this._windows[i].setSize(this._winWidth, this._winHeight);
             this._vbox.draw();
@@ -74,7 +74,7 @@ export class Accordion extends Component {
         const window: Window = event.target as Window;
         if (window.minimized )
         {
-            for (let i: number = 0; i < this._windows.length; i++)
+            for (let i = 0; i < this._windows.length; i++)
             {
                 this._windows[i].minimized = true;
             }

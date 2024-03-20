@@ -1,6 +1,6 @@
 export class Elastic {
-    protected static a: number = 1;
-    protected static p: number = 0.3;
+    protected static a = 1;
+    protected static p = 0.3;
     protected static s: number = p / 4;
     public static easeIn (ratio: number, unused1: number, unused2: number, unused3: number): number
     {

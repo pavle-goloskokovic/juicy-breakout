@@ -1,8 +1,8 @@
 import { GTween } from '../GTween';
 import { ColorTransform } from '../../../../flash/geom/ColorTransform';
 export class ColorTransformPlugin {
-    public static enabled: boolean = true;
-    protected static installed: boolean = false;
+    public static enabled = true;
+    protected static installed = false;
     protected static tweenProperties: any[] = ['redMultiplier', 'greenMultiplier', 'blueMultiplier', 'alphaMultiplier', 'redOffset', 'greenOffset', 'blueOffset', 'alphaOffset', 'tint'];
     public static install (): void
     {

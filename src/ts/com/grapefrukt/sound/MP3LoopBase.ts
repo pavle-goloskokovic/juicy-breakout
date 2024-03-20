@@ -11,18 +11,18 @@ import { Timer } from '../../../flash/utils/Timer';
 export class MP3LoopBase extends EventDispatcher {
     public static ASSET_CLASS: Class;
     protected _out: Sound;
-    protected _play_on_load: boolean = false;
+    protected _play_on_load = false;
     protected _state: number = NOT_LOADED;
-    protected _playing: boolean = false;
-    protected _loops: number = 0;
-    protected _url: string = '';
+    protected _playing = false;
+    protected _loops = 0;
+    protected _url = '';
     protected _out_channel: SoundChannel;
-    protected _bytes_total: number = 0;
-    protected _bytes_loaded: number = 0;
-    protected static NOT_LOADED: number = 0;
-    protected static LOADING: number = 1;
-    protected static LOADED: number = 2;
-    public constructor (url: string, autoLoad: boolean = false, playOnLoad: boolean = false, loops: number = 0)
+    protected _bytes_total = 0;
+    protected _bytes_loaded = 0;
+    protected static NOT_LOADED = 0;
+    protected static LOADING = 1;
+    protected static LOADED = 2;
+    public constructor (url: string, autoLoad = false, playOnLoad = false, loops = 0)
     {
         super();
         this._url = url;

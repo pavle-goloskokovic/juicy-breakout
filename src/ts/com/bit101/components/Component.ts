@@ -9,12 +9,12 @@ import { DropShadowFilter } from '../../../flash/filters/DropShadowFilter';
 [Event(name = 'resize', type = 'flash.events.Event')][Event(name = 'draw', type = 'flash.events.Event')];
 export class Component extends Sprite {
     protected Ronda: Class;
-    protected _width: number = 0;
-    protected _height: number = 0;
-    protected _tag: number = -1;
-    protected _enabled: boolean = true;
-    public static DRAW: string = 'draw';
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    protected _width = 0;
+    protected _height = 0;
+    protected _tag = -1;
+    protected _enabled = true;
+    public static DRAW = 'draw';
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super();
         this.move(xpos, ypos);
@@ -36,7 +36,7 @@ export class Component extends Sprite {
 
     }
 
-    protected getShadow (dist: number, knockout: boolean = false): DropShadowFilter
+    protected getShadow (dist: number, knockout = false): DropShadowFilter
     {
         return new DropShadowFilter(dist, 45, Style.DROPSHADOW, 1, dist, dist, .3, 1, knockout);
     }

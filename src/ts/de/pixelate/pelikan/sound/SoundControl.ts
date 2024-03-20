@@ -6,18 +6,18 @@ import { URLLoader } from '../../../../flash/net/URLLoader';
 import { URLRequest } from '../../../../flash/net/URLRequest';
 import { Dictionary } from '../../../../flash/utils/Dictionary';
 export class SoundControl extends EventDispatcher {
-    public VERSION: string = '1.0.1-grapefrukt';
+    public VERSION = '1.0.1-grapefrukt';
     private _sounds: Dictionary;
     private _groups: any;
     private _xml_config: XML;
     private _xml_config_loader: URLLoader;
-    private _sounds_total: number = 0;
-    private _sounds_loaded: number = 0;
-    private _bytes_total: number = 0;
-    private _bytes_loaded: number = 0;
+    private _sounds_total = 0;
+    private _sounds_loaded = 0;
+    private _bytes_total = 0;
+    private _bytes_loaded = 0;
     private _embed_class: Class;
-    private _basePath: string = '';
-    private _mute: boolean = false;
+    private _basePath = '';
+    private _mute = false;
     public constructor ()
     {
         super();
@@ -97,7 +97,7 @@ export class SoundControl extends EventDispatcher {
 
     private registerGroup (group: XML): void
     {
-        let i: number = 0;
+        let i = 0;
         for (const file of group.file)
         {
             const soundObject: SoundObject = this.registerSound(group.id + '-' + i.toString(), file, group);

@@ -1,5 +1,5 @@
 export class MathUtil {
-    public static wrap (value: number, max: number = 1, min: number = 0): number
+    public static wrap (value: number, max = 1, min = 0): number
     {
         while (value >= max)
         {
@@ -12,7 +12,7 @@ export class MathUtil {
         return value;
     }
 
-    public static clamp (value: number, max: number = 1, min: number = 0): number
+    public static clamp (value: number, max = 1, min = 0): number
     {
         if (value > max )
         {
@@ -25,7 +25,7 @@ export class MathUtil {
         return value;
     }
 
-    public static parseNumber (value: string, nanAsZero: boolean = false): number
+    public static parseNumber (value: string, nanAsZero = false): number
     {
         value = value.replace(',', '.');
         let val: number = parseFloat(value);

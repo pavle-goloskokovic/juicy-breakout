@@ -2,8 +2,8 @@ import { GTween } from '../GTween';
 import { BlurFilter } from '../../../../flash/filters/BlurFilter';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class MotionBlurPlugin implements IGTweenPlugin {
-    public static enabled: boolean = false;
-    public static strength: number = 0.6;
+    public static enabled = false;
+    public static strength = 0.6;
     protected static instance: MotionBlurPlugin;
     public static install (): void
     {

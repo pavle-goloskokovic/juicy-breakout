@@ -1,22 +1,22 @@
 export class Style {
-    public static TEXT_BACKGROUND: number = 0xFFFFFF;
-    public static BACKGROUND: number = 0xCCCCCC;
-    public static BUTTON_FACE: number = 0xFFFFFF;
-    public static BUTTON_DOWN: number = 0xEEEEEE;
-    public static INPUT_TEXT: number = 0x333333;
-    public static LABEL_TEXT: number = 0x666666;
-    public static DROPSHADOW: number = 0x000000;
-    public static PANEL: number = 0xF3F3F3;
-    public static PROGRESS_BAR: number = 0xFFFFFF;
-    public static LIST_DEFAULT: number = 0xFFFFFF;
-    public static LIST_ALTERNATE: number = 0xF3F3F3;
-    public static LIST_SELECTED: number = 0xCCCCCC;
-    public static LIST_ROLLOVER: number = 0XDDDDDD;
-    public static embedFonts: boolean = true;
-    public static fontName: string = 'PF Ronda Seven';
-    public static fontSize: number = 8;
-    public static DARK: string = 'dark';
-    public static LIGHT: string = 'light';
+    public static TEXT_BACKGROUND = 0xFFFFFF;
+    public static BACKGROUND = 0xCCCCCC;
+    public static BUTTON_FACE = 0xFFFFFF;
+    public static BUTTON_DOWN = 0xEEEEEE;
+    public static INPUT_TEXT = 0x333333;
+    public static LABEL_TEXT = 0x666666;
+    public static DROPSHADOW = 0x000000;
+    public static PANEL = 0xF3F3F3;
+    public static PROGRESS_BAR = 0xFFFFFF;
+    public static LIST_DEFAULT = 0xFFFFFF;
+    public static LIST_ALTERNATE = 0xF3F3F3;
+    public static LIST_SELECTED = 0xCCCCCC;
+    public static LIST_ROLLOVER = 0XDDDDDD;
+    public static embedFonts = true;
+    public static fontName = 'PF Ronda Seven';
+    public static fontSize = 8;
+    public static DARK = 'dark';
+    public static LIGHT = 'light';
     public static setStyle (style: string): void
     {
         switch (style)

@@ -7,23 +7,23 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class Knob extends Component {
-    public static VERTICAL: string = 'vertical';
-    public static HORIZONTAL: string = 'horizontal';
-    public static ROTATE: string = 'rotate';
+    public static VERTICAL = 'vertical';
+    public static HORIZONTAL = 'horizontal';
+    public static ROTATE = 'rotate';
     protected _knob: Sprite;
     protected _label: Label;
-    protected _labelText: string = '';
-    protected _max: number = 100;
-    protected _min: number = 0;
+    protected _labelText = '';
+    protected _max = 100;
+    protected _min = 0;
     protected _mode: string = VERTICAL;
-    protected _mouseRange: number = 100;
-    protected _precision: number = 1;
-    protected _radius: number = 20;
+    protected _mouseRange = 100;
+    protected _precision = 1;
+    protected _radius = 20;
     protected _startX: number;
     protected _startY: number;
-    protected _value: number = 0;
+    protected _value = 0;
     protected _valueLabel: Label;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -104,7 +104,7 @@ export class Knob extends Component {
             {
                 val += '.';
             }
-            for (let i: number = 0; i < this._precision; i++)
+            for (let i = 0; i < this._precision; i++)
             {
                 val += '0';
             }

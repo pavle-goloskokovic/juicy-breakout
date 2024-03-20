@@ -3,8 +3,8 @@ import { GTween } from '../../../../gskinner/motion/GTween';
 import { Sprite } from '../../../../../flash/display/Sprite';
 export class Particle extends Sprite {
     protected _gtween: GTween;
-    protected _scale: number = 1;
-    public constructor (lifespan: number = 2)
+    protected _scale = 1;
+    public constructor (lifespan = 2)
     {
         super();
         this._gtween = new GTween(this, lifespan);
@@ -17,7 +17,7 @@ export class Particle extends Sprite {
         this._gtween.position = -this._gtween.delay;
     }
 
-    public init (xPos: number, yPos: number, vectorX: number = 0, vectorY: number = 0): void
+    public init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
         this.x = xPos;
         this.y = yPos;

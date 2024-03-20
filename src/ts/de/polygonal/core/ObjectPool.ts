@@ -3,12 +3,12 @@ export class ObjectPool {
     private _initSize: number;
     private _currSize: number;
     private _usageCount: number;
-    private _grow: boolean = true;
+    private _grow = true;
     private _head: ObjNode;
     private _tail: ObjNode;
     private _emptyNode: ObjNode;
     private _allocNode: ObjNode;
-    public constructor (grow: boolean = false)
+    public constructor (grow = false)
     {
         this._grow = grow;
     }
@@ -52,7 +52,7 @@ export class ObjectPool {
                 const n: ObjNode = this._tail;
                 let t: ObjNode = this._tail;
                 let node: ObjNode;
-                for (let i: number = 0; i < this._initSize; i++)
+                for (let i = 0; i < this._initSize; i++)
                 {
                     node = new ObjNode();
                     node.data = new this._obj();
@@ -97,7 +97,7 @@ export class ObjectPool {
         this._head = (this._tail = new ObjNode());
         this._head.data = new this._obj();
         let n: ObjNode;
-        for (let i: number = 1; i < this._initSize; i++)
+        for (let i = 1; i < this._initSize; i++)
         {
             n = new ObjNode();
             n.data = new this._obj();

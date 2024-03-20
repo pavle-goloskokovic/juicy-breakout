@@ -35,7 +35,7 @@ export class SliceEffect extends Sprite {
         this.y = source.y;
         const points: Array<Point> = [new Point(0, 0), new Point(bmp.width, 0), new Point(bmp.width, bmp.height), new Point(0, bmp.height)];
         const offset: Point = new Point(bounds.topLeft.x - source.x, bounds.topLeft.y - source.y);
-        for (let i: number = 0; i < points.length; i++)
+        for (let i = 0; i < points.length; i++)
         {
             points[i] = points[i].add(offset);
         }
@@ -97,7 +97,7 @@ class LineSliceObject extends Shape {
     private _texture: BitmapData;
     private _textureOffset: Point;
     public velocity: Point;
-    public velocityR: number = 0;
+    public velocityR = 0;
     public constructor (points: Array<Point>, texture: BitmapData, textureOffset: Point)
     {
         super();
@@ -113,7 +113,7 @@ class LineSliceObject extends Shape {
         this.graphics.beginBitmapFill(this._texture, new Matrix(1, 0, 0, 1, this._textureOffset.x, this._textureOffset.y), false, true);
         this.graphics.moveTo(this._points[0].x, this._points[0].y);
         this._length = this._points.length;
-        for (let i: number = 1; i < this._length; i++)
+        for (let i = 1; i < this._length; i++)
         {
             this.graphics.lineTo(this._points[i].x, this._points[i].y);
         }
@@ -125,8 +125,8 @@ class LineSliceObject extends Shape {
         const _pt1: Point = this.globalToLocal(this.parent.localToGlobal(point1));
         const _pt2: Point = this.globalToLocal(this.parent.localToGlobal(point2));
         const newPoints: Array<Array<Point>> = [] < Array < Point >> [[], []];
-        let _numCross: number = 0;
-        for (let i: number = 0; i < this._length; i++)
+        let _numCross = 0;
+        for (let i = 0; i < this._length; i++)
         {
             const _pt3: Point = this._points[i];
             const _pt4: Point = this._points.length > i + 1 ? this._points[i + 1] : this._points[0];

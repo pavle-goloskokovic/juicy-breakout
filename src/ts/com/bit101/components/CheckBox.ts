@@ -8,9 +8,9 @@ export class CheckBox extends Component {
     protected _back: Sprite;
     protected _button: Sprite;
     protected _label: Label;
-    protected _labelText: string = '';
-    protected _selected: boolean = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    protected _labelText = '';
+    protected _selected = false;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);

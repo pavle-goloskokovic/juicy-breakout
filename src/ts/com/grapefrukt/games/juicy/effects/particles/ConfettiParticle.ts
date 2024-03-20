@@ -12,7 +12,7 @@ export class ConfettiParticle extends Particle {
     private _vectorX: number;
     private _vectorY: number;
     private _age: number;
-    public constructor (lifespan: number = 2)
+    public constructor (lifespan = 2)
     {
         super(lifespan);
         this._gfx = new ConfettiParticleGfx();
@@ -23,7 +23,7 @@ export class ConfettiParticle extends Particle {
         this._gfx.transform.colorTransform = new ColorTransform(colors[0] / 255, colors[1] / 255, colors[2] / 255);
     }
 
-    public init (xPos: number, yPos: number, vectorX: number = 0, vectorY: number = 0): void
+    public init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
         this._vectorY = vectorY;
         this._vectorX = vectorX;

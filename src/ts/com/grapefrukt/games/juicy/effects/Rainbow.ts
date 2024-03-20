@@ -28,7 +28,7 @@ export class Rainbow extends Shape {
         this._segments.push(seg);
     }
 
-    public redrawSegments (offsetX: number = 0, offsetY: number = 0): void
+    public redrawSegments (offsetX = 0, offsetY = 0): void
     {
         this.graphics.clear();
         if (!Settings.EFFECT_BALL_TRAIL )
@@ -37,16 +37,16 @@ export class Rainbow extends Shape {
         }
         let s1: Segment;
         let s2: Segment;
-        let vertIndex: number = 0;
+        let vertIndex = 0;
         let offset: number;
         let ang: number;
-        let sin: number = 0;
-        let cos: number = 0;
+        let sin = 0;
+        let cos = 0;
         if (this._verts.length != (this._segments.length - 1) * 4 )
         {
             this._verts.length = 0;
         }
-        for (let j: number = 0; j < this._segments.length; ++j)
+        for (let j = 0; j < this._segments.length; ++j)
         {
             s1 = this._segments[j];
             if (s2 )
@@ -54,7 +54,7 @@ export class Rainbow extends Shape {
                 ang = Math.atan2(s1.y - s2.y, s1.x - s2.x) + Math.PI / 2;
                 sin = Math.sin(ang);
                 cos = Math.cos(ang);
-                for (let i: number = 0; i < 2; ++i)
+                for (let i = 0; i < 2; ++i)
                 {
                     offset = (-.5 + i / 1) * 9.0;
                     if (Settings.EFFECT_BALL_TRAIL_SCALE )
@@ -69,7 +69,7 @@ export class Rainbow extends Shape {
         }
         if (this._verts.length >= 8 )
         {
-            for (let k: number = 0; k < this._verts.length / 2; k++)
+            for (let k = 0; k < this._verts.length / 2; k++)
             {
                 this._indices[k * 6 + 0] = k * 2 + 0;
                 this._indices[k * 6 + 1] = k * 2 + 1;
@@ -94,6 +94,6 @@ export class Rainbow extends Shape {
     }
 }
 class Segment {
-    public x: number = 0.0;
-    public y: number = 0.0;
+    public x = 0.0;
+    public y = 0.0;
 }

@@ -1,7 +1,7 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class SmartRotationPlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: SmartRotationPlugin;
     protected static tweenProperties: any[] = ['rotation', 'rotationX', 'rotationY', 'rotationZ'];
     public static install (properties: any[] = null): void

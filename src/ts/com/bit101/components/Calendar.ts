@@ -14,7 +14,7 @@ export class Calendar extends Panel {
     protected _monthNames: any[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     protected _selection: Shape;
     protected _year: number;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -30,9 +30,9 @@ export class Calendar extends Panel {
     protected addChildren (): void
     {
         super.addChildren();
-        for (let i: number = 0; i < 6; i++)
+        for (let i = 0; i < 6; i++)
         {
-            for (let j: number = 0; j < 7; j++)
+            for (let j = 0; j < 7; j++)
             {
                 const btn: PushButton = new PushButton(this.content, j * 20, 20 + i * 20);
                 btn.setSize(19, 19);
@@ -99,7 +99,7 @@ export class Calendar extends Panel {
         this._day = date.date;
         const startDay: number = new Date(this._year, this._month, 1).day;
         const endDay: number = this.getEndDay(this._month, this._year);
-        for (let i: number = 0; i < 42; i++)
+        for (let i = 0; i < 42; i++)
         {
             this._dayButtons[i].visible = false;
         }

@@ -1,5 +1,5 @@
 export class Quadratic {
-    public static easeIn (ratio: number, unused1: number = 0, unused2: number = 0, unused3: number = 0): number
+    public static easeIn (ratio: number, unused1 = 0, unused2 = 0, unused3 = 0): number
     {
         return ratio * ratio;
     }

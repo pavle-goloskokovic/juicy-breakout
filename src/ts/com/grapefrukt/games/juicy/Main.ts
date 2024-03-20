@@ -131,11 +131,11 @@ export class Main extends Sprite {
         this._balls.clear();
         this._lines.clear();
         this._particles_impact.clear();
-        for (let j: number = 0; j < Settings.NUM_BALLS; j++)
+        for (let j = 0; j < Settings.NUM_BALLS; j++)
         {
             this.addBall();
         }
-        for (let i: number = 0; i < 80; i++)
+        for (let i = 0; i < 80; i++)
         {
             const block: Block = new Block(120 + i % 10 * (Settings.BLOCK_W + 10), 30 + 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
             this._blocks.add(block);

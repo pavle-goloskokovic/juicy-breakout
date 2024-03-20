@@ -8,11 +8,11 @@ export class UISlider extends Component {
     protected _label: Label;
     protected _valueLabel: Label;
     protected _slider: Slider;
-    protected _precision: number = 1;
+    protected _precision = 1;
     protected _sliderClass: Class;
     protected _labelText: string;
-    protected _tick: number = 1;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    protected _tick = 1;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -46,7 +46,7 @@ export class UISlider extends Component {
             {
                 val += '.';
             }
-            for (let i: number = 0; i < this._precision; i++)
+            for (let i = 0; i < this._precision; i++)
             {
                 val += '0';
             }

@@ -21,7 +21,7 @@ export class Paddle extends Block {
         this._happyExtraScale = 10;
     }
 
-    public update (timeDelta: number = 1): void
+    public update (timeDelta = 1): void
     {
         super.update(timeDelta);
         this._face.visible = Settings.EFFECT_PADDLE_FACE;
@@ -54,7 +54,7 @@ export class Paddle extends Block {
 
     public smile (how_much: number): void
     {
-        let t: number = 0;
+        let t = 0;
         if (how_much < 0.4 )
         {
             t = -1 + how_much / 0.4;

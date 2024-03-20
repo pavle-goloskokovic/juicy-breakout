@@ -2,7 +2,7 @@ import { UISlider } from './UISlider';
 import { VSlider } from './VSlider';
 import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjectContainer';
 export class VUISlider extends UISlider {
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._sliderClass = VSlider;
         super(parent, xpos, ypos, label, defaultHandler);

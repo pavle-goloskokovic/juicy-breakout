@@ -7,11 +7,11 @@ export class DisplayListTraverser {
         DisplayListTraverser.traverse(root);
     }
 
-    private static traverse (node: DisplayObjectContainer, level: number = 0, childCount: number = 0): number
+    private static traverse (node: DisplayObjectContainer, level = 0, childCount = 0): number
     {
         let displayObject: DisplayObject;
         let displayObjectContainer: DisplayObjectContainer;
-        for (let i: number = 0; i < node.numChildren; i++)
+        for (let i = 0; i < node.numChildren; i++)
         {
             displayObject = node.getChildAt(i) as DisplayObject;
             displayObjectContainer = node.getChildAt(i) as DisplayObjectContainer;

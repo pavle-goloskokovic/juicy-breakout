@@ -28,7 +28,7 @@ export class ColorConverter {
         const cmax: number = Math.max(r, g, b);
         const cmin: number = Math.min(r, g, b);
         const brightness: number = cmax / 255.0;
-        let hue: number = 0;
+        let hue = 0;
         const saturation: number = cmax != 0 ? (cmax - cmin) / cmax : 0;
         if (saturation != 0 )
         {
@@ -58,9 +58,9 @@ export class ColorConverter {
 
     public static HSBtoUINT (hue: number, saturation: number, brightness: number): number
     {
-        let r: number = 0;
-        let g: number = 0;
-        let b: number = 0;
+        let r = 0;
+        let g = 0;
+        let b = 0;
         if (saturation == 0 )
         {
             r = (g = (b = brightness * 255.0 + 0.5));

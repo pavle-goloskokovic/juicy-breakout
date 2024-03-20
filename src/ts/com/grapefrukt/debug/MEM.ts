@@ -10,7 +10,7 @@ import { TimerEvent } from '../../../flash/events/TimerEvent';
 export class MEM extends Sprite {
     private mem_text: TextField;
     private update_timer: Timer;
-    public constructor (color: number = 0xffffff)
+    public constructor (color = 0xffffff)
     {
         super();
         const textformat: TextFormat = new TextFormat('Arial');

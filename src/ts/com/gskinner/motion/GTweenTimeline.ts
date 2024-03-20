@@ -11,7 +11,7 @@ export class GTweenTimeline extends GTween {
     protected labels: any;
     protected tweens: any[];
     protected tweenStartPositions: any[];
-    public constructor (target: any = null, duration: number = 1, values: any = null, props: any = null, pluginData: any = null, tweens: any[] = null)
+    public constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null, tweens: any[] = null)
     {
         this.tweens = [];
         this.tweenStartPositions = [];
@@ -71,7 +71,7 @@ export class GTweenTimeline extends GTween {
         }
         tween.autoPlay = false;
         tween.paused = true;
-        let index: number = -1;
+        let index = -1;
         while (++index < this.tweens.length && this.tweenStartPositions[index] < position)
         {
 
@@ -87,7 +87,7 @@ export class GTweenTimeline extends GTween {
         {
             return;
         }
-        for (let i: number = 0; i < tweens.length; i += 2)
+        for (let i = 0; i < tweens.length; i += 2)
         {
             this.addTween(tweens[i], tweens[i + 1] as GTween);
         }
@@ -147,7 +147,7 @@ export class GTweenTimeline extends GTween {
             return;
         }
         const l: number = this.callbacks.length;
-        for (let i: number = 0; i < l; i++)
+        for (let i = 0; i < l; i++)
         {
             if (position == this.callbacks[i].position )
             {
@@ -185,12 +185,12 @@ export class GTweenTimeline extends GTween {
 
     public calculateDuration (): void
     {
-        let d: number = 0;
+        let d = 0;
         if (this.callbacks.length > 0 )
         {
             d = this.callbacks[this.callbacks.length - 1].position;
         }
-        for (let i: number = 0; i < this.tweens.length; i++)
+        for (let i = 0; i < this.tweens.length; i++)
         {
             if (this.tweens[i].duration + this.tweenStartPositions[i] > d )
             {
@@ -221,13 +221,13 @@ export class GTweenTimeline extends GTween {
         }
     }
 
-    protected checkCallbackRange (startPos: number, endPos: number, includeStart: boolean = false): void
+    protected checkCallbackRange (startPos: number, endPos: number, includeStart = false): void
     {
         let sPos: number = startPos;
         let ePos: number = endPos;
-        let i: number = -1;
+        let i = -1;
         let j: number = this.callbacks.length;
-        let k: number = 1;
+        let k = 1;
         if (startPos > endPos )
         {
             sPos = endPos;

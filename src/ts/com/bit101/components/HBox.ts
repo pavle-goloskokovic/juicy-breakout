@@ -4,13 +4,13 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 import { Event } from '../../../flash/events/Event';
 [Event(name = 'resize', type = 'flash.events.Event')];
 export class HBox extends Component {
-    protected _spacing: number = 5;
+    protected _spacing = 5;
     private _alignment: string = NONE;
-    public static TOP: string = 'top';
-    public static BOTTOM: string = 'bottom';
-    public static MIDDLE: string = 'middle';
-    public static NONE: string = 'none';
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    public static TOP = 'top';
+    public static BOTTOM = 'bottom';
+    public static MIDDLE = 'middle';
+    public static NONE = 'none';
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -56,7 +56,7 @@ export class HBox extends Component {
     {
         if (this._alignment != HBox.NONE )
         {
-            for (let i: number = 0; i < this.numChildren; i++)
+            for (let i = 0; i < this.numChildren; i++)
             {
                 const child: DisplayObject = this.getChildAt(i);
                 if (this._alignment == HBox.TOP )
@@ -79,8 +79,8 @@ export class HBox extends Component {
     {
         this._width = 0;
         this._height = 0;
-        let xpos: number = 0;
-        for (let i: number = 0; i < this.numChildren; i++)
+        let xpos = 0;
+        for (let i = 0; i < this.numChildren; i++)
         {
             const child: DisplayObject = this.getChildAt(i);
             child.x = xpos;

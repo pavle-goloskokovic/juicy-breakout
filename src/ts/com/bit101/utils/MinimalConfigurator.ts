@@ -44,7 +44,7 @@ export class MinimalConfigurator extends EventDispatcher {
 
     public parseXML (xml: XML): void
     {
-        for (let i: number = 0; i < xml.children().length(); i++)
+        for (let i = 0; i < xml.children().length(); i++)
         {
             const comp: XML = xml.children()[i];
             const compInst: Component = this.parseComp(comp);
@@ -106,7 +106,7 @@ export class MinimalConfigurator extends EventDispatcher {
             {
                 compInst[prop] = specialProps[prop];
             }
-            for (let j: number = 0; j < xml.children().length(); j++)
+            for (let j = 0; j < xml.children().length(); j++)
             {
                 const child: Component = this.parseComp(xml.children()[j]);
                 if (child != null )

@@ -10,28 +10,28 @@ import { Rectangle } from '../../../flash/geom/Rectangle';
 export class RangeSlider extends Component {
     protected _back: Sprite;
     protected _highLabel: Label;
-    protected _highValue: number = 100;
+    protected _highValue = 100;
     protected _labelMode: string = ALWAYS;
     protected _labelPosition: string;
-    protected _labelPrecision: number = 0;
+    protected _labelPrecision = 0;
     protected _lowLabel: Label;
-    protected _lowValue: number = 0;
-    protected _maximum: number = 100;
+    protected _lowValue = 0;
+    protected _maximum = 100;
     protected _maxHandle: Sprite;
-    protected _minimum: number = 0;
+    protected _minimum = 0;
     protected _minHandle: Sprite;
     protected _orientation: string = VERTICAL;
-    protected _tick: number = 1;
-    public static ALWAYS: string = 'always';
-    public static BOTTOM: string = 'bottom';
-    public static HORIZONTAL: string = 'horizontal';
-    public static LEFT: string = 'left';
-    public static MOVE: string = 'move';
-    public static NEVER: string = 'never';
-    public static RIGHT: string = 'right';
-    public static TOP: string = 'top';
-    public static VERTICAL: string = 'vertical';
-    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null)
+    protected _tick = 1;
+    public static ALWAYS = 'always';
+    public static BOTTOM = 'bottom';
+    public static HORIZONTAL = 'horizontal';
+    public static LEFT = 'left';
+    public static MOVE = 'move';
+    public static NEVER = 'never';
+    public static RIGHT = 'right';
+    public static TOP = 'top';
+    public static VERTICAL = 'vertical';
+    public constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);

@@ -7,18 +7,18 @@ import { Event } from '../../../flash/events/Event';
 import { MouseEvent } from '../../../flash/events/MouseEvent';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class RotarySelector extends Component {
-    public static ALPHABETIC: string = 'alphabetic';
-    public static NUMERIC: string = 'numeric';
-    public static NONE: string = 'none';
-    public static ROMAN: string = 'roman';
+    public static ALPHABETIC = 'alphabetic';
+    public static NUMERIC = 'numeric';
+    public static NONE = 'none';
+    public static ROMAN = 'roman';
     protected _label: Label;
-    protected _labelText: string = '';
+    protected _labelText = '';
     protected _knob: Sprite;
-    protected _numChoices: number = 2;
-    protected _choice: number = 0;
+    protected _numChoices = 2;
+    protected _choice = 0;
     protected _labels: Sprite;
     protected _labelMode: string = ALPHABETIC;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         this._labelText = label;
         super(parent, xpos, ypos);
@@ -100,7 +100,7 @@ export class RotarySelector extends Component {
         const start: number = -Math.PI / 2 - arc * (this._numChoices - 1) / 2;
         this.graphics.clear();
         this.graphics.lineStyle(4, Style.BACKGROUND, .5);
-        for (let i: number = 0; i < this._numChoices; i++)
+        for (let i = 0; i < this._numChoices; i++)
         {
             const angle: number = start + arc * i;
             const sin: number = Math.sin(angle);

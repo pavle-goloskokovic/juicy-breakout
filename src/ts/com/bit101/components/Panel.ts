@@ -6,13 +6,13 @@ import { Sprite } from '../../../flash/display/Sprite';
 export class Panel extends Component {
     protected _mask: Sprite;
     protected _background: Sprite;
-    protected _color: number = -1;
-    protected _shadow: boolean = true;
-    protected _gridSize: number = 10;
-    protected _showGrid: boolean = false;
-    protected _gridColor: number = 0xd0d0d0;
+    protected _color = -1;
+    protected _shadow = true;
+    protected _gridSize = 10;
+    protected _showGrid = false;
+    protected _gridColor = 0xd0d0d0;
     public content: Sprite;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -77,7 +77,7 @@ export class Panel extends Component {
             return;
         }
         this._background.graphics.lineStyle(0, this._gridColor);
-        for (let i: number = 0; i < this._width; i += this._gridSize)
+        for (let i = 0; i < this._width; i += this._gridSize)
         {
             this._background.graphics.moveTo(i, 0);
             this._background.graphics.lineTo(i, this._height);

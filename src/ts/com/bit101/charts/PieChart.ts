@@ -4,9 +4,9 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 import { Sprite } from '../../../flash/display/Sprite';
 export class PieChart extends Chart {
     protected _sprite: Sprite;
-    protected _beginningAngle: number = 0;
+    protected _beginningAngle = 0;
     protected _colors: any[] = [0xff9999, 0xffff99, 0x99ff99, 0x99ffff, 0x9999ff, 0xff99ff, 0xffcccc, 0xffffcc, 0xccffcc, 0xccffff, 0xccccff, 0xffccff, 0xff6666, 0xffff66, 0x99ff66, 0x66ffff, 0x6666ff, 0xff66ff, 0xffffff];
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, data: any[] = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any[] = null)
     {
         super(parent, xpos, ypos, data);
     }
@@ -37,7 +37,7 @@ export class PieChart extends Chart {
         }
         const total: number = this.getDataTotal();
         let startAngle: number = this._beginningAngle * Math.PI / 180;
-        for (let i: number = 0; i < this._data.length; i++)
+        for (let i = 0; i < this._data.length; i++)
         {
             const percent: number = this.getValueForData(i) / total;
             const endAngle: number = startAngle + Math.PI * 2 * percent;
@@ -109,8 +109,8 @@ export class PieChart extends Chart {
 
     protected getDataTotal (): number
     {
-        let total: number = 0;
-        for (let i: number = 0; i < this._data.length; i++)
+        let total = 0;
+        for (let i = 0; i < this._data.length; i++)
         {
             total += this.getValueForData(i);
         }

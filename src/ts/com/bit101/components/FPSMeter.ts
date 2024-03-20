@@ -7,9 +7,9 @@ export class FPSMeter extends Component {
     protected _label: Label;
     protected _startTime: number;
     protected _frames: number;
-    protected _prefix: string = '';
-    protected _fps: number = 0;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, prefix: string = 'FPS:')
+    protected _prefix = '';
+    protected _fps = 0;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, prefix = 'FPS:')
     {
         super(parent, xpos, ypos);
         this._prefix = prefix;

@@ -1,7 +1,7 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class SnappingPlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: SnappingPlugin;
     protected static tweenProperties: any[] = ['x', 'y'];
     public static install (properties: any[] = null): void

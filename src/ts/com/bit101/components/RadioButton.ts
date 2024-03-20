@@ -7,12 +7,12 @@ import { MouseEvent } from '../../../flash/events/MouseEvent';
 export class RadioButton extends Component {
     protected _back: Sprite;
     protected _button: Sprite;
-    protected _selected: boolean = false;
+    protected _selected = false;
     protected _label: Label;
-    protected _labelText: string = '';
-    protected _groupName: string = 'defaultRadioGroup';
+    protected _labelText = '';
+    protected _groupName = 'defaultRadioGroup';
     protected static buttons: any[];
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, label: string = '', checked: boolean = false, defaultHandler: Function = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', checked = false, defaultHandler: Function = null)
     {
         RadioButton.addButton(this);
         this._selected = checked;
@@ -35,7 +35,7 @@ export class RadioButton extends Component {
 
     protected static clear (rb: RadioButton): void
     {
-        for (let i: number = 0; i < RadioButton.buttons.length; i++)
+        for (let i = 0; i < RadioButton.buttons.length; i++)
         {
             if (RadioButton.buttons[i] != rb && RadioButton.buttons[i].groupName == rb.groupName )
             {

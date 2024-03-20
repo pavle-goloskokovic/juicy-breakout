@@ -9,18 +9,18 @@ import { Point } from '../../../flash/geom/Point';
 import { Rectangle } from '../../../flash/geom/Rectangle';
 [Event(name = 'select', type = 'flash.events.Event')];
 export class ComboBox extends Component {
-    public static TOP: string = 'top';
-    public static BOTTOM: string = 'bottom';
-    protected _defaultLabel: string = '';
+    public static TOP = 'top';
+    public static BOTTOM = 'bottom';
+    protected _defaultLabel = '';
     protected _dropDownButton: PushButton;
     protected _items: any[];
     protected _labelButton: PushButton;
     protected _list: List;
-    protected _numVisibleItems: number = 6;
-    protected _open: boolean = false;
+    protected _numVisibleItems = 6;
+    protected _open = false;
     protected _openPosition: string = BOTTOM;
     protected _stage: Stage;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultLabel: string = '', items: any[] = null)
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultLabel = '', items: any[] = null)
     {
         this._defaultLabel = defaultLabel;
         this._items = items;

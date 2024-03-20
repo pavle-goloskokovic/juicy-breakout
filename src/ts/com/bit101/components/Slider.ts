@@ -9,15 +9,15 @@ import { Rectangle } from '../../../flash/geom/Rectangle';
 export class Slider extends Component {
     protected _handle: Sprite;
     protected _back: Sprite;
-    protected _backClick: boolean = true;
-    protected _value: number = 0;
-    protected _max: number = 100;
-    protected _min: number = 0;
+    protected _backClick = true;
+    protected _value = 0;
+    protected _max = 100;
+    protected _min = 0;
     protected _orientation: string;
-    protected _tick: number = 0.01;
-    public static HORIZONTAL: string = 'horizontal';
-    public static VERTICAL: string = 'vertical';
-    public constructor (orientation: string = Slider.HORIZONTAL, parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, defaultHandler: Function = null)
+    protected _tick = 0.01;
+    public static HORIZONTAL = 'horizontal';
+    public static VERTICAL = 'vertical';
+    public constructor (orientation: string = Slider.HORIZONTAL, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);

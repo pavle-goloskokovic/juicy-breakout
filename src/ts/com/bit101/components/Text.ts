@@ -9,13 +9,13 @@ import { TextFormat } from '../../../flash/text/TextFormat';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class Text extends Component {
     protected _tf: TextField;
-    protected _text: string = '';
-    protected _editable: boolean = true;
+    protected _text = '';
+    protected _editable = true;
     protected _panel: Panel;
-    protected _selectable: boolean = true;
-    protected _html: boolean = false;
+    protected _selectable = true;
+    protected _html = false;
     protected _format: TextFormat;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, text: string = '')
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, text = '')
     {
         this.text = text;
         super(parent, xpos, ypos);

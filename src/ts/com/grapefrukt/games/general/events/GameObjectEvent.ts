@@ -2,8 +2,8 @@ import type { GameObjectCollection } from '../collections/GameObjectCollection';
 import type { GameObject } from '../gameobjects/GameObject';
 import { Event } from '../../../../../flash/events/Event';
 export class GameObjectEvent extends Event {
-    public static REMOVE: string = 'gameobjectevent_remove';
-    public static DETACH: string = 'gameobjectevent_detach';
+    public static REMOVE = 'gameobjectevent_remove';
+    public static DETACH = 'gameobjectevent_detach';
     private _collection: GameObjectCollection;
     private _game_object: GameObject;
     public constructor (type: string, gameObject: GameObject, collection: GameObjectCollection)

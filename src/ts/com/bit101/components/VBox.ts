@@ -4,13 +4,13 @@ import type { DisplayObjectContainer } from '../../../flash/display/DisplayObjec
 import { Event } from '../../../flash/events/Event';
 [Event(name = 'resize', type = 'flash.events.Event')];
 export class VBox extends Component {
-    protected _spacing: number = 5;
+    protected _spacing = 5;
     private _alignment: string = NONE;
-    public static LEFT: string = 'left';
-    public static RIGHT: string = 'right';
-    public static CENTER: string = 'center';
-    public static NONE: string = 'none';
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0)
+    public static LEFT = 'left';
+    public static RIGHT = 'right';
+    public static CENTER = 'center';
+    public static NONE = 'none';
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);
     }
@@ -56,7 +56,7 @@ export class VBox extends Component {
     {
         if (this._alignment != VBox.NONE )
         {
-            for (let i: number = 0; i < this.numChildren; i++)
+            for (let i = 0; i < this.numChildren; i++)
             {
                 const child: DisplayObject = this.getChildAt(i);
                 if (this._alignment == VBox.LEFT )
@@ -79,8 +79,8 @@ export class VBox extends Component {
     {
         this._width = 0;
         this._height = 0;
-        let ypos: number = 0;
-        for (let i: number = 0; i < this.numChildren; i++)
+        let ypos = 0;
+        for (let i = 0; i < this.numChildren; i++)
         {
             const child: DisplayObject = this.getChildAt(i);
             child.y = ypos;

@@ -5,12 +5,12 @@ import { MouseEvent } from '../../../flash/events/MouseEvent';
 export class ListItem extends Component {
     protected _data: any;
     protected _label: Label;
-    protected _defaultColor: number = 0xffffff;
-    protected _selectedColor: number = 0xdddddd;
-    protected _rolloverColor: number = 0xeeeeee;
+    protected _defaultColor = 0xffffff;
+    protected _selectedColor = 0xdddddd;
+    protected _rolloverColor = 0xeeeeee;
     protected _selected: boolean;
-    protected _mouseOver: boolean = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, data: any = null)
+    protected _mouseOver = false;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, data: any = null)
     {
         this._data = data;
         super(parent, xpos, ypos);

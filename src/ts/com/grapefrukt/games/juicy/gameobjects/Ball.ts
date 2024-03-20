@@ -11,7 +11,7 @@ import { Shape } from '../../../../../flash/display/Shape';
 import { ColorTransform } from '../../../../../flash/geom/ColorTransform';
 import { Point } from '../../../../../flash/geom/Point';
 export class Ball extends GameObject {
-    private static SIZE: number = 15;
+    private static SIZE = 15;
     private _trail: Rainbow;
     private _gfx: Shape;
     private _ball_shakiness: number;
@@ -22,7 +22,7 @@ export class Ball extends GameObject {
     private _tween_brightness: GTween;
     public exX: number;
     public exY: number;
-    private _trailCooldown: number = .5;
+    private _trailCooldown = .5;
     public constructor (x: number, y: number)
     {
         super();
@@ -49,7 +49,7 @@ export class Ball extends GameObject {
         this._gfx.graphics.drawRect(-Ball.SIZE / 2, -Ball.SIZE / 2, Ball.SIZE, Ball.SIZE);
     }
 
-    public update (timeDelta: number = 1): void
+    public update (timeDelta = 1): void
     {
         this.exX = this.x;
         this.exY = this.y;

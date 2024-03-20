@@ -17,8 +17,8 @@ import { Matrix } from '../../../flash/geom/Matrix';
 import { Point } from '../../../flash/geom/Point';
 [Event(name = 'change', type = 'flash.events.Event')];
 export class ColorChooser extends Component {
-    public static TOP: string = 'top';
-    public static BOTTOM: string = 'bottom';
+    public static TOP = 'top';
+    public static BOTTOM = 'bottom';
     protected _colors: BitmapData;
     protected _colorsContainer: Sprite;
     protected _defaultModelColors: any[] = [0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF, 0xFF0000, 0xFFFFFF, 0x000000];
@@ -29,9 +29,9 @@ export class ColorChooser extends Component {
     protected _stage: Stage;
     protected _swatch: Sprite;
     protected _tmpColorChoice: number = _value;
-    protected _usePopup: boolean = false;
-    protected _value: number = 0xff0000;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, value: number = 0xff0000, defaultHandler: Function = null)
+    protected _usePopup = false;
+    protected _value = 0xff0000;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, value = 0xff0000, defaultHandler: Function = null)
     {
         this._oldColorChoice = (this._tmpColorChoice = (this._value = value));
         super(parent, xpos, ypos);
@@ -262,15 +262,15 @@ export class ColorChooser extends Component {
 
     protected getDefaultModel (): Sprite
     {
-        const w: number = 100;
-        const h: number = 100;
+        const w = 100;
+        const h = 100;
         const bmd: BitmapData = new BitmapData(w, h);
         const g1: Sprite = this.getGradientSprite(w, h, this._defaultModelColors);
         bmd.draw(g1);
         const blendmodes: any[] = [BlendMode.MULTIPLY, BlendMode.ADD];
         const nb: number = blendmodes.length;
         const g2: Sprite = this.getGradientSprite(h / nb, w, [0xFFFFFF, 0x000000]);
-        for (let i: number = 0; i < nb; i++)
+        for (let i = 0; i < nb; i++)
         {
             const blendmode: string = blendmodes[i];
             const m: Matrix = new Matrix();
@@ -293,7 +293,7 @@ export class ColorChooser extends Component {
         const gr: any[] = [];
         const gm: Matrix = new Matrix();
         gm.createGradientBox(w, h, 0, 0, 0);
-        for (let i: number = 0; i < gn; i++)
+        for (let i = 0; i < gn; i++)
         {
             ga.push(1);
             gr.push(0x00 + 0xFF / (gn - 1) * i);

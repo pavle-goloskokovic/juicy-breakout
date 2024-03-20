@@ -1,7 +1,7 @@
 import { GTween } from '../GTween';
 import type { IGTweenPlugin } from './IGTweenPlugin';
 export class AutoHidePlugin implements IGTweenPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: AutoHidePlugin;
     protected static tweenProperties: any[] = ['alpha'];
     public static install (): void

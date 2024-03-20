@@ -6,16 +6,16 @@ import { Point } from '../../../../../flash/geom/Point';
 import { Rectangle } from '../../../../../flash/geom/Rectangle';
 [Event(name = 'gameobjectevent_detach', type = 'com.grapefrukt.games.general.events.GameObjectEvent')];
 export class GameObject extends Sprite {
-    public velocityX: number = 0;
-    public velocityY: number = 0;
-    protected _flagged_for_removal: boolean = false;
-    protected _auto_remove: boolean = true;
+    public velocityX = 0;
+    public velocityY = 0;
+    protected _flagged_for_removal = false;
+    protected _auto_remove = true;
     public constructor ()
     {
         super();
     }
 
-    public update (timeDelta: number = 1): void
+    public update (timeDelta = 1): void
     {
         this.x += this.velocityX * timeDelta;
         this.y += this.velocityY * timeDelta;

@@ -16,7 +16,7 @@ export class DisplayObject extends EventDispatcher {
 
     }
 
-    public hitTestPoint (x: number, y: number, shapeFlag: boolean = false): boolean
+    public hitTestPoint (x: number, y: number, shapeFlag = false): boolean
     {
 
     }

@@ -5,7 +5,7 @@ import { Sprite } from '../../../../../flash/display/Sprite';
 export class ParticlePool extends Sprite {
     private _particleclass: Class;
     private _pool: ObjectPool;
-    public constructor (particleClass: Class, size: number = 20)
+    public constructor (particleClass: Class, size = 20)
     {
         super();
         this._particleclass = particleClass;

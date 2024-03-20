@@ -2,7 +2,7 @@ import { GTween } from '../GTween';
 import { IGTweenPlugin } from './IGTweenPlugin';
 import type { Matrix } from '../../../../flash/geom/Matrix';
 export class MatrixPlugin {
-    public static enabled: boolean = true;
+    public static enabled = true;
     protected static instance: MatrixPlugin;
     protected static tweenProperties: any[] = ['a', 'b', 'c', 'd', 'tx', 'ty'];
     public static install (): void

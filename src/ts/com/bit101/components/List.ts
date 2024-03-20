@@ -11,16 +11,16 @@ export class List extends Component {
     protected _items: any[];
     protected _itemHolder: Sprite;
     protected _panel: Panel;
-    protected _listItemHeight: number = 20;
+    protected _listItemHeight = 20;
     protected _listItemClass: Class = ListItem;
     protected _scrollbar: VScrollBar;
-    protected _selectedIndex: number = -1;
+    protected _selectedIndex = -1;
     protected _defaultColor: number = Style.LIST_DEFAULT;
     protected _alternateColor: number = Style.LIST_ALTERNATE;
     protected _selectedColor: number = Style.LIST_SELECTED;
     protected _rolloverColor: number = Style.LIST_ROLLOVER;
-    protected _alternateRows: boolean = false;
-    public constructor (parent: DisplayObjectContainer = null, xpos: number = 0, ypos: number = 0, items: any[] = null)
+    protected _alternateRows = false;
+    public constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, items: any[] = null)
     {
         if (items != null )
         {
@@ -66,7 +66,7 @@ export class List extends Component {
         let numItems: number = Math.ceil(this._height / this._listItemHeight);
         numItems = Math.min(numItems, this._items.length);
         numItems = Math.max(numItems, 1);
-        for (let i: number = 0; i < numItems; i++)
+        for (let i = 0; i < numItems; i++)
         {
             item = new this._listItemClass(this._itemHolder, 0, i * this._listItemHeight);
             item.setSize(this.width, this._listItemHeight);
@@ -82,7 +82,7 @@ export class List extends Component {
         const offset: number = this._scrollbar.value;
         let numItems: number = Math.ceil(this._height / this._listItemHeight);
         numItems = Math.min(numItems, this._items.length);
-        for (let i: number = 0; i < numItems; i++)
+        for (let i = 0; i < numItems; i++)
         {
             const item: ListItem = this._itemHolder.getChildAt(i) as ListItem;
             if (offset + i < this._items.length )
@@ -199,7 +199,7 @@ export class List extends Component {
             return;
         }
         const offset: number = this._scrollbar.value;
-        for (let i: number = 0; i < this._itemHolder.numChildren; i++)
+        for (let i = 0; i < this._itemHolder.numChildren; i++)
         {
             if (this._itemHolder.getChildAt(i) == event.target )
             {

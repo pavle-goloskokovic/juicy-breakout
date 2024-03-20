@@ -17,7 +17,7 @@ export class StringUtil {
         return string;
     }
 
-    public static secondsToTime (seconds: number, separator: string = ':'): string
+    public static secondsToTime (seconds: number, separator = ':'): string
     {
         const minutes: number = seconds / 60;
         seconds -= minutes * 60;
