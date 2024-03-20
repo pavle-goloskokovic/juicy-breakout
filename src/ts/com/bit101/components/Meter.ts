@@ -117,7 +117,7 @@ export class Meter extends Component {
         {
             const angle: number = startAngle + i * (endAngle - startAngle) / 8;
             this._dial.graphics.moveTo(Math.cos(angle) * r2, Math.sin(angle) * r2);
-            if (tick++ % 2 == 0 )
+            if (tick++ % 2 == 0)
             {
                 this._dial.graphics.lineTo(Math.cos(angle) * r3, Math.sin(angle) * r3);
             }
@@ -153,7 +153,7 @@ export class Meter extends Component {
         const dist: number = this._targetRotation - this._needle.rotation;
         this._velocity += dist * .05;
         this._velocity *= this._damp;
-        if (Math.abs(this._velocity) < .1 && Math.abs(dist) < .1 )
+        if (Math.abs(this._velocity) < .1 && Math.abs(dist) < .1)
         {
             this._needle.rotation = this._targetRotation;
             this.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);

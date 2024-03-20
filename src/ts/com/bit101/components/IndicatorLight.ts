@@ -38,7 +38,7 @@ export class IndicatorLight extends Component {
     protected drawLite (): void
     {
         let colors: any[];
-        if (this._lit )
+        if (this._lit)
         {
             colors = [0xffffff, this._color];
         }
@@ -73,7 +73,7 @@ export class IndicatorLight extends Component {
 
     flash (interval = 500): void
     {
-        if (interval < 1 )
+        if (interval < 1)
         {
             this._timer.stop();
             this.isLit = false;

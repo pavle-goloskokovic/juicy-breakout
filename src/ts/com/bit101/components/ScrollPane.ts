@@ -48,7 +48,7 @@ export class ScrollPane extends Panel {
         const hPercent: number = (this._width - 10) / this.content.width;
         this._vScrollbar.x = this.width - 10;
         this._hScrollbar.y = this.height - 10;
-        if (hPercent >= 1 )
+        if (hPercent >= 1)
         {
             this._vScrollbar.height = this.height;
             this._mask.height = this.height;
@@ -58,7 +58,7 @@ export class ScrollPane extends Panel {
             this._vScrollbar.height = this.height - 10;
             this._mask.height = this.height - 10;
         }
-        if (vPercent >= 1 )
+        if (vPercent >= 1)
         {
             this._hScrollbar.width = this.width;
             this._mask.width = this.width;
@@ -120,7 +120,7 @@ export class ScrollPane extends Panel {
     set dragContent (value: boolean)
     {
         this._dragContent = value;
-        if (this._dragContent )
+        if (this._dragContent)
         {
             this._background.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseGoDown);
             this._background.useHandCursor = true;

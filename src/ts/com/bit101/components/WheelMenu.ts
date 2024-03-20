@@ -23,7 +23,7 @@ export class WheelMenu extends Component {
         this._innerRadius = innerRadius;
         this.addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         super(parent);
-        if(defaultHandler != null ) {
+        if(defaultHandler != null) {
             this.addEventListener(Event.SELECT, defaultHandler);
         }
     }
@@ -46,7 +46,7 @@ export class WheelMenu extends Component {
     }
     hide(): void {
         this.visible = false;
-        if(this.stage != null ) {
+        if(this.stage != null) {
             this.stage.removeEventListener(MouseEvent.MOUSE_UP, this.onStageMouseUp);
         }
     }
@@ -160,21 +160,21 @@ class ArcButton extends Sprite {
         this.graphics.endFill();
     }
     setIcon(iconOrLabel: any): void {
-        if(iconOrLabel == null ) {
+        if(iconOrLabel == null) {
             return
         }
         while(this._iconHolder.numChildren > 0) {
             this._iconHolder.removeChildAt(0)
         }
-        if(iconOrLabel instanceof Class ) {
+        if(iconOrLabel instanceof Class) {
             this._icon = new iconOrLabel as Class() as DisplayObject;
-        } else if(iconOrLabel instanceof DisplayObject ) {
+        } else if(iconOrLabel instanceof DisplayObject) {
             this._icon = iconOrLabel as DisplayObject;
-        } else if(iconOrLabel instanceof String ) {
+        } else if(iconOrLabel instanceof String) {
             this._icon = new Label(null, 0, 0, iconOrLabel as string);
             (this._icon as Label).draw();
         }
-        if(this._icon != null ) {
+        if(this._icon != null) {
             let angle: number = this._bg.rotation * Math.PI / 180;
             this._icon.x = Math.round(-this._icon.width / 2);
             this._icon.y = Math.round(-this._icon.height / 2);

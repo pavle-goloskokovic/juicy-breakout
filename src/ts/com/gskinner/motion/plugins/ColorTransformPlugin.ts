@@ -6,7 +6,7 @@ export class ColorTransformPlugin {
     protected static tweenProperties: any[] = ['redMultiplier', 'greenMultiplier', 'blueMultiplier', 'alphaMultiplier', 'redOffset', 'greenOffset', 'blueOffset', 'alphaOffset', 'tint'];
     static install (): void
     {
-        if (ColorTransformPlugin.installed )
+        if (ColorTransformPlugin.installed)
         {
             return;
         }
@@ -16,11 +16,11 @@ export class ColorTransformPlugin {
 
     static init (tween: GTween, name: string, value: number): number
     {
-        if (!(ColorTransformPlugin.enabled && tween.pluginData.ColorTransformEnabled == null || tween.pluginData.ColorTransformEnabled) )
+        if (!(ColorTransformPlugin.enabled && tween.pluginData.ColorTransformEnabled == null || tween.pluginData.ColorTransformEnabled))
         {
             return value;
         }
-        if (name == 'tint' )
+        if (name == 'tint')
         {
             const ct: ColorTransform = tween.target.transform.colorTransform;
             const a: number = Math.min(1, 1 - ct.redMultiplier);
@@ -38,12 +38,12 @@ export class ColorTransformPlugin {
 
     static tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(tween.pluginData.ColorTransformEnabled == null && ColorTransformPlugin.enabled || tween.pluginData.ColorTransformEnabled) )
+        if (!(tween.pluginData.ColorTransformEnabled == null && ColorTransformPlugin.enabled || tween.pluginData.ColorTransformEnabled))
         {
             return value;
         }
         const ct: ColorTransform = tween.target.transform.colorTransform;
-        if (name == 'tint' )
+        if (name == 'tint')
         {
             const aA: number = initValue >> 24 & 0xFF;
             const rA: number = initValue >> 16 & 0xFF;

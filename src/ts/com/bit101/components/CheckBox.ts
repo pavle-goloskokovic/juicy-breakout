@@ -14,7 +14,7 @@ export class CheckBox extends Component {
     {
         this._labelText = label;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(MouseEvent.CLICK, defaultHandler);
         }

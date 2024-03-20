@@ -17,7 +17,7 @@ export class GTweener {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (end && tween.pluginData.GTweener )
+        if (end && tween.pluginData.GTweener)
         {
             GTweener.remove(tween);
         }
@@ -42,7 +42,7 @@ export class GTweener {
     {
         const target: any = tween.target;
         let list: any[] = GTweener.tweens[target];
-        if (list )
+        if (list)
         {
             GTweener.clearValues(target, tween.getValues());
         }
@@ -57,7 +57,7 @@ export class GTweener {
     static getTween (target: any, name: string): GTween
     {
         const list: any[] = GTweener.tweens[target];
-        if (list == null )
+        if (list == null)
         {
             return null;
         }
@@ -65,7 +65,7 @@ export class GTweener {
         for (let i = 0; i < l; i++)
         {
             const tween: GTween = list[i];
-            if (!isNaN(tween.getValue(name)) )
+            if (!isNaN(tween.getValue(name)))
             {
                 return tween;
             }
@@ -81,7 +81,7 @@ export class GTweener {
     static pauseTweens (target: any, paused = true): void
     {
         const list: any[] = GTweener.tweens[target];
-        if (list == null )
+        if (list == null)
         {
             return;
         }
@@ -101,14 +101,14 @@ export class GTweener {
     {
         delete tween.pluginData.GTweener;
         const list: any[] = GTweener.tweens[tween.target];
-        if (list == null )
+        if (list == null)
         {
             return;
         }
         const l: number = list.length;
         for (let i = 0; i < l; i++)
         {
-            if (list[i] == tween )
+            if (list[i] == tween)
             {
                 list.splice(i, 1);
                 return;
@@ -120,7 +120,7 @@ export class GTweener {
     {
         GTweener.pauseTweens(target);
         const list: any[] = GTweener.tweens[target];
-        if (list == null )
+        if (list == null)
         {
             return;
         }
@@ -137,7 +137,7 @@ export class GTweener {
         for (const n in values)
         {
             const tween: GTween = GTweener.getTween(target, n);
-            if (tween )
+            if (tween)
             {
                 tween.deleteValue(n);
             }

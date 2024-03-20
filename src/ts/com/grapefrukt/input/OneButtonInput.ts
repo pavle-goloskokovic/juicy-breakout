@@ -25,12 +25,12 @@ export class OneButtonInput extends EventDispatcher {
     {
         const oldKeyState: boolean = this._keyState;
         this._keyState = false;
-        if (e.type == MouseEvent.MOUSE_DOWN )
+        if (e.type == MouseEvent.MOUSE_DOWN)
         {
             this._keyState = true;
         }
         this._last_was_keyboard = false;
-        if (this._keyState != oldKeyState )
+        if (this._keyState != oldKeyState)
         {
             dispatchEvent(new Event(Event.CHANGE, false, true));
             this._changedSinceLastReadout = true;
@@ -39,18 +39,18 @@ export class OneButtonInput extends EventDispatcher {
 
     private handleKey (e: KeyboardEvent): void
     {
-        if (e.keyCode != this._keyCode )
+        if (e.keyCode != this._keyCode)
         {
             return;
         }
         const oldKeyState: boolean = this._keyState;
         this._keyState = false;
-        if (e.type == KeyboardEvent.KEY_DOWN )
+        if (e.type == KeyboardEvent.KEY_DOWN)
         {
             this._keyState = true;
         }
         this._last_was_keyboard = true;
-        if (this._keyState != oldKeyState )
+        if (this._keyState != oldKeyState)
         {
             dispatchEvent(new Event(Event.CHANGE, false, true));
             this._changedSinceLastReadout = true;
@@ -60,7 +60,7 @@ export class OneButtonInput extends EventDispatcher {
     get isChanged (): boolean
     {
         const tmp: boolean = this._changedSinceLastReadout;
-        if (this._resetChangedOnReadout )
+        if (this._resetChangedOnReadout)
         {
             this._changedSinceLastReadout = false;
         }

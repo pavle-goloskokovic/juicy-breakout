@@ -7,7 +7,7 @@ export class BlurPlugin implements IGTweenPlugin {
     protected static tweenProperties: any[] = ['blurX', 'blurY', 'blur'];
     static install (): void
     {
-        if (BlurPlugin.instance )
+        if (BlurPlugin.instance)
         {
             return;
         }
@@ -17,18 +17,18 @@ export class BlurPlugin implements IGTweenPlugin {
 
     init (tween: GTween, name: string, value: number): number
     {
-        if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled) )
+        if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled))
         {
             return value;
         }
         const f: any[] = tween.target.filters;
         for (let i = 0; i < f.length; i++)
         {
-            if (f[i] instanceof BlurFilter )
+            if (f[i] instanceof BlurFilter)
             {
                 const blurF: BlurFilter = f[i];
                 tween.pluginData.BlurData = { index: i };
-                if (name == 'blur' )
+                if (name == 'blur')
                 {
                     return (blurF.blurX + blurF.blurY) / 2;
                 }
@@ -43,22 +43,22 @@ export class BlurPlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled) )
+        if (!(tween.pluginData.BlurEnabled == null && BlurPlugin.enabled || tween.pluginData.BlurEnabled))
         {
             return value;
         }
         let data: any = tween.pluginData.BlurData;
-        if (data == null )
+        if (data == null)
         {
             data = this.initTarget(tween);
         }
         const f: any[] = tween.target.filters;
         const blurF: BlurFilter = f[data.index] as BlurFilter;
-        if (blurF == null )
+        if (blurF == null)
         {
             return value;
         }
-        if (name == 'blur' )
+        if (name == 'blur')
         {
             blurF.blurX = (blurF.blurY = value);
         }
@@ -67,7 +67,7 @@ export class BlurPlugin implements IGTweenPlugin {
             blurF[name] = value;
         }
         tween.target.filters = f;
-        if (end )
+        if (end)
         {
             delete tween.pluginData.BlurData;
         }

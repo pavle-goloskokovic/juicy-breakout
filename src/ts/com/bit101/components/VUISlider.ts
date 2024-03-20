@@ -32,7 +32,7 @@ export class VUISlider extends UISlider {
 
     get width (): number
     {
-        if (this._label == null )
+        if (this._label == null)
         {
             return this._width;
         }

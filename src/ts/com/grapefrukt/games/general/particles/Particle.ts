@@ -38,7 +38,7 @@ export class Particle extends Sprite {
     set scale (value: number)
     {
         this._scale = value;
-        if (this._scale < .5 )
+        if (this._scale < .5)
         {
             this.scaleX = this._scale * 2;
             this.scaleY = this._scale * 2;

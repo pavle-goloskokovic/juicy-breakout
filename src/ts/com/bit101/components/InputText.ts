@@ -15,7 +15,7 @@ export class InputText extends Component {
     {
         this.text = text;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -49,7 +49,7 @@ export class InputText extends Component {
         this._back.graphics.drawRect(0, 0, this._width, this._height);
         this._back.graphics.endFill();
         this._tf.displayAsPassword = this._password;
-        if (this._text != null )
+        if (this._text != null)
         {
             this._tf.text = this._text;
         }
@@ -58,7 +58,7 @@ export class InputText extends Component {
             this._tf.text = '';
         }
         this._tf.width = this._width - 4;
-        if (this._tf.text == '' )
+        if (this._tf.text == '')
         {
             this._tf.text = 'X';
             this._tf.height = Math.min(this._tf.textHeight + 4, this._height);
@@ -82,7 +82,7 @@ export class InputText extends Component {
     set text (t: string)
     {
         this._text = t;
-        if (this._text == null )
+        if (this._text == null)
         {
             this._text = '';
         }

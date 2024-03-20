@@ -18,7 +18,7 @@ export class RadioButton extends Component {
         this._selected = checked;
         this._labelText = label;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(MouseEvent.CLICK, defaultHandler);
         }
@@ -26,7 +26,7 @@ export class RadioButton extends Component {
 
     protected static addButton (rb: RadioButton): void
     {
-        if (RadioButton.buttons == null )
+        if (RadioButton.buttons == null)
         {
             RadioButton.buttons = [];
         }
@@ -37,7 +37,7 @@ export class RadioButton extends Component {
     {
         for (let i = 0; i < RadioButton.buttons.length; i++)
         {
-            if (RadioButton.buttons[i] != rb && RadioButton.buttons[i].groupName == rb.groupName )
+            if (RadioButton.buttons[i] != rb && RadioButton.buttons[i].groupName == rb.groupName)
             {
                 RadioButton.buttons[i].selected = false;
             }
@@ -94,7 +94,7 @@ export class RadioButton extends Component {
     {
         this._selected = s;
         this._button.visible = this._selected;
-        if (this._selected )
+        if (this._selected)
         {
             RadioButton.clear(this);
         }

@@ -9,7 +9,7 @@ export class SoundTransformPlugin implements IGTweenPlugin {
     protected static tweenProperties: any[] = ['leftToLeft', 'leftToRight', 'pan', 'rightToLeft', 'rightToRight', 'volume'];
     static install (): void
     {
-        if (SoundTransformPlugin.instance )
+        if (SoundTransformPlugin.instance)
         {
             return;
         }
@@ -19,7 +19,7 @@ export class SoundTransformPlugin implements IGTweenPlugin {
 
     init (tween: GTween, name: string, value: number): number
     {
-        if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled) )
+        if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled))
         {
             return value;
         }
@@ -28,7 +28,7 @@ export class SoundTransformPlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled) )
+        if (!(SoundTransformPlugin.enabled && tween.pluginData.SoundTransformEnabled == null || tween.pluginData.SoundTransformEnabled))
         {
             return value;
         }

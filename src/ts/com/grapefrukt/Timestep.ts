@@ -19,7 +19,7 @@ export class Timestep {
     {
         this._real_speed = (getTimer() - this._last_frame_time) / this._target_frametime;
         this._last_frame_time = getTimer();
-        if (this._real_speed > this._max_speed )
+        if (this._real_speed > this._max_speed)
         {
             this._real_speed = this._max_speed;
         }
@@ -59,11 +59,11 @@ export class Timestep {
 
     set smoothing (value: number)
     {
-        if (value > 1 )
+        if (value > 1)
         {
             value = 1;
         }
-        if (value < 0 )
+        if (value < 0)
         {
             value = 0;
         }

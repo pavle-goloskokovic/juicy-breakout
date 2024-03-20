@@ -16,7 +16,7 @@ export class FPSMeter extends Component {
         this._frames = 0;
         this._startTime = getTimer();
         this.setSize(50, 20);
-        if (this.stage != null )
+        if (this.stage != null)
         {
             this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
         }
@@ -39,7 +39,7 @@ export class FPSMeter extends Component {
         this._frames++;
         const time: number = getTimer();
         const elapsed: number = time - this._startTime;
-        if (elapsed >= 1000 )
+        if (elapsed >= 1000)
         {
             this._fps = Math.round(this._frames * 1000 / elapsed);
             this._frames = 0;

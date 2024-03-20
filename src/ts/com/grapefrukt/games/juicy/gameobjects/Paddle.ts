@@ -35,7 +35,7 @@ export class Paddle extends Block {
 
     lookAt (ball: Ball): void
     {
-        if (Settings.EFFECT_PADDLE_LOOK_AT_BALL )
+        if (Settings.EFFECT_PADDLE_LOOK_AT_BALL)
         {
             this._face.eye_l.rotation = -Math.atan2(this.x + this._face.eye_l.x - ball.x, this.y + this._face.eye_l.y - ball.y) * 180 / Math.PI;
             this._face.eye_r.rotation = -Math.atan2(this.x + this._face.eye_r.x - ball.x, this.y + this._face.eye_r.y - ball.y) * 180 / Math.PI;
@@ -55,12 +55,12 @@ export class Paddle extends Block {
     smile (how_much: number): void
     {
         let t = 0;
-        if (how_much < 0.4 )
+        if (how_much < 0.4)
         {
             t = -1 + how_much / 0.4;
             this._face.mouth.scaleY = t;
         }
-        else if (how_much <= 1 )
+        else if (how_much <= 1)
         {
             this._face.mouth.scaleY = 0.1;
         }

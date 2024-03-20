@@ -5,7 +5,7 @@ export class CurrentFramePlugin implements IGTweenPlugin {
     protected static instance: CurrentFramePlugin;
     static install (): void
     {
-        if (CurrentFramePlugin.instance )
+        if (CurrentFramePlugin.instance)
         {
             return;
         }
@@ -20,12 +20,12 @@ export class CurrentFramePlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(tween.pluginData.CurrentFrameEnabled == null && CurrentFramePlugin.enabled || tween.pluginData.CurrentFrameEnabled) )
+        if (!(tween.pluginData.CurrentFrameEnabled == null && CurrentFramePlugin.enabled || tween.pluginData.CurrentFrameEnabled))
         {
             return value;
         }
         const frame: number = Math.round(initValue + rangeValue * ratio);
-        if (tween.target.currentFrame != frame )
+        if (tween.target.currentFrame != frame)
         {
             tween.target.gotoAndStop(frame);
         }

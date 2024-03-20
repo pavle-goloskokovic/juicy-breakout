@@ -16,7 +16,7 @@ export class DisplayListTraverser {
             displayObject = node.getChildAt(i) as DisplayObject;
             displayObjectContainer = node.getChildAt(i) as DisplayObjectContainer;
             console.log(StringUtil.padStart('', level, '\t') + node.getChildAt(i).name + '\t' + node.getChildAt(i) + '\t' + node.getChildAt(i).alpha + '\t' + node.getChildAt(i).visible);
-            if (displayObjectContainer )
+            if (displayObjectContainer)
             {
                 childCount += DisplayListTraverser.traverse(displayObjectContainer, level + 1);
             }

@@ -54,20 +54,20 @@ export class VBox extends Component {
 
     protected doAlignment (): void
     {
-        if (this._alignment != VBox.NONE )
+        if (this._alignment != VBox.NONE)
         {
             for (let i = 0; i < this.numChildren; i++)
             {
                 const child: DisplayObject = this.getChildAt(i);
-                if (this._alignment == VBox.LEFT )
+                if (this._alignment == VBox.LEFT)
                 {
                     child.x = 0;
                 }
-                else if (this._alignment == VBox.RIGHT )
+                else if (this._alignment == VBox.RIGHT)
                 {
                     child.x = this._width - child.width;
                 }
-                else if (this._alignment == VBox.CENTER )
+                else if (this._alignment == VBox.CENTER)
                 {
                     child.x = (this._width - child.width) / 2;
                 }

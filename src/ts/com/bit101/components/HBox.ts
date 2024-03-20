@@ -54,20 +54,20 @@ export class HBox extends Component {
 
     protected doAlignment (): void
     {
-        if (this._alignment != HBox.NONE )
+        if (this._alignment != HBox.NONE)
         {
             for (let i = 0; i < this.numChildren; i++)
             {
                 const child: DisplayObject = this.getChildAt(i);
-                if (this._alignment == HBox.TOP )
+                if (this._alignment == HBox.TOP)
                 {
                     child.y = 0;
                 }
-                else if (this._alignment == HBox.BOTTOM )
+                else if (this._alignment == HBox.BOTTOM)
                 {
                     child.y = this._height - child.height;
                 }
-                else if (this._alignment == HBox.MIDDLE )
+                else if (this._alignment == HBox.MIDDLE)
                 {
                     child.y = (this._height - child.height) / 2;
                 }

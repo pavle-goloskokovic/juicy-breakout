@@ -35,7 +35,7 @@ export class SoundObject extends EventDispatcher {
 
     load (basePath: string): void
     {
-        if (this._embed_class )
+        if (this._embed_class)
         {
             this._sound = new this._embed_class[this._file.substr(0, this._file.length - 4)]() as Sound;
             const t: Timer = new Timer(100, 1);
@@ -67,7 +67,7 @@ export class SoundObject extends EventDispatcher {
 
     stop (): void
     {
-        if (!this._sound_channel )
+        if (!this._sound_channel)
         {
             return;
         }

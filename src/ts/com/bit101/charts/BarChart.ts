@@ -22,7 +22,7 @@ export class BarChart extends Chart {
         const scale: number = chartHeight / (max - min);
         for (let i = 0; i < this._data.length; i++)
         {
-            if (this._data[i] != null )
+            if (this._data[i] != null)
             {
                 this._chartHolder.graphics.beginFill(this._barColor);
                 this._chartHolder.graphics.drawRect(xpos, 0, barWidth, (this._data[i] - min) * -scale);

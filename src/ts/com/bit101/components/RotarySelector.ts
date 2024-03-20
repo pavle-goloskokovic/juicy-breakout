@@ -22,7 +22,7 @@ export class RotarySelector extends Component {
     {
         this._labelText = label;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -50,7 +50,7 @@ export class RotarySelector extends Component {
 
     protected decrement (): void
     {
-        if (this._choice > 0 )
+        if (this._choice > 0)
         {
             this._choice--;
             this.draw();
@@ -60,7 +60,7 @@ export class RotarySelector extends Component {
 
     protected increment (): void
     {
-        if (this._choice < this._numChoices - 1 )
+        if (this._choice < this._numChoices - 1)
         {
             this._choice++;
             this.draw();
@@ -112,20 +112,20 @@ export class RotarySelector extends Component {
             lab.buttonMode = true;
             lab.useHandCursor = true;
             lab.addEventListener(MouseEvent.CLICK, this.onLabelClick);
-            if (this._labelMode == RotarySelector.ALPHABETIC )
+            if (this._labelMode == RotarySelector.ALPHABETIC)
             {
                 lab.text = String.fromCharCode(65 + i);
             }
-            else if (this._labelMode == RotarySelector.NUMERIC )
+            else if (this._labelMode == RotarySelector.NUMERIC)
             {
                 lab.text = (i + 1).toString();
             }
-            else if (this._labelMode == RotarySelector.ROMAN )
+            else if (this._labelMode == RotarySelector.ROMAN)
             {
                 const chars: any[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
                 lab.text = chars[i];
             }
-            if (i != this._choice )
+            if (i != this._choice)
             {
                 lab.alpha = 0.5;
             }
@@ -142,7 +142,7 @@ export class RotarySelector extends Component {
 
     protected onClick (event: MouseEvent): void
     {
-        if (this.mouseX < this._width / 2 )
+        if (this.mouseX < this._width / 2)
         {
             this.decrement();
         }

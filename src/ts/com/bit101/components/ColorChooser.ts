@@ -35,7 +35,7 @@ export class ColorChooser extends Component {
     {
         this._oldColorChoice = (this._tmpColorChoice = (this._value = value));
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -112,10 +112,10 @@ export class ColorChooser extends Component {
     set model (value: DisplayObject)
     {
         this._model = value;
-        if (this._model != null )
+        if (this._model != null)
         {
             this.drawColors(this._model);
-            if (!this.usePopup )
+            if (!this.usePopup)
             {
                 this.usePopup = true;
             }
@@ -165,7 +165,7 @@ export class ColorChooser extends Component {
         this._colorsContainer.addEventListener(MouseEvent.MOUSE_OUT, this.backToColorChoice);
         this._colorsContainer.addEventListener(MouseEvent.CLICK, this.setColorChoice);
         this._swatch.addEventListener(MouseEvent.CLICK, this.onSwatchClick);
-        if (!this._usePopup )
+        if (!this._usePopup)
         {
             this._swatch.buttonMode = false;
             this._colorsContainer.buttonMode = false;
@@ -220,7 +220,7 @@ export class ColorChooser extends Component {
     protected displayColors (): void
     {
         this.placeColors();
-        if (this._colorsContainer.parent )
+        if (this._colorsContainer.parent)
         {
             this._colorsContainer.parent.removeChild(this._colorsContainer);
         }
@@ -233,7 +233,7 @@ export class ColorChooser extends Component {
     protected placeColors (): void
     {
         let point: Point = new Point(this.x, this.y);
-        if (this.parent )
+        if (this.parent)
         {
             point = this.parent.localToGlobal(point);
         }

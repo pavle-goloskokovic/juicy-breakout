@@ -20,14 +20,14 @@ export class FadedBackground extends Sprite {
         this._base_color = newColor;
         this._stageNormalWidth = stageNormalWidth;
         this._stageNormalHeight = stageNormalHeight;
-        if (fadedColor == 0x000000 )
+        if (fadedColor == 0x000000)
         {
             const fadedColorHSB: any[] = ColorConverter.UINTtoHSB(this._base_color);
             fadedColorHSB[2] *= 0.3;
             fadedColor = ColorConverter.HSBtoUINT(fadedColorHSB[0], fadedColorHSB[1], fadedColorHSB[2]);
         }
         this._faded_color = fadedColor;
-        if (!ratios )
+        if (!ratios)
         {
             ratios = [0x00, 0xFF];
         }
@@ -41,7 +41,7 @@ export class FadedBackground extends Sprite {
     {
         const stageRatio: number = this.stage.stageWidth / this.stage.stageHeight;
         const bkgRatio: number = this._baseWidth / this._baseWidth;
-        if (stageRatio >= bkgRatio )
+        if (stageRatio >= bkgRatio)
         {
             this.width = this.stage.stageWidth;
             this.height = this.width / this._baseWidth * this._baseWidth;
@@ -63,7 +63,7 @@ export class FadedBackground extends Sprite {
 
     redraw (newColor = -1): void
     {
-        if (newColor >= 0 )
+        if (newColor >= 0)
         {
             this._base_color = newColor;
         }

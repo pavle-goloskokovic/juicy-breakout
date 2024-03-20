@@ -19,7 +19,7 @@ export class GTweenTimeline extends GTween {
         this.labels = {};
         this.addTweens(tweens);
         super(target, duration, values, props, pluginData);
-        if (this.autoPlay )
+        if (this.autoPlay)
         {
             this.paused = false;
         }
@@ -34,7 +34,7 @@ export class GTweenTimeline extends GTween {
         const rev: boolean = this.reflect && repeatIndex % 2 >= 1;
         let i: number;
         const l: number = this.tweens.length;
-        if (rev )
+        if (rev)
         {
             for (i = 0; i < l; i++)
             {
@@ -48,16 +48,16 @@ export class GTweenTimeline extends GTween {
                 this.tweens[i].position = Math.max(0, this.calculatedPosition - this.tweenStartPositions[i]);
             }
         }
-        if (!this.suppressCallbacks )
+        if (!this.suppressCallbacks)
         {
             this.checkCallbacks();
         }
         this.suppressEvents = tmpSuppressEvents;
-        if (this.onChange != null && !this.suppressEvents )
+        if (this.onChange != null && !this.suppressEvents)
         {
             this.onChange(this);
         }
-        if (((this.onComplete != null && !this.suppressEvents) && value >= this.repeatCount * this.duration) && this.repeatCount > 0 )
+        if (((this.onComplete != null && !this.suppressEvents) && value >= this.repeatCount * this.duration) && this.repeatCount > 0)
         {
             this.onComplete(this);
         }
@@ -65,7 +65,7 @@ export class GTweenTimeline extends GTween {
 
     addTween (position: number, tween: GTween): void
     {
-        if (tween == null || isNaN(position) )
+        if (tween == null || isNaN(position))
         {
             return;
         }
@@ -83,7 +83,7 @@ export class GTweenTimeline extends GTween {
 
     addTweens (tweens: any[]): void
     {
-        if (tweens == null )
+        if (tweens == null)
         {
             return;
         }
@@ -97,7 +97,7 @@ export class GTweenTimeline extends GTween {
     {
         for (let i: number = this.tweens.length; i >= 0; i--)
         {
-            if (this.tweens[i] == tween )
+            if (this.tweens[i] == tween)
             {
                 this.tweens.splice(i, 1);
                 this.tweenStartPositions.splice(i, 1);
@@ -118,7 +118,7 @@ export class GTweenTimeline extends GTween {
     addCallback (labelOrPosition: any, forwardCallback: Function, forwardParameters: any[] = null, reverseCallback: Function = null, reverseParameters: any[] = null): void
     {
         const position: number = this.resolveLabelOrPosition(labelOrPosition);
-        if (isNaN(position) )
+        if (isNaN(position))
         {
             return;
         }
@@ -126,12 +126,12 @@ export class GTweenTimeline extends GTween {
         const l: number = this.callbacks.length;
         for (let i: number = l - 1; i >= 0; i--)
         {
-            if (position == this.callbacks[i].position )
+            if (position == this.callbacks[i].position)
             {
                 this.callbacks[i] = callback;
                 return;
             }
-            if (position > this.callbacks[i].position )
+            if (position > this.callbacks[i].position)
             {
                 break;
             }
@@ -142,14 +142,14 @@ export class GTweenTimeline extends GTween {
     removeCallback (labelOrPosition: any): void
     {
         const position: number = this.resolveLabelOrPosition(labelOrPosition);
-        if (isNaN(position) )
+        if (isNaN(position))
         {
             return;
         }
         const l: number = this.callbacks.length;
         for (let i = 0; i < l; i++)
         {
-            if (position == this.callbacks[i].position )
+            if (position == this.callbacks[i].position)
             {
                 this.callbacks.splice(i, 1);
                 return;
@@ -172,7 +172,7 @@ export class GTweenTimeline extends GTween {
     goto (labelOrPosition: any): void
     {
         const pos: number = this.resolveLabelOrPosition(labelOrPosition);
-        if (!isNaN(pos) )
+        if (!isNaN(pos))
         {
             this.position = pos;
         }
@@ -186,13 +186,13 @@ export class GTweenTimeline extends GTween {
     calculateDuration (): void
     {
         let d = 0;
-        if (this.callbacks.length > 0 )
+        if (this.callbacks.length > 0)
         {
             d = this.callbacks[this.callbacks.length - 1].position;
         }
         for (let i = 0; i < this.tweens.length; i++)
         {
-            if (this.tweens[i].duration + this.tweenStartPositions[i] > d )
+            if (this.tweens[i].duration + this.tweenStartPositions[i] > d)
             {
                 d = this.tweens[i].duration + this.tweenStartPositions[i];
             }
@@ -202,13 +202,13 @@ export class GTweenTimeline extends GTween {
 
     protected checkCallbacks (): void
     {
-        if (this.callbacks.length == 0 )
+        if (this.callbacks.length == 0)
         {
             return;
         }
         const repeatIndex: number = this._position / this.duration >> 0;
         const previousRepeatIndex: number = this.positionOld / this.duration >> 0;
-        if (repeatIndex == previousRepeatIndex || this.repeatCount > 0 && this._position > this.duration * this.repeatCount )
+        if (repeatIndex == previousRepeatIndex || this.repeatCount > 0 && this._position > this.duration * this.repeatCount)
         {
             this.checkCallbackRange(this.calculatedPositionOld, this.calculatedPosition);
         }
@@ -228,7 +228,7 @@ export class GTweenTimeline extends GTween {
         let i = -1;
         let j: number = this.callbacks.length;
         let k = 1;
-        if (startPos > endPos )
+        if (startPos > endPos)
         {
             sPos = endPos;
             ePos = startPos;
@@ -239,18 +239,18 @@ export class GTweenTimeline extends GTween {
         {
             const callback: Callback = this.callbacks[i];
             const pos: number = callback.position;
-            if ((pos > sPos && pos < ePos || pos == endPos) || includeStart && pos == startPos )
+            if ((pos > sPos && pos < ePos || pos == endPos) || includeStart && pos == startPos)
             {
-                if (k == 1 )
+                if (k == 1)
                 {
-                    if (callback.forward != null )
+                    if (callback.forward != null)
                     {
                         callback.forward.apply(this, callback.forwardParams);
                     }
                 }
                 else
                 {
-                    if (callback.reverse != null )
+                    if (callback.reverse != null)
                     {
                         callback.reverse.apply(this, callback.reverseParams);
                     }

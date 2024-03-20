@@ -19,7 +19,7 @@ export class Component extends Sprite {
         super();
         this.move(xpos, ypos);
         this.init();
-        if (parent != null )
+        if (parent != null)
         {
             parent.addChild(this);
         }

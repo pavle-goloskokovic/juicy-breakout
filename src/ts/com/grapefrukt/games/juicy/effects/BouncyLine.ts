@@ -40,12 +40,12 @@ export class BouncyLine extends GameObject {
 
     update (imeDelta = 1): void
     {
-        if (Math.abs(this.wobble_middle.y) > 0 )
+        if (Math.abs(this.wobble_middle.y) > 0)
         {
             this.wobble_velocity.y += -this.bounce_speed * this.wobble_middle.y;
             this.wobble_velocity.y *= this.bounciness;
         }
-        if (Math.abs(this.wobble_middle.x) > 0 )
+        if (Math.abs(this.wobble_middle.x) > 0)
         {
             this.wobble_middle.x *= 0.95;
         }
@@ -54,7 +54,7 @@ export class BouncyLine extends GameObject {
         this.graphics.lineStyle(Settings.EFFECT_BOUNCY_LINES_WIDTH, Settings.COLOR_BOUNCY_LINES, 1, false, 'normal', CapsStyle.SQUARE);
         this.graphics.moveTo(this.pos1.x, this.pos1.y);
         const m: Point = this.middle;
-        if (Settings.EFFECT_BOUNCY_LINES_ENABLED )
+        if (Settings.EFFECT_BOUNCY_LINES_ENABLED)
         {
             this.graphics.curveTo(m.x, m.y, this.pos2.x, this.pos2.y);
         }
@@ -62,7 +62,7 @@ export class BouncyLine extends GameObject {
         {
             this.graphics.lineTo(this.pos2.x, this.pos2.y);
         }
-        if (this.collisionCounter > 0 )
+        if (this.collisionCounter > 0)
         {
             this.collisionCounter--;
         }
@@ -94,13 +94,13 @@ export class BouncyLine extends GameObject {
 
     checkCollision (ball: Ball): void
     {
-        if (this.collisionCounter > 0 )
+        if (this.collisionCounter > 0)
         {
             return;
         }
         const dist: number = this.distanceFromLine(this.pos1, this.pos2, new Point(ball.x, ball.y));
         const max_distance: number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
-        if (dist <= max_distance )
+        if (dist <= max_distance)
         {
             this.wobble(ball.x + Settings.EFFECT_BOUNCY_LINES_STRENGHT * ball.velocityX, ball.y + Settings.EFFECT_BOUNCY_LINES_STRENGHT * ball.velocityY);
             this.collisionCounter = 2;
@@ -112,17 +112,17 @@ export class BouncyLine extends GameObject {
         const c: Point = new Point(p.x - a.x, p.y - a.y);
         const v: Point = new Point(b.x - a.x, b.y - a.y);
         const distance: number = v.length;
-        if (distance != 0 )
+        if (distance != 0)
         {
             v.x /= distance;
             v.y /= distance;
         }
         const t: number = v.x * c.x + v.y * c.y;
-        if (t < 0 )
+        if (t < 0)
         {
             return a.clone();
         }
-        if (t > distance )
+        if (t > distance)
         {
             return b.clone();
         }
@@ -155,28 +155,28 @@ export class BouncyLine extends GameObject {
         b2 = E.x - F.x;
         c2 = F.x * E.y - E.x * F.y;
         const denom: number = a1 * b2 - a2 * b1;
-        if (denom == 0 )
+        if (denom == 0)
         {
             return null;
         }
         ip = new Point();
         ip.x = (b1 * c2 - b2 * c1) / denom;
         ip.y = (a2 * c1 - a1 * c2) / denom;
-        if (as_seg )
+        if (as_seg)
         {
-            if (Math.pow(ip.x - B.x, 2) + Math.pow(ip.y - B.y, 2) > Math.pow(A.x - B.x, 2) + Math.pow(A.y - B.y, 2) )
+            if (Math.pow(ip.x - B.x, 2) + Math.pow(ip.y - B.y, 2) > Math.pow(A.x - B.x, 2) + Math.pow(A.y - B.y, 2))
             {
                 return null;
             }
-            if (Math.pow(ip.x - A.x, 2) + Math.pow(ip.y - A.y, 2) > Math.pow(A.x - B.x, 2) + Math.pow(A.y - B.y, 2) )
+            if (Math.pow(ip.x - A.x, 2) + Math.pow(ip.y - A.y, 2) > Math.pow(A.x - B.x, 2) + Math.pow(A.y - B.y, 2))
             {
                 return null;
             }
-            if (Math.pow(ip.x - F.x, 2) + Math.pow(ip.y - F.y, 2) > Math.pow(E.x - F.x, 2) + Math.pow(E.y - F.y, 2) )
+            if (Math.pow(ip.x - F.x, 2) + Math.pow(ip.y - F.y, 2) > Math.pow(E.x - F.x, 2) + Math.pow(E.y - F.y, 2))
             {
                 return null;
             }
-            if (Math.pow(ip.x - E.x, 2) + Math.pow(ip.y - E.y, 2) > Math.pow(E.x - F.x, 2) + Math.pow(E.y - F.y, 2) )
+            if (Math.pow(ip.x - E.x, 2) + Math.pow(ip.y - E.y, 2) > Math.pow(E.x - F.x, 2) + Math.pow(E.y - F.y, 2))
             {
                 return null;
             }

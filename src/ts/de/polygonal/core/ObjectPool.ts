@@ -44,9 +44,9 @@ export class ObjectPool {
 
     get object (): any
     {
-        if (this._usageCount == this._currSize )
+        if (this._usageCount == this._currSize)
         {
-            if (this._grow )
+            if (this._grow)
             {
                 this._currSize += this._initSize;
                 const n: ObjNode = this._tail;
@@ -81,7 +81,7 @@ export class ObjectPool {
 
     set object (o: any)
     {
-        if (this._usageCount > 0 )
+        if (this._usageCount > 0)
         {
             this._usageCount--;
             this._emptyNode.data = o;
@@ -114,7 +114,7 @@ export class ObjectPool {
         while (n)
         {
             n.data[func].apply(n.data, args);
-            if (n == this._tail )
+            if (n == this._tail)
             {
                 break;
             }
@@ -126,13 +126,13 @@ export class ObjectPool {
     {
         let i: number;
         let node: ObjNode;
-        if (this._usageCount == 0 )
+        if (this._usageCount == 0)
         {
-            if (this._currSize == this._initSize )
+            if (this._currSize == this._initSize)
             {
                 return;
             }
-            if (this._currSize > this._initSize )
+            if (this._currSize > this._initSize)
             {
                 i = 0;
                 node = this._head;
@@ -152,11 +152,11 @@ export class ObjectPool {
             node = this._head;
             while (node)
             {
-                if (!node.data )
+                if (!node.data)
                 {
                     a[int(i++)] = node;
                 }
-                if (node == this._tail )
+                if (node == this._tail)
                 {
                     break;
                 }
@@ -173,7 +173,7 @@ export class ObjectPool {
             }
             this._emptyNode = (this._allocNode = this._head);
             this._tail.next = this._head;
-            if (this._usageCount < this._initSize )
+            if (this._usageCount < this._initSize)
             {
                 this._currSize = this._initSize;
                 const n: ObjNode = this._tail;

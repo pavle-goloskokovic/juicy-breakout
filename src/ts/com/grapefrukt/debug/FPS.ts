@@ -38,7 +38,7 @@ export class FPS extends Sprite {
         this.fps_text.setTextFormat(textformat);
         this.fps_text.defaultTextFormat = textformat;
         this.addChild(this.fps_text);
-        if (this.manual_update == false )
+        if (this.manual_update == false)
         {
             this.addEventListener(Event.ENTER_FRAME, this.tick);
         }
@@ -50,7 +50,7 @@ export class FPS extends Sprite {
         this.last_tick = getTimer();
         this.frametimes[this.insert_pos] = this._t;
         this.insert_pos++;
-        if (this.insert_pos > this.BUFFER_SIZE )
+        if (this.insert_pos > this.BUFFER_SIZE)
         {
             this.insert_pos = 0;
         }

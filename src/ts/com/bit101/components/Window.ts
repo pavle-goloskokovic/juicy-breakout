@@ -102,7 +102,7 @@ export class Window extends Component {
         this._titleLabel.x = this._hasMinimizeButton ? 20 : 5;
         this._closeButton.x = this._width - 14;
         this._grips.x = this._titleLabel.x + this._titleLabel.width;
-        if (this._hasCloseButton )
+        if (this._hasCloseButton)
         {
             this._grips.width = this._closeButton.x - this._grips.x - 2;
         }
@@ -116,7 +116,7 @@ export class Window extends Component {
 
     protected onMouseGoDown (event: MouseEvent): void
     {
-        if (this._draggable )
+        if (this._draggable)
         {
             this.startDrag();
             this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onMouseGoUp);
@@ -144,7 +144,7 @@ export class Window extends Component {
     set shadow (b: boolean)
     {
         this._shadow = b;
-        if (this._shadow )
+        if (this._shadow)
         {
             this.filters = [this.getShadow(4, false)];
         }
@@ -201,11 +201,11 @@ export class Window extends Component {
     set hasMinimizeButton (b: boolean)
     {
         this._hasMinimizeButton = b;
-        if (this._hasMinimizeButton )
+        if (this._hasMinimizeButton)
         {
             super.addChild(this._minimizeButton);
         }
-        else if (this.contains(this._minimizeButton) )
+        else if (this.contains(this._minimizeButton))
         {
             this.removeChild(this._minimizeButton);
         }
@@ -220,9 +220,9 @@ export class Window extends Component {
     set minimized (value: boolean)
     {
         this._minimized = value;
-        if (this._minimized )
+        if (this._minimized)
         {
-            if (this.contains(this._panel) )
+            if (this.contains(this._panel))
             {
                 this.removeChild(this._panel);
             }
@@ -230,7 +230,7 @@ export class Window extends Component {
         }
         else
         {
-            if (!this.contains(this._panel) )
+            if (!this.contains(this._panel))
             {
                 super.addChild(this._panel);
             }
@@ -246,7 +246,7 @@ export class Window extends Component {
 
     get height (): number
     {
-        if (this.contains(this._panel) )
+        if (this.contains(this._panel))
         {
             return super.height;
         }
@@ -259,11 +259,11 @@ export class Window extends Component {
     set hasCloseButton (value: boolean)
     {
         this._hasCloseButton = value;
-        if (this._hasCloseButton )
+        if (this._hasCloseButton)
         {
             this._titleBar.content.addChild(this._closeButton);
         }
-        else if (this._titleBar.content.contains(this._closeButton) )
+        else if (this._titleBar.content.contains(this._closeButton))
         {
             this._titleBar.content.removeChild(this._closeButton);
         }

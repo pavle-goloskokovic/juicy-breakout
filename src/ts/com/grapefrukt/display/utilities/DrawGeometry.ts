@@ -2,10 +2,10 @@ import type { Graphics } from '../../../../flash/display/Graphics';
 export class DrawGeometry {
     static drawIrregularCircle (graphics: Graphics, x: number, y: number, radius: number, irregularity = .2, slices = -1): void
     {
-        if (slices < 0 )
+        if (slices < 0)
         {
             slices = Math.round(Math.sqrt(radius * radius * Math.PI) / 10);
-            if (slices < 6 )
+            if (slices < 6)
             {
                 slices = 6;
             }
@@ -19,7 +19,7 @@ export class DrawGeometry {
             rndRadius = radius * (1 + Math.random() * irregularity * 2 - irregularity / 2);
             px = x + Math.cos(angle) * rndRadius;
             py = y + Math.sin(angle) * rndRadius;
-            if (i == 0 )
+            if (i == 0)
             {
                 graphics.moveTo(px, py);
             }
@@ -119,7 +119,7 @@ export class DrawGeometry {
 
     static drawTriangle (graphics: Graphics, x: number, y: number, size: number, invert = false): void
     {
-        if (invert )
+        if (invert)
         {
             graphics.moveTo(x, y - size / 2);
             graphics.lineTo(x + size / 2, y + size / 2);

@@ -24,7 +24,7 @@ export class LineChart extends Chart {
         xpos += lineWidth;
         for (let i = 1; i < this._data.length; i++)
         {
-            if (this._data[i] != null )
+            if (this._data[i] != null)
             {
                 this._chartHolder.graphics.lineTo(xpos, (this._data[i] - min) * -scale);
             }

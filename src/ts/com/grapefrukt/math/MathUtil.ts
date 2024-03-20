@@ -14,11 +14,11 @@ export class MathUtil {
 
     static clamp (value: number, max = 1, min = 0): number
     {
-        if (value > max )
+        if (value > max)
         {
             return max;
         }
-        if (value < min )
+        if (value < min)
         {
             return min;
         }
@@ -29,7 +29,7 @@ export class MathUtil {
     {
         value = value.replace(',', '.');
         let val: number = parseFloat(value);
-        if (nanAsZero && isNaN(val) )
+        if (nanAsZero && isNaN(val))
         {
             val = 0;
         }
@@ -38,15 +38,15 @@ export class MathUtil {
 
     static parseBoolean (value: string): boolean
     {
-        if (value == 'true' )
+        if (value == 'true')
         {
             return true;
         }
-        if (value == '1' )
+        if (value == '1')
         {
             return true;
         }
-        if (value == 'yes' )
+        if (value == 'yes')
         {
             return true;
         }

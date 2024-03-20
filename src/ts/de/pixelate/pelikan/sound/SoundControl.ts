@@ -34,12 +34,12 @@ export class SoundControl extends EventDispatcher {
 
     play (id: string): void
     {
-        if (this._mute || !this.loaded )
+        if (this._mute || !this.loaded)
         {
             return;
         }
         const group: any[] = this._groups[id];
-        if (group )
+        if (group)
         {
             id = group[int(Math.random() * group.length)].id;
         }
@@ -49,12 +49,12 @@ export class SoundControl extends EventDispatcher {
 
     playSoundId (id: string, sound_id: number): void
     {
-        if (this._mute || !this.loaded )
+        if (this._mute || !this.loaded)
         {
             return;
         }
         const group: any[] = this._groups[id];
-        if (group )
+        if (group)
         {
             id = group[int(sound_id % group.length)].id;
         }
@@ -70,7 +70,7 @@ export class SoundControl extends EventDispatcher {
 
     private parseXML (): void
     {
-        if (this._xml_config.embedSounds == 'false' )
+        if (this._xml_config.embedSounds == 'false')
         {
             this._embed_class = null;
         }
@@ -101,7 +101,7 @@ export class SoundControl extends EventDispatcher {
         for (const file of group.file)
         {
             const soundObject: SoundObject = this.registerSound(group.id + '-' + i.toString(), file, group);
-            if (this._groups[group.id] == null )
+            if (this._groups[group.id] == null)
             {
                 this._groups[group.id] = [];
             }
@@ -112,7 +112,7 @@ export class SoundControl extends EventDispatcher {
 
     getSound (id: string): SoundObject
     {
-        if (this._sounds[id] == null )
+        if (this._sounds[id] == null)
         {
             throw new Error('Sound with id "' + id + '" does not exist.');
         }
@@ -141,7 +141,7 @@ export class SoundControl extends EventDispatcher {
     {
         this._sounds_loaded++;
         dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, this._sounds_loaded, this._sounds_total));
-        if (this._sounds_loaded == this._sounds_total )
+        if (this._sounds_loaded == this._sounds_total)
         {
             dispatchEvent(new Event(Event.INIT));
         }

@@ -48,15 +48,15 @@ export class ComboBox extends Component {
 
     protected setLabelButtonLabel (): void
     {
-        if (this.selectedItem == null )
+        if (this.selectedItem == null)
         {
             this._labelButton.label = this._defaultLabel;
         }
-        else if (this.selectedItem instanceof String )
+        else if (this.selectedItem instanceof String)
         {
             this._labelButton.label = this.selectedItem as string;
         }
-        else if (this.selectedItem.hasOwnProperty('label') && this.selectedItem.label instanceof String )
+        else if (this.selectedItem.hasOwnProperty('label') && this.selectedItem.label instanceof String)
         {
             this._labelButton.label = this.selectedItem.label;
         }
@@ -68,7 +68,7 @@ export class ComboBox extends Component {
 
     protected removeList (): void
     {
-        if (this._stage.contains(this._list) )
+        if (this._stage.contains(this._list))
         {
             this._stage.removeChild(this._list);
         }
@@ -115,10 +115,10 @@ export class ComboBox extends Component {
     protected onDropDown (event: MouseEvent): void
     {
         this._open = !this._open;
-        if (this._open )
+        if (this._open)
         {
             let point: Point = new Point();
-            if (this._openPosition == ComboBox.BOTTOM )
+            if (this._openPosition == ComboBox.BOTTOM)
             {
                 point.y = this._height;
             }
@@ -140,11 +140,11 @@ export class ComboBox extends Component {
 
     protected onStageClick (event: MouseEvent): void
     {
-        if (event.target == this._dropDownButton || event.target == this._labelButton )
+        if (event.target == this._dropDownButton || event.target == this._labelButton)
         {
             return;
         }
-        if (new Rectangle(this._list.x, this._list.y, this._list.width, this._list.height).contains(event.stageX, event.stageY) )
+        if (new Rectangle(this._list.x, this._list.y, this._list.width, this._list.height).contains(event.stageX, event.stageY))
         {
             return;
         }
@@ -156,7 +156,7 @@ export class ComboBox extends Component {
     {
         this._open = false;
         this._dropDownButton.label = '+';
-        if (this.stage != null && this.stage.contains(this._list) )
+        if (this.stage != null && this.stage.contains(this._list))
         {
             this.stage.removeChild(this._list);
         }

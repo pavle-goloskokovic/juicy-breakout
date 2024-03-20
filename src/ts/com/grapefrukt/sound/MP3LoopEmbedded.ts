@@ -7,7 +7,7 @@ export class MP3LoopEmbedded extends MP3LoopBase {
     {
         super('', false, false, loops);
         this._out = new soundClass() as Sound;
-        if (autoLoad )
+        if (autoLoad)
         {
             this.load();
         }

@@ -29,7 +29,7 @@ export class MP3LoopBase extends EventDispatcher {
         this._loops = loops;
         this.playOnLoad = playOnLoad;
         this._out = new Sound();
-        if (autoLoad && this._url )
+        if (autoLoad && this._url)
         {
             this.load();
         }
@@ -38,11 +38,11 @@ export class MP3LoopBase extends EventDispatcher {
     load (): void
     {
         console.log('MP3LoopBase, load()', this._state);
-        if (this.loaded || this.loading )
+        if (this.loaded || this.loading)
         {
             return;
         }
-        if (MP3LoopBase.ASSET_CLASS )
+        if (MP3LoopBase.ASSET_CLASS)
         {
             this._state = MP3LoopBase.LOADING;
             this._out = new MP3LoopBase.ASSET_CLASS[this._url.substr(0, this._url.length - 4)]() as Sound;
@@ -76,7 +76,7 @@ export class MP3LoopBase extends EventDispatcher {
         console.log('MP3LoopBase, handleLoadComplete()', this._state);
         this._state = MP3LoopBase.LOADED;
         dispatchEvent(new MP3LoopEvent(MP3LoopEvent.COMPLETE, this));
-        if (this._play_on_load )
+        if (this._play_on_load)
         {
             this.play();
         }
@@ -85,7 +85,7 @@ export class MP3LoopBase extends EventDispatcher {
     play (): boolean
     {
         console.log('playing loop, state:', this._state);
-        if (this._playing || !this.loaded )
+        if (this._playing || !this.loaded)
         {
             return false;
         }
@@ -97,7 +97,7 @@ export class MP3LoopBase extends EventDispatcher {
 
     stop (): boolean
     {
-        if (!this._playing )
+        if (!this._playing)
         {
             return false;
         }

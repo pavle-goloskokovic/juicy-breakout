@@ -53,7 +53,7 @@ export class Panel extends Component {
         super.draw();
         this._background.graphics.clear();
         this._background.graphics.lineStyle(1, 0, 0.1);
-        if (this._color == -1 )
+        if (this._color == -1)
         {
             this._background.graphics.beginFill(Style.PANEL);
         }
@@ -72,7 +72,7 @@ export class Panel extends Component {
 
     protected drawGrid (): void
     {
-        if (!this._showGrid )
+        if (!this._showGrid)
         {
             return;
         }
@@ -92,7 +92,7 @@ export class Panel extends Component {
     set shadow (b: boolean)
     {
         this._shadow = b;
-        if (this._shadow )
+        if (this._shadow)
         {
             this.filters = [this.getShadow(2, true)];
         }

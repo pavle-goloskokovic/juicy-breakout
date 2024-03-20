@@ -18,16 +18,16 @@ export class GTween {
         for (let i = 0; i < propertyNames.length; i++)
         {
             const propertyName: string = propertyNames[i];
-            if (propertyName == '*' )
+            if (propertyName == '*')
             {
                 GTween.hasStarPlugins = true;
             }
-            if (GTween.plugins[propertyName] == null )
+            if (GTween.plugins[propertyName] == null)
             {
                 GTween.plugins[propertyName] = [plugin];
                 continue;
             }
-            if (highPriority )
+            if (highPriority)
             {
                 GTween.plugins[propertyName].unshift(plugin);
             }
@@ -53,7 +53,7 @@ export class GTween {
     {
         const t: number = GTween.time;
         GTween.time = getTimer() / 1000;
-        if (GTween.pauseAll )
+        if (GTween.pauseAll)
         {
             return;
         }
@@ -100,18 +100,18 @@ export class GTween {
         this.target = target;
         this.duration = duration;
         this.pluginData = this.copy(pluginData, {});
-        if (props )
+        if (props)
         {
             const swap: boolean = props.swapValues;
             delete props.swapValues;
         }
         this.copy(props, this);
         this.resetValues(values);
-        if (swap )
+        if (swap)
         {
             this.swapValues();
         }
-        if ((this.duration == 0 && this.delay == 0) && this.autoPlay )
+        if ((this.duration == 0 && this.delay == 0) && this.autoPlay)
         {
             this.position = 0;
         }
@@ -124,19 +124,19 @@ export class GTween {
 
     set paused (value: boolean)
     {
-        if (value == this._paused )
+        if (value == this._paused)
         {
             return;
         }
         this._paused = value;
-        if (this._paused )
+        if (this._paused)
         {
             delete GTween.tickList[this];
             this.setGCLock(false);
         }
         else
         {
-            if (this.repeatCount != 0 && this._position >= this.repeatCount * this.duration )
+            if (this.repeatCount != 0 && this._position >= this.repeatCount * this.duration)
             {
                 this._inited = false;
                 this._position = -this.delay;
@@ -158,9 +158,9 @@ export class GTween {
         this.calculatedPositionOld = this.calculatedPosition;
         const maxPosition: number = this.repeatCount * this.duration;
         const end: boolean = value >= maxPosition && this.repeatCount > 0;
-        if (end )
+        if (end)
         {
-            if (this.calculatedPositionOld == maxPosition )
+            if (this.calculatedPositionOld == maxPosition)
             {
                 return;
             }
@@ -171,15 +171,15 @@ export class GTween {
         {
             this._position = value < -this._delay ? -this._delay : value;
             this.calculatedPosition = this._position < 0 ? 0 : this._position % this.duration;
-            if (this.reflect && this._position / this.duration & 1 )
+            if (this.reflect && this._position / this.duration & 1)
             {
                 this.calculatedPosition = this.duration - this.calculatedPosition;
             }
         }
         this.ratio = this.duration == 0 && this._position >= 0 ? 1 : this.ease(this.calculatedPosition / this.duration, 0, 1, 1);
-        if ((this.target && (this._position >= 0 || this.positionOld >= 0)) && this._position != this.positionOld )
+        if ((this.target && (this._position >= 0 || this.positionOld >= 0)) && this._position != this.positionOld)
         {
-            if (!this._inited )
+            if (!this._inited)
             {
                 this.init();
             }
@@ -189,14 +189,14 @@ export class GTween {
                 const rangeVal: number = this._rangeValues[n];
                 let val: number = initVal + rangeVal * this.ratio;
                 const pluginArr: any[] = GTween.plugins[n];
-                if (pluginArr )
+                if (pluginArr)
                 {
                     const l: number = pluginArr.length;
                     for (let i = 0; i < l; i++)
                     {
                         val = pluginArr[i].tween(this, n, val, initVal, rangeVal, this.ratio, end);
                     }
-                    if (!isNaN(val) )
+                    if (!isNaN(val))
                     {
                         this.target[n] = val;
                     }
@@ -207,7 +207,7 @@ export class GTween {
                 }
             }
         }
-        if (GTween.hasStarPlugins )
+        if (GTween.hasStarPlugins)
         {
             pluginArr = GTween.plugins['*'];
             l = pluginArr.length;
@@ -216,18 +216,18 @@ export class GTween {
                 pluginArr[i].tween(this, '*', NaN, NaN, NaN, this.ratio, end);
             }
         }
-        if (this.onChange != null && !this.suppressEvents )
+        if (this.onChange != null && !this.suppressEvents)
         {
             this.onChange(this);
         }
-        if (end )
+        if (end)
         {
             this.paused = true;
-            if (this.nextTween )
+            if (this.nextTween)
             {
                 this.nextTween.paused = false;
             }
-            if (this.onComplete != null && !this.suppressEvents )
+            if (this.onComplete != null && !this.suppressEvents)
             {
                 this.onComplete(this);
             }
@@ -241,7 +241,7 @@ export class GTween {
 
     set delay (value: number)
     {
-        if (this._position <= 0 )
+        if (this._position <= 0)
         {
             this._position = -value;
         }
@@ -250,7 +250,7 @@ export class GTween {
 
     get proxy (): TargetProxy
     {
-        if (this._proxy == null )
+        if (this._proxy == null)
         {
             this._proxy = new TargetProxy(this);
         }
@@ -299,7 +299,7 @@ export class GTween {
 
     swapValues (): void
     {
-        if (!this._inited )
+        if (!this._inited)
         {
             this.init();
         }
@@ -310,7 +310,7 @@ export class GTween {
         {
             this._rangeValues[n] *= -1;
         }
-        if (this._position < 0 )
+        if (this._position < 0)
         {
             const pos: number = this.positionOld;
             this.position = 0;
@@ -330,7 +330,7 @@ export class GTween {
         this._rangeValues = {};
         for (const n in this._values)
         {
-            if (GTween.plugins[n] )
+            if (GTween.plugins[n])
             {
                 const pluginArr: any[] = GTween.plugins[n];
                 const l: number = pluginArr.length;
@@ -339,7 +339,7 @@ export class GTween {
                 {
                     value = pluginArr[i].init(this, n, value);
                 }
-                if (!isNaN(value) )
+                if (!isNaN(value))
                 {
                     this._rangeValues[n] = this._values[n] - (this._initValues[n] = value);
                 }
@@ -349,7 +349,7 @@ export class GTween {
                 this._rangeValues[n] = this._values[n] - (this._initValues[n] = this.target[n]);
             }
         }
-        if (GTween.hasStarPlugins )
+        if (GTween.hasStarPlugins)
         {
             pluginArr = GTween.plugins['*'];
             l = pluginArr.length;
@@ -358,7 +358,7 @@ export class GTween {
                 pluginArr[i].init(this, '*', NaN);
             }
         }
-        if (this.onInit != null && !this.suppressEvents )
+        if (this.onInit != null && !this.suppressEvents)
         {
             this.onInit(this);
         }
@@ -378,11 +378,11 @@ export class GTween {
     protected invalidate (): void
     {
         this._inited = false;
-        if (this._position > 0 )
+        if (this._position > 0)
         {
             this._position = 0;
         }
-        if (this.autoPlay )
+        if (this.autoPlay)
         {
             this.paused = false;
         }
@@ -390,9 +390,9 @@ export class GTween {
 
     protected setGCLock (value: boolean): void
     {
-        if (value )
+        if (value)
         {
-            if (this.target instanceof IEventDispatcher )
+            if (this.target instanceof IEventDispatcher)
             {
                 this.target.addEventListener('_', this.setGCLock);
             }
@@ -403,7 +403,7 @@ export class GTween {
         }
         else
         {
-            if (this.target instanceof IEventDispatcher )
+            if (this.target instanceof IEventDispatcher)
             {
                 this.target.removeEventListener('_', this.setGCLock);
             }
@@ -415,7 +415,7 @@ export class GTween {
     {
         for (const n in o1)
         {
-            if (smart && o1[n] == null )
+            if (smart && o1[n] == null)
             {
                 delete o2[n];
             }
@@ -450,7 +450,7 @@ class TargetProxy extends Proxy {
 
     setProperty (prop: any, value: any): void
     {
-        if ((value instanceof Boolean || value instanceof String) || isNaN(value) )
+        if ((value instanceof Boolean || value instanceof String) || isNaN(value))
         {
             this.tween.target[prop] = value;
         }

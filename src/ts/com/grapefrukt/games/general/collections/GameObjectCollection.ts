@@ -21,17 +21,17 @@ export class GameObjectCollection extends Sprite {
     {
         let dist = 0.0;
         let minDist: number = maxDistance;
-        if (minDist != Number.MAX_VALUE )
+        if (minDist != Number.MAX_VALUE)
         {
             minDist *= minDist;
         }
         let minObj: GameObject;
         for (const go of this._collection)
         {
-            if ((!classFilter || go instanceof classFilter) && go != filterObject )
+            if ((!classFilter || go instanceof classFilter) && go != filterObject)
             {
                 dist = (go.x - x) * (go.x - x) + (go.y - y) * (go.y - y);
-                if (dist < minDist )
+                if (dist < minDist)
                 {
                     minDist = dist;
                     minObj = go;
@@ -60,7 +60,7 @@ export class GameObjectCollection extends Sprite {
         const go: GameObject = this._collection[pos];
         this._collection.splice(pos, 1);
         go.handleDetach(this);
-        if (doRemove )
+        if (doRemove)
         {
             go.remove();
         }
@@ -70,11 +70,11 @@ export class GameObjectCollection extends Sprite {
     remove (go: GameObject, doRemove: boolean): GameObject
     {
         const i: number = this._collection.indexOf(go);
-        if (this._collection[i] && GameObject(this._collection[i]) == go )
+        if (this._collection[i] && GameObject(this._collection[i]) == go)
         {
             this._collection.splice(i, 1);
             go.handleDetach(this);
-            if (doRemove )
+            if (doRemove)
             {
                 go.remove();
             }
@@ -87,7 +87,7 @@ export class GameObjectCollection extends Sprite {
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
-            if (this._collection[i] && GameObject(this._collection[i]) == go )
+            if (this._collection[i] && GameObject(this._collection[i]) == go)
             {
                 return i;
             }
@@ -97,7 +97,7 @@ export class GameObjectCollection extends Sprite {
 
     getRandom (): GameObject
     {
-        if (this._collection.length == 0 )
+        if (this._collection.length == 0)
         {
             return null;
         }
@@ -114,7 +114,7 @@ export class GameObjectCollection extends Sprite {
     checkCollision (x: number, y: number, classFilter: Class = null, filterObject: GameObject = null): GameObject
     {
         const hitGo: GameObject = this.getClosest(x, y, Number.MAX_VALUE, classFilter, filterObject);
-        if ((hitGo && !hitGo.flaggedForRemoval) && hitGo.hitTestPoint(x, y, true) )
+        if ((hitGo && !hitGo.flaggedForRemoval) && hitGo.hitTestPoint(x, y, true))
         {
             return hitGo;
         }
@@ -125,7 +125,7 @@ export class GameObjectCollection extends Sprite {
     {
         for (const go of this._collection)
         {
-            if (go instanceof findClass )
+            if (go instanceof findClass)
             {
                 return true;
             }
@@ -152,7 +152,7 @@ export class GameObjectCollection extends Sprite {
 
     get head (): GameObject
     {
-        if (this._collection.length )
+        if (this._collection.length)
         {
             return this._collection[0];
         }
@@ -161,7 +161,7 @@ export class GameObjectCollection extends Sprite {
 
     get tail (): GameObject
     {
-        if (this._collection.length )
+        if (this._collection.length)
         {
             return this._collection[this._collection.length - 1];
         }

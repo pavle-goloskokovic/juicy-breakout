@@ -16,7 +16,7 @@ export class PushButton extends Component {
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(MouseEvent.CLICK, defaultHandler);
         }
@@ -52,7 +52,7 @@ export class PushButton extends Component {
     protected drawFace (): void
     {
         this._face.graphics.clear();
-        if (this._down )
+        if (this._down)
         {
             this._face.graphics.beginFill(Style.BUTTON_DOWN);
         }
@@ -75,7 +75,7 @@ export class PushButton extends Component {
         this._label.text = this._labelText;
         this._label.autoSize = true;
         this._label.draw();
-        if (this._label.width > this._width - 4 )
+        if (this._label.width > this._width - 4)
         {
             this._label.autoSize = false;
             this._label.width = this._width - 4;
@@ -97,7 +97,7 @@ export class PushButton extends Component {
     protected onMouseOut (event: MouseEvent): void
     {
         this._over = false;
-        if (!this._down )
+        if (!this._down)
         {
             this._face.filters = [this.getShadow(1)];
         }
@@ -114,7 +114,7 @@ export class PushButton extends Component {
 
     protected onMouseGoUp (event: MouseEvent): void
     {
-        if (this._toggle && this._over )
+        if (this._toggle && this._over)
         {
             this._selected = !this._selected;
         }
@@ -137,7 +137,7 @@ export class PushButton extends Component {
 
     set selected (value: boolean)
     {
-        if (!this._toggle )
+        if (!this._toggle)
         {
             value = false;
         }

@@ -20,7 +20,7 @@ export class MP3LoopGapless extends MP3LoopBase {
     {
         super(url, autoLoad, playOnLoad);
         this._samples_total = samplesTotal;
-        if (this._samples_total == 0 )
+        if (this._samples_total == 0)
         {
             throw new Error('sound must be longer than zero samples');
         }
@@ -36,7 +36,7 @@ export class MP3LoopGapless extends MP3LoopBase {
 
     play (): boolean
     {
-        if (this._playing || !this.loaded )
+        if (this._playing || !this.loaded)
         {
             return false;
         }
@@ -47,7 +47,7 @@ export class MP3LoopGapless extends MP3LoopBase {
 
     stop (): boolean
     {
-        if (!super.stop() )
+        if (!super.stop())
         {
             return false;
         }
@@ -64,7 +64,7 @@ export class MP3LoopGapless extends MP3LoopBase {
     {
         while (0 < length)
         {
-            if (this._samples_position + length > this._samples_total )
+            if (this._samples_position + length > this._samples_total)
             {
                 const read: number = this._samples_total - this._samples_position;
                 this._mp3.extract(target, read, this._samples_position + this.MAGIC_DELAY);
@@ -77,7 +77,7 @@ export class MP3LoopGapless extends MP3LoopBase {
                 this._samples_position += length;
                 length = 0;
             }
-            if (this._samples_position == this._samples_total )
+            if (this._samples_position == this._samples_total)
             {
                 this._samples_position = 0;
             }

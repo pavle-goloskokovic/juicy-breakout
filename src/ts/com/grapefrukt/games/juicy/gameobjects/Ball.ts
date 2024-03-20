@@ -54,11 +54,11 @@ export class Ball extends GameObject {
         this.exX = this.x;
         this.exY = this.y;
         super.update(timeDelta);
-        if (Settings.EFFECT_BALL_ROTATE )
+        if (Settings.EFFECT_BALL_ROTATE)
         {
             const target_rotation: number = Math.atan2(this.velocityY, this.velocityX) / Math.PI * 180;
             this._ball_rotation += (target_rotation - this._ball_rotation) * timeDelta * 0.5;
-            if (Settings.EFFECT_BALL_ROTATE_ANIMATED == false )
+            if (Settings.EFFECT_BALL_ROTATE_ANIMATED == false)
             {
                 this._ball_rotation = target_rotation;
             }
@@ -68,20 +68,20 @@ export class Ball extends GameObject {
         {
             this._gfx.rotation = 0;
         }
-        if (Math.abs(this._ball_shakiness) > 0 )
+        if (Math.abs(this._ball_shakiness) > 0)
         {
             this._ball_shakiness_vel += timeDelta * -0.25 * this._ball_shakiness;
             this._ball_shakiness_vel -= timeDelta * this._ball_shakiness_vel * 0.10;
             this._ball_shakiness += timeDelta * this._ball_shakiness_vel;
         }
-        if (Settings.EFFECT_BALL_STRETCH )
+        if (Settings.EFFECT_BALL_STRETCH)
         {
-            if (Settings.EFFECT_BALL_STRETCH_ANIMATED == false )
+            if (Settings.EFFECT_BALL_STRETCH_ANIMATED == false)
             {
                 this._gfx.scaleX = 1 + (this.velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
                 this._gfx.scaleY = 1 - (this.velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
             }
-            else if (Settings.EFFECT_BALL_STRETCH_ANIMATED )
+            else if (Settings.EFFECT_BALL_STRETCH_ANIMATED)
             {
                 let relative: number = 1.0 + this.velocity / (2 * Settings.BALL_MAX_VELOCITY);
                 relative = MathUtil.clamp(relative, 2.5, 1.0);
@@ -97,9 +97,9 @@ export class Ball extends GameObject {
         {
             this._gfx.scaleX = (this._gfx.scaleY = 1);
         }
-        if (Settings.EFFECT_BALL_EXTRA_SCALE )
+        if (Settings.EFFECT_BALL_EXTRA_SCALE)
         {
-            if (this._ball_extra_scale > 0.01 )
+            if (this._ball_extra_scale > 0.01)
             {
                 this._gfx.scaleX += this._ball_extra_scale;
                 this._gfx.scaleY += this._ball_extra_scale;
@@ -110,7 +110,7 @@ export class Ball extends GameObject {
         {
             this._ball_extra_scale = 0;
         }
-        if ((this._trailCooldown -= timeDelta) < 0 )
+        if ((this._trailCooldown -= timeDelta) < 0)
         {
             this._trail.addSegment(this.x, this.y);
             this._trailCooldown = 3;
@@ -124,9 +124,9 @@ export class Ball extends GameObject {
         this._ball_shakiness = 0.1;
         this._ball_shakiness_vel = 2.5;
         this._ball_extra_scale += 1.5;
-        if (Settings.EFFECT_BALL_GLOW )
+        if (Settings.EFFECT_BALL_GLOW)
         {
-            if (!this._tween_brightness )
+            if (!this._tween_brightness)
             {
                 this._tween_brightness = new GTween(this, 0.7, null, { ease: Back.easeOut });
             }

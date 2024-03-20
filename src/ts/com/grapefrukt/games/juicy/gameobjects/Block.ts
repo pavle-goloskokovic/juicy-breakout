@@ -34,17 +34,17 @@ export class Block extends GameObject {
         this._gfx = new Sprite();
         this.addChild(this._gfx);
         this.render(Settings.COLOR_BLOCK);
-        if (Settings.EFFECT_TWEENIN_ENABLED )
+        if (Settings.EFFECT_TWEENIN_ENABLED)
         {
-            if (Settings.EFFECT_TWEENIN_PROPERTY_Y )
+            if (Settings.EFFECT_TWEENIN_PROPERTY_Y)
             {
                 this._gfx.y = -500;
             }
-            if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION )
+            if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION)
             {
                 this._gfx.rotation = Math.random() * 90 - 45;
             }
-            if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE )
+            if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE)
             {
                 this._gfx.scaleX = (this._gfx.scaleY = .2);
             }
@@ -63,11 +63,11 @@ export class Block extends GameObject {
     {
         this._collidable = false;
         let delayDestruction = false;
-        if (Settings.EFFECT_BLOCK_DARKEN )
+        if (Settings.EFFECT_BLOCK_DARKEN)
         {
             this.transform.colorTransform = new ColorTransform(.7, .7, .8);
         }
-        if (Settings.EFFECT_BLOCK_PUSH )
+        if (Settings.EFFECT_BLOCK_PUSH)
         {
             const v: Point = new Point(this.x - ball.x, this.y - ball.y);
             v.normalize(ball.velocity * 1);
@@ -80,17 +80,17 @@ export class Block extends GameObject {
         this.addChild(this._sliceEffect);
         this._gfx.visible = false;
         Freezer.freeze();
-        if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER )
+        if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER)
         {
             this._sliceEffect.slices[0].velocityR = Math.random() > .5 ? Settings.EFFECT_BLOCK_SHATTER_ROTATION : -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
             delayDestruction = true;
         }
-        if (Settings.EFFECT_BLOCK_SHATTER )
+        if (Settings.EFFECT_BLOCK_SHATTER)
         {
             this._sliceEffect.slice(new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10), new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10));
             delayDestruction = true;
         }
-        if (Settings.EFFECT_BLOCK_SCALE )
+        if (Settings.EFFECT_BLOCK_SCALE)
         {
             for (const slice of this._sliceEffect.slices)
             {
@@ -99,7 +99,7 @@ export class Block extends GameObject {
             delayDestruction = true;
         }
         dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED, ball, this));
-        if (!delayDestruction )
+        if (!delayDestruction)
         {
             this.remove();
         }
@@ -124,11 +124,11 @@ export class Block extends GameObject {
     update (timeDelta = 1): void
     {
         super.update(timeDelta);
-        if (this._sliceEffect )
+        if (this._sliceEffect)
         {
             this._sliceEffect.update(timeDelta);
         }
-        if (Settings.EFFECT_BLOCK_GRAVITY && !this._collidable )
+        if (Settings.EFFECT_BLOCK_GRAVITY && !this._collidable)
         {
             this.velocityY += .4 * timeDelta;
         }

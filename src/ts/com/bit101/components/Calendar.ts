@@ -79,7 +79,7 @@ export class Calendar extends Panel {
                 break;
             case 1:
                 {
-                    if (year % 400 == 0 || year % 100 != 0 && year % 4 == 0 )
+                    if (year % 400 == 0 || year % 100 != 0 && year % 4 == 0)
                     {
                         return 29;
                     }
@@ -109,7 +109,7 @@ export class Calendar extends Panel {
             btn.visible = true;
             btn.label = (i + 1).toString();
             btn.tag = i + 1;
-            if (i + 1 == this._day )
+            if (i + 1 == this._day)
             {
                 this._selection.x = btn.x;
                 this._selection.y = btn.y;
@@ -128,7 +128,7 @@ export class Calendar extends Panel {
     protected onNextMonth (event: MouseEvent): void
     {
         this._month++;
-        if (this._month > 11 )
+        if (this._month > 11)
         {
             this._month = 0;
             this._year++;
@@ -140,7 +140,7 @@ export class Calendar extends Panel {
     protected onPrevMonth (event: MouseEvent): void
     {
         this._month--;
-        if (this._month < 0 )
+        if (this._month < 0)
         {
             this._month = 11;
             this._year--;

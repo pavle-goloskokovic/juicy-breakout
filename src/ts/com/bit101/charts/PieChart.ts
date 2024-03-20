@@ -52,7 +52,7 @@ export class PieChart extends Chart {
         const label: Label = new Label(this._sprite, 0, 0, text);
         label.x = Math.cos(angle) * radius;
         label.y = Math.sin(angle) * radius - label.height / 2;
-        if (label.x < 0 )
+        if (label.x < 0)
         {
             label.x -= label.width;
         }
@@ -73,7 +73,7 @@ export class PieChart extends Chart {
 
     protected getLabelForData (index: number): string
     {
-        if (!(this._data[index] instanceof Number) && this._data[index].label != null )
+        if (!(this._data[index] instanceof Number) && this._data[index].label != null)
         {
             return this._data[index].label;
         }
@@ -83,11 +83,11 @@ export class PieChart extends Chart {
 
     protected getColorForData (index: number): number
     {
-        if (!this._data[index] instanceof Number && this._data[index].color != null )
+        if (!this._data[index] instanceof Number && this._data[index].color != null)
         {
             return this._data[index].color;
         }
-        if (index < this._colors.length )
+        if (index < this._colors.length)
         {
             return this._colors[index];
         }
@@ -96,11 +96,11 @@ export class PieChart extends Chart {
 
     protected getValueForData (index: number): number
     {
-        if (this._data[index] instanceof Number )
+        if (this._data[index] instanceof Number)
         {
             return this._data[index];
         }
-        if (this._data[index].value != null )
+        if (this._data[index].value != null)
         {
             return this._data[index].value;
         }

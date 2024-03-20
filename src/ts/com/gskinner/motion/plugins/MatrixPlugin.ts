@@ -7,7 +7,7 @@ export class MatrixPlugin {
     protected static tweenProperties: any[] = ['a', 'b', 'c', 'd', 'tx', 'ty'];
     static install (): void
     {
-        if (MatrixPlugin.instance )
+        if (MatrixPlugin.instance)
         {
             return;
         }
@@ -17,7 +17,7 @@ export class MatrixPlugin {
 
     init (tween: GTween, name: string, value: number): number
     {
-        if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled) )
+        if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled))
         {
             return value;
         }
@@ -26,7 +26,7 @@ export class MatrixPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled) )
+        if (!(MatrixPlugin.enabled && tween.pluginData.MatrixEnabled == null || tween.pluginData.MatrixEnabled))
         {
             return value;
         }

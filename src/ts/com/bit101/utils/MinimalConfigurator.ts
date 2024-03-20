@@ -48,7 +48,7 @@ export class MinimalConfigurator extends EventDispatcher {
         {
             const comp: XML = xml.children()[i];
             const compInst: Component = this.parseComp(comp);
-            if (compInst != null )
+            if (compInst != null)
             {
                 this.parent.addChild(compInst);
             }
@@ -64,21 +64,21 @@ export class MinimalConfigurator extends EventDispatcher {
             const classRef: Class = getDefinitionByName('com.bit101.components.' + xml.name()) as Class;
             compInst = new classRef();
             const id: string = this.trim(xml.id.toString());
-            if (id != '' )
+            if (id != '')
             {
                 compInst.name = id;
                 this.idMap[id] = compInst;
-                if (this.parent.hasOwnProperty(id) )
+                if (this.parent.hasOwnProperty(id))
                 {
                     this.parent[id] = compInst;
                 }
             }
-            if (xml.event.toString() != '' )
+            if (xml.event.toString() != '')
             {
                 const parts: any[] = xml.event.split(':');
                 const eventName: string = this.trim(parts[0]);
                 const handler: string = this.trim(parts[1]);
-                if (this.parent.hasOwnProperty(handler) )
+                if (this.parent.hasOwnProperty(handler))
                 {
                     compInst.addEventListener(eventName, this.parent[handler]);
                 }
@@ -86,13 +86,13 @@ export class MinimalConfigurator extends EventDispatcher {
             for (const attrib of xml.attributes())
             {
                 const prop: string = attrib.name().toString();
-                if (compInst.hasOwnProperty(prop) )
+                if (compInst.hasOwnProperty(prop))
                 {
-                    if (compInst[prop] instanceof Boolean )
+                    if (compInst[prop] instanceof Boolean)
                     {
                         compInst[prop] = attrib == 'true';
                     }
-                    else if (((prop == 'value' || prop == 'lowValue') || prop == 'highValue') || prop == 'choice' )
+                    else if (((prop == 'value' || prop == 'lowValue') || prop == 'highValue') || prop == 'choice')
                     {
                         specialProps[prop] = attrib;
                     }
@@ -109,7 +109,7 @@ export class MinimalConfigurator extends EventDispatcher {
             for (let j = 0; j < xml.children().length(); j++)
             {
                 const child: Component = this.parseComp(xml.children()[j]);
-                if (child != null )
+                if (child != null)
                 {
                     compInst.addChild(child);
                 }

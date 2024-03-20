@@ -6,15 +6,15 @@ export class Bounce {
 
     static easeOut (ratio: number, unused1: number, unused2: number, unused3: number): number
     {
-        if (ratio < 1 / 2.75 )
+        if (ratio < 1 / 2.75)
         {
             return 7.5625 * ratio * ratio;
         }
-        else if (ratio < 2 / 2.75 )
+        else if (ratio < 2 / 2.75)
         {
             return 7.5625 * (ratio -= 1.5 / 2.75) * ratio + 0.75;
         }
-        else if (ratio < 2.5 / 2.75 )
+        else if (ratio < 2.5 / 2.75)
         {
             return 7.5625 * (ratio -= 2.25 / 2.75) * ratio + 0.9375;
         }

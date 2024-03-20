@@ -16,7 +16,7 @@ export class MP3LoopController {
 
     private handleTweenComplete (g: GTween): void
     {
-        if (this._volume == 0 )
+        if (this._volume == 0)
         {
             this._loop.stop();
         }
@@ -24,7 +24,7 @@ export class MP3LoopController {
 
     private handleTweenChange (g: GTween): void
     {
-        if (!this._loop.soundChannel )
+        if (!this._loop.soundChannel)
         {
             return;
         }
@@ -36,7 +36,7 @@ export class MP3LoopController {
     tweenVolume (value: number): void
     {
         this._gtween.proxy.volume = value;
-        if (value > 0 && !this._loop.playing )
+        if (value > 0 && !this._loop.playing)
         {
             this._loop.play();
         }
@@ -44,12 +44,12 @@ export class MP3LoopController {
 
     play (): boolean
     {
-        if (!this._loop.play() )
+        if (!this._loop.play())
         {
             return false;
         }
         this._loop.soundChannel.soundTransform = new SoundTransform(this._volume);
-        if (this._next_music && !this._next_music.loaded )
+        if (this._next_music && !this._next_music.loaded)
         {
             this._next_music.load();
         }

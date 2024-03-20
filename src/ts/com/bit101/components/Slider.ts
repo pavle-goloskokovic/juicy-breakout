@@ -21,7 +21,7 @@ export class Slider extends Component {
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -30,7 +30,7 @@ export class Slider extends Component {
     protected init (): void
     {
         super.init();
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this.setSize(100, 10);
         }
@@ -59,7 +59,7 @@ export class Slider extends Component {
         this._back.graphics.beginFill(Style.BACKGROUND);
         this._back.graphics.drawRect(0, 0, this._width, this._height);
         this._back.graphics.endFill();
-        if (this._backClick )
+        if (this._backClick)
         {
             this._back.addEventListener(MouseEvent.MOUSE_DOWN, this.onBackClick);
         }
@@ -73,7 +73,7 @@ export class Slider extends Component {
     {
         this._handle.graphics.clear();
         this._handle.graphics.beginFill(Style.BUTTON_FACE);
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this._handle.graphics.drawRect(1, 1, this._height - 2, this._height - 2);
         }
@@ -87,7 +87,7 @@ export class Slider extends Component {
 
     protected correctValue (): void
     {
-        if (this._max > this._min )
+        if (this._max > this._min)
         {
             this._value = Math.min(this._value, this._max);
             this._value = Math.max(this._value, this._min);
@@ -102,7 +102,7 @@ export class Slider extends Component {
     protected positionHandle (): void
     {
         let range: number;
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             range = this._width - this._height;
             this._handle.x = (this._value - this._min) / (this._max - this._min) * range;
@@ -130,7 +130,7 @@ export class Slider extends Component {
 
     protected onBackClick (event: MouseEvent): void
     {
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this._handle.x = this.mouseX - this._height / 2;
             this._handle.x = Math.max(this._handle.x, 0);
@@ -151,7 +151,7 @@ export class Slider extends Component {
     {
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
         this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this._handle.startDrag(false, new Rectangle(0, 0, this._width - this._height, 0));
         }
@@ -171,7 +171,7 @@ export class Slider extends Component {
     protected onSlide (event: MouseEvent): void
     {
         const oldValue: number = this._value;
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this._value = this._handle.x / (this.width - this._height) * (this._max - this._min) + this._min;
         }
@@ -179,7 +179,7 @@ export class Slider extends Component {
         {
             this._value = (this._height - this._width - this._handle.y) / (this.height - this._width) * (this._max - this._min) + this._min;
         }
-        if (this._value != oldValue )
+        if (this._value != oldValue)
         {
             dispatchEvent(new Event(Event.CHANGE));
         }

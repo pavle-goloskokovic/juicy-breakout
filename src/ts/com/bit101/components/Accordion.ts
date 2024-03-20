@@ -72,7 +72,7 @@ export class Accordion extends Component {
     protected onWindowSelect (event: Event): void
     {
         const window: Window = event.target as Window;
-        if (window.minimized )
+        if (window.minimized)
         {
             for (let i = 0; i < this._windows.length; i++)
             {

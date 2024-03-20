@@ -53,7 +53,7 @@ export class Text extends Component {
         this._panel.draw();
         this._tf.width = this._width - 4;
         this._tf.height = this._height - 4;
-        if (this._html )
+        if (this._html)
         {
             this._tf.htmlText = this._text;
         }
@@ -61,7 +61,7 @@ export class Text extends Component {
         {
             this._tf.text = this._text;
         }
-        if (this._editable )
+        if (this._editable)
         {
             this._tf.mouseEnabled = true;
             this._tf.selectable = true;
@@ -85,7 +85,7 @@ export class Text extends Component {
     set text (t: string)
     {
         this._text = t;
-        if (this._text == null )
+        if (this._text == null)
         {
             this._text = '';
         }

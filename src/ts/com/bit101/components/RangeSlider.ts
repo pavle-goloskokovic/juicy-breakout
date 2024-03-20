@@ -35,7 +35,7 @@ export class RangeSlider extends Component {
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -44,7 +44,7 @@ export class RangeSlider extends Component {
     protected init (): void
     {
         super.init();
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this.setSize(110, 10);
             this._labelPosition = RangeSlider.TOP;
@@ -93,7 +93,7 @@ export class RangeSlider extends Component {
         this._minHandle.graphics.beginFill(Style.BUTTON_FACE);
         this._maxHandle.graphics.clear();
         this._maxHandle.graphics.beginFill(Style.BUTTON_FACE);
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this._minHandle.graphics.drawRect(1, 1, this._height - 2, this._height - 2);
             this._maxHandle.graphics.drawRect(1, 1, this._height - 2, this._height - 2);
@@ -110,7 +110,7 @@ export class RangeSlider extends Component {
     protected positionHandles (): void
     {
         let range: number;
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             range = this._width - this._height * 2;
             this._minHandle.x = (this._lowValue - this._minimum) / (this._maximum - this._minimum) * range;
@@ -131,11 +131,11 @@ export class RangeSlider extends Component {
         this._highLabel.text = this.getLabelForValue(this.highValue);
         this._lowLabel.draw();
         this._highLabel.draw();
-        if (this._orientation == RangeSlider.VERTICAL )
+        if (this._orientation == RangeSlider.VERTICAL)
         {
             this._lowLabel.y = this._minHandle.y + (this._width - this._lowLabel.height) * 0.5;
             this._highLabel.y = this._maxHandle.y + (this._width - this._highLabel.height) * 0.5;
-            if (this._labelPosition == RangeSlider.LEFT )
+            if (this._labelPosition == RangeSlider.LEFT)
             {
                 this._lowLabel.x = -this._lowLabel.width - 5;
                 this._highLabel.x = -this._highLabel.width - 5;
@@ -150,7 +150,7 @@ export class RangeSlider extends Component {
         {
             this._lowLabel.x = this._minHandle.x - this._lowLabel.width + this._height;
             this._highLabel.x = this._maxHandle.x;
-            if (this._labelPosition == RangeSlider.BOTTOM )
+            if (this._labelPosition == RangeSlider.BOTTOM)
             {
                 this._lowLabel.y = this._height + 2;
                 this._highLabel.y = this._height + 2;
@@ -166,10 +166,10 @@ export class RangeSlider extends Component {
     protected getLabelForValue (value: number): string
     {
         let str: string = (Math.round(value * Math.pow(10, this._labelPrecision)) / Math.pow(10, this._labelPrecision)).toString();
-        if (this._labelPrecision > 0 )
+        if (this._labelPrecision > 0)
         {
             const decimal: string = str.split('.')[1] || '';
-            if (decimal.length == 0 )
+            if (decimal.length == 0)
             {
                 str += '.';
             }
@@ -192,7 +192,7 @@ export class RangeSlider extends Component {
     {
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
         this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this._minHandle.startDrag(false, new Rectangle(0, 0, this._maxHandle.x - this._height, 0));
         }
@@ -200,7 +200,7 @@ export class RangeSlider extends Component {
         {
             this._minHandle.startDrag(false, new Rectangle(0, this._maxHandle.y + this._width, 0, this._height - this._maxHandle.y - this._width * 2));
         }
-        if (this._labelMode == RangeSlider.MOVE )
+        if (this._labelMode == RangeSlider.MOVE)
         {
             this._lowLabel.visible = true;
             this._highLabel.visible = true;
@@ -211,7 +211,7 @@ export class RangeSlider extends Component {
     {
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
         this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this._maxHandle.startDrag(false, new Rectangle(this._minHandle.x + this._height, 0, this._width - this._height - this._minHandle.x - this._height, 0));
         }
@@ -219,7 +219,7 @@ export class RangeSlider extends Component {
         {
             this._maxHandle.startDrag(false, new Rectangle(0, 0, 0, this._minHandle.y - this._width));
         }
-        if (this._labelMode == RangeSlider.MOVE )
+        if (this._labelMode == RangeSlider.MOVE)
         {
             this._lowLabel.visible = true;
             this._highLabel.visible = true;
@@ -232,7 +232,7 @@ export class RangeSlider extends Component {
         this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMinSlide);
         this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, this.onMaxSlide);
         this.stopDrag();
-        if (this._labelMode == RangeSlider.MOVE )
+        if (this._labelMode == RangeSlider.MOVE)
         {
             this._lowLabel.visible = false;
             this._highLabel.visible = false;
@@ -242,7 +242,7 @@ export class RangeSlider extends Component {
     protected onMinSlide (event: MouseEvent): void
     {
         const oldValue: number = this._lowValue;
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this._lowValue = this._minHandle.x / (this._width - this._height * 2) * (this._maximum - this._minimum) + this._minimum;
         }
@@ -250,7 +250,7 @@ export class RangeSlider extends Component {
         {
             this._lowValue = (this._height - this._width - this._minHandle.y) / (this.height - this._width * 2) * (this._maximum - this._minimum) + this._minimum;
         }
-        if (this._lowValue != oldValue )
+        if (this._lowValue != oldValue)
         {
             dispatchEvent(new Event(Event.CHANGE));
         }
@@ -260,7 +260,7 @@ export class RangeSlider extends Component {
     protected onMaxSlide (event: MouseEvent): void
     {
         const oldValue: number = this._highValue;
-        if (this._orientation == RangeSlider.HORIZONTAL )
+        if (this._orientation == RangeSlider.HORIZONTAL)
         {
             this._highValue = (this._maxHandle.x - this._height) / (this._width - this._height * 2) * (this._maximum - this._minimum) + this._minimum;
         }
@@ -268,7 +268,7 @@ export class RangeSlider extends Component {
         {
             this._highValue = (this._height - this._width * 2 - this._maxHandle.y) / (this._height - this._width * 2) * (this._maximum - this._minimum) + this._minimum;
         }
-        if (this._highValue != oldValue )
+        if (this._highValue != oldValue)
         {
             dispatchEvent(new Event(Event.CHANGE));
         }

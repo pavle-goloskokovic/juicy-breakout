@@ -7,7 +7,7 @@ export class MotionBlurPlugin implements IGTweenPlugin {
     protected static instance: MotionBlurPlugin;
     static install (): void
     {
-        if (MotionBlurPlugin.instance )
+        if (MotionBlurPlugin.instance)
         {
             return;
         }
@@ -22,22 +22,22 @@ export class MotionBlurPlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(MotionBlurPlugin.enabled && tween.pluginData.MotionBlurEnabled == null || tween.pluginData.MotionBlurEnabled) )
+        if (!(MotionBlurPlugin.enabled && tween.pluginData.MotionBlurEnabled == null || tween.pluginData.MotionBlurEnabled))
         {
             return value;
         }
         let data: any = tween.pluginData.MotionBlurData;
-        if (data == null )
+        if (data == null)
         {
             data = this.initTarget(tween);
         }
         const f: any[] = tween.target.filters;
         const blurF: BlurFilter = f[data.index] as BlurFilter;
-        if (blurF == null )
+        if (blurF == null)
         {
             return value;
         }
-        if (end )
+        if (end)
         {
             f.splice(data.index, 1);
             delete tween.pluginData.MotionBlurData;
@@ -45,7 +45,7 @@ export class MotionBlurPlugin implements IGTweenPlugin {
         else
         {
             const blur: number = Math.abs((tween.ratioOld - ratio) * rangeValue * MotionBlurPlugin.strength);
-            if (name == 'x' )
+            if (name == 'x')
             {
                 blurF.blurX = blur;
             }

@@ -41,7 +41,7 @@ export class Label extends Component {
     {
         super.draw();
         this._tf.text = this._text;
-        if (this._autoSize )
+        if (this._autoSize)
         {
             this._tf.autoSize = TextFieldAutoSize.LEFT;
             this._width = this._tf.width;
@@ -58,7 +58,7 @@ export class Label extends Component {
     set text (t: string)
     {
         this._text = t;
-        if (this._text == null )
+        if (this._text == null)
         {
             this._text = '';
         }

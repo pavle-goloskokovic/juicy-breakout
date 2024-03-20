@@ -8,7 +8,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
     protected static tweenProperties: any[] = ['brightness', 'contrast', 'hue', 'saturation'];
     static install (): void
     {
-        if (ColorAdjustPlugin.instance )
+        if (ColorAdjustPlugin.instance)
         {
             return;
         }
@@ -18,16 +18,16 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
 
     init (tween: GTween, name: string, value: number): number
     {
-        if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled) )
+        if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled))
         {
             return value;
         }
-        if (tween.pluginData.ColorAdjustData == null )
+        if (tween.pluginData.ColorAdjustData == null)
         {
             const f: any[] = tween.target.filters;
             for (let i = 0; i < f.length; i++)
             {
-                if (f[i] instanceof ColorMatrixFilter )
+                if (f[i] instanceof ColorMatrixFilter)
                 {
                     const cmF: ColorMatrixFilter = f[i];
                     const o: any = { index: i, ratio: NaN };
@@ -42,16 +42,16 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled) )
+        if (!(tween.pluginData.ColorAdjustEnabled == null && ColorAdjustPlugin.enabled || tween.pluginData.ColorAdjustEnabled))
         {
             return value;
         }
         let data: any = tween.pluginData.ColorAdjustData;
-        if (data == null )
+        if (data == null)
         {
             data = this.initTarget(tween);
         }
-        if (ratio == data.ratio )
+        if (ratio == data.ratio)
         {
             return value;
         }
@@ -59,13 +59,13 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         ratio = value - initValue;
         const f: any[] = tween.target.filters;
         const cmF: ColorMatrixFilter = f[data.index] as ColorMatrixFilter;
-        if (cmF == null )
+        if (cmF == null)
         {
             return value;
         }
         let initMatrix: any[] = data.initMatrix;
         let targMatrix: any[] = data.matrix;
-        if (rangeValue < 0 )
+        if (rangeValue < 0)
         {
             initMatrix = targMatrix;
             targMatrix = data.initMatrix;
@@ -79,7 +79,7 @@ export class ColorAdjustPlugin implements IGTweenPlugin {
         }
         cmF.matrix = matrix;
         tween.target.filters = f;
-        if (end )
+        if (end)
         {
             delete tween.pluginData.ColorAdjustData;
         }

@@ -28,7 +28,7 @@ export class ColorMatrix extends Array {
     adjustBrightness (value: number): void
     {
         value = this.cleanValue(value, 255);
-        if (value == 0 || isNaN(value) )
+        if (value == 0 || isNaN(value))
         {
             return;
         }
@@ -38,19 +38,19 @@ export class ColorMatrix extends Array {
     adjustContrast (value: number): void
     {
         value = this.cleanValue(value, 100);
-        if (value == 0 || isNaN(value) )
+        if (value == 0 || isNaN(value))
         {
             return;
         }
         let x: number;
-        if (value < 0 )
+        if (value < 0)
         {
             x = 127 + value / 100 * 127;
         }
         else
         {
             x = value % 1;
-            if (x == 0 )
+            if (x == 0)
             {
                 x = ColorMatrix.DELTA_INDEX[value];
             }
@@ -66,7 +66,7 @@ export class ColorMatrix extends Array {
     adjustSaturation (value: number): void
     {
         value = this.cleanValue(value, 100);
-        if (value == 0 || isNaN(value) )
+        if (value == 0 || isNaN(value))
         {
             return;
         }
@@ -80,7 +80,7 @@ export class ColorMatrix extends Array {
     adjustHue (value: number): void
     {
         value = this.cleanValue(value, 180) / 180 * Math.PI;
-        if (value == 0 || isNaN(value) )
+        if (value == 0 || isNaN(value))
         {
             return;
         }
@@ -95,7 +95,7 @@ export class ColorMatrix extends Array {
     concat (matrix: any[]): void
     {
         matrix = this.fixMatrix(matrix);
-        if (matrix.length != ColorMatrix.LENGTH )
+        if (matrix.length != ColorMatrix.LENGTH)
         {
             return;
         }
@@ -154,19 +154,19 @@ export class ColorMatrix extends Array {
 
     protected fixMatrix (matrix: any[] = null): any[]
     {
-        if (matrix == null )
+        if (matrix == null)
         {
             return ColorMatrix.IDENTITY_MATRIX;
         }
-        if (matrix instanceof ColorMatrix )
+        if (matrix instanceof ColorMatrix)
         {
             matrix = matrix.slice(0);
         }
-        if (matrix.length < ColorMatrix.LENGTH )
+        if (matrix.length < ColorMatrix.LENGTH)
         {
             matrix = matrix.slice(0, matrix.length).concat(ColorMatrix.IDENTITY_MATRIX.slice(matrix.length, ColorMatrix.LENGTH));
         }
-        else if (matrix.length > ColorMatrix.LENGTH )
+        else if (matrix.length > ColorMatrix.LENGTH)
         {
             matrix = matrix.slice(0, ColorMatrix.LENGTH);
         }

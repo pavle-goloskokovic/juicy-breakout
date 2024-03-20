@@ -30,7 +30,7 @@ export class GameObject extends Sprite {
     {
         this._flagged_for_removal = true;
         dispatchEvent(new GameObjectEvent(GameObjectEvent.REMOVE, this, null));
-        if (this._auto_remove )
+        if (this._auto_remove)
         {
             this.handleRemoveComplete();
         }
@@ -38,7 +38,7 @@ export class GameObject extends Sprite {
 
     protected handleRemoveComplete (): void
     {
-        if (this.parent )
+        if (this.parent)
         {
             this.parent.removeChild(this);
         }

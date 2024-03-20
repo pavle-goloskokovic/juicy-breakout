@@ -111,7 +111,7 @@ export class Main extends Sprite {
     drawBackground (): void
     {
         this._background.graphics.clear();
-        if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this._backgroundGlitchForce > 0.01 )
+        if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this._backgroundGlitchForce > 0.01)
         {
             this._background.graphics.beginFill(Settings.COLOR_BACKGROUND * (3 * Math.random()));
             this._backgroundGlitchForce *= 0.8;
@@ -152,23 +152,23 @@ export class Main extends Sprite {
     {
         this._timestep.tick();
         this._soundLastTimeHit++;
-        if (Settings.EFFECT_SCREEN_COLORS != this._useColors )
+        if (Settings.EFFECT_SCREEN_COLORS != this._useColors)
         {
             this.updateColorUse();
         }
-        if (!Settings.SOUND_MUSIC )
+        if (!Settings.SOUND_MUSIC)
         {
             SoundManager.soundControl.stopSound('music-0');
         }
-        else if (!SoundManager.soundControl.getSound('music-0').isPlaying )
+        else if (!SoundManager.soundControl.getSound('music-0').isPlaying)
         {
             SoundManager.play('music');
         }
-        if (this._keyboard.keyIsDown(Keyboard.CONTROL) || this._slides.visible )
+        if (this._keyboard.keyIsDown(Keyboard.CONTROL) || this._slides.visible)
         {
             this._timestep.gameSpeed = 0;
         }
-        else if (this._keyboard.keyIsDown(Keyboard.SHIFT) )
+        else if (this._keyboard.keyIsDown(Keyboard.SHIFT))
         {
             this._timestep.gameSpeed = .1;
         }
@@ -183,11 +183,11 @@ export class Main extends Sprite {
         this._blocks.update(this._timestep.timeDelta);
         this._lines.update(this._timestep.timeDelta);
         this._screenshake.update(this._timestep.timeDelta);
-        if (this._balls.collection.length )
+        if (this._balls.collection.length)
         {
             this._paddle.lookAt(Ball(this._balls.collection[0]));
         }
-        if (Settings.EFFECT_PADDLE_STRETCH )
+        if (Settings.EFFECT_PADDLE_STRETCH)
         {
             this._paddle.scaleX = 1 + Math.abs(this._paddle.x - this.mouseX) / 100;
             this._paddle.scaleY = 1.5 - this._paddle.scaleX * .5;
@@ -200,19 +200,19 @@ export class Main extends Sprite {
         const screen_buffer: number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
         for (const ball of this._balls.collection)
         {
-            if (ball.x < screen_buffer && ball.velocityX < 0 )
+            if (ball.x < screen_buffer && ball.velocityX < 0)
             {
                 ball.collide(-1, 1);
             }
-            if (ball.x > Settings.STAGE_W - screen_buffer && ball.velocityX > 0 )
+            if (ball.x > Settings.STAGE_W - screen_buffer && ball.velocityX > 0)
             {
                 ball.collide(-1, 1);
             }
-            if (ball.y < screen_buffer && ball.velocityY < 0 )
+            if (ball.y < screen_buffer && ball.velocityY < 0)
             {
                 ball.collide(1, -1);
             }
-            if (ball.y > Settings.STAGE_H && ball.velocityY > 0 )
+            if (ball.y > Settings.STAGE_H && ball.velocityY > 0)
             {
                 ball.collide(1, -1);
             }
@@ -221,28 +221,28 @@ export class Main extends Sprite {
             {
                 line.checkCollision(ball);
             }
-            if (this._mouseDown )
+            if (this._mouseDown)
             {
                 _mouseArrayx = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
                 _mouseArrayy = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
-                if (_mouseArraylength > Settings.MOUSE_GRAVITY_MAX )
+                if (_mouseArraylength > Settings.MOUSE_GRAVITY_MAX)
                 {
                     _mouseArraynormalize(Settings.MOUSE_GRAVITY_MAX);
                 }
                 ball.velocityX -= _mouseArrayx;
                 ball.velocityY -= _mouseArrayy;
             }
-            if (ball.velocity < Settings.BALL_MIN_VELOCITY )
+            if (ball.velocity < Settings.BALL_MIN_VELOCITY)
             {
                 ball.velocity = Settings.BALL_MIN_VELOCITY;
             }
-            if (ball.velocity > Settings.BALL_MAX_VELOCITY )
+            if (ball.velocity > Settings.BALL_MAX_VELOCITY)
             {
                 ball.velocity -= ball.velocity * Settings.BALL_VELOCITY_LOSS * this._timestep.timeDelta;
             }
             for (const block of this._blocks.collection)
             {
-                if (block.collidable && this.isColliding(ball, block) )
+                if (block.collidable && this.isColliding(ball, block))
                 {
                     const v: Point = new Point(ball.velocityX, ball.velocityY);
                     v.normalize(2);
@@ -252,23 +252,23 @@ export class Main extends Sprite {
                         ball.y -= v.y;
                     }
                     block.collide(ball);
-                    if (Settings.POWERUP_SLICER_BALL && !(block instanceof Paddle) )
+                    if (Settings.POWERUP_SLICER_BALL && !(block instanceof Paddle))
                     {
                         ball.collide(1, 1, block);
                     }
-                    else if (ball.y <= block.y - block.collisionH / 2 && ball.velocityY > 0 )
+                    else if (ball.y <= block.y - block.collisionH / 2 && ball.velocityY > 0)
                     {
                         ball.collide(1, -1, block);
                     }
-                    else if (ball.y >= block.y + block.collisionH / 2 && ball.velocityY < 0 )
+                    else if (ball.y >= block.y + block.collisionH / 2 && ball.velocityY < 0)
                     {
                         ball.collide(1, -1, block);
                     }
-                    else if (ball.x <= block.x - block.collisionW / 2 )
+                    else if (ball.x <= block.x - block.collisionW / 2)
                     {
                         ball.collide(-1, 1, block);
                     }
-                    else if (ball.x >= block.x + block.collisionW / 2 )
+                    else if (ball.x >= block.x + block.collisionW / 2)
                     {
                         ball.collide(-1, 1, block);
                     }
@@ -289,19 +289,19 @@ export class Main extends Sprite {
 
     private handleBallCollide (e: JuicyEvent): void
     {
-        if (e.block != null && e.block != this._paddle )
+        if (e.block != null && e.block != this._paddle)
         {
             this._backgroundGlitchForce = 0.05;
         }
-        if (Settings.EFFECT_PARTICLE_BALL_COLLISION )
+        if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
         {
             ParticleSpawn.burst(e.ball.x, e.ball.y, 5, 90, -Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, e.ball.velocity * 5, .5, this._particles_impact);
         }
-        if (Settings.EFFECT_SCREEN_SHAKE )
+        if (Settings.EFFECT_SCREEN_SHAKE)
         {
             this._screenshake.shake(-e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
         }
-        if (Settings.EFFECT_BLOCK_JELLY )
+        if (Settings.EFFECT_BLOCK_JELLY)
         {
             for (const block of this._blocks.collection)
             {
@@ -309,33 +309,33 @@ export class Main extends Sprite {
             }
         }
         e.ball.velocity = Settings.BALL_MAX_VELOCITY;
-        if (e.block instanceof Paddle )
+        if (e.block instanceof Paddle)
         {
-            if (Settings.SOUND_PADDLE )
+            if (Settings.SOUND_PADDLE)
             {
                 SoundManager.play('ball-paddle');
             }
-            if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION )
+            if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
             {
                 ParticleSpawn.burst(e.ball.x, e.ball.y, 20, 90, -180, 600, 1, this._particles_confetti);
             }
         }
-        else if (e.block )
+        else if (e.block)
         {
             this._soundBlockHitCounter++;
-            if (this._soundLastTimeHit > 60 )
+            if (this._soundLastTimeHit > 60)
             {
                 this._soundBlockHitCounter = 0;
             }
             this._soundLastTimeHit = 0;
-            if (Settings.SOUND_BLOCK )
+            if (Settings.SOUND_BLOCK)
             {
                 SoundManager.playSoundId('ball-block', this._soundBlockHitCounter);
             }
         }
         else
         {
-            if (Settings.SOUND_WALL )
+            if (Settings.SOUND_WALL)
             {
                 SoundManager.play('ball-wall');
             }
@@ -344,7 +344,7 @@ export class Main extends Sprite {
 
     private handleBlockDestroyed (e: JuicyEvent): void
     {
-        if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER )
+        if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
         {
             ParticleSpawn.burst(e.ball.x, e.ball.y, 5, 45, -Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 50 + e.ball.velocity * 10, .5, this._particles_shatter);
         }
@@ -352,24 +352,24 @@ export class Main extends Sprite {
 
     private handleKeyDown (e: KeyboardEvent): void
     {
-        if (e.keyCode == Keyboard.SPACE )
+        if (e.keyCode == Keyboard.SPACE)
         {
             this.reset();
         }
-        if (e.keyCode == Keyboard.B )
+        if (e.keyCode == Keyboard.B)
         {
             this.addBall();
         }
-        if (e.keyCode == Keyboard.ENTER )
+        if (e.keyCode == Keyboard.ENTER)
         {
             this._toggler.setAll(true);
             Settings.EFFECT_SCREEN_COLORS = true;
         }
-        if (e.keyCode == Keyboard.NUMBER_2 )
+        if (e.keyCode == Keyboard.NUMBER_2)
         {
             this._toggler.setAll(false);
         }
-        if (e.keyCode == Keyboard.P )
+        if (e.keyCode == Keyboard.P)
         {
             const b: Ball = this._balls.collection[0] as Ball;
             ParticleSpawn.burst(b.x, b.y, 10, 360, Math.atan2(b.velocityY, b.velocityX) * 180 / Math.PI, 100, .1, this._particles_impact);
@@ -388,7 +388,7 @@ export class Main extends Sprite {
 
     private updateColorUse (): void
     {
-        if (Settings.EFFECT_SCREEN_COLORS )
+        if (Settings.EFFECT_SCREEN_COLORS)
         {
             this.transform.colorTransform = new ColorTransform();
             this._background.transform.colorTransform = new ColorTransform();

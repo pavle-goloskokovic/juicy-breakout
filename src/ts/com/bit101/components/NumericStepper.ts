@@ -26,7 +26,7 @@ export class NumericStepper extends Component {
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -56,7 +56,7 @@ export class NumericStepper extends Component {
 
     protected increment (): void
     {
-        if (this._value + this._step <= this._maximum )
+        if (this._value + this._step <= this._maximum)
         {
             this._value += this._step;
             this.invalidate();
@@ -66,7 +66,7 @@ export class NumericStepper extends Component {
 
     protected decrement (): void
     {
-        if (this._value - this._step >= this._minimum )
+        if (this._value - this._step >= this._minimum)
         {
             this._value -= this._step;
             this.invalidate();
@@ -109,7 +109,7 @@ export class NumericStepper extends Component {
     {
         event.stopImmediatePropagation();
         const newVal = Number(this._valueText.text);
-        if (newVal <= this._maximum && newVal >= this._minimum )
+        if (newVal <= this._maximum && newVal >= this._minimum)
         {
             this._value = newVal;
             this.invalidate();
@@ -124,7 +124,7 @@ export class NumericStepper extends Component {
 
     protected onRepeat (event: TimerEvent): void
     {
-        if (this._direction == this.UP )
+        if (this._direction == this.UP)
         {
             this.increment();
         }
@@ -136,7 +136,7 @@ export class NumericStepper extends Component {
 
     set value (val: number)
     {
-        if (val <= this._maximum && val >= this._minimum )
+        if (val <= this._maximum && val >= this._minimum)
         {
             this._value = val;
             this.invalidate();
@@ -150,7 +150,7 @@ export class NumericStepper extends Component {
 
     set step (value: number)
     {
-        if (this.value < 0 )
+        if (this.value < 0)
         {
             throw new Error('NumericStepper step must be positive.');
         }
@@ -176,7 +176,7 @@ export class NumericStepper extends Component {
     set maximum (value: number)
     {
         this._maximum = this.value;
-        if (this._value > this._maximum )
+        if (this._value > this._maximum)
         {
             this._value = this._maximum;
             this.invalidate();
@@ -191,7 +191,7 @@ export class NumericStepper extends Component {
     set minimum (value: number)
     {
         this._minimum = this.value;
-        if (this._value < this._minimum )
+        if (this._value < this._minimum)
         {
             this._value = this._minimum;
             this.invalidate();

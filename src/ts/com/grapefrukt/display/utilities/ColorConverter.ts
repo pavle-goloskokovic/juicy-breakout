@@ -30,16 +30,16 @@ export class ColorConverter {
         const brightness: number = cmax / 255.0;
         let hue = 0;
         const saturation: number = cmax != 0 ? (cmax - cmin) / cmax : 0;
-        if (saturation != 0 )
+        if (saturation != 0)
         {
             const redc: number = (cmax - r) / (cmax - cmin);
             const greenc: number = (cmax - g) / (cmax - cmin);
             const bluec: number = (cmax - b) / (cmax - cmin);
-            if (r == cmax )
+            if (r == cmax)
             {
                 hue = bluec - greenc;
             }
-            else if (g == cmax )
+            else if (g == cmax)
             {
                 hue = 2.0 + redc - bluec;
             }
@@ -48,7 +48,7 @@ export class ColorConverter {
                 hue = 4.0 + greenc - redc;
             }
             hue = hue / 6.0;
-            if (hue < 0 )
+            if (hue < 0)
             {
                 hue = hue + 1.0;
             }
@@ -61,7 +61,7 @@ export class ColorConverter {
         let r = 0;
         let g = 0;
         let b = 0;
-        if (saturation == 0 )
+        if (saturation == 0)
         {
             r = (g = (b = brightness * 255.0 + 0.5));
         }

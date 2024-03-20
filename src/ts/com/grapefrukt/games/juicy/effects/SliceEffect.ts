@@ -67,7 +67,7 @@ export class SliceEffect extends Sprite {
 
     private handleAdded (e: Event): void
     {
-        if (!(e.target instanceof LineSliceObject) )
+        if (!(e.target instanceof LineSliceObject))
         {
             return;
         }
@@ -76,7 +76,7 @@ export class SliceEffect extends Sprite {
 
     private handleRemoved (e: Event): void
     {
-        if (!(e.target instanceof LineSliceObject) )
+        if (!(e.target instanceof LineSliceObject))
         {
             return;
         }
@@ -132,7 +132,7 @@ class LineSliceObject extends Shape {
             const _pt4: Point = this._points.length > i + 1 ? this._points[i + 1] : this._points[0];
             const _crossPt: Point = this.crossPoint(_pt1, _pt2, _pt3, _pt4);
             newPoints[0].push(_pt3);
-            if (_crossPt )
+            if (_crossPt)
             {
                 newPoints[0].push(_crossPt);
                 newPoints[1].push(_crossPt);
@@ -140,7 +140,7 @@ class LineSliceObject extends Shape {
                 _numCross++;
             }
         }
-        if (_numCross == 2 )
+        if (_numCross == 2)
         {
             const slice1: LineSliceObject = new LineSliceObject(newPoints[0], this._texture, this._textureOffset);
             const slice2: LineSliceObject = new LineSliceObject(newPoints[1], this._texture, this._textureOffset);
@@ -174,13 +174,13 @@ class LineSliceObject extends Shape {
     {
         const _vector1: Point = pt2.subtract(pt1);
         const _vector2: Point = pt4.subtract(pt3);
-        if (this.cross(_vector1, _vector2) == 0.0 )
+        if (this.cross(_vector1, _vector2) == 0.0)
         {
             return null;
         }
         const _s: number = this.cross(_vector2, pt3.subtract(pt1)) / this.cross(_vector2, _vector1);
         const _t: number = this.cross(_vector1, pt1.subtract(pt3)) / this.cross(_vector1, _vector2);
-        if (LineSliceObject.isCross(_s) && LineSliceObject.isCross(_t) )
+        if (LineSliceObject.isCross(_s) && LineSliceObject.isCross(_t))
         {
             _vector1.x *= _s;
             _vector1.y *= _s;

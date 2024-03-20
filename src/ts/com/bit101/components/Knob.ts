@@ -27,7 +27,7 @@ export class Knob extends Component {
     {
         this._labelText = label;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -81,7 +81,7 @@ export class Knob extends Component {
 
     protected correctValue (): void
     {
-        if (this._max > this._min )
+        if (this._max > this._min)
         {
             this._value = Math.min(this._value, this._max);
             this._value = Math.max(this._value, this._min);
@@ -98,9 +98,9 @@ export class Knob extends Component {
         const mult: number = Math.pow(10, this._precision);
         let val: string = (Math.round(this._value * mult) / mult).toString();
         const parts: any[] = val.split('.');
-        if (parts[1] == null )
+        if (parts[1] == null)
         {
-            if (this._precision > 0 )
+            if (this._precision > 0)
             {
                 val += '.';
             }
@@ -109,7 +109,7 @@ export class Knob extends Component {
                 val += '0';
             }
         }
-        else if (parts[1].length < this._precision )
+        else if (parts[1].length < this._precision)
         {
             for (i = 0; i < this._precision - parts[1].length; i++)
             {
@@ -147,7 +147,7 @@ export class Knob extends Component {
     protected onMouseMoved (event: MouseEvent): void
     {
         const oldValue: number = this._value;
-        if (this._mode == Knob.ROTATE )
+        if (this._mode == Knob.ROTATE)
         {
             const angle: number = Math.atan2(this.mouseY - this._knob.y, this.mouseX - this._knob.x);
             let rot: number = angle * 180 / Math.PI - 135;
@@ -159,44 +159,44 @@ export class Knob extends Component {
             {
                 rot += 360;
             }
-            if (rot > 270 && rot < 315 )
+            if (rot > 270 && rot < 315)
             {
                 rot = 270;
             }
-            if (rot >= 315 && rot <= 360 )
+            if (rot >= 315 && rot <= 360)
             {
                 rot = 0;
             }
             this._value = rot / 270 * (this._max - this._min) + this._min;
-            if (this._value != oldValue )
+            if (this._value != oldValue)
             {
                 dispatchEvent(new Event(Event.CHANGE));
             }
             this._knob.rotation = rot + 135;
             this.formatValueLabel();
         }
-        else if (this._mode == Knob.VERTICAL )
+        else if (this._mode == Knob.VERTICAL)
         {
             const diff: number = this._startY - this.mouseY;
             const range: number = this._max - this._min;
             const percent: number = range / this._mouseRange;
             this._value += percent * diff;
             this.correctValue();
-            if (this._value != oldValue )
+            if (this._value != oldValue)
             {
                 this.updateKnob();
                 dispatchEvent(new Event(Event.CHANGE));
             }
             this._startY = this.mouseY;
         }
-        else if (this._mode == Knob.HORIZONTAL )
+        else if (this._mode == Knob.HORIZONTAL)
         {
             diff = this._startX - this.mouseX;
             range = this._max - this._min;
             percent = range / this._mouseRange;
             this._value -= percent * diff;
             this.correctValue();
-            if (this._value != oldValue )
+            if (this._value != oldValue)
             {
                 this.updateKnob();
                 dispatchEvent(new Event(Event.CHANGE));

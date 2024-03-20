@@ -38,7 +38,7 @@ export class Toggler extends Sprite {
             property.name = variable.name.toString();
             property.value = this._targetClass[variable.name];
             property.type = variable.type.toString();
-            if (property.type == 'Number' || property.type == 'int' )
+            if (property.type == 'Number' || property.type == 'int')
             {
                 property.min = property.value / 2;
                 property.max = property.value * 2;
@@ -78,9 +78,9 @@ export class Toggler extends Sprite {
         let window: Window;
         for (property of this._properties)
         {
-            if (!window || window.title != property.header && property.header != '' )
+            if (!window || window.title != property.header && property.header != '')
             {
-                if (window )
+                if (window)
                 {
                     window.content.getChildAt(0).height = DisplayObjectContainer(window.content.getChildAt(0)).numChildren * 30;
                 }
@@ -109,7 +109,7 @@ export class Toggler extends Sprite {
                         slider.minimum = property.min;
                         slider.maximum = property.max;
                         slider.value = property.value;
-                        if (property.type == 'int' )
+                        if (property.type == 'int')
                         {
                             slider.tick = 1;
                         }
@@ -125,13 +125,13 @@ export class Toggler extends Sprite {
     {
         for (const property of this._properties)
         {
-            if (property.name == 'EFFECT_SCREEN_COLORS' )
+            if (property.name == 'EFFECT_SCREEN_COLORS')
             {
                 continue;
             }
-            if (property.name == 'EFFECT_PADDLE_SMILE' )
+            if (property.name == 'EFFECT_PADDLE_SMILE')
             {
-                if (value )
+                if (value)
                 {
                     this._targetClass[property.name] = 100;
                 }
@@ -140,7 +140,7 @@ export class Toggler extends Sprite {
                     this._targetClass[property.name] = 0;
                 }
             }
-            if (property.type == 'Boolean' )
+            if (property.type == 'Boolean')
             {
                 this._targetClass[property.name] = value;
             }
@@ -183,7 +183,7 @@ export class Toggler extends Sprite {
 
     private handleKeyDown (e: KeyboardEvent): void
     {
-        if (e.keyCode == Keyboard.TAB )
+        if (e.keyCode == Keyboard.TAB)
         {
             this.visible = !this.visible;
         }
@@ -191,27 +191,27 @@ export class Toggler extends Sprite {
 
     private _sort (p1: Property, p2: Property): number
     {
-        if (p1.order == '' && p2.order != '' )
+        if (p1.order == '' && p2.order != '')
         {
             return 1;
         }
-        if (p1.order != '' && p2.order == '' )
+        if (p1.order != '' && p2.order == '')
         {
             return -1;
         }
-        if (p1.order < p2.order )
+        if (p1.order < p2.order)
         {
             return -1;
         }
-        if (p1.order > p2.order )
+        if (p1.order > p2.order)
         {
             return 1;
         }
-        if (p1.name < p2.name )
+        if (p1.name < p2.name)
         {
             return -1;
         }
-        if (p1.name > p2.name )
+        if (p1.name > p2.name)
         {
             return 1;
         }

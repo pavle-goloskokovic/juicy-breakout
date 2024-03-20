@@ -34,11 +34,11 @@ export class ListItem extends Component {
     {
         super.draw();
         this.graphics.clear();
-        if (this._selected )
+        if (this._selected)
         {
             this.graphics.beginFill(this._selectedColor);
         }
-        else if (this._mouseOver )
+        else if (this._mouseOver)
         {
             this.graphics.beginFill(this._rolloverColor);
         }
@@ -48,15 +48,15 @@ export class ListItem extends Component {
         }
         this.graphics.drawRect(0, 0, this.width, this.height);
         this.graphics.endFill();
-        if (this._data == null )
+        if (this._data == null)
         {
             return;
         }
-        if (this._data instanceof String )
+        if (this._data instanceof String)
         {
             this._label.text = this._data as string;
         }
-        else if (this._data.hasOwnProperty('label') && this._data.label instanceof String )
+        else if (this._data.hasOwnProperty('label') && this._data.label instanceof String)
         {
             this._label.text = this._data.label;
         }

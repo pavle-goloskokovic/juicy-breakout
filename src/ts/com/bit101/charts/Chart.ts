@@ -43,14 +43,14 @@ export class Chart extends Component {
 
     protected getMaxValue (): number
     {
-        if (!this._autoScale )
+        if (!this._autoScale)
         {
             return this._maximum;
         }
         let maxValue: number = Number.NEGATIVE_INFINITY;
         for (let i = 0; i < this._data.length; i++)
         {
-            if (this._data[i] != null )
+            if (this._data[i] != null)
             {
                 maxValue = Math.max(this._data[i], maxValue);
             }
@@ -60,14 +60,14 @@ export class Chart extends Component {
 
     protected getMinValue (): number
     {
-        if (!this._autoScale )
+        if (!this._autoScale)
         {
             return this._minimum;
         }
         let minValue: number = Number.POSITIVE_INFINITY;
         for (let i = 0; i < this._data.length; i++)
         {
-            if (this._data[i] != null )
+            if (this._data[i] != null)
             {
                 minValue = Math.min(this._data[i], minValue);
             }
@@ -81,7 +81,7 @@ export class Chart extends Component {
         this._panel.setSize(this.width, this.height);
         this._panel.draw();
         this._chartHolder.graphics.clear();
-        if (this._data != null )
+        if (this._data != null)
         {
             this.drawChart();
             const mult: number = Math.pow(10, this._labelPrecision);
@@ -117,7 +117,7 @@ export class Chart extends Component {
 
     get maximum (): number
     {
-        if (this._autoScale )
+        if (this._autoScale)
         {
             return this.getMaxValue();
         }
@@ -132,7 +132,7 @@ export class Chart extends Component {
 
     get minimum (): number
     {
-        if (this._autoScale )
+        if (this._autoScale)
         {
             return this.getMinValue();
         }
@@ -153,18 +153,18 @@ export class Chart extends Component {
     set showScaleLabels (value: boolean)
     {
         this._showScaleLabels = value;
-        if (this._showScaleLabels )
+        if (this._showScaleLabels)
         {
             this.addChild(this._maxLabel);
             this.addChild(this._minLabel);
         }
         else
         {
-            if (this.contains(this._maxLabel) )
+            if (this.contains(this._maxLabel))
             {
                 this.removeChild(this._maxLabel);
             }
-            if (this.contains(this._minLabel) )
+            if (this.contains(this._minLabel))
             {
                 this.removeChild(this._minLabel);
             }

@@ -19,7 +19,7 @@ export class Rainbow extends Shape {
         {
             seg = this._segments.shift();
         }
-        if (!seg )
+        if (!seg)
         {
             seg = new Segment();
         }
@@ -31,7 +31,7 @@ export class Rainbow extends Shape {
     redrawSegments (offsetX = 0, offsetY = 0): void
     {
         this.graphics.clear();
-        if (!Settings.EFFECT_BALL_TRAIL )
+        if (!Settings.EFFECT_BALL_TRAIL)
         {
             return;
         }
@@ -42,14 +42,14 @@ export class Rainbow extends Shape {
         let ang: number;
         let sin = 0;
         let cos = 0;
-        if (this._verts.length != (this._segments.length - 1) * 4 )
+        if (this._verts.length != (this._segments.length - 1) * 4)
         {
             this._verts.length = 0;
         }
         for (let j = 0; j < this._segments.length; ++j)
         {
             s1 = this._segments[j];
-            if (s2 )
+            if (s2)
             {
                 ang = Math.atan2(s1.y - s2.y, s1.x - s2.x) + Math.PI / 2;
                 sin = Math.sin(ang);
@@ -57,7 +57,7 @@ export class Rainbow extends Shape {
                 for (let i = 0; i < 2; ++i)
                 {
                     offset = (-.5 + i / 1) * 9.0;
-                    if (Settings.EFFECT_BALL_TRAIL_SCALE )
+                    if (Settings.EFFECT_BALL_TRAIL_SCALE)
                     {
                         offset *= j / this._segments.length;
                     }
@@ -67,7 +67,7 @@ export class Rainbow extends Shape {
             }
             s2 = s1;
         }
-        if (this._verts.length >= 8 )
+        if (this._verts.length >= 8)
         {
             for (let k = 0; k < this._verts.length / 2; k++)
             {

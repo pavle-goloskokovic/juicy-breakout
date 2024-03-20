@@ -25,27 +25,27 @@ export class Slides extends Sprite {
 
     private handleKeyDown (e: KeyboardEvent): void
     {
-        if (e.keyCode == Keyboard.S )
+        if (e.keyCode == Keyboard.S)
         {
             this.visible = !this.visible;
         }
-        if (e.keyCode == Keyboard.TAB )
+        if (e.keyCode == Keyboard.TAB)
         {
             this.visible = false;
         }
-        if (!this.visible && this._slides.currentFrame == 7 )
+        if (!this.visible && this._slides.currentFrame == 7)
         {
             this._slides.gotoAndStop(6);
         }
-        if (!this.visible )
+        if (!this.visible)
         {
             return;
         }
-        if (e.keyCode == Keyboard.LEFT )
+        if (e.keyCode == Keyboard.LEFT)
         {
             this._slides.gotoAndStop(this._slides.currentFrame - 1);
         }
-        if (e.keyCode == Keyboard.RIGHT )
+        if (e.keyCode == Keyboard.RIGHT)
         {
             this._slides.gotoAndStop(this._slides.currentFrame + 1);
         }

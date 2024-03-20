@@ -22,7 +22,7 @@ export class List extends Component {
     protected _alternateRows = false;
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, items: any[] = null)
     {
-        if (items != null )
+        if (items != null)
         {
             this._items = items;
         }
@@ -85,7 +85,7 @@ export class List extends Component {
         for (let i = 0; i < numItems; i++)
         {
             const item: ListItem = this._itemHolder.getChildAt(i) as ListItem;
-            if (offset + i < this._items.length )
+            if (offset + i < this._items.length)
             {
                 item.data = this._items[offset + i];
             }
@@ -93,7 +93,7 @@ export class List extends Component {
             {
                 item.data = '';
             }
-            if (this._alternateRows )
+            if (this._alternateRows)
             {
                 item.defaultColor = (offset + i) % 2 == 0 ? this._defaultColor : this._alternateColor;
             }
@@ -101,7 +101,7 @@ export class List extends Component {
             {
                 item.defaultColor = this._defaultColor;
             }
-            if (offset + i == this._selectedIndex )
+            if (offset + i == this._selectedIndex)
             {
                 item.selected = true;
             }
@@ -115,13 +115,13 @@ export class List extends Component {
     protected scrollToSelection (): void
     {
         const numItems: number = Math.ceil(this._height / this._listItemHeight);
-        if (this._selectedIndex != -1 )
+        if (this._selectedIndex != -1)
         {
-            if (this._scrollbar.value > this._selectedIndex )
+            if (this._scrollbar.value > this._selectedIndex)
             {
 
             }
-            else if (this._scrollbar.value + numItems < this._selectedIndex )
+            else if (this._scrollbar.value + numItems < this._selectedIndex)
             {
                 this._scrollbar.value = this._selectedIndex - numItems + 1;
             }
@@ -176,7 +176,7 @@ export class List extends Component {
 
     removeItemAt (index: number): void
     {
-        if (index < 0 || index >= this._items.length )
+        if (index < 0 || index >= this._items.length)
         {
             return;
         }
@@ -194,14 +194,14 @@ export class List extends Component {
 
     protected onSelect (event: Event): void
     {
-        if (!(event.target instanceof ListItem) )
+        if (!(event.target instanceof ListItem))
         {
             return;
         }
         const offset: number = this._scrollbar.value;
         for (let i = 0; i < this._itemHolder.numChildren; i++)
         {
-            if (this._itemHolder.getChildAt(i) == event.target )
+            if (this._itemHolder.getChildAt(i) == event.target)
             {
                 this._selectedIndex = i + offset;
             }
@@ -230,7 +230,7 @@ export class List extends Component {
 
     set selectedIndex (value: number)
     {
-        if (value >= 0 && value < this._items.length )
+        if (value >= 0 && value < this._items.length)
         {
             this._selectedIndex = value;
         }
@@ -257,7 +257,7 @@ export class List extends Component {
 
     get selectedItem (): any
     {
-        if (this._selectedIndex >= 0 && this._selectedIndex < this._items.length )
+        if (this._selectedIndex >= 0 && this._selectedIndex < this._items.length)
         {
             return this._items[this._selectedIndex];
         }

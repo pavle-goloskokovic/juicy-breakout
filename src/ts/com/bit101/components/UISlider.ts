@@ -16,7 +16,7 @@ export class UISlider extends Component {
     {
         this._labelText = label;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -32,7 +32,7 @@ export class UISlider extends Component {
 
     protected formatValueLabel (): void
     {
-        if (isNaN(this._slider.value) )
+        if (isNaN(this._slider.value))
         {
             this._valueLabel.text = 'NaN';
             return;
@@ -40,9 +40,9 @@ export class UISlider extends Component {
         const mult: number = Math.pow(10, this._precision);
         let val: string = (Math.round(this._slider.value * mult) / mult).toString();
         const parts: any[] = val.split('.');
-        if (parts[1] == null )
+        if (parts[1] == null)
         {
-            if (this._precision > 0 )
+            if (this._precision > 0)
             {
                 val += '.';
             }
@@ -51,7 +51,7 @@ export class UISlider extends Component {
                 val += '0';
             }
         }
-        else if (parts[1].length < this._precision )
+        else if (parts[1].length < this._precision)
         {
             for (i = 0; i < this._precision - parts[1].length; i++)
             {

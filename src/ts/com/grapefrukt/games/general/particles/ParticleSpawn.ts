@@ -24,7 +24,7 @@ export class ParticleSpawn {
 
     static explode (spawnX: number, spawnY: number, count: number, distanceMultiplier: number, pool: ParticlePool, randomRange = 2, vector: Point = null, spawnAreaSize = 0): void
     {
-        if (vector == null )
+        if (vector == null)
         {
             vector = new Point(0, 0);
         }
@@ -37,11 +37,11 @@ export class ParticleSpawn {
 
     static explode2 (position: Point, pool: ParticlePool, count: number, randomRange: Point = null, vector: Point = null, spawnAreaSize = 0, distanceMultiplier = 1): void
     {
-        if (randomRange == null )
+        if (randomRange == null)
         {
             randomRange = new Point(0, 0);
         }
-        if (vector == null )
+        if (vector == null)
         {
             vector = new Point(0, 0);
         }

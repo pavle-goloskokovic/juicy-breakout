@@ -57,11 +57,11 @@ export class SoundUtil {
 
     private static wrapVol (num: number): number
     {
-        if (num > 1 )
+        if (num > 1)
         {
             num = 1;
         }
-        if (num < 0 )
+        if (num < 0)
         {
             num = 0;
         }
@@ -70,11 +70,11 @@ export class SoundUtil {
 
     private static wrapPan (num: number): number
     {
-        if (num > 1 )
+        if (num > 1)
         {
             num = 1;
         }
-        if (num < -1 )
+        if (num < -1)
         {
             num = -1;
         }

@@ -26,7 +26,7 @@ export class ScrollBar extends Component {
     {
         this._orientation = orientation;
         super(parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -45,7 +45,7 @@ export class ScrollBar extends Component {
         this._downButton.setSize(10, 10);
         const downArrow: Shape = new Shape();
         this._downButton.addChild(downArrow);
-        if (this._orientation == Slider.VERTICAL )
+        if (this._orientation == Slider.VERTICAL)
         {
             upArrow.graphics.beginFill(Style.DROPSHADOW, 0.5);
             upArrow.graphics.moveTo(5, 3);
@@ -76,7 +76,7 @@ export class ScrollBar extends Component {
     protected init (): void
     {
         super.init();
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this.setSize(100, 10);
         }
@@ -103,7 +103,7 @@ export class ScrollBar extends Component {
     draw (): void
     {
         super.draw();
-        if (this._orientation == Slider.VERTICAL )
+        if (this._orientation == Slider.VERTICAL)
         {
             this._scrollSlider.x = 0;
             this._scrollSlider.y = 10;
@@ -122,7 +122,7 @@ export class ScrollBar extends Component {
             this._downButton.y = 0;
         }
         this._scrollSlider.draw();
-        if (this._autoHide )
+        if (this._autoHide)
         {
             this.visible = this._scrollSlider.thumbPercent < 1.0;
         }
@@ -238,7 +238,7 @@ export class ScrollBar extends Component {
 
     protected onDelayComplete (event: TimerEvent): void
     {
-        if (this._shouldRepeat )
+        if (this._shouldRepeat)
         {
             this._repeatTimer.start();
         }
@@ -246,7 +246,7 @@ export class ScrollBar extends Component {
 
     protected onRepeat (event: TimerEvent): void
     {
-        if (this._direction == this.UP )
+        if (this._direction == this.UP)
         {
             this.goUp();
         }
@@ -265,7 +265,7 @@ class ScrollSlider extends Slider {
     constructor (orientation: string, parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, defaultHandler: Function = null)
     {
         super(orientation, parent, xpos, ypos);
-        if (defaultHandler != null )
+        if (defaultHandler != null)
         {
             this.addEventListener(Event.CHANGE, defaultHandler);
         }
@@ -282,7 +282,7 @@ class ScrollSlider extends Slider {
     {
         let size: number;
         this._handle.graphics.clear();
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             size = Math.round(this._width * this._thumbPercent);
             size = Math.max(this._height, size);
@@ -309,7 +309,7 @@ class ScrollSlider extends Slider {
     protected positionHandle (): void
     {
         let range: number;
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             range = this.width - this._handle.width;
             this._handle.x = (this._value - this._min) / (this._max - this._min) * range;
@@ -329,11 +329,11 @@ class ScrollSlider extends Slider {
 
     protected onBackClick (event: MouseEvent): void
     {
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
-            if (this.mouseX < this._handle.x )
+            if (this.mouseX < this._handle.x)
             {
-                if (this._max > this._min )
+                if (this._max > this._min)
                 {
                     this._value -= this._pageSize;
                 }
@@ -345,7 +345,7 @@ class ScrollSlider extends Slider {
             }
             else
             {
-                if (this._max > this._min )
+                if (this._max > this._min)
                 {
                     this._value += this._pageSize;
                 }
@@ -359,9 +359,9 @@ class ScrollSlider extends Slider {
         }
         else
         {
-            if (this.mouseY < this._handle.y )
+            if (this.mouseY < this._handle.y)
             {
-                if (this._max > this._min )
+                if (this._max > this._min)
                 {
                     this._value -= this._pageSize;
                 }
@@ -373,7 +373,7 @@ class ScrollSlider extends Slider {
             }
             else
             {
-                if (this._max > this._min )
+                if (this._max > this._min)
                 {
                     this._value += this._pageSize;
                 }
@@ -392,7 +392,7 @@ class ScrollSlider extends Slider {
     {
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.onDrop);
         this.stage.addEventListener(MouseEvent.MOUSE_MOVE, this.onSlide);
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
             this._handle.startDrag(false, new Rectangle(0, 0, this._width - this._handle.width, 0));
         }
@@ -405,9 +405,9 @@ class ScrollSlider extends Slider {
     protected onSlide (event: MouseEvent): void
     {
         const oldValue: number = this._value;
-        if (this._orientation == Slider.HORIZONTAL )
+        if (this._orientation == Slider.HORIZONTAL)
         {
-            if (this._width == this._handle.width )
+            if (this._width == this._handle.width)
             {
                 this._value = this._min;
             }
@@ -418,7 +418,7 @@ class ScrollSlider extends Slider {
         }
         else
         {
-            if (this._height == this._handle.height )
+            if (this._height == this._handle.height)
             {
                 this._value = this._min;
             }
@@ -427,7 +427,7 @@ class ScrollSlider extends Slider {
                 this._value = this._handle.y / (this._height - this._handle.height) * (this._max - this._min) + this._min;
             }
         }
-        if (this._value != oldValue )
+        if (this._value != oldValue)
         {
             dispatchEvent(new Event(Event.CHANGE));
         }

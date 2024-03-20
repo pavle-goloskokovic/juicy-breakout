@@ -6,7 +6,7 @@ export class SnappingPlugin implements IGTweenPlugin {
     protected static tweenProperties: any[] = ['x', 'y'];
     static install (properties: any[] = null): void
     {
-        if (SnappingPlugin.instance )
+        if (SnappingPlugin.instance)
         {
             return;
         }
@@ -21,7 +21,7 @@ export class SnappingPlugin implements IGTweenPlugin {
 
     tween (tween: GTween, name: string, value: number, initValue: number, rangeValue: number, ratio: number, end: boolean): number
     {
-        if (!(SnappingPlugin.enabled && tween.pluginData.SnappingEnabled == null || tween.pluginData.SnappingEnabled) )
+        if (!(SnappingPlugin.enabled && tween.pluginData.SnappingEnabled == null || tween.pluginData.SnappingEnabled))
         {
             return value;
         }
