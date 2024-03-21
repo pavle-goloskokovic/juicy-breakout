@@ -1,10 +1,8 @@
 import { Shaker } from './Shaker';
 import { Toggler } from './Toggler';
 import { Slides } from './Slides';
-import { SoundManager } from './SoundManager';
 import { Settings } from './Settings';
 import { Freezer } from './Freezer';
-import { TXT } from '../../debug/TXT';
 import { GameObjectCollection } from '../general/collections/GameObjectCollection';
 import { ParticlePool } from '../general/particles/ParticlePool';
 import { ParticleSpawn } from '../general/particles/ParticleSpawn';
@@ -24,14 +22,13 @@ import { LazyKeyboard } from '../../input/LazyKeyboard';
 import { Timestep } from '../../Timestep';
 import { GTween } from '../../../gskinner/motion/GTween';
 import { ColorTransformPlugin } from '../../../gskinner/motion/plugins/ColorTransformPlugin';
-import { Sprite } from '../../../../flash/display/Sprite';
 import { Event } from '../../../../flash/events/Event';
 import { KeyboardEvent } from '../../../../flash/events/KeyboardEvent';
 import { MouseEvent } from '../../../../flash/events/MouseEvent';
-import { Point } from '../../../../flash/geom/Point';
-import { SoundChannel } from '../../../../flash/media/SoundChannel';
 import { Keyboard } from '../../../../flash/ui/Keyboard';
-export class Main extends Sprite {
+
+export class Main extends Phaser.Scene {
+
     private _blocks: GameObjectCollection;
     private _balls: GameObjectCollection;
     private _lines: GameObjectCollection;
@@ -42,32 +39,62 @@ export class Main extends Sprite {
     private _particles_shatter: ParticlePool;
     private _particles_confetti: ParticlePool;
     private _mouseDown: boolean;
-    private _mouseVector: Point;
+    private _mouseVector: Phaser.Math.Vector2;
     private _toggler: Toggler;
     private _backgroundGlitchForce: number;
-    private _soundBlockHitCounter: number;
-    private _soundLastTimeHit: number;
+    private blockHitCount: number;
+    private blockHitTime: number;
     private _keyboard: LazyKeyboard;
     private _slides: Slides;
     private _background: Shape;
     private _useColors: boolean;
-    private _preload: TXT;
-    constructor ()
+    private preloadText: Phaser.GameObjects.Text;
+
+    private music: Phaser.Sound.BaseSound;
+    private tempVector = new Phaser.Math.Vector2();
+
+    constructor () { super('main'); }
+
+    boot (): void
     {
-        super();
-        ColorTransformPlugin.install();
-        SoundManager.init();
-        SoundManager.soundControl.addEventListener(Event.INIT, this.handleInit);
-        this._preload = new TXT();
-        this._preload.setText('Loading sounds...');
-        this.addChild(this._preload);
-        this.tabEnabled = false;
-        this.tabChildren = false;
+        ColorTransformPlugin.install(); // TODO
     }
 
-    private handleInit (e: Event): void
+    preload (): void
     {
-        this.removeChild(this._preload);
+        const load = this.load;
+
+        load.audio('music',
+            require('../../../../../assets/sound/juicy_breakout-theme.mp3'));
+        load.audio('ball-paddle',
+            require('../../../../../assets/sound/ball-paddle.mp3'));
+        load.audio('ball-wall',
+            require('../../../../../assets/sound/ball-wall.mp3'));
+        for (let i = 0; i < 12; i++)
+        {
+            load.audio(`ball-block${i}`,
+                require(`../../../../../assets/sound/pling${i + 1}.mp3`));
+        }
+
+        // TODO preload visual assets
+
+        this.preloadText = this.add.text(0, 0, 'Loading sounds...', {
+            color: '#ffffff',
+            fontSize: 12,
+            fontFamily: 'Arial'
+        });
+    }
+
+    create (): void
+    {
+        this.preloadText.destroy();
+        this.preloadText = null;
+
+        this.music = this.sound.add('music', {
+            volume: .8,
+            loop: true
+        });
+
         this._particles_confetti = new ParticlePool(ConfettiParticle);
         this.addChild(this._particles_confetti);
         this._blocks = new GameObjectCollection();
@@ -88,7 +115,7 @@ export class Main extends Sprite {
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.handleMouseToggle);
         this._timestep = new Timestep();
         this._timestep.gameSpeed = 1;
-        this._mouseVector = new Point();
+        this._mouseVector = new Phaser.Math.Vector2();
         this._screenshake = new Shaker(this);
         this._background = new Shape();
         this.parent.addChildAt(this._background, 0);
@@ -125,7 +152,9 @@ export class Main extends Sprite {
 
     reset (): void
     {
-        this._soundBlockHitCounter = 0;
+        this.blockHitCount =
+            this.blockHitTime = 0;
+
         this.drawBackground();
         this._blocks.clear();
         this._balls.clear();
@@ -151,19 +180,22 @@ export class Main extends Sprite {
     private handleEnterFrame (e: Event): void
     {
         this._timestep.tick();
-        this._soundLastTimeHit++;
+
         if (Settings.EFFECT_SCREEN_COLORS != this._useColors)
         {
             this.updateColorUse();
         }
+
+        const music = this.music;
         if (!Settings.SOUND_MUSIC)
         {
-            SoundManager.soundControl.stopSound('music-0');
+            music.stop();
         }
-        else if (!SoundManager.soundControl.getSound('music-0').isPlaying)
+        else if (!music.isPlaying)
         {
-            SoundManager.play('music');
+            music.play();
         }
+
         if (this._keyboard.keyIsDown(Keyboard.CONTROL) || this._slides.visible)
         {
             this._timestep.gameSpeed = 0;
@@ -223,14 +255,14 @@ export class Main extends Sprite {
             }
             if (this._mouseDown)
             {
-                _mouseArrayx = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
-                _mouseArrayy = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
-                if (_mouseArraylength > Settings.MOUSE_GRAVITY_MAX)
+                this._mouseVector.x = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
+                this._mouseVector.y = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
+                if (this._mouseVector.length() > Settings.MOUSE_GRAVITY_MAX)
                 {
-                    _mouseArraynormalize(Settings.MOUSE_GRAVITY_MAX);
+                    this._mouseVector.normalize().scale(Settings.MOUSE_GRAVITY_MAX);
                 }
-                ball.velocityX -= _mouseArrayx;
-                ball.velocityY -= _mouseArrayy;
+                ball.velocityX -= this._mouseVector.x;
+                ball.velocityY -= this._mouseVector.y;
             }
             if (ball.velocity < Settings.BALL_MIN_VELOCITY)
             {
@@ -244,8 +276,11 @@ export class Main extends Sprite {
             {
                 if (block.collidable && this.isColliding(ball, block))
                 {
-                    const v: Point = new Point(ball.velocityX, ball.velocityY);
-                    v.normalize(2);
+                    const v = this.tempVector
+                        .set(ball.velocityX, ball.velocityY)
+                        .normalize()
+                        .scale(2);
+
                     while (this.isColliding(ball, block))
                     {
                         ball.x -= v.x;
@@ -289,6 +324,8 @@ export class Main extends Sprite {
 
     private handleBallCollide (e: JuicyEvent): void
     {
+        const sound = this.sound;
+
         if (e.block != null && e.block != this._paddle)
         {
             this._backgroundGlitchForce = 0.05;
@@ -308,12 +345,14 @@ export class Main extends Sprite {
                 block.jellyEffect(.2, Math.random() * .02);
             }
         }
+
         e.ball.velocity = Settings.BALL_MAX_VELOCITY;
+
         if (e.block instanceof Paddle)
         {
             if (Settings.SOUND_PADDLE)
             {
-                SoundManager.play('ball-paddle');
+                sound.play('ball-paddle');
             }
             if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
             {
@@ -322,22 +361,30 @@ export class Main extends Sprite {
         }
         else if (e.block)
         {
-            this._soundBlockHitCounter++;
-            if (this._soundLastTimeHit > 60)
+            const now = Date.now();
+
+            if (now - this.blockHitTime > 1000)
             {
-                this._soundBlockHitCounter = 0;
+                this.blockHitCount = 0;
             }
-            this._soundLastTimeHit = 0;
+            else
+            {
+                this.blockHitCount =
+                    (this.blockHitCount + 1) % 12;
+            }
+
+            this.blockHitTime = now;
+
             if (Settings.SOUND_BLOCK)
             {
-                SoundManager.playSoundId('ball-block', this._soundBlockHitCounter);
+                sound.play(`ball-block${this.blockHitCount}`);
             }
         }
         else
         {
             if (Settings.SOUND_WALL)
             {
-                SoundManager.play('ball-wall');
+                sound.play('ball-wall');
             }
         }
     }
