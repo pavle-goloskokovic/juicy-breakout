@@ -1,16 +1,17 @@
 import { Settings } from './Settings';
-import { GTween } from '../../../gskinner/motion/GTween';
-import { getTimer } from '../../../../flash/utils/getTimer';
+
 export class Freezer {
+
     private static frozeAt: number;
+
     static freeze (): void
     {
-        Freezer.frozeAt = getTimer();
+        Freezer.frozeAt = Date.now();
     }
 
     static get multiplier (): number
     {
-        let time: number = getTimer() - Freezer.frozeAt;
+        let time = Date.now() - Freezer.frozeAt;
         if (time < Settings.EFFECT_FREEZE_FADE_IN_MS)
         {
             return Freezer.lerp(1, Settings.EFFECT_FREEZE_SPEED_MULTIPLIER, time / Settings.EFFECT_FREEZE_FADE_IN_MS);

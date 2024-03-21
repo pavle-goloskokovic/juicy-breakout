@@ -15,14 +15,10 @@ import { Ball } from './gameobjects/Ball';
 import { Block } from './gameobjects/Block';
 import { Paddle } from './gameobjects/Paddle';
 import { Shape } from '../../../../flash/display/Shape';
-import { TimerEvent } from '../../../../flash/events/TimerEvent';
 import { ColorTransform } from '../../../../flash/geom/ColorTransform';
-import { Timer } from '../../../../flash/utils/Timer';
 import { LazyKeyboard } from '../../input/LazyKeyboard';
-import { Timestep } from '../../Timestep';
 import { GTween } from '../../../gskinner/motion/GTween';
 import { ColorTransformPlugin } from '../../../gskinner/motion/plugins/ColorTransformPlugin';
-import { Event } from '../../../../flash/events/Event';
 import { KeyboardEvent } from '../../../../flash/events/KeyboardEvent';
 import { MouseEvent } from '../../../../flash/events/MouseEvent';
 import { Keyboard } from '../../../../flash/ui/Keyboard';
@@ -32,7 +28,6 @@ export class Main extends Phaser.Scene {
     private _blocks: GameObjectCollection;
     private _balls: GameObjectCollection;
     private _lines: GameObjectCollection;
-    private _timestep: Timestep;
     private _screenshake: Shaker;
     private _paddle: Paddle;
     private _particles_impact: ParticlePool;
@@ -109,12 +104,11 @@ export class Main extends Phaser.Scene {
         this.addChild(this._particles_impact);
         this._particles_shatter = new ParticlePool(BlockShatterParticle);
         this.addChild(this._particles_shatter);
-        this.addEventListener(Event.ENTER_FRAME, this.handleEnterFrame);
+
         this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
         this.stage.addEventListener(MouseEvent.MOUSE_DOWN, this.handleMouseToggle);
         this.stage.addEventListener(MouseEvent.MOUSE_UP, this.handleMouseToggle);
-        this._timestep = new Timestep();
-        this._timestep.gameSpeed = 1;
+
         this._mouseVector = new Phaser.Math.Vector2();
         this._screenshake = new Shaker(this);
         this._background = new Shape();
@@ -125,17 +119,13 @@ export class Main extends Phaser.Scene {
         this._slides.visible = false;
         this.parent.addChild(this._slides);
         this._keyboard = new LazyKeyboard(this.stage);
+
         this.updateColorUse();
+
         this.reset();
-        const t: Timer = new Timer(50, 0);
-        t.addEventListener(TimerEvent.TIMER, function (e: Event): void
-        {
-            this.stage.focus = this.stage;
-        });
-        t.start();
     }
 
-    drawBackground (): void
+    private drawBackground (): void
     {
         this._background.graphics.clear();
         if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this._backgroundGlitchForce > 0.01)
@@ -150,7 +140,7 @@ export class Main extends Phaser.Scene {
         this._background.graphics.drawRect(5, 5, Settings.STAGE_W - 10, Settings.STAGE_H);
     }
 
-    reset (): void
+    private reset (): void
     {
         this.blockHitCount =
             this.blockHitTime = 0;
@@ -177,10 +167,8 @@ export class Main extends Phaser.Scene {
         this._blocks.add(this._paddle);
     }
 
-    private handleEnterFrame (e: Event): void
+    update (time: number, delta: number): void
     {
-        this._timestep.tick();
-
         if (Settings.EFFECT_SCREEN_COLORS != this._useColors)
         {
             this.updateColorUse();
@@ -196,25 +184,30 @@ export class Main extends Phaser.Scene {
             music.play();
         }
 
+        const clock = this.time;
         if (this._keyboard.keyIsDown(Keyboard.CONTROL) || this._slides.visible)
         {
-            this._timestep.gameSpeed = 0;
+            clock.timeScale = 0;
         }
         else if (this._keyboard.keyIsDown(Keyboard.SHIFT))
         {
-            this._timestep.gameSpeed = .1;
+            clock.timeScale = .1;
         }
         else
         {
-            this._timestep.gameSpeed = 1;
+            clock.timeScale = 1;
         }
-        this._timestep.gameSpeed *= Freezer.multiplier;
-        GTween.timeScaleAll = this._timestep.gameSpeed;
+        clock.timeScale *= Freezer.multiplier;
+        GTween.timeScaleAll = clock.timeScale; // TODO
+
+        const deltaFactor = delta / 1000 * 60 * clock.timeScale;
+
         this.drawBackground();
-        this._balls.update(this._timestep.timeDelta);
-        this._blocks.update(this._timestep.timeDelta);
-        this._lines.update(this._timestep.timeDelta);
-        this._screenshake.update(this._timestep.timeDelta);
+
+        this._balls.update(deltaFactor);
+        this._blocks.update(deltaFactor);
+        this._lines.update(deltaFactor);
+        this._screenshake.update(deltaFactor);
         if (this._balls.collection.length)
         {
             this._paddle.lookAt(Ball(this._balls.collection[0]));
@@ -248,15 +241,15 @@ export class Main extends Phaser.Scene {
             {
                 ball.collide(1, -1);
             }
-            ball.velocityY += Settings.BALL_GRAVITY / 100 * this._timestep.timeDelta;
+            ball.velocityY += Settings.BALL_GRAVITY / 100 * deltaFactor;
             for (const line of this._lines.collection)
             {
                 line.checkCollision(ball);
             }
             if (this._mouseDown)
             {
-                this._mouseVector.x = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
-                this._mouseVector.y = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * this._timestep.timeDelta;
+                this._mouseVector.x = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
+                this._mouseVector.y = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
                 if (this._mouseVector.length() > Settings.MOUSE_GRAVITY_MAX)
                 {
                     this._mouseVector.normalize().scale(Settings.MOUSE_GRAVITY_MAX);
@@ -270,7 +263,7 @@ export class Main extends Phaser.Scene {
             }
             if (ball.velocity > Settings.BALL_MAX_VELOCITY)
             {
-                ball.velocity -= ball.velocity * Settings.BALL_VELOCITY_LOSS * this._timestep.timeDelta;
+                ball.velocity -= ball.velocity * Settings.BALL_VELOCITY_LOSS * deltaFactor;
             }
             for (const block of this._blocks.collection)
             {
