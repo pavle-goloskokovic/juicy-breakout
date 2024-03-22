@@ -74,13 +74,16 @@ export default <webpack.Configuration>{
                     }*/
                 }
             },
-            {
+            { oneOf: [{
+                resourceQuery: /raw/,
+                type: 'asset/source',
+            },{
                 test: /\.css$/i,
                 use: [
                     prod ? MiniCssExtractPlugin.loader : 'style-loader',
                     'css-loader'
-                ]
-            },
+                ],
+            }] },
             /**
              * Fonts
              */

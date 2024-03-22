@@ -1,0 +1,20 @@
+.dg.main .close-button {
+    display: none;
+}
+
+.dg .property-name,
+.dg .c {
+    width: 50%;
+}
+
+.dg .property-name {
+    white-space: nowrap;
+}
+
+.dg .slider {
+    width: 76%;
+}
+
+.dg .has-slider input[type=text] {
+    width: 20%;
+}

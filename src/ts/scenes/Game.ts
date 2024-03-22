@@ -1,4 +1,5 @@
 import { Timestep } from '../com/grapefrukt/Timestep';
+import { SettingsToggler } from '../com/grapefrukt/games/juicy/SettingsToggler';
 
 /**
  * Game Phaser scene.
@@ -46,6 +47,8 @@ export default class Game extends Phaser.Scene {
                     console.log(e.code);
             }
         });
+
+        new SettingsToggler(this);
     }
 
     update (time: number, delta: number)

@@ -1,5 +1,5 @@
 import { Shaker } from './Shaker';
-import { Toggler } from './Toggler';
+import { SettingsToggler } from './SettingsToggler';
 import { Slides } from './Slides';
 import { Settings } from './Settings';
 import { Freezer } from './Freezer';
@@ -35,14 +35,14 @@ export class Main extends Phaser.Scene {
     private _particles_confetti: ParticlePool;
     private _mouseDown: boolean;
     private _mouseVector: Phaser.Math.Vector2;
-    private _toggler: Toggler;
+    private toggler: SettingsToggler;
     private _backgroundGlitchForce: number;
     private blockHitCount: number;
     private blockHitTime: number;
     private _keyboard: LazyKeyboard;
     private _slides: Slides;
     private _background: Shape;
-    private _useColors: boolean;
+    private useColors: boolean;
     private preloadText: Phaser.GameObjects.Text;
 
     private music: Phaser.Sound.BaseSound;
@@ -113,8 +113,9 @@ export class Main extends Phaser.Scene {
         this._screenshake = new Shaker(this);
         this._background = new Shape();
         this.parent.addChildAt(this._background, 0);
-        this._toggler = new Toggler(Settings);
-        this.parent.addChild(this._toggler);
+
+        this.toggler = new SettingsToggler(this);
+
         this._slides = new Slides();
         this._slides.visible = false;
         this.parent.addChild(this._slides);
@@ -169,10 +170,7 @@ export class Main extends Phaser.Scene {
 
     update (time: number, delta: number): void
     {
-        if (Settings.EFFECT_SCREEN_COLORS != this._useColors)
-        {
-            this.updateColorUse();
-        }
+        this.updateColorUse();
 
         const music = this.music;
         if (!Settings.SOUND_MUSIC)
@@ -400,15 +398,17 @@ export class Main extends Phaser.Scene {
         {
             this.addBall();
         }
+
+        const toggler = this.toggler;
         if (e.keyCode == Keyboard.ENTER)
         {
-            this._toggler.setAll(true);
-            Settings.EFFECT_SCREEN_COLORS = true;
+            toggler.setAll(true);
         }
         if (e.keyCode == Keyboard.NUMBER_2)
         {
-            this._toggler.setAll(false);
+            toggler.setAll(false);
         }
+
         if (e.keyCode == Keyboard.P)
         {
             const b: Ball = this._balls.collection[0] as Ball;
@@ -428,7 +428,11 @@ export class Main extends Phaser.Scene {
 
     private updateColorUse (): void
     {
-        if (Settings.EFFECT_SCREEN_COLORS)
+        const useColors= Settings.EFFECT_SCREEN_COLORS;
+
+        if (useColors === this.useColors) { return; }
+
+        if (useColors)
         {
             this.transform.colorTransform = new ColorTransform();
             this._background.transform.colorTransform = new ColorTransform();
@@ -438,6 +442,7 @@ export class Main extends Phaser.Scene {
             this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
             this._background.transform.colorTransform = new ColorTransform(0, 0, 0);
         }
-        this._useColors = Settings.EFFECT_SCREEN_COLORS;
+
+        this.useColors = useColors;
     }
 }
