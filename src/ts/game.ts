@@ -17,6 +17,11 @@ const config: Phaser.Types.Core.GameConfig = {
     parent: 'container', // parent id - '' means  no container
     width: size.w,
     height: size.h,
+    backgroundColor: '#000000',
+    scale: {
+        autoCenter: Phaser.Scale.Center.CENTER_BOTH,
+        mode: Phaser.Scale.ScaleModes.FIT
+    },
     scene: [
         Boot,
         Preloader,

@@ -1,11 +1,13 @@
 import { Block } from './Block';
 import type { Ball } from './Ball';
-import { GameObject } from '../../general/gameobjects/GameObject';
 import { Settings } from '../Settings';
 import { MathUtil } from '../../../math/MathUtil';
+
 export class Paddle extends Block {
+
     private _face: PaddleFace;
     private _happyExtraScale: number;
+
     constructor ()
     {
         super(Settings.STAGE_W / 2, Settings.STAGE_H + Settings.PADDLE_H / 2 - 50);
@@ -16,7 +18,7 @@ export class Paddle extends Block {
         this._gfx.addChild(this._face);
     }
 
-    collide (ball: Ball): void
+    collide (/*ball: Ball*/): void
     {
         this._happyExtraScale = 10;
     }

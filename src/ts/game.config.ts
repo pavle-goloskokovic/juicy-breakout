@@ -1,9 +1,11 @@
+import { Settings } from './com/grapefrukt/games/juicy/Settings';
+
 /**
  * Game title used for page title tag and metadata.
  * @type {string}
  */
 export const title =
-    'Phaser 3.70, Webpack 5, and TypeScript template'; // TODO update
+    'JUICEATRON 5002 XX'; // TODO 2024 RI
 /**
  * Game description used for html page metadata.
  * @type {string}
@@ -27,8 +29,8 @@ export const size: {
     readonly w: number;
     readonly h: number;
 } = {
-    w: 1070,
-    h: 600
+    w: Settings.STAGE_W,
+    h: Settings.STAGE_H
 };
 /**
  * Google Analytics 4 tag ID

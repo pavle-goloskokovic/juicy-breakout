@@ -14,7 +14,6 @@ import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
 import { Block } from './gameobjects/Block';
 import { Paddle } from './gameobjects/Paddle';
-import { Shape } from '../../../../flash/display/Shape';
 import { ColorTransform } from '../../../../flash/geom/ColorTransform';
 import { LazyKeyboard } from '../../input/LazyKeyboard';
 import { GTween } from '../../../gskinner/motion/GTween';
@@ -36,12 +35,12 @@ export class Main extends Phaser.Scene {
     private _mouseDown: boolean;
     private _mouseVector: Phaser.Math.Vector2;
     private toggler: SettingsToggler;
-    private _backgroundGlitchForce: number;
+    private bgGlitchForce: number;
     private blockHitCount: number;
     private blockHitTime: number;
     private _keyboard: LazyKeyboard;
     private _slides: Slides;
-    private _background: Shape;
+    private bg: Phaser.GameObjects.Graphics;
     private useColors: boolean;
     private preloadText: Phaser.GameObjects.Text;
 
@@ -90,6 +89,8 @@ export class Main extends Phaser.Scene {
             loop: true
         });
 
+        this.bg = this.add.graphics();
+
         this._particles_confetti = new ParticlePool(ConfettiParticle);
         this.addChild(this._particles_confetti);
         this._blocks = new GameObjectCollection();
@@ -111,8 +112,6 @@ export class Main extends Phaser.Scene {
 
         this._mouseVector = new Phaser.Math.Vector2();
         this._screenshake = new Shaker(this);
-        this._background = new Shape();
-        this.parent.addChildAt(this._background, 0);
 
         this.toggler = new SettingsToggler(this);
 
@@ -128,17 +127,22 @@ export class Main extends Phaser.Scene {
 
     private drawBackground (): void
     {
-        this._background.graphics.clear();
-        if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this._backgroundGlitchForce > 0.01)
+        const bg = this.bg;
+
+        bg.clear();
+
+        if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this.bgGlitchForce > 0.01)
         {
-            this._background.graphics.beginFill(Settings.COLOR_BACKGROUND * (3 * Math.random()));
-            this._backgroundGlitchForce *= 0.8;
+            bg.fillStyle(Settings.COLOR_BACKGROUND * (3 * Math.random()));
+
+            this.bgGlitchForce *= 0.8;
         }
         else
         {
-            this._background.graphics.beginFill(Settings.COLOR_BACKGROUND);
+            bg.fillStyle(Settings.COLOR_BACKGROUND);
         }
-        this._background.graphics.drawRect(5, 5, Settings.STAGE_W - 10, Settings.STAGE_H);
+
+        bg.fillRect(5, 5, Settings.STAGE_W - 10, Settings.STAGE_H);
     }
 
     private reset (): void
@@ -147,6 +151,7 @@ export class Main extends Phaser.Scene {
             this.blockHitTime = 0;
 
         this.drawBackground();
+
         this._blocks.clear();
         this._balls.clear();
         this._lines.clear();
@@ -319,8 +324,9 @@ export class Main extends Phaser.Scene {
 
         if (e.block != null && e.block != this._paddle)
         {
-            this._backgroundGlitchForce = 0.05;
+            this.bgGlitchForce = 0.05;
         }
+
         if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
         {
             ParticleSpawn.burst(e.ball.x, e.ball.y, 5, 90, -Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, e.ball.velocity * 5, .5, this._particles_impact);
@@ -428,21 +434,22 @@ export class Main extends Phaser.Scene {
 
     private updateColorUse (): void
     {
-        const useColors= Settings.EFFECT_SCREEN_COLORS;
+        const useColors = Settings.EFFECT_SCREEN_COLORS;
+        const bg = this.bg;
 
         if (useColors === this.useColors) { return; }
 
         if (useColors)
         {
-            this.transform.colorTransform = new ColorTransform();
-            this._background.transform.colorTransform = new ColorTransform();
+            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
+            bg.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
         }
         else
         {
             this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
-            this._background.transform.colorTransform = new ColorTransform(0, 0, 0);
+            bg.transform.colorTransform = new ColorTransform(0, 0, 0, 1, 0, 0, 0, 0);
         }
 
-        this.useColors = useColors;
+        this.useColors = Settings.EFFECT_SCREEN_COLORS;
     }
 }
