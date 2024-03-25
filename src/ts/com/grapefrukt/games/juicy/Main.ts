@@ -24,9 +24,9 @@ import { Keyboard } from '../../../../flash/ui/Keyboard';
 
 export class Main extends Phaser.Scene {
 
-    private _blocks: GameObjectCollection;
-    private _balls: GameObjectCollection;
-    private _lines: GameObjectCollection;
+    private _blocks: GameObjectCollection<Block>;
+    private _balls: GameObjectCollection<Ball>;
+    private _lines: GameObjectCollection<BouncyLine>;
     private _screenshake: Shaker;
     private _paddle: Paddle;
     private _particles_impact: ParticlePool;
@@ -94,7 +94,9 @@ export class Main extends Phaser.Scene {
         this._particles_confetti = new ParticlePool(ConfettiParticle);
         this.addChild(this._particles_confetti);
         this._blocks = new GameObjectCollection();
-        this._blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, true);
+
+        this.events.on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this);
+
         this.addChild(this._blocks);
         this._lines = new GameObjectCollection();
         this.addChild(this._lines);
@@ -386,11 +388,14 @@ export class Main extends Phaser.Scene {
         }
     }
 
-    private handleBlockDestroyed (e: JuicyEvent): void
+    private handleBlockDestroyed (ball: Ball/*, block: Block*/): void
     {
         if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
         {
-            ParticleSpawn.burst(e.ball.x, e.ball.y, 5, 45, -Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 50 + e.ball.velocity * 10, .5, this._particles_shatter);
+            ParticleSpawn.burst(ball.x, ball.y, 5, 45,
+                -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
+                50 + ball.velocity * 10,
+                .5, this._particles_shatter);
         }
     }
 

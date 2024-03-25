@@ -21,10 +21,10 @@ export class BouncyLine extends GameObject {
         let delta: Point;
         delta = this.pos2.clone();
         delta = delta.subtract(this.pos1);
-        this.length = delta.length;
+        const length = delta.length;
         delta.normalize(1);
         this.line_rotation = Math.atan2(delta.y, delta.x);
-        delta.normalize(this.length * 0.5);
+        delta.normalize(length * 0.5);
         this.pos_middle = this.pos1.clone();
         this.pos_middle = this.pos_middle.add(delta);
     }
@@ -187,7 +187,6 @@ export class BouncyLine extends GameObject {
     private pos1: Point = new Point();
     private pos2: Point = new Point();
     private pos_middle: Point = new Point();
-    private length = 0;
     private wobble_middle: Point = new Point();
     private wobble_velocity: Point = new Point();
     private line_rotation = 0;

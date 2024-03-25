@@ -1,10 +1,9 @@
 import { GameObjectEvent } from '../events/GameObjectEvent';
 import { GameObject } from '../gameobjects/GameObject';
 import { Sprite } from '../../../../../flash/display/Sprite';
-import { Point } from '../../../../../flash/geom/Point';
-import { grapelib } from '../namespaces/grapelib';
-export class GameObjectCollection extends Sprite {
-    protected _collection: Array<GameObject>;
+
+export class GameObjectCollection<T extends GameObject> extends Sprite {
+    protected _collection: Array<T>;
     constructor ()
     {
         super();
@@ -17,7 +16,7 @@ export class GameObjectCollection extends Sprite {
         this.remove(GameObject(e.target), false);
     }
 
-    getClosest (x: number, y: number, maxDistance: number = Number.MAX_VALUE, classFilter: Class = null, filterObject: GameObject = null): GameObject
+    getClosest (x: number, y: number, maxDistance: number = Number.MAX_VALUE, classFilter: Class = null, filterObject: T = null): T
     {
         let dist = 0.0;
         let minDist: number = maxDistance;
@@ -25,7 +24,7 @@ export class GameObjectCollection extends Sprite {
         {
             minDist *= minDist;
         }
-        let minObj: GameObject;
+        let minObj: T;
         for (const go of this._collection)
         {
             if ((!classFilter || go instanceof classFilter) && go != filterObject)
@@ -41,33 +40,33 @@ export class GameObjectCollection extends Sprite {
         return minObj;
     }
 
-    add (go: GameObject): GameObject
+    add (go: T): T
     {
         this._collection.push(go);
         this.addChild(go);
         return go;
     }
 
-    addAt (go: GameObject, index: number): GameObject
+    addAt (go: T, index: number): T
     {
         this._collection.splice(index - 1, 0, go);
         this.addChild(go);
         return go;
     }
 
-    removeAtIndex (pos: number, doRemove: boolean): GameObject
+    removeAtIndex (pos: number, doRemove: boolean): T
     {
-        const go: GameObject = this._collection[pos];
+        const go: T = this._collection[pos];
         this._collection.splice(pos, 1);
         go.handleDetach(this);
         if (doRemove)
         {
-            go.remove();
+            go.destroy();
         }
         return go;
     }
 
-    remove (go: GameObject, doRemove: boolean): GameObject
+    remove (go: T, doRemove: boolean): T
     {
         const i: number = this._collection.indexOf(go);
         if (this._collection[i] && GameObject(this._collection[i]) == go)
@@ -76,14 +75,14 @@ export class GameObjectCollection extends Sprite {
             go.handleDetach(this);
             if (doRemove)
             {
-                go.remove();
+                go.destroy();
             }
             return go;
         }
         return null;
     }
 
-    getIndex (go: GameObject): number
+    getIndex (go: T): number
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
@@ -95,13 +94,13 @@ export class GameObjectCollection extends Sprite {
         return -1;
     }
 
-    getRandom (): GameObject
+    getRandom (): T
     {
         if (this._collection.length == 0)
         {
             return null;
         }
-        let go: GameObject;
+        let go: T;
         let tries = 0;
         while (!go && tries < 10)
         {
@@ -109,16 +108,6 @@ export class GameObjectCollection extends Sprite {
             tries++;
         }
         return go;
-    }
-
-    checkCollision (x: number, y: number, classFilter: Class = null, filterObject: GameObject = null): GameObject
-    {
-        const hitGo: GameObject = this.getClosest(x, y, Number.MAX_VALUE, classFilter, filterObject);
-        if ((hitGo && !hitGo.flaggedForRemoval) && hitGo.hitTestPoint(x, y, true))
-        {
-            return hitGo;
-        }
-        return null;
     }
 
     hasItemOfClass (findClass: Class): boolean
@@ -145,12 +134,12 @@ export class GameObjectCollection extends Sprite {
     {
         for (let i: number = this._collection.length - 1; i >= 0; --i)
         {
-            this._collection[i].remove();
+            this._collection[i].destroy();
         }
         this._collection.length = 0;
     }
 
-    get head (): GameObject
+    get head (): T
     {
         if (this._collection.length)
         {
@@ -159,7 +148,7 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    get tail (): GameObject
+    get tail (): T
     {
         if (this._collection.length)
         {
@@ -168,7 +157,7 @@ export class GameObjectCollection extends Sprite {
         return null;
     }
 
-    get collection (): Array<GameObject>
+    get collection (): typeof this._collection
     {
         return this._collection;
     }

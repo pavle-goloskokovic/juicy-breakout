@@ -1,5 +1,7 @@
 import { Timestep } from '../com/grapefrukt/Timestep';
 import { SettingsToggler } from '../com/grapefrukt/games/juicy/SettingsToggler';
+import { Block } from '../com/grapefrukt/games/juicy/gameobjects/Block';
+import { Settings } from '../com/grapefrukt/games/juicy/Settings';
 
 /**
  * Game Phaser scene.
@@ -20,8 +22,15 @@ export default class Game extends Phaser.Scene {
         const x = scale.width / 2;
         const y = scale.height / 2;
 
-        this.add.image(x, y, 'bg');
-        this.add.image(x, y, 'logo');
+        this.add.existing(new Block(this, x, y));
+
+        for (let i = 0; i < 80; i++)
+        {
+            this.add.existing(new Block(this,
+                120 + i % 10 * (Settings.BLOCK_W + 10),
+                30 + 47.5 + Math.trunc(i / 10) * (Settings.BLOCK_H + 10)
+            ));
+        }
 
         this._timestep = new Timestep();
 

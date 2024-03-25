@@ -1,95 +1,113 @@
 import type { Ball } from './Ball';
-import { DrawGeometry } from '../../../display/utilities/DrawGeometry';
 import { GameObject } from '../../general/gameobjects/GameObject';
-import { SliceEffect } from '../effects/SliceEffect';
+// import { SliceEffect } from '../effects/SliceEffect';
 import { JuicyEvent } from '../events/JuicyEvent';
 import { Freezer } from '../Freezer';
 import { Settings } from '../Settings';
-import { Timestep } from '../../../Timestep';
-import { Back } from '../../../../gskinner/motion/easing/Back';
-import { Bounce } from '../../../../gskinner/motion/easing/Bounce';
-import { Elastic } from '../../../../gskinner/motion/easing/Elastic';
-import { Linear } from '../../../../gskinner/motion/easing/Linear';
-import { Quadratic } from '../../../../gskinner/motion/easing/Quadratic';
-import { GTween } from '../../../../gskinner/motion/GTween';
-import { ColorTransformPlugin } from '../../../../gskinner/motion/plugins/ColorTransformPlugin';
-import { Shape } from '../../../../../flash/display/Shape';
-import { Sprite } from '../../../../../flash/display/Sprite';
-import { Event } from '../../../../../flash/events/Event';
-import { TimerEvent } from '../../../../../flash/events/TimerEvent';
-import { ColorTransform } from '../../../../../flash/geom/ColorTransform';
-import { Point } from '../../../../../flash/geom/Point';
-import { Timer } from '../../../../../flash/utils/Timer';
+
+const tempVec = new Phaser.Math.Vector2();
+
 export class Block extends GameObject {
+
     protected _collisionW: number = Settings.BLOCK_W;
     protected _collisionH: number = Settings.BLOCK_H;
-    protected _collidable = true;
-    protected _gfx: Sprite;
-    private _sliceEffect: SliceEffect;
-    constructor (x: number, y: number)
+    private _collidable = true;
+    protected _gfx: Phaser.GameObjects.Graphics;
+
+    // TODO slice effect
+    // private _sliceEffect: SliceEffect;
+
+    constructor (scene: Phaser.Scene, x: number, y: number)
     {
-        super();
-        this.x = x;
-        this.y = y;
-        this._gfx = new Sprite();
-        this.addChild(this._gfx);
+        super(scene, x, y);
+
+        this.add(
+            this._gfx = scene.add.graphics()
+        );
+
         this.render(Settings.COLOR_BLOCK);
+
         if (Settings.EFFECT_TWEENIN_ENABLED)
         {
             if (Settings.EFFECT_TWEENIN_PROPERTY_Y)
             {
                 this._gfx.y = -500;
             }
+
             if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION)
             {
                 this._gfx.rotation = Math.random() * 90 - 45;
             }
+
             if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE)
             {
                 this._gfx.scaleX = (this._gfx.scaleY = .2);
             }
-            const t: GTween = new GTween(this._gfx, Settings.EFFECT_TWEENIN_DURATION);
-            t.proxy.y = 0;
-            t.proxy.rotation = 0;
-            t.proxy.scaleX = 1;
-            t.proxy.scaleY = 1;
-            t.delay = Math.random() * Settings.EFFECT_TWEENIN_DELAY;
-            const easing: Array<Function> = Array([Linear.easeNone, Quadratic.easeOut, Back.easeOut, Bounce.easeOut]);
-            t.ease = easing[Settings.EFFECT_TWEENIN_EQUATION];
+
+            scene.add.tween({
+                targets: this._gfx,
+                duration: Settings.EFFECT_TWEENIN_DURATION * 1000,
+                props: {
+                    y: 0,
+                    rotation: 0,
+                    scaleX: 1,
+                    scaleY: 1
+                },
+                delay: Math.random() * Settings.EFFECT_TWEENIN_DELAY * 1000,
+                ease: [
+                    Phaser.Math.Easing.Linear,
+                    Phaser.Math.Easing.Quadratic.Out,
+                    Phaser.Math.Easing.Back.Out,
+                    Phaser.Math.Easing.Bounce.Out
+                ][Settings.EFFECT_TWEENIN_EQUATION]
+            });
         }
     }
 
     collide (ball: Ball): void
     {
         this._collidable = false;
+
         let delayDestruction = false;
+
         if (Settings.EFFECT_BLOCK_DARKEN)
         {
-            this.transform.colorTransform = new ColorTransform(.7, .7, .8);
+            // this.transform.colorTransform = new ColorTransform(.7, .7, .8);
+            this.render(0x45846A);
         }
+
         if (Settings.EFFECT_BLOCK_PUSH)
         {
-            const v: Point = new Point(this.x - ball.x, this.y - ball.y);
-            v.normalize(ball.velocity * 1);
-            this.velocityX += v.x;
-            this.velocityY += v.y;
+            tempVec.set(this.x - ball.x, this.y - ball.y)
+                .normalize()
+                .scale(ball.velocity);
+
+            this.velocityX += tempVec.x;
+            this.velocityY += tempVec.y;
+
             delayDestruction = true;
         }
-        this.parent.setChildIndex(this, this.parent.numChildren - 1);
+
+        /*this.parent.setChildIndex(this, this.parent.numChildren - 1);
         this._sliceEffect = new SliceEffect(this._gfx, null);
-        this.addChild(this._sliceEffect);
+        this.addChild(this._sliceEffect);*/
+
         this._gfx.visible = false;
+
         Freezer.freeze();
-        if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER)
+
+        /*if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER)
         {
             this._sliceEffect.slices[0].velocityR = Math.random() > .5 ? Settings.EFFECT_BLOCK_SHATTER_ROTATION : -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
             delayDestruction = true;
         }
+
         if (Settings.EFFECT_BLOCK_SHATTER)
         {
             this._sliceEffect.slice(new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10), new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10));
             delayDestruction = true;
         }
+
         if (Settings.EFFECT_BLOCK_SCALE)
         {
             for (const slice of this._sliceEffect.slices)
@@ -97,53 +115,96 @@ export class Block extends GameObject {
                 new GTween(slice, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, { scaleY: 0, scaleX: 0 }, { ease: Quadratic.easeOut });
             }
             delayDestruction = true;
-        }
-        dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED, ball, this));
+        }*/
+
+        this.scene.events.emit(JuicyEvent.BLOCK_DESTROYED, ball, this);
+
         if (!delayDestruction)
         {
-            this.remove();
+            this.destroy();
         }
         else
         {
-            new GTween(this, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, null, { onComplete: this.handleRemoveTweenComplete });
+            this.scene.time.delayedCall(
+                Settings.EFFECT_BLOCK_DESTRUCTION_DURATION * 1000,
+                () => { this.destroy(); });
         }
     }
 
     jellyEffect (strength = .2, delay = 0): void
     {
-        new GTween(this._gfx, .05, { scaleX: 1 + strength }, { delay: delay, ease: Quadratic.easeInOut, onComplete: function (gt: GTween): void
-        {
-            new GTween(gt.target, .6, { scaleX: 1 }, { ease: Elastic.easeOut });
-        } });
-        new GTween(this._gfx, .05, { scaleY: 1 + strength }, { delay: delay + .05, ease: Quadratic.easeInOut, onComplete: function (gt: GTween): void
-        {
-            new GTween(gt.target, .6, { scaleY: 1 }, { ease: Elastic.easeOut });
-        } });
+        const tweens = this.scene.tweens;
+
+        tweens.add({
+            targets: this._gfx,
+            duration: .05 * 1000,
+            props: {
+                scaleX: 1 + strength
+            },
+            delay: delay * 1000,
+            ease: Phaser.Math.Easing.Quadratic.InOut,
+            onComplete: (tween) =>
+            {
+                // TODO chain
+                tweens.add({
+                    targets: tween.targets,
+                    duration: .6 * 1000,
+                    props: {
+                        scaleX: 1
+                    },
+                    ease: Phaser.Math.Easing.Elastic.Out
+                });
+            }
+        });
+
+        tweens.add({
+            targets: this._gfx,
+            duration: .05 * 1000,
+            props: {
+                scaleY: 1 + strength
+            },
+            delay: (delay + .05) * 1000,
+            ease: Phaser.Math.Easing.Quadratic.InOut,
+            onComplete: (tween) =>
+            {
+                // TODO chain
+                tweens.add({
+                    targets: tween.targets,
+                    duration: .6 * 1000,
+                    props: {
+                        scaleY: 1
+                    },
+                    ease: Phaser.Math.Easing.Elastic.Out
+                });
+            }
+        });
     }
 
-    update (timeDelta = 1): void
+    update (deltaFactor = 1): void
     {
-        super.update(timeDelta);
-        if (this._sliceEffect)
+        super.update(deltaFactor);
+
+        /*if (this._sliceEffect)
         {
-            this._sliceEffect.update(timeDelta);
-        }
+            this._sliceEffect.update(deltaFactor);
+        }*/
+
         if (Settings.EFFECT_BLOCK_GRAVITY && !this._collidable)
         {
-            this.velocityY += .4 * timeDelta;
+            this.velocityY += .4 * deltaFactor;
         }
-    }
-
-    private handleRemoveTweenComplete (g: GTween): void
-    {
-        this.remove();
     }
 
     protected render (color: number): void
     {
-        this._gfx.graphics.clear();
-        this._gfx.graphics.beginFill(color);
-        this._gfx.graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
+        this._gfx.clear();
+        this._gfx.fillStyle(color);
+        this._gfx.fillRect(
+            -Settings.BLOCK_W / 2,
+            -Settings.BLOCK_H / 2,
+            Settings.BLOCK_W,
+            Settings.BLOCK_H
+        );
     }
 
     get collidable (): boolean

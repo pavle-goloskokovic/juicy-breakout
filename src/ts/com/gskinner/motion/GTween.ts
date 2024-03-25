@@ -3,7 +3,7 @@ import { Event } from '../../../flash/events/Event';
 import { Dictionary } from '../../../flash/utils/Dictionary';
 import { getTimer } from '../../../flash/utils/getTimer';
 import { IEventDispatcher } from '../../../flash/events/IEventDispatcher';
-export class GTween {
+export class GTween<T> {
     static pauseAll = false;
     static defaultEase: Function = linearEase;
     static timeScaleAll = 1;
@@ -73,7 +73,7 @@ export class GTween {
     protected _initValues: any;
     protected _rangeValues: any;
     protected _referenceTime: number;
-    protected _proxy: TargetProxy;
+    protected _proxy: T & { tween: GTween<T> };
     autoPlay = true;
     data: any;
     duration: number;
@@ -82,7 +82,7 @@ export class GTween {
     pluginData: any;
     reflect: boolean;
     repeatCount = 1;
-    target: any;
+    target: T;
     useFrames: boolean;
     timeScale = 1;
     positionOld: number;
@@ -91,10 +91,11 @@ export class GTween {
     calculatedPosition: number;
     calculatedPositionOld: number;
     suppressEvents: boolean;
-    onComplete: Function;
+    onComplete: (tween: GTween<T>) => void;
     onChange: Function;
     onInit: Function;
-    constructor (target: any = null, duration = 1, values: any = null, props: any = null, pluginData: any = null)
+
+    constructor (target: T = null, duration = 1, values: Partial<T> = null, props: Partial<GTween<T>> = null, pluginData: any = null)
     {
         this.ease = GTween.defaultEase;
         this.target = target;
@@ -248,7 +249,7 @@ export class GTween {
         this._delay = value;
     }
 
-    get proxy (): TargetProxy
+    get proxy (): T & { tween: GTween<T> }
     {
         if (this._proxy == null)
         {
@@ -428,7 +429,6 @@ export class GTween {
     }
 }
 import { Proxy } from '../../../flash/utils/Proxy';
-import { flash_proxy } from '../../../flash/utils/flash_proxy';
 class TargetProxy extends Proxy {
     private tween: GTween;
     constructor (tween: GTween)
