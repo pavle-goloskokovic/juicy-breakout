@@ -2,6 +2,8 @@ import { Timestep } from '../com/grapefrukt/Timestep';
 import { SettingsToggler } from '../com/grapefrukt/games/juicy/SettingsToggler';
 import { Block } from '../com/grapefrukt/games/juicy/gameobjects/Block';
 import { Settings } from '../com/grapefrukt/games/juicy/Settings';
+import { Ball } from '../com/grapefrukt/games/juicy/gameobjects/Ball';
+import { Paddle } from '../com/grapefrukt/games/juicy/gameobjects/Paddle';
 
 /**
  * Game Phaser scene.
@@ -11,6 +13,8 @@ import { Settings } from '../com/grapefrukt/games/juicy/Settings';
 export default class Game extends Phaser.Scene {
 
     private _timestep: Timestep;
+
+    private paddle: Paddle;
 
     constructor () { super('game'); }
 
@@ -22,7 +26,9 @@ export default class Game extends Phaser.Scene {
         const x = scale.width / 2;
         const y = scale.height / 2;
 
-        this.add.existing(new Block(this, x, y));
+        this.add.existing(new Ball(this, x, y + 100));
+
+        this.paddle = this.add.existing(new Paddle(this));
 
         for (let i = 0; i < 80; i++)
         {
@@ -66,6 +72,8 @@ export default class Game extends Phaser.Scene {
 
         const deltaFactor = delta / 1000 * 60 * this.time.timeScale;
 
-        console.log(this._timestep.timeDelta.toFixed(2), deltaFactor.toFixed(2));
+        this.paddle.update(deltaFactor);
+
+        // console.log(this._timestep.timeDelta.toFixed(2), deltaFactor.toFixed(2));
     }
 }

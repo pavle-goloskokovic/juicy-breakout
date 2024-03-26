@@ -101,7 +101,9 @@ export class Main extends Phaser.Scene {
         this._lines = new GameObjectCollection();
         this.addChild(this._lines);
         this._balls = new GameObjectCollection();
-        this._balls.addEventListener(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, true);
+
+        this.events.on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
+
         this.addChild(this._balls);
         this._particles_impact = new ParticlePool(BallImpactParticle);
         this.addChild(this._particles_impact);
@@ -320,22 +322,22 @@ export class Main extends Phaser.Scene {
         return ((ball.x > block.x - block.collisionW / 2 && ball.x < block.x + block.collisionW / 2) && ball.y > block.y - block.collisionH / 2) && ball.y < block.y + block.collisionH / 2;
     }
 
-    private handleBallCollide (e: JuicyEvent): void
+    private handleBallCollide (ball: Ball, block: Block): void
     {
         const sound = this.sound;
 
-        if (e.block != null && e.block != this._paddle)
+        if (block != null && block != this._paddle)
         {
             this.bgGlitchForce = 0.05;
         }
 
         if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
         {
-            ParticleSpawn.burst(e.ball.x, e.ball.y, 5, 90, -Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, e.ball.velocity * 5, .5, this._particles_impact);
+            ParticleSpawn.burst(ball.x, ball.y, 5, 90, -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI, ball.velocity * 5, .5, this._particles_impact);
         }
         if (Settings.EFFECT_SCREEN_SHAKE)
         {
-            this._screenshake.shake(-e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
+            this._screenshake.shake(-ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
         }
         if (Settings.EFFECT_BLOCK_JELLY)
         {
@@ -345,9 +347,9 @@ export class Main extends Phaser.Scene {
             }
         }
 
-        e.ball.velocity = Settings.BALL_MAX_VELOCITY;
+        ball.velocity = Settings.BALL_MAX_VELOCITY;
 
-        if (e.block instanceof Paddle)
+        if (block instanceof Paddle)
         {
             if (Settings.SOUND_PADDLE)
             {
@@ -355,10 +357,10 @@ export class Main extends Phaser.Scene {
             }
             if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
             {
-                ParticleSpawn.burst(e.ball.x, e.ball.y, 20, 90, -180, 600, 1, this._particles_confetti);
+                ParticleSpawn.burst(ball.x, ball.y, 20, 90, -180, 600, 1, this._particles_confetti);
             }
         }
-        else if (e.block)
+        else if (block)
         {
             const now = Date.now();
 
