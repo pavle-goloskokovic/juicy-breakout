@@ -31,24 +31,24 @@ export class Block extends GameObject {
         {
             if (Settings.EFFECT_TWEENIN_PROPERTY_Y)
             {
-                this._gfx.y = -500;
+                this.y = y - 500;
             }
 
             if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION)
             {
-                this._gfx.rotation = Math.random() * 90 - 45;
+                this.rotation = Math.random() * 90 - 45;
             }
 
             if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE)
             {
-                this._gfx.scaleX = (this._gfx.scaleY = .2);
+                this.setScale(.2);
             }
 
             scene.add.tween({
-                targets: this._gfx,
+                targets: this,
                 duration: Settings.EFFECT_TWEENIN_DURATION * 1000,
                 props: {
-                    y: 0,
+                    y,
                     rotation: 0,
                     scaleX: 1,
                     scaleY: 1
@@ -70,7 +70,7 @@ export class Block extends GameObject {
 
         let delayDestruction = false;
 
-        if (Settings.EFFECT_BLOCK_DARKEN)
+        if (Settings.EFFECT_BLOCK_DARKEN) // TODO should affect slice color
         {
             // this.transform.colorTransform = new ColorTransform(.7, .7, .8);
             this.render(0x45846A);
@@ -197,14 +197,14 @@ export class Block extends GameObject {
 
     protected render (color: number): void
     {
-        this._gfx.clear();
-        this._gfx.fillStyle(color);
-        this._gfx.fillRect(
-            -Settings.BLOCK_W / 2,
-            -Settings.BLOCK_H / 2,
-            Settings.BLOCK_W,
-            Settings.BLOCK_H
-        );
+        this._gfx.clear()
+            .fillStyle(color)
+            .fillRect(
+                -Settings.BLOCK_W / 2,
+                -Settings.BLOCK_H / 2,
+                Settings.BLOCK_W,
+                Settings.BLOCK_H
+            );
     }
 
     get collidable (): boolean
