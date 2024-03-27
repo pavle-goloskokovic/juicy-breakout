@@ -1,45 +1,49 @@
-import { Shaker } from './Shaker';
+// import { Shaker } from './Shaker';
 import { SettingsToggler } from './SettingsToggler';
-import { Slides } from './Slides';
+// import { Slides } from './Slides';
 import { Settings } from './Settings';
 import { Freezer } from './Freezer';
-import { GameObjectCollection } from '../general/collections/GameObjectCollection';
-import { ParticlePool } from '../general/particles/ParticlePool';
-import { ParticleSpawn } from '../general/particles/ParticleSpawn';
-import { BouncyLine } from './effects/BouncyLine';
-import { BallImpactParticle } from './effects/particles/BallImpactParticle';
-import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
-import { ConfettiParticle } from './effects/particles/ConfettiParticle';
+// import { ParticlePool } from '../general/particles/ParticlePool';
+// import { ParticleSpawn } from '../general/particles/ParticleSpawn';
+// import { BouncyLine } from './effects/BouncyLine';
+// import { BallImpactParticle } from './effects/particles/BallImpactParticle';
+// import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
+// import { ConfettiParticle } from './effects/particles/ConfettiParticle';
 import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
 import { Block } from './gameobjects/Block';
 import { Paddle } from './gameobjects/Paddle';
-import { ColorTransform } from '../../../../flash/geom/ColorTransform';
-import { LazyKeyboard } from '../../input/LazyKeyboard';
-import { GTween } from '../../../gskinner/motion/GTween';
-import { ColorTransformPlugin } from '../../../gskinner/motion/plugins/ColorTransformPlugin';
-import { KeyboardEvent } from '../../../../flash/events/KeyboardEvent';
-import { MouseEvent } from '../../../../flash/events/MouseEvent';
-import { Keyboard } from '../../../../flash/ui/Keyboard';
+// import { ColorTransformPlugin } from '../../../gskinner/motion/plugins/ColorTransformPlugin';
+import spritesData from '../../../../../data/sprites.json';
 
 export class Main extends Phaser.Scene {
 
-    private _blocks: GameObjectCollection<Block>;
-    private _balls: GameObjectCollection<Ball>;
-    private _lines: GameObjectCollection<BouncyLine>;
-    private _screenshake: Shaker;
-    private _paddle: Paddle;
-    private _particles_impact: ParticlePool;
-    private _particles_shatter: ParticlePool;
-    private _particles_confetti: ParticlePool;
-    private _mouseDown: boolean;
-    private _mouseVector: Phaser.Math.Vector2;
+    private blocks: Block[] = [];
+    private balls: Ball[] = [];
+    // private _lines: GameObjectCollection<BouncyLine>; // TODO wobbly lines
+
+    // private _screenshake: Shaker; // TODO screen shaker
+
+    private paddle: Paddle;
+
+    // private _particles_impact: ParticlePool; // TODO particles
+    // private _particles_shatter: ParticlePool;
+    // private _particles_confetti: ParticlePool;
+
+    private pointerDown = false;
+    private pointerVector = new Phaser.Math.Vector2();
+
     private toggler: SettingsToggler;
+
     private bgGlitchForce: number;
+
     private blockHitCount: number;
     private blockHitTime: number;
-    private _keyboard: LazyKeyboard;
-    private _slides: Slides;
+
+    private keyCtrl: Phaser.Input.Keyboard.Key;
+    private keyShift: Phaser.Input.Keyboard.Key;
+
+    // private _slides: Slides; // TODO slides
     private bg: Phaser.GameObjects.Graphics;
     private useColors: boolean;
     private preloadText: Phaser.GameObjects.Text;
@@ -51,7 +55,7 @@ export class Main extends Phaser.Scene {
 
     boot (): void
     {
-        ColorTransformPlugin.install(); // TODO
+        // ColorTransformPlugin.install(); // TODO
     }
 
     preload (): void
@@ -70,7 +74,9 @@ export class Main extends Phaser.Scene {
                 require(`../../../../../assets/sound/pling${i + 1}.mp3`));
         }
 
-        // TODO preload visual assets
+        load.atlas('sprites',
+            require('../../../../../assets/images/sprites.png'),
+            spritesData);
 
         this.preloadText = this.add.text(0, 0, 'Loading sounds...', {
             color: '#ffffff',
@@ -91,38 +97,43 @@ export class Main extends Phaser.Scene {
 
         this.bg = this.add.graphics();
 
-        this._particles_confetti = new ParticlePool(ConfettiParticle);
-        this.addChild(this._particles_confetti);
-        this._blocks = new GameObjectCollection();
+        // this._particles_confetti = new ParticlePool(ConfettiParticle);
+        // this.addChild(this._particles_confetti);
 
-        this.events.on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this);
+        this.events
+            .on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this)
+            .on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
 
-        this.addChild(this._blocks);
-        this._lines = new GameObjectCollection();
-        this.addChild(this._lines);
-        this._balls = new GameObjectCollection();
+        // this._lines = new GameObjectCollection();
+        // this.addChild(this._lines);
 
-        this.events.on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
-
-        this.addChild(this._balls);
-        this._particles_impact = new ParticlePool(BallImpactParticle);
-        this.addChild(this._particles_impact);
-        this._particles_shatter = new ParticlePool(BlockShatterParticle);
-        this.addChild(this._particles_shatter);
-
-        this.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.handleKeyDown);
-        this.stage.addEventListener(MouseEvent.MOUSE_DOWN, this.handleMouseToggle);
-        this.stage.addEventListener(MouseEvent.MOUSE_UP, this.handleMouseToggle);
-
-        this._mouseVector = new Phaser.Math.Vector2();
-        this._screenshake = new Shaker(this);
+        // this._particles_impact = new ParticlePool(BallImpactParticle);
+        // this.addChild(this._particles_impact);
+        // this._particles_shatter = new ParticlePool(BlockShatterParticle);
+        // this.addChild(this._particles_shatter);
 
         this.toggler = new SettingsToggler(this);
 
-        this._slides = new Slides();
-        this._slides.visible = false;
-        this.parent.addChild(this._slides);
-        this._keyboard = new LazyKeyboard(this.stage);
+        this.handleKeyDown();
+
+        this.input.on('pointerdown', () =>
+        {
+            this.pointerDown = true;
+        }
+        ).on('pointerup', () =>
+        {
+            this.pointerDown = false;
+        });
+
+        // this._screenshake = new Shaker(this);
+
+        // this._slides = new Slides();
+        // this._slides.visible = false;
+        // this.parent.addChild(this._slides);
+
+        const keyboard = this.input.keyboard;
+        this.keyCtrl = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
+        this.keyShift = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
 
         this.updateColorUse();
 
@@ -156,25 +167,47 @@ export class Main extends Phaser.Scene {
 
         this.drawBackground();
 
-        this._blocks.clear();
-        this._balls.clear();
-        this._lines.clear();
-        this._particles_impact.clear();
+        this.blocks.forEach((block) =>
+        {
+            block.destroy();
+        });
+        this.blocks.length = 0;
+
+        this.balls.forEach((ball) =>
+        {
+            ball.destroy();
+        });
+        this.balls.length = 0;
+
+        // this._lines.clear();
+
+        // this._particles_impact.clear();
+
         for (let j = 0; j < Settings.NUM_BALLS; j++)
         {
             this.addBall();
         }
+
         for (let i = 0; i < 80; i++)
         {
-            const block: Block = new Block(120 + i % 10 * (Settings.BLOCK_W + 10), 30 + 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
-            this._blocks.add(block);
+            this.blocks.push(
+                this.add.existing(
+                    new Block(this,
+                        120 + i % 10 * (Settings.BLOCK_W + 10),
+                        30 + 47.5 + Math.trunc(i / 10) * (Settings.BLOCK_H + 10)
+                    )
+                )
+            );
         }
-        const buffer: number = Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
-        this._lines.add(new BouncyLine(buffer, buffer, Settings.STAGE_W - buffer, buffer));
-        this._lines.add(new BouncyLine(buffer, buffer, buffer, Settings.STAGE_H));
-        this._lines.add(new BouncyLine(Settings.STAGE_W - buffer, buffer, Settings.STAGE_W - buffer, Settings.STAGE_H));
-        this._paddle = new Paddle();
-        this._blocks.add(this._paddle);
+
+        // const buffer = Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
+        // this._lines.add(new BouncyLine(buffer, buffer, Settings.STAGE_W - buffer, buffer));
+        // this._lines.add(new BouncyLine(buffer, buffer, buffer, Settings.STAGE_H));
+        // this._lines.add(new BouncyLine(Settings.STAGE_W - buffer, buffer, Settings.STAGE_W - buffer, Settings.STAGE_H));
+
+        this.blocks.push(
+            this.paddle = this.add.existing(new Paddle(this))
+        );
     }
 
     update (time: number, delta: number): void
@@ -192,11 +225,11 @@ export class Main extends Phaser.Scene {
         }
 
         const clock = this.time;
-        if (this._keyboard.keyIsDown(Keyboard.CONTROL) || this._slides.visible)
+        if (this.keyCtrl.isDown /*|| this._slides.visible*/)
         {
             clock.timeScale = 0;
         }
-        else if (this._keyboard.keyIsDown(Keyboard.SHIFT))
+        else if (this.keyShift.isDown)
         {
             clock.timeScale = .1;
         }
@@ -205,32 +238,47 @@ export class Main extends Phaser.Scene {
             clock.timeScale = 1;
         }
         clock.timeScale *= Freezer.multiplier;
-        GTween.timeScaleAll = clock.timeScale; // TODO
 
         const deltaFactor = delta / 1000 * 60 * clock.timeScale;
 
         this.drawBackground();
 
-        this._balls.update(deltaFactor);
-        this._blocks.update(deltaFactor);
-        this._lines.update(deltaFactor);
-        this._screenshake.update(deltaFactor);
-        if (this._balls.collection.length)
+        this.balls.forEach((ball) =>
         {
-            this._paddle.lookAt(Ball(this._balls.collection[0]));
+            ball.update(deltaFactor);
+        });
+
+        this.blocks.forEach((block) =>
+        {
+            block.update(deltaFactor);
+        });
+
+        // this._lines.update(deltaFactor);
+
+        // this._screenshake.update(deltaFactor);
+
+        if (this.balls.length)
+        {
+            this.paddle.lookAt(this.balls[0]);
         }
+
+        const input = this.input;
         if (Settings.EFFECT_PADDLE_STRETCH)
         {
-            this._paddle.scaleX = 1 + Math.abs(this._paddle.x - this.mouseX) / 100;
-            this._paddle.scaleY = 1.5 - this._paddle.scaleX * .5;
+            this.paddle.scaleX = 1 + Math.abs(this.paddle.x - input.x) / 100;
+            this.paddle.scaleY = 1.5 - this.paddle.scaleX * .5;
         }
         else
         {
-            this._paddle.scaleX = (this._paddle.scaleY = 1);
+            this.paddle.scaleX =
+                this.paddle.scaleY = 1;
         }
-        this._paddle.x = this.mouseX;
-        const screen_buffer: number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
-        for (const ball of this._balls.collection)
+        this.paddle.x = input.x;
+
+        const screen_buffer = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH
+            + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
+
+        for (const ball of this.balls)
         {
             if (ball.x < screen_buffer && ball.velocityX < 0)
             {
@@ -249,30 +297,44 @@ export class Main extends Phaser.Scene {
                 ball.collide(1, -1);
             }
             ball.velocityY += Settings.BALL_GRAVITY / 100 * deltaFactor;
-            for (const line of this._lines.collection)
+
+            // for (const line of this._lines.collection)
+            // {
+            //     line.checkCollision(ball);
+            // }
+
+            if (this.pointerDown)
             {
-                line.checkCollision(ball);
-            }
-            if (this._mouseDown)
-            {
-                this._mouseVector.x = (ball.x - this.mouseX) * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
-                this._mouseVector.y = (ball.y - this.mouseY) * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
-                if (this._mouseVector.length() > Settings.MOUSE_GRAVITY_MAX)
+                const pointerVector = this.pointerVector;
+
+                pointerVector.x = (ball.x - input.x)
+                    * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
+                pointerVector.y = (ball.y - input.y)
+                    * Settings.MOUSE_GRAVITY_POWER * deltaFactor;
+
+                if (pointerVector.length() > Settings.MOUSE_GRAVITY_MAX)
                 {
-                    this._mouseVector.normalize().scale(Settings.MOUSE_GRAVITY_MAX);
+                    pointerVector
+                        .normalize()
+                        .scale(Settings.MOUSE_GRAVITY_MAX);
                 }
-                ball.velocityX -= this._mouseVector.x;
-                ball.velocityY -= this._mouseVector.y;
+
+                ball.velocityX -= pointerVector.x;
+                ball.velocityY -= pointerVector.y;
             }
+
             if (ball.velocity < Settings.BALL_MIN_VELOCITY)
             {
                 ball.velocity = Settings.BALL_MIN_VELOCITY;
             }
+
             if (ball.velocity > Settings.BALL_MAX_VELOCITY)
             {
-                ball.velocity -= ball.velocity * Settings.BALL_VELOCITY_LOSS * deltaFactor;
+                ball.velocity -= ball.velocity
+                    * Settings.BALL_VELOCITY_LOSS * deltaFactor;
             }
-            for (const block of this._blocks.collection)
+
+            for (const block of this.blocks)
             {
                 if (block.collidable && this.isColliding(ball, block))
                 {
@@ -287,6 +349,7 @@ export class Main extends Phaser.Scene {
                         ball.y -= v.y;
                     }
                     block.collide(ball);
+
                     if (Settings.POWERUP_SLICER_BALL && !(block instanceof Paddle))
                     {
                         ball.collide(1, 1, block);
@@ -311,6 +374,7 @@ export class Main extends Phaser.Scene {
                     {
                         ball.collide(-1, -1, block);
                     }
+
                     break;
                 }
             }
@@ -319,29 +383,34 @@ export class Main extends Phaser.Scene {
 
     private isColliding (ball: Ball, block: Block): boolean
     {
-        return ((ball.x > block.x - block.collisionW / 2 && ball.x < block.x + block.collisionW / 2) && ball.y > block.y - block.collisionH / 2) && ball.y < block.y + block.collisionH / 2;
+        return ((ball.x > block.x - block.collisionW / 2 &&
+                    ball.x < block.x + block.collisionW / 2) &&
+                ball.y > block.y - block.collisionH / 2) &&
+            ball.y < block.y + block.collisionH / 2;
     }
 
     private handleBallCollide (ball: Ball, block: Block): void
     {
         const sound = this.sound;
 
-        if (block != null && block != this._paddle)
+        if (block && block !== this.paddle)
         {
             this.bgGlitchForce = 0.05;
         }
 
-        if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
+        /*if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
         {
             ParticleSpawn.burst(ball.x, ball.y, 5, 90, -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI, ball.velocity * 5, .5, this._particles_impact);
-        }
-        if (Settings.EFFECT_SCREEN_SHAKE)
+        }*/
+
+        /*if (Settings.EFFECT_SCREEN_SHAKE)
         {
             this._screenshake.shake(-ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
-        }
+        }*/
+
         if (Settings.EFFECT_BLOCK_JELLY)
         {
-            for (const block of this._blocks.collection)
+            for (const block of this.blocks)
             {
                 block.jellyEffect(.2, Math.random() * .02);
             }
@@ -355,10 +424,11 @@ export class Main extends Phaser.Scene {
             {
                 sound.play('ball-paddle');
             }
-            if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
+
+            /*if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
             {
                 ParticleSpawn.burst(ball.x, ball.y, 20, 90, -180, 600, 1, this._particles_confetti);
-            }
+            }*/
         }
         else if (block)
         {
@@ -390,71 +460,79 @@ export class Main extends Phaser.Scene {
         }
     }
 
-    private handleBlockDestroyed (ball: Ball/*, block: Block*/): void
+    private handleBlockDestroyed (ball: Ball, block: Block): void
     {
-        if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
+        /*if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
         {
             ParticleSpawn.burst(ball.x, ball.y, 5, 45,
                 -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
                 50 + ball.velocity * 10,
                 .5, this._particles_shatter);
+        }*/
+
+        const index = this.blocks.indexOf(block);
+        if (index > -1) // only splice array when item is found
+        {
+            // 2nd parameter means remove one item only
+            this.blocks.splice(index, 1);
         }
     }
 
-    private handleKeyDown (e: KeyboardEvent): void
+    private handleKeyDown (): void
     {
-        if (e.keyCode == Keyboard.SPACE)
-        {
-            this.reset();
-        }
-        if (e.keyCode == Keyboard.B)
-        {
-            this.addBall();
-        }
-
         const toggler = this.toggler;
-        if (e.keyCode == Keyboard.ENTER)
-        {
-            toggler.setAll(true);
-        }
-        if (e.keyCode == Keyboard.NUMBER_2)
-        {
-            toggler.setAll(false);
-        }
 
-        if (e.keyCode == Keyboard.P)
-        {
-            const b: Ball = this._balls.collection[0] as Ball;
-            ParticleSpawn.burst(b.x, b.y, 10, 360, Math.atan2(b.velocityY, b.velocityX) * 180 / Math.PI, 100, .1, this._particles_impact);
-        }
-    }
+        this.input.keyboard
+            .on('keydown-SPACE', this.reset, this)
+            .on('keydown-B', this.addBall, this)
+            .on('keydown-ENTER', () =>
+            {
+                toggler.setAll(true);
+            })
+            .on('keydown-TWO', () =>
+            {
+                toggler.setAll(false);
+            })
+            .on('keydown-P', () =>
+            {
+                /*const b = this.balls[0];
 
-    private handleMouseToggle (e: MouseEvent): void
-    {
-        this._mouseDown = e.type == MouseEvent.MOUSE_DOWN;
+                ParticleSpawn.burst(b.x, b.y,
+                    10, 360,
+                    Math.atan2(b.velocityY, b.velocityX) * 180 / Math.PI,
+                    100, .1,
+                    this._particles_impact
+                );*/
+            });
     }
 
     private addBall (): void
     {
-        this._balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2 + 100));
+        this.balls.push(
+            this.add.existing(new Ball(this,
+                Settings.STAGE_W / 2,
+                Settings.STAGE_H / 2 + 100)
+            )
+        );
     }
 
     private updateColorUse (): void
     {
         const useColors = Settings.EFFECT_SCREEN_COLORS;
-        const bg = this.bg;
+        // const bg = this.bg;
 
         if (useColors === this.useColors) { return; }
 
         if (useColors)
         {
-            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
-            bg.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
+            // TODO recreate color transform
+            // this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
+            // bg.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
         }
         else
         {
-            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
-            bg.transform.colorTransform = new ColorTransform(0, 0, 0, 1, 0, 0, 0, 0);
+            // this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
+            // bg.transform.colorTransform = new ColorTransform(0, 0, 0, 1, 0, 0, 0, 0);
         }
 
         this.useColors = Settings.EFFECT_SCREEN_COLORS;
