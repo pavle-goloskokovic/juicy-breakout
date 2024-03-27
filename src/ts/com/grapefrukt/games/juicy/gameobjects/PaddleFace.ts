@@ -14,17 +14,39 @@ export class PaddleFace extends Phaser.GameObjects.Container {
                 .setVisible(false)
         );
 
-        // TODO timers to animate eyes
+        const eyeL = this.eyeL = scene.add
+            .image(-24.35, -2.2, 'sprites', 'EyeOpen');
 
-        this.add(
-            this.eyeL = scene.add
-                .image(-24.35, -2.2, 'sprites', 'Eye0001')
-        );
+        const eyeR = this.eyeR = scene.add
+            .image(24.35, -2.2, 'sprites', 'EyeOpen');
 
-        this.add(
-            this.eyeR = scene.add
-                .image(24.35, -2.2, 'sprites', 'Eye0001')
-        );
+        this.add([eyeL, eyeR]);
+
+        const clock = scene.time;
+        const delay = 1000 / 60 * 99; // frames
+
+        clock.addEvent({ // blink
+            delay,
+            loop: true,
+            callback: () =>
+            {
+                eyeL.setTexture('sprites', 'EyeClosed');
+                eyeR.setTexture('sprites', 'EyeClosed');
+            }
+        });
+
+        clock.delayedCall(1000 / 60 * 7, () =>
+        {
+            clock.addEvent({ // open
+                delay,
+                loop: true,
+                callback: () =>
+                {
+                    eyeL.setTexture('sprites', 'EyeOpen');
+                    eyeR.setTexture('sprites', 'EyeOpen');
+                }
+            });
+        });
     }
 
     smile (frame: number): void

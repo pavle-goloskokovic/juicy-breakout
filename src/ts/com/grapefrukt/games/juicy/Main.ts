@@ -162,6 +162,9 @@ export class Main extends Phaser.Scene {
 
     private reset (): void
     {
+        this.time.removeAllEvents();
+        this.tweens.killAll();
+
         this.blockHitCount =
             this.blockHitTime = 0;
 

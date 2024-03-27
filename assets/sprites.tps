@@ -206,121 +206,17 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">sprites/Eye0001.png</key>
-            <key type="filename">sprites/Eye0002.png</key>
-            <key type="filename">sprites/Eye0003.png</key>
-            <key type="filename">sprites/Eye0004.png</key>
-            <key type="filename">sprites/Eye0005.png</key>
-            <key type="filename">sprites/Eye0006.png</key>
-            <key type="filename">sprites/Eye0007.png</key>
-            <key type="filename">sprites/Eye0008.png</key>
-            <key type="filename">sprites/Eye0009.png</key>
-            <key type="filename">sprites/Eye0010.png</key>
-            <key type="filename">sprites/Eye0011.png</key>
-            <key type="filename">sprites/Eye0012.png</key>
-            <key type="filename">sprites/Eye0013.png</key>
-            <key type="filename">sprites/Eye0014.png</key>
-            <key type="filename">sprites/Eye0015.png</key>
-            <key type="filename">sprites/Eye0016.png</key>
-            <key type="filename">sprites/Eye0017.png</key>
-            <key type="filename">sprites/Eye0018.png</key>
-            <key type="filename">sprites/Eye0019.png</key>
-            <key type="filename">sprites/Eye0020.png</key>
-            <key type="filename">sprites/Eye0021.png</key>
-            <key type="filename">sprites/Eye0022.png</key>
-            <key type="filename">sprites/Eye0023.png</key>
-            <key type="filename">sprites/Eye0024.png</key>
-            <key type="filename">sprites/Eye0025.png</key>
-            <key type="filename">sprites/Eye0026.png</key>
-            <key type="filename">sprites/Eye0027.png</key>
-            <key type="filename">sprites/Eye0028.png</key>
-            <key type="filename">sprites/Eye0029.png</key>
-            <key type="filename">sprites/Eye0030.png</key>
-            <key type="filename">sprites/Eye0031.png</key>
-            <key type="filename">sprites/Eye0032.png</key>
-            <key type="filename">sprites/Eye0033.png</key>
-            <key type="filename">sprites/Eye0034.png</key>
-            <key type="filename">sprites/Eye0035.png</key>
-            <key type="filename">sprites/Eye0036.png</key>
-            <key type="filename">sprites/Eye0037.png</key>
-            <key type="filename">sprites/Eye0038.png</key>
-            <key type="filename">sprites/Eye0039.png</key>
-            <key type="filename">sprites/Eye0040.png</key>
-            <key type="filename">sprites/Eye0041.png</key>
-            <key type="filename">sprites/Eye0042.png</key>
-            <key type="filename">sprites/Eye0043.png</key>
-            <key type="filename">sprites/Eye0044.png</key>
-            <key type="filename">sprites/Eye0045.png</key>
-            <key type="filename">sprites/Eye0046.png</key>
-            <key type="filename">sprites/Eye0047.png</key>
-            <key type="filename">sprites/Eye0048.png</key>
-            <key type="filename">sprites/Eye0049.png</key>
-            <key type="filename">sprites/Eye0050.png</key>
-            <key type="filename">sprites/Eye0051.png</key>
-            <key type="filename">sprites/Eye0052.png</key>
-            <key type="filename">sprites/Eye0053.png</key>
-            <key type="filename">sprites/Eye0054.png</key>
-            <key type="filename">sprites/Eye0055.png</key>
-            <key type="filename">sprites/Eye0056.png</key>
-            <key type="filename">sprites/Eye0057.png</key>
-            <key type="filename">sprites/Eye0058.png</key>
-            <key type="filename">sprites/Eye0059.png</key>
-            <key type="filename">sprites/Eye0060.png</key>
-            <key type="filename">sprites/Eye0061.png</key>
-            <key type="filename">sprites/Eye0062.png</key>
-            <key type="filename">sprites/Eye0063.png</key>
-            <key type="filename">sprites/Eye0064.png</key>
-            <key type="filename">sprites/Eye0065.png</key>
-            <key type="filename">sprites/Eye0066.png</key>
-            <key type="filename">sprites/Eye0067.png</key>
-            <key type="filename">sprites/Eye0068.png</key>
-            <key type="filename">sprites/Eye0069.png</key>
-            <key type="filename">sprites/Eye0070.png</key>
-            <key type="filename">sprites/Eye0071.png</key>
-            <key type="filename">sprites/Eye0072.png</key>
-            <key type="filename">sprites/Eye0073.png</key>
-            <key type="filename">sprites/Eye0074.png</key>
-            <key type="filename">sprites/Eye0075.png</key>
-            <key type="filename">sprites/Eye0076.png</key>
-            <key type="filename">sprites/Eye0077.png</key>
-            <key type="filename">sprites/Eye0078.png</key>
-            <key type="filename">sprites/Eye0079.png</key>
-            <key type="filename">sprites/Eye0080.png</key>
-            <key type="filename">sprites/Eye0081.png</key>
-            <key type="filename">sprites/Eye0082.png</key>
-            <key type="filename">sprites/Eye0083.png</key>
-            <key type="filename">sprites/Eye0084.png</key>
-            <key type="filename">sprites/Eye0085.png</key>
-            <key type="filename">sprites/Eye0086.png</key>
-            <key type="filename">sprites/Eye0087.png</key>
-            <key type="filename">sprites/Eye0088.png</key>
-            <key type="filename">sprites/Eye0089.png</key>
-            <key type="filename">sprites/Eye0090.png</key>
-            <key type="filename">sprites/Eye0091.png</key>
-            <key type="filename">sprites/Eye0092.png</key>
-            <key type="filename">sprites/Eye0093.png</key>
-            <key type="filename">sprites/Eye0094.png</key>
-            <key type="filename">sprites/Eye0095.png</key>
-            <key type="filename">sprites/Eye0096.png</key>
-            <key type="filename">sprites/Eye0097.png</key>
-            <key type="filename">sprites/Eye0098.png</key>
-            <key type="filename">sprites/Eye0099.png</key>
-            <key type="filename">sprites/Eye0100.png</key>
-            <key type="filename">sprites/Eye0101.png</key>
-            <key type="filename">sprites/Eye0102.png</key>
-            <key type="filename">sprites/Eye0103.png</key>
-            <key type="filename">sprites/Eye0104.png</key>
-            <key type="filename">sprites/Eye0105.png</key>
-            <key type="filename">sprites/Eye0106.png</key>
+            <key type="filename">sprites/EyeClosed.png</key>
+            <key type="filename">sprites/EyeOpen.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>2,2,5,5</rect>
+                <rect>9,9,17,17</rect>
                 <key>scale9Paddings</key>
-                <rect>2,2,5,5</rect>
+                <rect>9,9,17,17</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

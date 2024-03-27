@@ -44,8 +44,7 @@ export class Paddle extends Block {
 
         this.happyExtraScale *= 0.95;
 
-        // TODO asset as scale x4 and deveided here
-        const scale = 1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100;
+        const scale = (1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100) / 4;
         eyeL.setScale(scale);
         eyeR.setScale(scale);
     }
