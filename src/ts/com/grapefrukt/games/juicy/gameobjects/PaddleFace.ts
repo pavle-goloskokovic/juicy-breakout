@@ -1,8 +1,8 @@
 export class PaddleFace extends Phaser.GameObjects.Container {
 
     mouth: Phaser.GameObjects.Image;
-    eye_l: Phaser.GameObjects.Image;
-    eye_r: Phaser.GameObjects.Image;
+    eyeL: Phaser.GameObjects.Image;
+    eyeR: Phaser.GameObjects.Image;
 
     constructor (scene: Phaser.Scene)
     {
@@ -14,13 +14,15 @@ export class PaddleFace extends Phaser.GameObjects.Container {
                 .setVisible(false)
         );
 
+        // TODO timers to animate eyes
+
         this.add(
-            this.eye_l = scene.add
+            this.eyeL = scene.add
                 .image(-24.35, -2.2, 'sprites', 'Eye0001')
         );
 
         this.add(
-            this.eye_r = scene.add
+            this.eyeR = scene.add
                 .image(24.35, -2.2, 'sprites', 'Eye0001')
         );
     }
