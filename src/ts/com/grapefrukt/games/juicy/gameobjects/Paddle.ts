@@ -53,20 +53,20 @@ export class Paddle extends Block {
     {
         if (Settings.EFFECT_PADDLE_LOOK_AT_BALL)
         {
-            this._face.eye_l.rotation = -Math.atan2(
+            this._face.eye_l.angle = -Math.atan2(
                 this.x + this._face.eye_l.x - ball.x,
                 this.y + this._face.eye_l.y - ball.y
             ) * 180 / Math.PI;
 
-            this._face.eye_r.rotation = -Math.atan2(
+            this._face.eye_r.angle = -Math.atan2(
                 this.x + this._face.eye_r.x - ball.x,
                 this.y + this._face.eye_r.y - ball.y
             ) * 180 / Math.PI;
         }
         else
         {
-            this._face.eye_l.rotation =
-                this._face.eye_r.rotation = 0;
+            this._face.eye_l.angle =
+                this._face.eye_r.angle = 0;
         }
 
         this._face.mouth.scaleX = 1;
