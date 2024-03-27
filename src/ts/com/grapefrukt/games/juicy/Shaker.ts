@@ -1,38 +1,36 @@
-import type { DisplayObject } from '../../../../flash/display/DisplayObject';
-import { Point } from '../../../../flash/geom/Point';
 export class Shaker {
-    private _velocity: Point;
-    private _position: Point;
-    private _target: DisplayObject;
-    private _drag = .1;
-    private _elasticity = .1;
-    constructor (target: DisplayObject)
-    {
-        this._target = target;
-        this._velocity = new Point();
-        this._position = new Point();
-    }
+
+    private vel = new Phaser.Math.Vector2();
+    private pos = new Phaser.Math.Vector2();
+
+    private drag = .1;
+    private elasticity = .1;
+
+    constructor (private camera: Phaser.Cameras.Scene2D.Camera) { }
 
     shake (powerX: number, powerY: number): void
     {
-        this._velocity.x += powerX;
-        this._velocity.y += powerY;
+        this.vel.x += powerX;
+        this.vel.y += powerY;
     }
 
-    shakeRandom (power: number): void
+    /*shakeRandom (power: number): void
     {
-        this._velocity = Point.polar(power, Math.random() * Math.PI * 2);
-    }
+        this.vel // Point.polar
+            .set(1, 0)
+            .scale(power)
+            .setAngle(Math.random() * Math.PI * 2);
+    }*/
 
-    update (delta: number): void
+    update (deltaFactor: number): void
     {
-        this._velocity.x -= this._velocity.x * this._drag * delta;
-        this._velocity.y -= this._velocity.y * this._drag * delta;
-        this._velocity.x -= this._position.x * this._elasticity * delta;
-        this._velocity.y -= this._position.y * this._elasticity * delta;
-        this._position.x += this._velocity.x * delta;
-        this._position.y += this._velocity.y * delta;
-        this._target.x = this._position.x;
-        this._target.y = this._position.y;
+        this.vel.x -= this.vel.x * this.drag * deltaFactor;
+        this.vel.y -= this.vel.y * this.drag * deltaFactor;
+        this.vel.x -= this.pos.x * this.elasticity * deltaFactor;
+        this.vel.y -= this.pos.y * this.elasticity * deltaFactor;
+        this.pos.x += this.vel.x * deltaFactor;
+        this.pos.y += this.vel.y * deltaFactor;
+        this.camera.scrollX = this.pos.x;
+        this.camera.scrollY = this.pos.y;
     }
 }

@@ -1,4 +1,4 @@
-// import { Shaker } from './Shaker';
+import { Shaker } from './Shaker';
 import { SettingsToggler } from './SettingsToggler';
 // import { Slides } from './Slides';
 import { Settings } from './Settings';
@@ -22,7 +22,7 @@ export class Main extends Phaser.Scene {
     private balls: Ball[] = [];
     // private _lines: GameObjectCollection<BouncyLine>; // TODO wobbly lines
 
-    // private _screenshake: Shaker; // TODO screen shaker
+    private shaker: Shaker;
 
     private paddle: Paddle;
 
@@ -125,7 +125,7 @@ export class Main extends Phaser.Scene {
             this.pointerDown = false;
         });
 
-        // this._screenshake = new Shaker(this);
+        this.shaker = new Shaker(this.cameras.main);
 
         // this._slides = new Slides();
         // this._slides.visible = false;
@@ -255,7 +255,7 @@ export class Main extends Phaser.Scene {
 
         // this._lines.update(deltaFactor);
 
-        // this._screenshake.update(deltaFactor);
+        this.shaker.update(deltaFactor);
 
         if (this.balls.length)
         {
@@ -403,10 +403,13 @@ export class Main extends Phaser.Scene {
             ParticleSpawn.burst(ball.x, ball.y, 5, 90, -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI, ball.velocity * 5, .5, this._particles_impact);
         }*/
 
-        /*if (Settings.EFFECT_SCREEN_SHAKE)
+        if (Settings.EFFECT_SCREEN_SHAKE)
         {
-            this._screenshake.shake(-ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
-        }*/
+            this.shaker.shake(
+                -ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER,
+                -ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER
+            );
+        }
 
         if (Settings.EFFECT_BLOCK_JELLY)
         {
