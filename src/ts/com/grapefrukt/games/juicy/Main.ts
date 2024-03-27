@@ -273,7 +273,9 @@ export class Main extends Phaser.Scene {
             this.paddle.scaleX =
                 this.paddle.scaleY = 1;
         }
-        this.paddle.x = input.x;
+        this.paddle.x = Phaser.Math.Clamp(input.x,
+            10 + Settings.PADDLE_W / 2,
+            Settings.STAGE_W - 10 - Settings.PADDLE_W / 2);
 
         const screen_buffer = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH
             + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
