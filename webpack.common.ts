@@ -11,6 +11,17 @@ const prod: boolean = module.parent.id.includes('.prod');
 
 const banner = '\nCopyright (c) ' + new Date().getFullYear() + ' ' + pkg.author + '\n';
 
+const htmlminOptions = {
+    removeComments: true,
+    collapseWhitespace: true,
+    conservativeCollapse: true,
+    minifyJS: {
+        compress: false,
+        mangle: false
+    },
+    minifyCSS: true
+} as HtmlWebpackPlugin.MinifyOptions;
+
 const assetsRule = (
     test: webpack.RuleSetRule['test'],
     folderName: 'images' | 'fonts' | 'audio'
@@ -66,12 +77,10 @@ export default <webpack.Configuration>{
                 test: /\.ejs$/,
                 use: {
                     loader: 'ejs-compiled-loader',
-                    /*options: {
-                        htmlmin: true,
-                        htmlminOptions: {
-                            removeComments: true
-                        }
-                    }*/
+                    options: {
+                        htmlmin: prod,
+                        htmlminOptions
+                    }
                 }
             },
             { oneOf: [{
@@ -105,7 +114,7 @@ export default <webpack.Configuration>{
         alias: {
             'phaser': resolve(__dirname,
                 // 'node_modules/phaser/src/phaser-core.js')
-                'node_modules/phaser/dist/phaser-arcade-physics.min.js')
+                `node_modules/phaser/dist/phaser-arcade-physics${ prod ? '.min' : '' }.js`)
         }
     },
     plugins: [
@@ -124,21 +133,12 @@ export default <webpack.Configuration>{
         new HtmlWebpackPlugin({
             template: './src/ejs/index.ejs',
             templateParameters: {
-                banner: banner.replace('\n', '\n   '),
+                banner: `\n${banner.replace('\n', '\n   ')}\n`,
                 tagId: prod ? tagId : null,
                 title,
                 description
             },
-            minify: prod ? {
-                removeComments: true,
-                collapseWhitespace: true,
-                conservativeCollapse: true,
-                minifyJS: {
-                    compress: false,
-                    mangle: false
-                },
-                minifyCSS: true
-            } : 'auto'
+            minify: prod ? htmlminOptions : 'auto'
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
