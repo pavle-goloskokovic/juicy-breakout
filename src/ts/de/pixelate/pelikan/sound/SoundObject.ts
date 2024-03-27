@@ -15,10 +15,10 @@ export class SoundObject extends EventDispatcher {
     private _sound_transform: SoundTransform;
     private _id: string;
     private _file: string;
-    private _volume: number;
-    private _pan: number;
-    private _startTime: number;
-    private _loops: number;
+    private _volume = 0;
+    private _pan = 0;
+    private _startTime = 0;
+    private _loops = 0;
     private _embed_class: Class;
     constructor (id: string, file: string, volume: number, pan: number, startTime: number, loops: number, embedClass: Class = null)
     {

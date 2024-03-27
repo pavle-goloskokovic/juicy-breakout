@@ -9,11 +9,11 @@ export class WheelMenu extends Component {
     protected _buttons: any[];
     protected _color: number = 0xffffff;
     protected _highlightColor: number = 0xeeeeee;
-    protected _iconRadius: number;
-    protected _innerRadius: number;
+    protected _iconRadius = 0;
+    protected _innerRadius = 0;
     protected _items: any[];
-    protected _numButtons: number;
-    protected _outerRadius: number;
+    protected _numButtons = 0;
+    protected _outerRadius = 0;
     protected _selectedIndex: number = -1;
     protected _startingAngle: number = -90;
     constructor(parent: DisplayObjectContainer, numButtons: number, outerRadius: number = 80, iconRadius: number = 60, innerRadius: number = 10, defaultHandler: Function = null) {
@@ -116,17 +116,17 @@ import {Sprite} from "../../../flash/display/Sprite";
 import {Shape} from "../../../flash/display/Shape";
 import {Label} from "./Label";
 class ArcButton extends Sprite {
-    id: number;
-    protected _arc: number;
+    id = 0;
+    protected _arc = 0;
     protected _bg: Shape;
     protected _borderColor: number = 0xcccccc;
     protected _color: number = 0xffffff;
     protected _highlightColor: number = 0xeeeeee;
     protected _icon: DisplayObject;
     protected _iconHolder: Sprite;
-    protected _iconRadius: number;
-    protected _innerRadius: number;
-    protected _outerRadius: number;
+    protected _iconRadius = 0;
+    protected _innerRadius = 0;
+    protected _outerRadius = 0;
     constructor(arc: number, outerRadius: number, iconRadius: number, innerRadius: number) {
         super();
         this._arc = arc;

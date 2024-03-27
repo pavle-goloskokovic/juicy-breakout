@@ -12,15 +12,15 @@ export class Ball extends GameObject {
 
     private _trail: Rainbow;
     private _gfx: Phaser.GameObjects.Graphics;
-    private _ball_shakiness: number;
-    private _ball_shakiness_vel: number;
-    private _ball_rotation: number;
-    private _ball_extra_scale: number;
+    private _ball_shakiness = 0;
+    private _ball_shakiness_vel = 0;
+    private _ball_rotation = 0;
+    private _ball_extra_scale = 0;
     // TODO ball glow
     // private _tween_brightness: GTween;
 
-    exX: number;
-    exY: number;
+    exX = 0;
+    exY = 0;
 
     private _trailCooldown = .5;
 

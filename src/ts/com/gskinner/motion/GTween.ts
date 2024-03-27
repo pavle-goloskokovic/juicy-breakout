@@ -10,7 +10,7 @@ export class GTween<T> {
     protected static hasStarPlugins = false;
     protected static plugins: any = {};
     protected static shape: Shape;
-    protected static time: number;
+    protected static time = 0;
     protected static tickList: Dictionary = new Dictionary(true);
     protected static gcLockList: Dictionary = new Dictionary(false);
     static installPlugin (plugin: any, propertyNames: any[], highPriority = false): void
@@ -72,11 +72,11 @@ export class GTween<T> {
     protected _inited: boolean;
     protected _initValues: any;
     protected _rangeValues: any;
-    protected _referenceTime: number;
+    protected _referenceTime = 0;
     protected _proxy: T & { tween: GTween<T> };
     autoPlay = true;
     data: any;
-    duration: number;
+    duration = 0;
     ease: Function;
     nextTween: GTween;
     pluginData: any;
@@ -85,11 +85,11 @@ export class GTween<T> {
     target: T;
     useFrames: boolean;
     timeScale = 1;
-    positionOld: number;
-    ratio: number;
-    ratioOld: number;
-    calculatedPosition: number;
-    calculatedPositionOld: number;
+    positionOld = 0;
+    ratio = 0;
+    ratioOld = 0;
+    calculatedPosition = 0;
+    calculatedPositionOld = 0;
     suppressEvents: boolean;
     onComplete: (tween: GTween<T>) => void;
     onChange: Function;

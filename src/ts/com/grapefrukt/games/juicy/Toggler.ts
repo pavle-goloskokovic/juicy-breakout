@@ -223,8 +223,8 @@ class Property {
     comment: string;
     type: string;
     value: any;
-    max: number;
-    min: number;
+    max = 0;
+    min = 0;
     order = '';
     header = '';
 }

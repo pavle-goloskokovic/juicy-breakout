@@ -19,8 +19,8 @@ export class Knob extends Component {
     protected _mouseRange = 100;
     protected _precision = 1;
     protected _radius = 20;
-    protected _startX: number;
-    protected _startY: number;
+    protected _startX = 0;
+    protected _startY = 0;
     protected _value = 0;
     protected _valueLabel: Label;
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, label = '', defaultHandler: Function = null)

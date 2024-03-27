@@ -9,9 +9,9 @@ import { ColorMatrixFilter } from '../../../../../../flash/filters/ColorMatrixFi
 import { ColorTransform } from '../../../../../../flash/geom/ColorTransform';
 export class ConfettiParticle extends Particle {
     private _gfx: ConfettiParticleGfx;
-    private _vectorX: number;
-    private _vectorY: number;
-    private _age: number;
+    private _vectorX = 0;
+    private _vectorY = 0;
+    private _age = 0;
     constructor (lifespan = 2)
     {
         super(lifespan);

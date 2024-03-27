@@ -28,15 +28,15 @@ export class DisplayObject extends EventDispatcher {
     graphics: Graphics;
     mask: DisplayObject;
     filters: any[];
-    width: number;
-    height: number;
-    x: number;
-    y: number;
-    scaleX: number;
-    scaleY: number;
-    rotation: number;
-    alpha: number;
+    width = 0;
+    height = 0;
+    x = 0;
+    y = 0;
+    scaleX = 0;
+    scaleY = 0;
+    rotation = 0;
+    alpha = 0;
     cacheAsBitmap: boolean;
-    mouseX: number;
-    mouseY: number;
+    mouseX = 0;
+    mouseY = 0;
 }

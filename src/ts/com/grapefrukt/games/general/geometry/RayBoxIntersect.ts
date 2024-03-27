@@ -14,10 +14,8 @@ export class RayBoxIntersect {
             return null;
         }
         let intersections: Array<Point>;
-        let tnear: number;
-        let tfar: number;
-        tnear = Math.max((box.x - r1.x) / (r2.x - r1.x), (box.y - r1.y) / (r2.y - r1.y));
-        tfar = Math.min((box.x + box.width - r1.x) / (r2.x - r1.x), (box.y + box.height - r1.y) / (r2.y - r1.y));
+        let tnear = Math.max((box.x - r1.x) / (r2.x - r1.x), (box.y - r1.y) / (r2.y - r1.y));
+        let tfar = Math.min((box.x + box.width - r1.x) / (r2.x - r1.x), (box.y + box.height - r1.y) / (r2.y - r1.y));
         if (tnear < tfar)
         {
             intersections = [2, true];
@@ -89,8 +87,8 @@ export class RayBoxIntersect {
         {
             return false;
         }
-        let tnear: number;
-        let tfar: number;
+        let tnear = 0;
+        let tfar = 0;
         let interpolate = -1;
         while (1)
         {

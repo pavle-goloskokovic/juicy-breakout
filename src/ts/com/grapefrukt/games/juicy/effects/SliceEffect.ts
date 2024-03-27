@@ -93,7 +93,7 @@ class LineSliceObject extends Shape {
     private _points: Array<Point>;
     private _point1: Point;
     private _point2: Point;
-    private _length: number;
+    private _length = 0;
     private _texture: BitmapData;
     private _textureOffset: Point;
     velocity: Point;

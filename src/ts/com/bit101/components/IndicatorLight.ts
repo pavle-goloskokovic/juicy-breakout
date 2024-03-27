@@ -7,7 +7,7 @@ import { TimerEvent } from '../../../flash/events/TimerEvent';
 import { Matrix } from '../../../flash/geom/Matrix';
 import { Timer } from '../../../flash/utils/Timer';
 export class IndicatorLight extends Component {
-    protected _color: number;
+    protected _color = 0;
     protected _lit = false;
     protected _label: Label;
     protected _labelText = '';

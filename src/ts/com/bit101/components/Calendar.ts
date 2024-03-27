@@ -8,12 +8,12 @@ import { MouseEvent } from '../../../flash/events/MouseEvent';
 [Event(name = 'select', type = 'flash.events.Event')];
 export class Calendar extends Panel {
     protected _dateLabel: Label;
-    protected _day: number;
+    protected _day = 0;
     protected _dayButtons: any[] = [];
-    protected _month: number;
+    protected _month = 0;
     protected _monthNames: any[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     protected _selection: Shape;
-    protected _year: number;
+    protected _year = 0;
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0)
     {
         super(parent, xpos, ypos);

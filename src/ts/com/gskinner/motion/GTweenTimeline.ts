@@ -260,7 +260,7 @@ export class GTweenTimeline extends GTween {
     }
 }
 class Callback {
-    position: number;
+    position = 0;
     forward: Function;
     reverse: Function;
     forwardParams: any[];

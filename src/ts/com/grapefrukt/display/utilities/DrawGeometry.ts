@@ -31,19 +31,15 @@ export class DrawGeometry {
 
     static drawDonut (graphics: Graphics, x: number, y: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
-        let segAngle: number;
-        let theta: number;
-        let angle: number;
-        let angleMid: number;
-        let segs: number;
-        let bx: number;
-        let by: number;
-        let cx: number;
-        let cy: number;
-        segs = 8;
-        segAngle = 45;
-        theta = 0;
-        angle = 0;
+        const segAngle = 45;
+        let theta = 0;
+        let angle = 0;
+        let angleMid = 0;
+        const segs = 8;
+        let bx = 0;
+        let by = 0;
+        let cx = 0;
+        let cy = 0;
         graphics.beginFill(color, fillAlpha);
         graphics.moveTo(x + Math.cos(0) * innerXRadius, y + Math.sin(0) * innerYRadius);
         graphics.lineTo(x + Math.cos(0) * xRadius, y + Math.sin(0) * yRadius);
@@ -75,19 +71,15 @@ export class DrawGeometry {
 
     static drawWedge (graphics: Graphics, x: number, y: number, startAngle: number, arc: number, xRadius: number, yRadius: number, innerXRadius: number, innerYRadius: number, color = 0xFF0000, fillAlpha = 1): void
     {
-        let segAngle: number;
-        let theta: number;
-        let angle: number;
-        let angleMid: number;
-        let segs: number;
-        let bx: number;
-        let by: number;
-        let cx: number;
-        let cy: number;
-        segs = Math.ceil(Math.abs(arc) / 45);
-        segAngle = arc / segs;
-        theta = -(segAngle / 180) * Math.PI;
-        angle = -(startAngle / 180) * Math.PI;
+        const segs = Math.ceil(Math.abs(arc) / 45);
+        const segAngle = arc / segs;
+        let theta = -(segAngle / 180) * Math.PI;
+        let angle = -(startAngle / 180) * Math.PI;
+        let angleMid = 0;
+        let bx = 0;
+        let by = 0;
+        let cx = 0;
+        let cy = 0;
         graphics.beginFill(color, fillAlpha);
         graphics.moveTo(x + Math.cos(startAngle / 180 * Math.PI) * innerXRadius, y + Math.sin(-startAngle / 180 * Math.PI) * innerYRadius);
         graphics.lineTo(x + Math.cos(startAngle / 180 * Math.PI) * xRadius, y + Math.sin(-startAngle / 180 * Math.PI) * yRadius);

@@ -1,8 +1,8 @@
 export class ObjectPool {
     private _obj: Class;
-    private _initSize: number;
-    private _currSize: number;
-    private _usageCount: number;
+    private _initSize = 0;
+    private _currSize = 0;
+    private _usageCount = 0;
     private _grow = true;
     private _head: ObjNode;
     private _tail: ObjNode;
@@ -124,7 +124,7 @@ export class ObjectPool {
 
     purge (): void
     {
-        let i: number;
+        let i = 0;
         let node: ObjNode;
         if (this._usageCount == 0)
         {

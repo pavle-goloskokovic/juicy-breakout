@@ -40,8 +40,8 @@ export class Rainbow extends Phaser.GameObjects.Graphics {
         let s1: Segment;
         let s2: Segment;
         let vertIndex = 0;
-        let offset: number;
-        let ang: number;
+        let offset = 0;
+        let ang = 0;
         let sin = 0;
         let cos = 0;
 

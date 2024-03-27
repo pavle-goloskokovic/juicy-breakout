@@ -31,6 +31,6 @@ export class DisplayObjectContainer extends InteractiveObject {
 
     }
 
-    numChildren: number;
+    numChildren = 0;
     tabChildren: boolean;
 }

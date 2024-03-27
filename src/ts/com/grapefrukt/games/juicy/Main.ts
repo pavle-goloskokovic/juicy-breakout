@@ -35,10 +35,10 @@ export class Main extends Phaser.Scene {
 
     private toggler: SettingsToggler;
 
-    private bgGlitchForce: number;
+    private bgGlitchForce = 0;
 
-    private blockHitCount: number;
-    private blockHitTime: number;
+    private blockHitCount = 0;
+    private blockHitTime = 0;
 
     private keyCtrl: Phaser.Input.Keyboard.Key;
     private keyShift: Phaser.Input.Keyboard.Key;

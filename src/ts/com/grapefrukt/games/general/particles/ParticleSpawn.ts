@@ -6,7 +6,7 @@ import { Point } from '../../../../../flash/geom/Point';
 export class ParticleSpawn {
     static burst (spawnX: number, spawnY: number, count: number, spread: number, baseAngle: number, speed: number, speedVariance: number, pool: ParticlePool): void
     {
-        let speedRnd: number;
+        let speedRnd = 0;
         const angleVector: Point = new Point();
         let spreadRnd = 0;
         for (let i = 0; i < count; i++)

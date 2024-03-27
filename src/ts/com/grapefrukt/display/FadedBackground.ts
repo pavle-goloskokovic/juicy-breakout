@@ -7,7 +7,7 @@ import { Event } from '../../../flash/events/Event';
 import { Matrix } from '../../../flash/geom/Matrix';
 export class FadedBackground extends Sprite {
     private _base_color = 0x619928;
-    private _faded_color: number;
+    private _faded_color = 0;
     private _gfx: Shape;
     private _baseWidth = 0;
     private _baseHeight = 0;

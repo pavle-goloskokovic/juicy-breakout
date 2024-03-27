@@ -5,8 +5,8 @@ import { Event } from '../../../flash/events/Event';
 import { getTimer } from '../../../flash/utils/getTimer';
 export class FPSMeter extends Component {
     protected _label: Label;
-    protected _startTime: number;
-    protected _frames: number;
+    protected _startTime = 0;
+    protected _frames = 0;
     protected _prefix = '';
     protected _fps = 0;
     constructor (parent: DisplayObjectContainer = null, xpos = 0, ypos = 0, prefix = 'FPS:')

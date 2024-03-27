@@ -2,7 +2,7 @@ import { Settings } from './Settings';
 
 export class Freezer {
 
-    private static frozeAt: number;
+    private static frozeAt = 0;
 
     static freeze (): void
     {
