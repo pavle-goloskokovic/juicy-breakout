@@ -3,6 +3,7 @@ import { GameObject } from '../../general/gameobjects/GameObject';
 import { Rainbow } from '../effects/Rainbow';
 import { JuicyEvent } from '../events/JuicyEvent';
 import { Settings } from '../Settings';
+import { applyColorTransform } from '../effects/ColorTransform';
 
 const tempVec = new Phaser.Math.Vector2();
 
@@ -16,8 +17,8 @@ export class Ball extends GameObject {
     private ballShakinessVel = 0;
     private ballRotation = 0;
     private ballExtraScale = 0;
-    // TODO ball glow
-    // private _tween_brightness: GTween;
+    private brightnessTween: Phaser.Tweens.Tween;
+    private colorOffset = 0;
 
     exX = 0;
     exY = 0;
@@ -53,8 +54,13 @@ export class Ball extends GameObject {
 
     private drawBall (): void
     {
+        const offset = this.colorOffset;
+
         this.gfx.clear();
-        this.gfx.fillStyle(Settings.COLOR_BALL);
+        this.gfx.fillStyle(applyColorTransform(
+            Settings.COLOR_BALL,
+            1, 1, 1,
+            offset, offset, offset));
         this.gfx.fillRect(
             -Ball.SIZE / 2,
             -Ball.SIZE / 2,
@@ -151,27 +157,45 @@ export class Ball extends GameObject {
             this.trail.addSegment(this.x, this.y);
             this.trailCooldown = 3;
         }
-        this.trail.redrawSegments(this.x, this.y);
+        this.trail.redrawSegments(this.x, this.y, this.colorOffset);
     }
 
     private doCollisionEffects (block: Block = null): void
     {
-        this.scene.events.emit(JuicyEvent.BALL_COLLIDE, this, block);
+        const scene = this.scene;
+
+        scene.events.emit(JuicyEvent.BALL_COLLIDE, this, block);
 
         this.ballShakiness = 0.1;
         this.ballShakinessVel = 2.5;
         this.ballExtraScale += 1.5;
 
-        /* if (Settings.EFFECT_BALL_GLOW)
+        if (Settings.EFFECT_BALL_GLOW)
         {
-            if (!this._tween_brightness)
+            if (this.brightnessTween)
             {
-                this._tween_brightness = new GTween(this, 0.7, null, { ease: Back.easeOut });
+                this.brightnessTween
+                    .remove()
+                    .destroy();
             }
 
-            this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
-            this._tween_brightness.proxy.redOffset = (this._tween_brightness.proxy.greenOffset = (this._tween_brightness.proxy.blueOffset = 1));
-        }*/
+            this.brightnessTween = scene.tweens.addCounter({
+                duration: 0.7 * 1000,
+                ease: Phaser.Math.Easing.Back.Out,
+                onUpdate: (tween) =>
+                {
+                    this.colorOffset = (1 - tween.getValue()) * 255;
+
+                    this.drawBall();
+                },
+                onComplete: () =>
+                {
+                    this.colorOffset = 0;
+
+                    this.drawBall();
+                }
+            });
+        }
     }
 
     collide (velocityMultiplierX: number, velocityMultiplierY: number, block: Block = null): void

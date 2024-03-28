@@ -1,4 +1,5 @@
 import { Settings } from '../Settings';
+import { applyColorTransform } from './ColorTransform';
 
 class Segment {
     x = 0;
@@ -33,7 +34,7 @@ export class Rainbow extends Phaser.GameObjects.Graphics {
         segments.push(seg);
     }
 
-    redrawSegments (offsetX = 0, offsetY = 0): void
+    redrawSegments (offsetX: number, offsetY: number, colorOffset: number): void
     {
         this.clear();
 
@@ -79,7 +80,10 @@ export class Rainbow extends Phaser.GameObjects.Graphics {
 
         if (verts.length >= 8)
         {
-            this.fillStyle(Settings.COLOR_TRAIL);
+            this.fillStyle(applyColorTransform(
+                Settings.COLOR_TRAIL,
+                1, 1, 1,
+                colorOffset, colorOffset, colorOffset));
 
             for (let k = 0; k < verts.length / 2; k++)
             {
