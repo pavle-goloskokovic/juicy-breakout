@@ -12,7 +12,7 @@ export class Block extends GameObject {
     protected _collisionW: number = Settings.BLOCK_W;
     protected _collisionH: number = Settings.BLOCK_H;
     private _collidable = true;
-    protected _gfx: Phaser.GameObjects.Graphics;
+    protected gfx: Phaser.GameObjects.Graphics;
 
     // TODO slice effect
     // private _sliceEffect: SliceEffect;
@@ -22,7 +22,7 @@ export class Block extends GameObject {
         super(scene, x, y);
 
         this.add(
-            this._gfx = scene.add.graphics()
+            this.gfx = scene.add.graphics()
         );
 
         this.render(Settings.COLOR_BLOCK);
@@ -89,10 +89,10 @@ export class Block extends GameObject {
         }
 
         /*this.parent.setChildIndex(this, this.parent.numChildren - 1);
-        this._sliceEffect = new SliceEffect(this._gfx, null);
+        this._sliceEffect = new SliceEffect(this.gfx, null);
         this.addChild(this._sliceEffect);*/
 
-        this._gfx.visible = false;
+        this.gfx.visible = false;
 
         Freezer.freeze();
 
@@ -136,7 +136,7 @@ export class Block extends GameObject {
         const tweens = this.scene.tweens;
 
         tweens.add({
-            targets: this._gfx,
+            targets: this.gfx,
             duration: .05 * 1000,
             props: {
                 scaleX: 1 + strength
@@ -158,7 +158,7 @@ export class Block extends GameObject {
         });
 
         tweens.add({
-            targets: this._gfx,
+            targets: this.gfx,
             duration: .05 * 1000,
             props: {
                 scaleY: 1 + strength
@@ -197,7 +197,7 @@ export class Block extends GameObject {
 
     protected render (color: number): void
     {
-        this._gfx.clear()
+        this.gfx.clear()
             .fillStyle(color)
             .fillRect(
                 -Settings.BLOCK_W / 2,

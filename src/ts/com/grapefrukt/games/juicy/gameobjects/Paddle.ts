@@ -112,7 +112,7 @@ export class Paddle extends Block {
 
     protected render (color: number): void
     {
-        this._gfx.clear()
+        this.gfx.clear()
             .fillStyle(color)
             .fillRect(
                 -Settings.PADDLE_W / 2,

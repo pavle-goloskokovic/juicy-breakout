@@ -10,30 +10,30 @@ export class Ball extends GameObject {
 
     private static SIZE = 15;
 
-    private _trail: Rainbow;
-    private _gfx: Phaser.GameObjects.Graphics;
-    private _ball_shakiness = 0;
-    private _ball_shakiness_vel = 0;
-    private _ball_rotation = 0;
-    private _ball_extra_scale = 0;
+    private trail: Rainbow;
+    private gfx: Phaser.GameObjects.Graphics;
+    private ballShakiness = 0;
+    private ballShakinessVel = 0;
+    private ballRotation = 0;
+    private ballExtraScale = 0;
     // TODO ball glow
     // private _tween_brightness: GTween;
 
     exX = 0;
     exY = 0;
 
-    private _trailCooldown = .5;
+    private trailCooldown = .5;
 
     constructor (scene: Phaser.Scene, x: number, y: number)
     {
         super(scene, x, y);
 
         this.add(
-            this._trail = new Rainbow(scene)
+            this.trail = new Rainbow(scene)
         );
 
         this.add(
-            this._gfx = scene.add.graphics()
+            this.gfx = scene.add.graphics()
         );
 
         this.drawBall();
@@ -45,17 +45,17 @@ export class Ball extends GameObject {
         this.velocityX = tempVec.x;
         this.velocityY = tempVec.y;
 
-        this._ball_shakiness = 0;
-        this._ball_shakiness_vel = 0;
-        this._ball_rotation = 0;
-        this._ball_extra_scale = 0;
+        this.ballShakiness = 0;
+        this.ballShakinessVel = 0;
+        this.ballRotation = 0;
+        this.ballExtraScale = 0;
     }
 
     private drawBall (): void
     {
-        this._gfx.clear();
-        this._gfx.fillStyle(Settings.COLOR_BALL);
-        this._gfx.fillRect(
+        this.gfx.clear();
+        this.gfx.fillStyle(Settings.COLOR_BALL);
+        this.gfx.fillRect(
             -Ball.SIZE / 2,
             -Ball.SIZE / 2,
             Ball.SIZE,
@@ -72,43 +72,43 @@ export class Ball extends GameObject {
 
         if (Settings.EFFECT_BALL_ROTATE)
         {
-            const target_rotation =
+            const targetRotation =
                 Math.atan2(this.velocityY, this.velocityX) / Math.PI * 180;
 
-            this._ball_rotation +=
-                (target_rotation - this._ball_rotation) * deltaFactor * 0.5;
+            this.ballRotation +=
+                (targetRotation - this.ballRotation) * deltaFactor * 0.5;
 
             if (!Settings.EFFECT_BALL_ROTATE_ANIMATED)
             {
-                this._ball_rotation = target_rotation;
+                this.ballRotation = targetRotation;
             }
 
-            this._gfx.rotation = this._ball_rotation;
+            this.gfx.rotation = this.ballRotation;
         }
         else
         {
-            this._gfx.rotation = 0;
+            this.gfx.rotation = 0;
         }
 
-        if (Math.abs(this._ball_shakiness) > 0)
+        if (Math.abs(this.ballShakiness) > 0)
         {
-            this._ball_shakiness_vel +=
-                deltaFactor * -0.25 * this._ball_shakiness;
-            this._ball_shakiness_vel -=
-                deltaFactor * this._ball_shakiness_vel * 0.10;
-            this._ball_shakiness +=
-                deltaFactor * this._ball_shakiness_vel;
+            this.ballShakinessVel +=
+                deltaFactor * -0.25 * this.ballShakiness;
+            this.ballShakinessVel -=
+                deltaFactor * this.ballShakinessVel * 0.10;
+            this.ballShakiness +=
+                deltaFactor * this.ballShakinessVel;
         }
 
         if (Settings.EFFECT_BALL_STRETCH)
         {
             if (!Settings.EFFECT_BALL_STRETCH_ANIMATED)
             {
-                this._gfx.scaleX = 1
+                this.gfx.scaleX = 1
                     + (this.velocity - Settings.BALL_MIN_VELOCITY)
                     / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
 
-                this._gfx.scaleY = 1
+                this.gfx.scaleY = 1
                     - (this.velocity - Settings.BALL_MIN_VELOCITY)
                     / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
             }
@@ -117,51 +117,50 @@ export class Ball extends GameObject {
                 let relative = 1.0 +
                     this.velocity / (2 * Settings.BALL_MAX_VELOCITY);
                 relative = Phaser.Math.Clamp(relative, 1.0, 2.5);
-                this._gfx.scaleX = 1.0 * relative;
-                this._gfx.scaleY = 1.0 / relative;
-                this._gfx.scaleX -= this._ball_shakiness;
-                this._gfx.scaleY += this._ball_shakiness;
-                this._gfx.scaleX = Phaser.Math.Clamp(this._gfx.scaleX, 0.85, 1.35);
-                this._gfx.scaleY = Phaser.Math.Clamp(this._gfx.scaleY, 0.85, 1.35);
+                this.gfx.scaleX = 1.0 * relative;
+                this.gfx.scaleY = 1.0 / relative;
+                this.gfx.scaleX -= this.ballShakiness;
+                this.gfx.scaleY += this.ballShakiness;
+                this.gfx.scaleX = Phaser.Math.Clamp(this.gfx.scaleX, 0.85, 1.35);
+                this.gfx.scaleY = Phaser.Math.Clamp(this.gfx.scaleY, 0.85, 1.35);
             }
         }
         else
         {
-            this._gfx.scaleX =
-                this._gfx.scaleY = 1;
+            this.gfx.setScale(1);
         }
 
         if (Settings.EFFECT_BALL_EXTRA_SCALE)
         {
-            if (this._ball_extra_scale > 0.01)
+            if (this.ballExtraScale > 0.01)
             {
-                this._gfx.scaleX += this._ball_extra_scale;
-                this._gfx.scaleY += this._ball_extra_scale;
-                this._ball_extra_scale -= deltaFactor
-                    * this._ball_extra_scale * 0.35;
+                this.gfx.scaleX += this.ballExtraScale;
+                this.gfx.scaleY += this.ballExtraScale;
+                this.ballExtraScale -= deltaFactor
+                    * this.ballExtraScale * 0.35;
             }
         }
         else
         {
-            this._ball_extra_scale = 0;
+            this.ballExtraScale = 0;
         }
 
-        this._trailCooldown -= deltaFactor;
-        if (this._trailCooldown < 0)
+        this.trailCooldown -= deltaFactor;
+        if (this.trailCooldown < 0)
         {
-            this._trail.addSegment(this.x, this.y);
-            this._trailCooldown = 3;
+            this.trail.addSegment(this.x, this.y);
+            this.trailCooldown = 3;
         }
-        this._trail.redrawSegments(this.x, this.y);
+        this.trail.redrawSegments(this.x, this.y);
     }
 
     private doCollisionEffects (block: Block = null): void
     {
         this.scene.events.emit(JuicyEvent.BALL_COLLIDE, this, block);
 
-        this._ball_shakiness = 0.1;
-        this._ball_shakiness_vel = 2.5;
-        this._ball_extra_scale += 1.5;
+        this.ballShakiness = 0.1;
+        this.ballShakinessVel = 2.5;
+        this.ballExtraScale += 1.5;
 
         /* if (Settings.EFFECT_BALL_GLOW)
         {
