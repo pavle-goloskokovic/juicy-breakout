@@ -520,12 +520,15 @@ export class Main extends Phaser.Scene {
 
     private addBall (): void
     {
-        this.balls.push(
-            this.add.existing(new Ball(this,
-                Settings.STAGE_W / 2,
-                Settings.STAGE_H / 2 + 100)
-            )
+        const ball = this.add.existing(new Ball(this,
+            Settings.STAGE_W / 2,
+            Settings.STAGE_H / 2 + 100)
         );
+
+        // this.children.moveTo(ball,
+        //     this.children.getIndex(this.bg) + 1);
+
+        this.balls.push(ball);
     }
 
     private updateColorUse (): void
