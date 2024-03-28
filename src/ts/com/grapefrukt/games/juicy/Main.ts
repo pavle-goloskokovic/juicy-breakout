@@ -78,11 +78,15 @@ export class Main extends Phaser.Scene {
             require('../../../../../assets/images/sprites.png'),
             spritesData);
 
-        this.preloadText = this.add.text(0, 0, 'Loading sounds...', {
-            color: '#ffffff',
-            fontSize: 12,
-            fontFamily: 'Arial'
-        });
+        this.preloadText = this.add.text(
+            Settings.STAGE_W / 2,
+            Settings.STAGE_H / 2,
+            'Loading sounds...', {
+                color: '#ffffff',
+                fontSize: 12,
+                fontFamily: 'Arial',
+            }
+        ).setOrigin(0.5);
     }
 
     create (): void
