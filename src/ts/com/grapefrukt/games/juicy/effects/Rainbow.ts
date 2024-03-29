@@ -81,9 +81,11 @@ export class Rainbow extends Phaser.GameObjects.Graphics {
         if (verts.length >= 8)
         {
             this.fillStyle(applyColorTransform(
-                Settings.COLOR_TRAIL,
+                Settings.EFFECT_SCREEN_COLORS ? Settings.COLOR_TRAIL : 0x888888,
                 1, 1, 1,
-                colorOffset, colorOffset, colorOffset));
+                colorOffset, colorOffset, colorOffset
+            ),
+            Settings.EFFECT_SCREEN_COLORS ? 1 : 0.5);
 
             for (let k = 0; k < verts.length / 2; k++)
             {

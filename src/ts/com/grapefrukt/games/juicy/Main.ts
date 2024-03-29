@@ -150,7 +150,11 @@ export class Main extends Phaser.Scene {
 
         bg.clear();
 
-        if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this.bgGlitchForce > 0.01)
+        if (!this.useColors)
+        {
+            bg.fillStyle(0x000000);
+        }
+        else if (Settings.EFFECT_SCREEN_COLOR_GLITCH && this.bgGlitchForce > 0.01)
         {
             bg.fillStyle(Settings.COLOR_BACKGROUND * (3 * Math.random()));
 
@@ -533,22 +537,17 @@ export class Main extends Phaser.Scene {
 
     private updateColorUse (): void
     {
-        const useColors = Settings.EFFECT_SCREEN_COLORS;
-        // const bg = this.bg;
+        if (Settings.EFFECT_SCREEN_COLORS === this.useColors) { return; }
 
-        if (useColors === this.useColors) { return; }
+        this.blocks.forEach((block) =>
+        {
+            block.updateColorUse();
+        });
 
-        if (useColors)
+        this.balls.forEach((ball) =>
         {
-            // TODO recreate color transform
-            // this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
-            // bg.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
-        }
-        else
-        {
-            // this.transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
-            // bg.transform.colorTransform = new ColorTransform(0, 0, 0, 1, 0, 0, 0, 0);
-        }
+            ball.updateColorUse();
+        });
 
         this.useColors = Settings.EFFECT_SCREEN_COLORS;
     }

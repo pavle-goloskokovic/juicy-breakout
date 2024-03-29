@@ -25,7 +25,7 @@ export class Block extends GameObject {
             this.gfx = scene.add.graphics()
         );
 
-        this.render(Settings.COLOR_BLOCK);
+        this.render();
 
         if (Settings.EFFECT_TWEENIN_ENABLED)
         {
@@ -70,10 +70,10 @@ export class Block extends GameObject {
 
         let delayDestruction = false;
 
-        if (Settings.EFFECT_BLOCK_DARKEN) // TODO should affect slice color
+        if (Settings.EFFECT_BLOCK_DARKEN)
         {
+            // TODO should affect slice color
             // this.transform.colorTransform = new ColorTransform(.7, .7, .8);
-            this.render(0x45846A);
         }
 
         if (Settings.EFFECT_BLOCK_PUSH)
@@ -88,6 +88,7 @@ export class Block extends GameObject {
             delayDestruction = true;
         }
 
+        // TODO color based on Settings.EFFECT_BLOCK_DARKEN
         /*this.parent.setChildIndex(this, this.parent.numChildren - 1);
         this._sliceEffect = new SliceEffect(this.gfx, null);
         this.addChild(this._sliceEffect);*/
@@ -195,10 +196,15 @@ export class Block extends GameObject {
         }
     }
 
-    protected render (color: number): void
+    updateColorUse (): void
+    {
+        this.render();
+    }
+
+    protected render (color = Settings.COLOR_BLOCK): void
     {
         this.gfx.clear()
-            .fillStyle(color)
+            .fillStyle(Settings.EFFECT_SCREEN_COLORS ? color : 0xFFFFFF)
             .fillRect(
                 -Settings.BLOCK_W / 2,
                 -Settings.BLOCK_H / 2,

@@ -52,15 +52,22 @@ export class Ball extends GameObject {
         this.ballExtraScale = 0;
     }
 
+    updateColorUse (): void
+    {
+        this.drawBall();
+    }
+
     private drawBall (): void
     {
         const offset = this.colorOffset;
 
         this.gfx.clear();
-        this.gfx.fillStyle(applyColorTransform(
-            Settings.COLOR_BALL,
-            1, 1, 1,
-            offset, offset, offset));
+        this.gfx.fillStyle(Settings.EFFECT_SCREEN_COLORS ?
+            applyColorTransform(
+                Settings.COLOR_BALL,
+                1, 1, 1,
+                offset, offset, offset
+            ) : 0xFFFFFF);
         this.gfx.fillRect(
             -Ball.SIZE / 2,
             -Ball.SIZE / 2,

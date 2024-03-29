@@ -17,8 +17,6 @@ export class Paddle extends Block {
         this._collisionW = Settings.PADDLE_W;
         this._collisionH = Settings.PADDLE_H;
 
-        this.render(Settings.COLOR_PADDLE);
-
         this.add(
             this.face = new PaddleFace(scene)
         );
@@ -110,10 +108,19 @@ export class Paddle extends Block {
         }
     }
 
-    protected render (color: number): void
+    updateColorUse ()
+    {
+        super.updateColorUse();
+
+        const mouth = this.face.mouth;
+        mouth.tintFill = !Settings.EFFECT_SCREEN_COLORS;
+        mouth.tint = Settings.EFFECT_SCREEN_COLORS ? 0xFFFFFF : 0x000000;
+    }
+
+    protected render (color = Settings.COLOR_PADDLE): void
     {
         this.gfx.clear()
-            .fillStyle(color)
+            .fillStyle(Settings.EFFECT_SCREEN_COLORS ? color : 0xFFFFFF)
             .fillRect(
                 -Settings.PADDLE_W / 2,
                 -Settings.PADDLE_H / 2,
