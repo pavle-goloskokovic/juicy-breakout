@@ -5,7 +5,7 @@ import { Settings } from './Settings';
 import { Freezer } from './Freezer';
 // import { ParticlePool } from '../general/particles/ParticlePool';
 // import { ParticleSpawn } from '../general/particles/ParticleSpawn';
-// import { BouncyLine } from './effects/BouncyLine';
+import { BouncyLine } from './effects/BouncyLine';
 // import { BallImpactParticle } from './effects/particles/BallImpactParticle';
 // import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
 // import { ConfettiParticle } from './effects/particles/ConfettiParticle';
@@ -20,7 +20,7 @@ export class Main extends Phaser.Scene {
 
     private blocks: Block[] = [];
     private balls: Ball[] = [];
-    // private _lines: GameObjectCollection<BouncyLine>; // TODO wobbly lines
+    private lines: BouncyLine[] = [];
 
     private shaker: Shaker;
 
@@ -108,9 +108,6 @@ export class Main extends Phaser.Scene {
             .on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this)
             .on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
 
-        // this._lines = new GameObjectCollection();
-        // this.addChild(this._lines);
-
         // this._particles_impact = new ParticlePool(BallImpactParticle);
         // this.addChild(this._particles_impact);
         // this._particles_shatter = new ParticlePool(BlockShatterParticle);
@@ -190,7 +187,11 @@ export class Main extends Phaser.Scene {
         });
         this.balls.length = 0;
 
-        // this._lines.clear();
+        this.lines.forEach((line) =>
+        {
+            line.destroy();
+        });
+        this.lines.length = 0;
 
         // this._particles_impact.clear();
 
@@ -211,10 +212,18 @@ export class Main extends Phaser.Scene {
             );
         }
 
-        // const buffer = Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
-        // this._lines.add(new BouncyLine(buffer, buffer, Settings.STAGE_W - buffer, buffer));
-        // this._lines.add(new BouncyLine(buffer, buffer, buffer, Settings.STAGE_H));
-        // this._lines.add(new BouncyLine(Settings.STAGE_W - buffer, buffer, Settings.STAGE_W - buffer, Settings.STAGE_H));
+        const buffer = Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
+        this.lines.push(
+            this.add.existing(new BouncyLine(this,
+                buffer, buffer,
+                Settings.STAGE_W - buffer, buffer)),
+            this.add.existing(new BouncyLine(this,
+                buffer, buffer,
+                buffer, Settings.STAGE_H)),
+            this.add.existing(new BouncyLine(this,
+                Settings.STAGE_W - buffer, buffer,
+                Settings.STAGE_W - buffer, Settings.STAGE_H))
+        );
 
         this.blocks.push(
             this.paddle = this.add.existing(new Paddle(this))
@@ -264,7 +273,10 @@ export class Main extends Phaser.Scene {
             block.update(deltaFactor);
         });
 
-        // this._lines.update(deltaFactor);
+        this.lines.forEach((line) =>
+        {
+            line.update(/*deltaFactor*/);
+        });
 
         this.shaker.update(deltaFactor);
 
@@ -288,20 +300,20 @@ export class Main extends Phaser.Scene {
             10 + Settings.PADDLE_W / 2,
             Settings.STAGE_W - 10 - Settings.PADDLE_W / 2);
 
-        const screen_buffer = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH
+        const screenBuffer = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH
             + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
 
         for (const ball of this.balls)
         {
-            if (ball.x < screen_buffer && ball.velocityX < 0)
+            if (ball.x < screenBuffer && ball.velocityX < 0)
             {
                 ball.collide(-1, 1);
             }
-            if (ball.x > Settings.STAGE_W - screen_buffer && ball.velocityX > 0)
+            if (ball.x > Settings.STAGE_W - screenBuffer && ball.velocityX > 0)
             {
                 ball.collide(-1, 1);
             }
-            if (ball.y < screen_buffer && ball.velocityY < 0)
+            if (ball.y < screenBuffer && ball.velocityY < 0)
             {
                 ball.collide(1, -1);
             }
@@ -311,10 +323,10 @@ export class Main extends Phaser.Scene {
             }
             ball.velocityY += Settings.BALL_GRAVITY / 100 * deltaFactor;
 
-            // for (const line of this._lines.collection)
-            // {
-            //     line.checkCollision(ball);
-            // }
+            for (const line of this.lines)
+            {
+                line.checkCollision(ball);
+            }
 
             if (this.pointerDown)
             {
