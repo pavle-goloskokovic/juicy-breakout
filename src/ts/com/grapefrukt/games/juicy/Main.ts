@@ -40,8 +40,8 @@ export class Main extends Phaser.Scene {
     private blockHitCount = 0;
     private blockHitTime = 0;
 
-    private keyCtrl: Phaser.Input.Keyboard.Key;
-    private keyShift: Phaser.Input.Keyboard.Key;
+    private keyW: Phaser.Input.Keyboard.Key;
+    private keyQ: Phaser.Input.Keyboard.Key;
 
     // private _slides: Slides; // TODO slides
     private bg: Phaser.GameObjects.Graphics;
@@ -145,8 +145,8 @@ export class Main extends Phaser.Scene {
         // this.parent.addChild(this._slides);
 
         const keyboard = this.input.keyboard;
-        this.keyCtrl = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
-        this.keyShift = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+        this.keyW = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.keyQ = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
         this.updateColorUse();
 
@@ -258,11 +258,11 @@ export class Main extends Phaser.Scene {
         }
 
         const clock = this.time;
-        if (this.keyCtrl.isDown /*|| this._slides.visible*/)
+        if (this.keyW.isDown /*|| this._slides.visible*/)
         {
             clock.timeScale = 0;
         }
-        else if (this.keyShift.isDown)
+        else if (this.keyQ.isDown)
         {
             clock.timeScale = .1;
         }
@@ -271,6 +271,7 @@ export class Main extends Phaser.Scene {
             clock.timeScale = 1;
         }
         clock.timeScale *= Freezer.multiplier;
+        this.tweens.timeScale = clock.timeScale;
 
         // this.sound.rate = Math.max(0.001, clock.timeScale);
 
