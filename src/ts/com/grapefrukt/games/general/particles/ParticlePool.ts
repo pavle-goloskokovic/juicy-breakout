@@ -20,7 +20,7 @@ export class ParticlePool<T extends typeof Particle>
         this.pool.allocate(this.particleClass, size, [scene]);
         this.pool.initialize('reset');
 
-        this.on(ParticleEvent.DIE, this.handleParticleDeath, this);
+        this.on(ParticleEvent.DIE, this.releaseParticle, this);
     }
 
     clear (): void
@@ -29,18 +29,14 @@ export class ParticlePool<T extends typeof Particle>
 
         while (list.length)
         {
-            const p = list[0];
-
-            this.remove(p, false);
-            p.removeFromDisplayList();
-
-            this.pool.object = p;
+            this.releaseParticle(list[0]);
         }
     }
 
-    private handleParticleDeath (p: InstanceType<T>): void
+    private releaseParticle (p: InstanceType<T>): void
     {
         this.remove(p, false);
+        p.removeFromDisplayList();
 
         this.pool.object = p;
     }

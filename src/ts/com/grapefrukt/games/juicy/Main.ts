@@ -6,8 +6,8 @@ import { Freezer } from './Freezer';
 import { ParticlePool } from '../general/particles/ParticlePool';
 import { ParticleSpawn } from '../general/particles/ParticleSpawn';
 import { BouncyLine } from './effects/BouncyLine';
-// import { BallImpactParticle } from './effects/particles/BallImpactParticle';
-// import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
+import { BallImpactParticle } from './effects/particles/BallImpactParticle';
+import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
 import { ConfettiParticle } from './effects/particles/ConfettiParticle';
 import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
@@ -26,8 +26,8 @@ export class Main extends Phaser.Scene {
 
     private paddle: Paddle;
 
-    // private _particles_impact: ParticlePool; // TODO particles
-    // private _particles_shatter: ParticlePool;
+    private particlesImpact: ParticlePool<typeof BallImpactParticle>;
+    private particlesShatter: ParticlePool<typeof BlockShatterParticle>;
     private particlesConfetti: ParticlePool<typeof ConfettiParticle>;
 
     private pointerDown = false;
@@ -120,10 +120,12 @@ export class Main extends Phaser.Scene {
             .on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this)
             .on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
 
-        // this._particles_impact = new ParticlePool(BallImpactParticle);
-        // this.addChild(this._particles_impact);
-        // this._particles_shatter = new ParticlePool(BlockShatterParticle);
-        // this.addChild(this._particles_shatter);
+        this.particlesImpact = this.add.existing(
+            new ParticlePool(this, BallImpactParticle)
+        );
+        this.particlesShatter = this.add.existing(
+            new ParticlePool(this, BlockShatterParticle)
+        );
 
         this.toggler = new SettingsToggler(this);
 
@@ -205,7 +207,8 @@ export class Main extends Phaser.Scene {
         });
         this.lines.length = 0;
 
-        // this._particles_impact.clear();
+        this.particlesImpact.clear();
+        this.particlesShatter.clear();
         this.particlesConfetti.clear();
 
         for (let j = 0; j < Settings.NUM_BALLS; j++)
@@ -439,10 +442,14 @@ export class Main extends Phaser.Scene {
             this.bgGlitchForce = 0.05;
         }
 
-        /*if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
+        if (Settings.EFFECT_PARTICLE_BALL_COLLISION)
         {
-            ParticleSpawn.burst(ball.x, ball.y, 5, 90, -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI, ball.velocity * 5, .5, this._particles_impact);
-        }*/
+            ParticleSpawn.burst(ball.x, ball.y,
+                5, 90,
+                -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
+                ball.velocity * 5, .5,
+                this.particlesImpact);
+        }
 
         if (Settings.EFFECT_SCREEN_SHAKE)
         {
@@ -508,13 +515,14 @@ export class Main extends Phaser.Scene {
 
     private handleBlockDestroyed (ball: Ball, block: Block): void
     {
-        /*if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
+        if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
         {
-            ParticleSpawn.burst(ball.x, ball.y, 5, 45,
+            ParticleSpawn.burst(ball.x, ball.y,
+                5, 45,
                 -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
-                50 + ball.velocity * 10,
-                .5, this._particles_shatter);
-        }*/
+                50 + ball.velocity * 10, .5,
+                this.particlesShatter);
+        }
 
         const index = this.blocks.indexOf(block);
         if (index > -1) // only splice array when item is found
@@ -541,14 +549,14 @@ export class Main extends Phaser.Scene {
             })
             .on('keydown-P', () =>
             {
-                /*const b = this.balls[0];
+                const b = this.balls[0];
 
                 ParticleSpawn.burst(b.x, b.y,
                     10, 360,
                     Math.atan2(b.velocityY, b.velocityX) * 180 / Math.PI,
                     100, .1,
-                    this._particles_impact
-                );*/
+                    this.particlesImpact
+                );
             });
     }
 
