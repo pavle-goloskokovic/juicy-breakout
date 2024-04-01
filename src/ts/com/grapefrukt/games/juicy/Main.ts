@@ -6,8 +6,7 @@ import { Freezer } from './Freezer';
 import { ParticlePool } from '../general/particles/ParticlePool';
 import { ParticleSpawn } from '../general/particles/ParticleSpawn';
 import { BouncyLine } from './effects/BouncyLine';
-import { BallImpactParticle } from './effects/particles/BallImpactParticle';
-import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
+import { GraphicsParticle } from './effects/particles/GraphicsParticle';
 import { ConfettiParticle } from './effects/particles/ConfettiParticle';
 import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
@@ -26,8 +25,8 @@ export class Main extends Phaser.Scene {
 
     private paddle: Paddle;
 
-    private particlesImpact: ParticlePool<typeof BallImpactParticle>;
-    private particlesShatter: ParticlePool<typeof BlockShatterParticle>;
+    private particlesImpact: ParticlePool<typeof GraphicsParticle>;
+    private particlesShatter: ParticlePool<typeof GraphicsParticle>;
     private particlesConfetti: ParticlePool<typeof ConfettiParticle>;
 
     private pointerDown = false;
@@ -120,11 +119,11 @@ export class Main extends Phaser.Scene {
             .on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this)
             .on(JuicyEvent.BALL_COLLIDE, this.handleBallCollide, this);
 
-        this.particlesImpact = this.add.existing(
-            new ParticlePool(this, BallImpactParticle)
+        this.particlesImpact = this.add.existing(new ParticlePool(
+            this, GraphicsParticle, [this, Settings.COLOR_SPARK])
         );
-        this.particlesShatter = this.add.existing(
-            new ParticlePool(this, BlockShatterParticle)
+        this.particlesShatter = this.add.existing(new ParticlePool(
+            this, GraphicsParticle, [this, Settings.COLOR_BLOCK])
         );
 
         this.toggler = new SettingsToggler(this);

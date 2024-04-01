@@ -10,14 +10,14 @@ export class ParticlePool<T extends typeof Particle>
     constructor (
         scene: Phaser.Scene,
         private particleClass: T,
-        // TODO T constructor arguments
+        allocateArgs: any[] = [scene],
         size = 20
     )
     {
         super(scene);
 
         this.pool = new ObjectPool<T>(true);
-        this.pool.allocate(this.particleClass, size, [scene]);
+        this.pool.allocate(this.particleClass, size, allocateArgs);
         this.pool.initialize('reset');
 
         this.on(ParticleEvent.DIE, this.releaseParticle, this);

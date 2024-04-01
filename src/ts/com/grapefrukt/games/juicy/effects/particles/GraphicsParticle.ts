@@ -1,17 +1,16 @@
 import { Particle } from '../../../general/particles/Particle';
-import { Settings } from '../../Settings';
 import { applyColorTransform } from '../ColorTransform';
 
-export class BallImpactParticle extends Particle {
+export class GraphicsParticle extends Particle {
 
-    constructor (scene: Phaser.Scene)
+    constructor (scene: Phaser.Scene, color: number)
     {
         super(scene, .3 + Math.random() * .3);
 
         const shade = .8 + Math.random() * .2;
 
         this.add(scene.add.graphics()
-            .fillStyle(applyColorTransform(Settings.COLOR_SPARK,
+            .fillStyle(applyColorTransform(color,
                 shade, shade, shade)
             )
             .fillRect(-7, -7, 14, 14)
