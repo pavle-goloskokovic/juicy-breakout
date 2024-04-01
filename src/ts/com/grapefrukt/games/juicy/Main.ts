@@ -12,7 +12,6 @@ import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
 import { Block } from './gameobjects/Block';
 import { Paddle } from './gameobjects/Paddle';
-// import { ColorTransformPlugin } from '../../../gskinner/motion/plugins/ColorTransformPlugin';
 import spritesData from '../../../../../data/sprites.json';
 
 export class Main extends Phaser.Scene {
@@ -51,11 +50,6 @@ export class Main extends Phaser.Scene {
     private tempVector = new Phaser.Math.Vector2();
 
     constructor () { super('main'); }
-
-    boot (): void
-    {
-        // ColorTransformPlugin.install(); // TODO
-    }
 
     preload (): void
     {
