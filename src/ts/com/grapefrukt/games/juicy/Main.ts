@@ -91,6 +91,17 @@ export class Main extends Phaser.Scene {
 
     create (): void
     {
+        this.anims.create({ key: 'confetti',
+            frames: this.anims.generateFrameNames('sprites', {
+                prefix: 'Confetti',
+                start: 1,
+                end: 13,
+                zeroPad: 4
+            }),
+            repeat: -1,
+            frameRate: 60
+        });
+
         this.preloadText.destroy();
         this.preloadText = null;
 
@@ -260,6 +271,8 @@ export class Main extends Phaser.Scene {
             clock.timeScale = 1;
         }
         clock.timeScale *= Freezer.multiplier;
+
+        // this.sound.rate = Math.max(0.001, clock.timeScale);
 
         const deltaFactor = delta / 1000 * 60 * clock.timeScale;
 

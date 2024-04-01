@@ -3,6 +3,8 @@ import { Particle } from '../../../general/particles/Particle';
 
 export class ConfettiParticle extends Particle {
 
+    private gfx: Phaser.GameObjects.Sprite;
+
     private vectorX = 0;
     private vectorY = 0;
 
@@ -13,10 +15,8 @@ export class ConfettiParticle extends Particle {
     {
         super(scene, lifespan);
 
-        this.add(scene.add // gfx
-            .sprite(0, 0, 'sprites', 'Confetti0003')
-            // TODO set animation
-            .setAngle(Math.random() * 360)
+        this.add(this.gfx = scene.add
+            .sprite(0, 0, 'sprites')
             .setTint(ColorConverter.HSBtoUINT(Math.random(), 1, 1)));
     }
 
@@ -47,7 +47,10 @@ export class ConfettiParticle extends Particle {
             }
         });
 
-        // TODO start at random frame
+        this.gfx.play({
+            key: 'confetti',
+            randomFrame: true
+        });
     }
 
     update (): void
