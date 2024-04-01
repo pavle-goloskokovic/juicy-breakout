@@ -1,6 +1,6 @@
 export class JuicyEvent {
 
-    static BLOCK_DESTROYED = 'juicyevent_block_destroyed';
+    static readonly BLOCK_DESTROYED = 'juicyevent_block_destroyed';
 
-    static BALL_COLLIDE = 'juicyevent_ball_collide';
+    static readonly BALL_COLLIDE = 'juicyevent_ball_collide';
 }

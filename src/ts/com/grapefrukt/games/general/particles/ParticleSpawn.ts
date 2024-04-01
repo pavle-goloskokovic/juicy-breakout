@@ -1,54 +1,73 @@
 import type { ParticlePool } from './ParticlePool';
 import type { Particle } from './Particle';
-import { GameObjectCollection } from '../collections/GameObjectCollection';
-import { GameObject } from '../gameobjects/GameObject';
-import { Point } from '../../../../../flash/geom/Point';
+
 export class ParticleSpawn {
-    static burst (spawnX: number, spawnY: number, count: number, spread: number, baseAngle: number, speed: number, speedVariance: number, pool: ParticlePool): void
+
+    static burst (
+        spawnX: number, spawnY: number,
+        count: number, spread: number,
+        baseAngle: number, speed: number,
+        speedVariance: number,
+        pool: ParticlePool<typeof Particle>
+    ): void
     {
-        let speedRnd = 0;
-        const angleVector: Point = new Point();
-        let spreadRnd = 0;
         for (let i = 0; i < count; i++)
         {
-            const particle: Particle = pool.add();
+            const particle = pool.addParticle();
+
             particle.x = spawnX;
             particle.y = spawnY;
-            speedRnd = Math.random() * speedVariance - speedVariance / 2;
-            spreadRnd = Math.random() * spread - spread / 2;
-            angleArrayx = Math.sin((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd);
-            angleArrayy = Math.cos((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd);
-            particle.init(spawnX, spawnY, angleArrayx, angleArrayy);
+
+            const speedRnd = Math.random() * speedVariance - speedVariance / 2;
+            const spreadRnd = Math.random() * spread - spread / 2;
+
+            particle.init(spawnX, spawnY,
+                Math.sin((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd),
+                Math.cos((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd));
         }
     }
 
-    static explode (spawnX: number, spawnY: number, count: number, distanceMultiplier: number, pool: ParticlePool, randomRange = 2, vector: Point = null, spawnAreaSize = 0): void
+    /*static explode (
+        spawnX: number, spawnY: number,
+        count: number, distanceMultiplier: number,
+        pool: ParticlePool<typeof Particle>,
+        randomRange = 2,
+        vector = new Phaser.Math.Vector2(),
+        spawnAreaSize = 0
+    ): void
     {
-        if (vector == null)
-        {
-            vector = new Point(0, 0);
-        }
         for (let i = 0; i < count; i++)
         {
-            const particle: Particle = pool.add();
-            particle.init(spawnX + (Math.random() - .5) * spawnAreaSize, spawnY + (Math.random() - .5) * spawnAreaSize, (vector.x + (Math.random() - .5) * randomRange) * distanceMultiplier, (vector.y + (Math.random() - .5) * randomRange) * distanceMultiplier);
+            const particle = pool.addParticle();
+
+            particle.init(
+                spawnX + (Math.random() - .5) * spawnAreaSize,
+                spawnY + (Math.random() - .5) * spawnAreaSize,
+                (vector.x + (Math.random() - .5) * randomRange) * distanceMultiplier,
+                (vector.y + (Math.random() - .5) * randomRange) * distanceMultiplier);
         }
     }
 
-    static explode2 (position: Point, pool: ParticlePool, count: number, randomRange: Point = null, vector: Point = null, spawnAreaSize = 0, distanceMultiplier = 1): void
+    // TODO cache vectors
+    static explode2 (
+        position: Phaser.Math.Vector2,
+        pool: ParticlePool<typeof Particle>,
+        count: number,
+        randomRange = new Phaser.Math.Vector2(),
+        vector = new Phaser.Math.Vector2(),
+        spawnAreaSize = 0,
+        distanceMultiplier = 1
+    ): void
     {
-        if (randomRange == null)
-        {
-            randomRange = new Point(0, 0);
-        }
-        if (vector == null)
-        {
-            vector = new Point(0, 0);
-        }
         for (let i = 0; i < count; i++)
         {
-            const particle: Particle = pool.add();
-            particle.init(position.x + (Math.random() - .5) * spawnAreaSize, position.y + (Math.random() - .5) * spawnAreaSize, (vector.x + (Math.random() - .5) * randomRange.x) * distanceMultiplier, (vector.y + (Math.random() - .5) * randomRange.y) * distanceMultiplier);
+            const particle = pool.addParticle();
+
+            particle.init(
+                position.x + (Math.random() - .5) * spawnAreaSize,
+                position.y + (Math.random() - .5) * spawnAreaSize,
+                (vector.x + (Math.random() - .5) * randomRange.x) * distanceMultiplier,
+                (vector.y + (Math.random() - .5) * randomRange.y) * distanceMultiplier);
         }
-    }
+    }*/
 }

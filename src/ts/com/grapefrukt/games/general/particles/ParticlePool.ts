@@ -1,41 +1,54 @@
-import { Particle } from './Particle';
+import type { Particle } from './Particle';
 import { ParticleEvent } from './events/ParticleEvent';
 import { ObjectPool } from '../../../../../de/polygonal/core/ObjectPool';
-import { Sprite } from '../../../../../flash/display/Sprite';
-export class ParticlePool extends Sprite {
-    private _particleclass: Class;
-    private _pool: ObjectPool;
-    constructor (particleClass: Class, size = 20)
+
+export class ParticlePool<T extends typeof Particle>
+    extends Phaser.GameObjects.Container {
+
+    private pool: ObjectPool<T>;
+
+    constructor (
+        scene: Phaser.Scene,
+        private particleClass: T,
+        // TODO T constructor arguments
+        size = 20
+    )
     {
-        super();
-        this._particleclass = particleClass;
-        this._pool = new ObjectPool(true);
-        this._pool.allocate(this._particleclass, size);
-        this._pool.initialize('reset', []);
-        this.addEventListener(ParticleEvent.DIE, this.handleParticleDeath, true);
+        super(scene);
+
+        this.pool = new ObjectPool<T>(true);
+        this.pool.allocate(this.particleClass, size, [scene]);
+        this.pool.initialize('reset');
+
+        this.on(ParticleEvent.DIE, this.handleParticleDeath, this);
     }
 
     clear (): void
     {
-        while (this.numChildren)
+        const list = this.list as InstanceType<T>[];
+
+        while (list.length)
         {
-            const p: Particle = Particle(this.getChildAt(0));
-            this.removeChild(p);
-            this._pool.object = p;
+            const p = list[0];
+
+            this.remove(p, false);
+            p.removeFromDisplayList();
+
+            this.pool.object = p;
         }
     }
 
-    private handleParticleDeath (e: ParticleEvent): void
+    private handleParticleDeath (p: InstanceType<T>): void
     {
-        const p: Particle = Particle(e.target);
-        this.removeChild(p);
-        this._pool.object = p;
+        this.remove(p, false);
+
+        this.pool.object = p;
     }
 
-    add (): Particle
+    addParticle (): InstanceType<T>
     {
-        const p: Particle = this._pool.object;
-        this.addChild(p);
+        const p = this.pool.object;
+        this.add(p);
         return p;
     }
 }

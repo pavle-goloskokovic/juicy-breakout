@@ -1,52 +1,64 @@
 import { ParticleEvent } from './events/ParticleEvent';
-import { GTween } from '../../../../gskinner/motion/GTween';
-import { Sprite } from '../../../../../flash/display/Sprite';
-export class Particle extends Sprite {
-    protected _gtween: GTween;
-    protected _scale = 1;
-    constructor (lifespan = 2)
+
+export class Particle extends Phaser.GameObjects.Container {
+
+    protected tween: Phaser.Tweens.Tween;
+    protected _particleScale = 1;
+
+    constructor (
+        scene: Phaser.Scene,
+        protected lifespan = 2
+    )
     {
-        super();
-        this._gtween = new GTween(this, lifespan);
-        this._gtween.onComplete = this.die;
+        super(scene);
     }
 
     reset (): void
     {
-        this._gtween.end();
-        this._gtween.position = -this._gtween.delay;
+        this.tween?.remove().destroy();
+
+        this.die();
     }
 
     init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
         this.x = xPos;
         this.y = yPos;
-        this._gtween.proxy.x = xPos + vectorX;
-        this._gtween.proxy.y = yPos + vectorY;
+
+        this.tween = this.scene.tweens.add({
+            targets: this,
+            duration: this.lifespan * 1000,
+            onComplete: () => { this.die(); },
+            props: {
+                x: xPos + vectorX,
+                y: yPos + vectorY
+            }
+        });
     }
 
-    die (gt: GTween = null): void
+    die (): void
     {
-        dispatchEvent(new ParticleEvent(ParticleEvent.DIE));
+        this.tween = null;
+
+        this.parentContainer?.emit(ParticleEvent.DIE, this);
     }
 
-    get scale (): number
+    get particleScale (): number
     {
-        return this._scale;
+        return this._particleScale;
     }
 
-    set scale (value: number)
+    set particleScale (value: number)
     {
-        this._scale = value;
-        if (this._scale < .5)
+        this._particleScale = value;
+
+        if (value < .5)
         {
-            this.scaleX = this._scale * 2;
-            this.scaleY = this._scale * 2;
+            this.setScale(value * 2);
         }
         else
         {
-            this.scaleX = 2 - this._scale * 2;
-            this.scaleY = 2 - this._scale * 2;
+            this.setScale(2 - value * 2);
         }
     }
 }

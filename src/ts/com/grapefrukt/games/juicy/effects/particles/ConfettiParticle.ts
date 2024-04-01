@@ -1,52 +1,68 @@
 import { ColorConverter } from '../../../../display/utilities/ColorConverter';
 import { Particle } from '../../../general/particles/Particle';
-import { ColorMatrix } from '../../../../../gskinner/geom/ColorMatrix';
-import { Back } from '../../../../../gskinner/motion/easing/Back';
-import { Bounce } from '../../../../../gskinner/motion/easing/Bounce';
-import { Exponential } from '../../../../../gskinner/motion/easing/Exponential';
-import { GTween } from '../../../../../gskinner/motion/GTween';
-import { ColorMatrixFilter } from '../../../../../../flash/filters/ColorMatrixFilter';
-import { ColorTransform } from '../../../../../../flash/geom/ColorTransform';
+
 export class ConfettiParticle extends Particle {
-    private _gfx: ConfettiParticleGfx;
-    private _vectorX = 0;
-    private _vectorY = 0;
-    private _age = 0;
-    constructor (lifespan = 2)
+
+    private vectorX = 0;
+    private vectorY = 0;
+
+    constructor (
+        scene: Phaser.Scene,
+        lifespan = 2
+    )
     {
-        super(lifespan);
-        this._gfx = new ConfettiParticleGfx();
-        this.addChild(this._gfx);
-        this._gfx.rotation = Math.random() * 360;
-        this._gtween.onChange = this.update;
-        const colors: any[] = ColorConverter.HSBtoRGB(Math.random(), 1, 1);
-        this._gfx.transform.colorTransform = new ColorTransform(colors[0] / 255, colors[1] / 255, colors[2] / 255);
+        super(scene, lifespan);
+
+        this.add(scene.add // gfx
+            .sprite(0, 0, 'sprites', 'Confetti0003')
+            // TODO set animation
+            .setAngle(Math.random() * 360)
+            .setTint(ColorConverter.HSBtoUINT(Math.random(), 1, 1)));
     }
 
     init (xPos: number, yPos: number, vectorX = 0, vectorY = 0): void
     {
-        this._vectorY = vectorY;
-        this._vectorX = vectorX;
+        this.vectorY = vectorY;
+        this.vectorX = vectorX;
+
         this.x = xPos;
         this.y = yPos;
-        this.rotation = 0;
-        this.scale = .8;
+
+        this.angle = 0;
+
+        this.particleScale = .8;
+
         this.alpha = 1;
-        this._gtween.delay = Math.random() * .3;
-        this._gtween.proxy.scaleX = (this._gtween.proxy.scaleY = .01);
-        this._gtween.proxy.rotation = Math.random() * 360;
-        this._age = Math.random() * this._gfx.totalFrames;
+
+        this.tween = this.scene.tweens.add({
+            targets: this,
+            duration: this.lifespan * 1000,
+            onComplete: () => { this.die(); },
+            onUpdate: () => { this.update(); },
+            delay: Math.random() * .3,
+            props: {
+                scaleX: .01,
+                scaleY: .01,
+                angle: Math.random() * 360
+            }
+        });
+
+        // TODO start at random frame
     }
 
-    private update (gt: GTween): void
+    update (): void
     {
-        const timeDelta: number = GTween.timeScaleAll;
-        this._age += timeDelta;
-        this._gfx.gotoAndPlay(1 + (int(this._age) % this._gfx.totalFrames - 1));
-        this.x += this._vectorX / 100 * timeDelta;
-        this.y += this._vectorY / 100 * timeDelta;
-        this._vectorY += 10 * timeDelta;
-        this._vectorX -= this._vectorX * .05 * timeDelta;
-        this._vectorY -= this._vectorY * .05 * timeDelta;
+        const scene = this.scene;
+        const timeScale = scene.time.timeScale;
+        const delta = scene.sys.game.loop.delta;
+        const deltaFactor = delta / 1000 * 60 * timeScale;
+
+        this.x += this.vectorX / 100 * deltaFactor;
+        this.y += this.vectorY / 100 * deltaFactor;
+
+        this.vectorY += 10 * deltaFactor;
+
+        this.vectorX -= this.vectorX * .05 * deltaFactor;
+        this.vectorY -= this.vectorY * .05 * deltaFactor;
     }
 }

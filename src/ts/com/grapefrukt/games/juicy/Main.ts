@@ -3,12 +3,12 @@ import { SettingsToggler } from './SettingsToggler';
 // import { Slides } from './Slides';
 import { Settings } from './Settings';
 import { Freezer } from './Freezer';
-// import { ParticlePool } from '../general/particles/ParticlePool';
-// import { ParticleSpawn } from '../general/particles/ParticleSpawn';
+import { ParticlePool } from '../general/particles/ParticlePool';
+import { ParticleSpawn } from '../general/particles/ParticleSpawn';
 import { BouncyLine } from './effects/BouncyLine';
 // import { BallImpactParticle } from './effects/particles/BallImpactParticle';
 // import { BlockShatterParticle } from './effects/particles/BlockShatterParticle';
-// import { ConfettiParticle } from './effects/particles/ConfettiParticle';
+import { ConfettiParticle } from './effects/particles/ConfettiParticle';
 import { JuicyEvent } from './events/JuicyEvent';
 import { Ball } from './gameobjects/Ball';
 import { Block } from './gameobjects/Block';
@@ -28,7 +28,7 @@ export class Main extends Phaser.Scene {
 
     // private _particles_impact: ParticlePool; // TODO particles
     // private _particles_shatter: ParticlePool;
-    // private _particles_confetti: ParticlePool;
+    private particlesConfetti: ParticlePool<typeof ConfettiParticle>;
 
     private pointerDown = false;
     private pointerVector = new Phaser.Math.Vector2();
@@ -101,8 +101,9 @@ export class Main extends Phaser.Scene {
 
         this.bg = this.add.graphics();
 
-        // this._particles_confetti = new ParticlePool(ConfettiParticle);
-        // this.addChild(this._particles_confetti);
+        this.particlesConfetti = this.add.existing(
+            new ParticlePool(this, ConfettiParticle)
+        );
 
         this.events
             .on(JuicyEvent.BLOCK_DESTROYED, this.handleBlockDestroyed, this)
@@ -194,6 +195,7 @@ export class Main extends Phaser.Scene {
         this.lines.length = 0;
 
         // this._particles_impact.clear();
+        this.particlesConfetti.clear();
 
         for (let j = 0; j < Settings.NUM_BALLS; j++)
         {
@@ -453,10 +455,12 @@ export class Main extends Phaser.Scene {
                 sound.play('ball-paddle');
             }
 
-            /*if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
+            if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION)
             {
-                ParticleSpawn.burst(ball.x, ball.y, 20, 90, -180, 600, 1, this._particles_confetti);
-            }*/
+                ParticleSpawn.burst(ball.x, ball.y,
+                    20, 90, -180, 600, 1,
+                    this.particlesConfetti);
+            }
         }
         else if (block)
         {

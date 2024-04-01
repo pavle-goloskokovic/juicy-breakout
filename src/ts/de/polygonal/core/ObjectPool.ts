@@ -1,22 +1,30 @@
-export class ObjectPool {
-    private _obj: Class;
+
+class ObjNode<T extends new(...args: any[]) => any> {
+    next: ObjNode<T>;
+    data: InstanceType<T>;
+}
+
+export class ObjectPool<T extends new(...args: any[]) => any> {
+
+    private _obj: T;
+    private _args: any[];
     private _initSize = 0;
     private _currSize = 0;
     private _usageCount = 0;
-    private _grow = true;
-    private _head: ObjNode;
-    private _tail: ObjNode;
-    private _emptyNode: ObjNode;
-    private _allocNode: ObjNode;
-    constructor (grow = false)
-    {
-        this._grow = grow;
-    }
+    private _head: ObjNode<T>;
+    private _tail: ObjNode<T>;
+    private _emptyNode: ObjNode<T>;
+    private _allocNode: ObjNode<T>;
+
+    constructor (
+        private _grow = false
+    ) {}
 
     deconstruct (): void
     {
-        let node: ObjNode = this._head;
-        let t: ObjNode;
+        let node = this._head;
+        let t: ObjNode<T>;
+
         while (node)
         {
             t = node.next;
@@ -24,7 +32,11 @@ export class ObjectPool {
             node.data = null;
             node = t;
         }
-        this._head = (this._tail = (this._emptyNode = (this._allocNode = null)));
+
+        this._head =
+            this._tail =
+                this._emptyNode =
+                    this._allocNode = null;
     }
 
     get size (): number
@@ -32,7 +44,7 @@ export class ObjectPool {
         return this._currSize;
     }
 
-    get usageCount (): number
+    /*get usageCount (): number
     {
         return this._usageCount;
     }
@@ -40,22 +52,22 @@ export class ObjectPool {
     get wasteCount (): number
     {
         return this._currSize - this._usageCount;
-    }
+    }*/
 
-    get object (): any
+    get object (): InstanceType<T>
     {
-        if (this._usageCount == this._currSize)
+        if (this._usageCount === this._currSize)
         {
             if (this._grow)
             {
                 this._currSize += this._initSize;
-                const n: ObjNode = this._tail;
-                let t: ObjNode = this._tail;
-                let node: ObjNode;
+                const n = this._tail;
+                let t = this._tail;
+                let node: ObjNode<T>;
                 for (let i = 0; i < this._initSize; i++)
                 {
                     node = new ObjNode();
-                    node.data = new this._obj();
+                    node.data = new this._obj(...this._args);
                     t.next = node;
                     t = node;
                 }
@@ -71,7 +83,7 @@ export class ObjectPool {
         }
         else
         {
-            const o: any = this._allocNode.data;
+            const o = this._allocNode.data;
             this._allocNode.data = null;
             this._allocNode = this._allocNode.next;
             this._usageCount++;
@@ -79,7 +91,7 @@ export class ObjectPool {
         }
     }
 
-    set object (o: any)
+    set object (o: InstanceType<T>)
     {
         if (this._usageCount > 0)
         {
@@ -89,18 +101,21 @@ export class ObjectPool {
         }
     }
 
-    allocate (C: Class, size: number): void
+    allocate (C: T, size: number, args: any[] = []): void
     {
         this.deconstruct();
         this._obj = C;
-        this._initSize = (this._currSize = size);
-        this._head = (this._tail = new ObjNode());
-        this._head.data = new this._obj();
-        let n: ObjNode;
+        this._args = args;
+        this._initSize =
+            this._currSize = size;
+        this._head =
+            this._tail = new ObjNode();
+        this._head.data = new this._obj(...args);
+        let n: ObjNode<T>;
         for (let i = 1; i < this._initSize; i++)
         {
             n = new ObjNode();
-            n.data = new this._obj();
+            n.data = new this._obj(...args);
             n.next = this._head;
             this._head = n;
         }
@@ -108,12 +123,12 @@ export class ObjectPool {
         this._tail.next = this._head;
     }
 
-    initialize (func: string, args: any[]): void
+    initialize (func: keyof InstanceType<T>, args: any[] = []): void
     {
-        let n: ObjNode = this._head;
+        let n = this._head;
         while (n)
         {
-            n.data[func].apply(n.data, args);
+            n.data[func](...args);
             if (n == this._tail)
             {
                 break;
@@ -122,10 +137,10 @@ export class ObjectPool {
         }
     }
 
-    purge (): void
+    /*purge (): void
     {
         let i = 0;
-        let node: ObjNode;
+        let node: ObjNode<T>;
         if (this._usageCount == 0)
         {
             if (this._currSize == this._initSize)
@@ -148,13 +163,13 @@ export class ObjectPool {
         }
         else
         {
-            const a: any[] = [];
+            const a: ObjNode<T>[] = [];
             node = this._head;
             while (node)
             {
                 if (!node.data)
                 {
-                    a[int(i++)] = node;
+                    a[Math.trunc(i++)] = node;
                 }
                 if (node == this._tail)
                 {
@@ -176,13 +191,13 @@ export class ObjectPool {
             if (this._usageCount < this._initSize)
             {
                 this._currSize = this._initSize;
-                const n: ObjNode = this._tail;
-                let t: ObjNode = this._tail;
+                const n = this._tail;
+                let t = this._tail;
                 const k: number = this._initSize - this._usageCount;
                 for (i = 0; i < k; i++)
                 {
                     node = new ObjNode();
-                    node.data = new this._obj();
+                    node.data = new this._obj(...this._args);
                     t.next = node;
                     t = node;
                 }
@@ -191,9 +206,5 @@ export class ObjectPool {
                 this._allocNode = n.next;
             }
         }
-    }
-}
-class ObjNode {
-    next: ObjNode;
-    data: any;
+    }*/
 }

@@ -1,19 +1,20 @@
 export class ColorConverter {
-    static UINTtoRGB (color: number): any[]
+
+    static UINTtoRGB (color: number): number[]
     {
-        const r: number = color >> 16 & 0xFF;
-        const g: number = color >> 8 & 0xFF;
-        const b: number = color & 0xFF;
+        const r = color >> 16 & 0xFF;
+        const g = color >> 8 & 0xFF;
+        const b = color & 0xFF;
         return [r, g, b];
     }
 
-    static UINTtoHSB (color: number): any[]
+    static UINTtoHSB (color: number): number[]
     {
-        const rgb: any[] = ColorConverter.UINTtoRGB(color);
+        const rgb = ColorConverter.UINTtoRGB(color);
         return ColorConverter.RGBtoHSB(rgb[0], rgb[1], rgb[2]);
     }
 
-    static HSBtoRGB (hue: number, saturation: number, brightness: number): any[]
+    static HSBtoRGB (hue: number, saturation: number, brightness: number): number[]
     {
         return ColorConverter.UINTtoRGB(ColorConverter.HSBtoUINT(hue, saturation, brightness));
     }
@@ -23,18 +24,18 @@ export class ColorConverter {
         return r << 16 | g << 8 | b << 0;
     }
 
-    static RGBtoHSB (r: number, g: number, b: number): any[]
+    static RGBtoHSB (r: number, g: number, b: number): number[]
     {
-        const cmax: number = Math.max(r, g, b);
-        const cmin: number = Math.min(r, g, b);
-        const brightness: number = cmax / 255.0;
+        const cmax = Math.max(r, g, b);
+        const cmin = Math.min(r, g, b);
+        const brightness = cmax / 255.0;
         let hue = 0;
-        const saturation: number = cmax != 0 ? (cmax - cmin) / cmax : 0;
+        const saturation = cmax != 0 ? (cmax - cmin) / cmax : 0;
         if (saturation != 0)
         {
-            const redc: number = (cmax - r) / (cmax - cmin);
-            const greenc: number = (cmax - g) / (cmax - cmin);
-            const bluec: number = (cmax - b) / (cmax - cmin);
+            const redc = (cmax - r) / (cmax - cmin);
+            const greenc = (cmax - g) / (cmax - cmin);
+            const bluec = (cmax - b) / (cmax - cmin);
             if (r == cmax)
             {
                 hue = bluec - greenc;
@@ -67,12 +68,12 @@ export class ColorConverter {
         }
         else
         {
-            const h: number = (hue - int(hue)) * 6.0;
-            const f: number = h - int(h);
-            const p: number = brightness * (1.0 - saturation);
-            const q: number = brightness * (1.0 - saturation * f);
-            const t: number = brightness * (1.0 - saturation * (1.0 - f));
-            switch (int(h))
+            const h = (hue - Math.trunc(hue)) * 6.0;
+            const f = h - Math.trunc(h);
+            const p = brightness * (1.0 - saturation);
+            const q = brightness * (1.0 - saturation * f);
+            const t = brightness * (1.0 - saturation * (1.0 - f));
+            switch (Math.trunc(h))
             {
                 case 0:
                     {
