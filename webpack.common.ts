@@ -50,7 +50,7 @@ export default <webpack.Configuration>{
         // options related to how webpack emits results
         filename: `[name]${ prod ? '.[contenthash]' : '' }.js`, // string
         // the filename template for entry chunks
-        path: resolve(__dirname, 'dist'), // string
+        path: resolve(__dirname, 'docs'), // string
         // the target directory for all output files
         // must be an absolute path (use the Node.js path module)
         // publicPath: "/assets/", // string
