@@ -1,4 +1,4 @@
-import { Settings } from './com/grapefrukt/games/juicy/Settings';
+import { Settings } from './classes/Settings';
 
 /**
  * Game title used for page title tag and metadata.

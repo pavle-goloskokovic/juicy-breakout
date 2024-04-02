@@ -8,9 +8,7 @@ import 'phaser'; // loading Phaser
 
 import { size, stats } from './game.config';
 
-import Boot from './scenes/Boot';
-import Preloader from './scenes/Preloader';
-import Game from './scenes/Game';
+import { Main } from './scenes/Main';
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -20,13 +18,9 @@ const config: Phaser.Types.Core.GameConfig = {
     backgroundColor: '#000000',
     scale: {
         autoCenter: Phaser.Scale.Center.CENTER_BOTH,
-        mode: Phaser.Scale.ScaleModes.FIT
+        mode: Phaser.Scale.ScaleModes.NONE
     },
-    scene: [
-        Boot,
-        Preloader,
-        Game
-    ]
+    scene: [ Main ]
 };
 
 // Choosing implementation based on 'stats' app config setting
