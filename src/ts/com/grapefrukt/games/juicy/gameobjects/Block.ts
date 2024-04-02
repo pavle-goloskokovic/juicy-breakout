@@ -1,11 +1,17 @@
 import type { Ball } from './Ball';
 import { GameObject } from '../../general/gameobjects/GameObject';
-// import { SliceEffect } from '../effects/SliceEffect';
+import { GraphicsSliceEffect } from '../effects/GraphicsSliceEffect';
 import { JuicyEvent } from '../events/JuicyEvent';
 import { Freezer } from '../Freezer';
 import { Settings } from '../Settings';
 
 const tempVec = new Phaser.Math.Vector2();
+const boundsRect = new Phaser.Geom.Rectangle(
+    -Settings.BLOCK_W / 2,
+    -Settings.BLOCK_H / 2,
+    Settings.BLOCK_W,
+    Settings.BLOCK_H
+);
 
 export class Block extends GameObject {
 
@@ -14,8 +20,7 @@ export class Block extends GameObject {
     private _collidable = true;
     protected gfx: Phaser.GameObjects.Graphics;
 
-    // TODO slice effect
-    // private _sliceEffect: SliceEffect;
+    private sliceEffect: GraphicsSliceEffect;
 
     constructor (scene: Phaser.Scene, x: number, y: number)
     {
@@ -70,11 +75,11 @@ export class Block extends GameObject {
 
         let delayDestruction = false;
 
-        if (Settings.EFFECT_BLOCK_DARKEN)
+        // moved to slice effect
+        /*if (Settings.EFFECT_BLOCK_DARKEN)
         {
-            // TODO should affect slice color
-            // this.transform.colorTransform = new ColorTransform(.7, .7, .8);
-        }
+            this.transform.colorTransform = new ColorTransform(.7, .7, .8);
+        }*/
 
         if (Settings.EFFECT_BLOCK_PUSH)
         {
@@ -88,47 +93,72 @@ export class Block extends GameObject {
             delayDestruction = true;
         }
 
-        // TODO color based on Settings.EFFECT_BLOCK_DARKEN
-        /*this.parent.setChildIndex(this, this.parent.numChildren - 1);
-        this._sliceEffect = new SliceEffect(this.gfx, null);
-        this.addChild(this._sliceEffect);*/
+        this.scene.children.bringToTop(this);
+        this.add(this.sliceEffect =
+            new GraphicsSliceEffect(this.scene, this.gfx, boundsRect));
 
         this.gfx.visible = false;
 
         Freezer.freeze();
 
-        /*if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER)
+        if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER)
         {
-            this._sliceEffect.slices[0].velocityR = Math.random() > .5 ? Settings.EFFECT_BLOCK_SHATTER_ROTATION : -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
+            this.sliceEffect.slices[0].velocityR = Math.random() > .5 ?
+                Settings.EFFECT_BLOCK_SHATTER_ROTATION :
+                -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
+
             delayDestruction = true;
         }
 
         if (Settings.EFFECT_BLOCK_SHATTER)
         {
-            this._sliceEffect.slice(new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10), new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10));
+            this.sliceEffect.slice( // TODO cache vectors
+                new Phaser.Math.Vector2(
+                    ball.x - this.x + ball.velocityX * 10,
+                    ball.y - this.y + ball.velocityY * 10
+                ),
+                new Phaser.Math.Vector2(
+                    ball.x - this.x - ball.velocityX * 10,
+                    ball.y - this.y - ball.velocityY * 10
+                )
+            );
+
             delayDestruction = true;
         }
 
         if (Settings.EFFECT_BLOCK_SCALE)
         {
-            for (const slice of this._sliceEffect.slices)
+            for (const slice of this.sliceEffect.slices)
             {
-                new GTween(slice, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, { scaleY: 0, scaleX: 0 }, { ease: Quadratic.easeOut });
+                this.scene.tweens.add({
+                    targets: slice,
+                    duration: Settings.EFFECT_BLOCK_DESTRUCTION_DURATION * 1000,
+                    props: { scaleY: 0, scaleX: 0 },
+                    ease: Phaser.Math.Easing.Quadratic.Out
+                });
             }
-            delayDestruction = true;
-        }*/
 
-        this.scene.events.emit(JuicyEvent.BLOCK_DESTROYED, ball, this);
+            delayDestruction = true;
+        }
+
+        const events = this.scene.events;
 
         if (!delayDestruction)
         {
+            events.emit(JuicyEvent.BLOCK_DESTROYED, ball, this);
+
             this.destroy();
         }
         else
         {
             this.scene.time.delayedCall(
                 Settings.EFFECT_BLOCK_DESTRUCTION_DURATION * 1000,
-                () => { this.destroy(); });
+                () =>
+                {
+                    events.emit(JuicyEvent.BLOCK_DESTROYED, ball, this);
+
+                    this.destroy();
+                });
         }
     }
 
@@ -185,10 +215,10 @@ export class Block extends GameObject {
     {
         super.update(deltaFactor);
 
-        /*if (this._sliceEffect)
+        if (this.sliceEffect)
         {
-            this._sliceEffect.update(deltaFactor);
-        }*/
+            this.sliceEffect.update(deltaFactor);
+        }
 
         if (Settings.EFFECT_BLOCK_GRAVITY && !this._collidable)
         {
@@ -206,10 +236,8 @@ export class Block extends GameObject {
         this.gfx.clear()
             .fillStyle(Settings.EFFECT_SCREEN_COLORS ? color : 0xFFFFFF)
             .fillRect(
-                -Settings.BLOCK_W / 2,
-                -Settings.BLOCK_H / 2,
-                Settings.BLOCK_W,
-                Settings.BLOCK_H
+                boundsRect.x, boundsRect.y,
+                boundsRect.width, boundsRect.height
             );
     }
 

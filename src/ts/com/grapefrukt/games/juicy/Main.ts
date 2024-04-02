@@ -385,7 +385,17 @@ export class Main extends Phaser.Scene {
                         ball.x -= v.x;
                         ball.y -= v.y;
                     }
+
                     block.collide(ball);
+
+                    if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
+                    {
+                        ParticleSpawn.burst(ball.x, ball.y,
+                            5, 45,
+                            -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
+                            50 + ball.velocity * 10, .5,
+                            this.particlesShatter);
+                    }
 
                     if (Settings.POWERUP_SLICER_BALL && !(block instanceof Paddle))
                     {
@@ -508,20 +518,12 @@ export class Main extends Phaser.Scene {
 
     private handleBlockDestroyed (ball: Ball, block: Block): void
     {
-        if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER)
-        {
-            ParticleSpawn.burst(ball.x, ball.y,
-                5, 45,
-                -Math.atan2(ball.velocityX, ball.velocityY) * 180 / Math.PI,
-                50 + ball.velocity * 10, .5,
-                this.particlesShatter);
-        }
-
-        const index = this.blocks.indexOf(block);
+        const blocks = this.blocks;
+        const index = blocks.indexOf(block);
         if (index > -1) // only splice array when item is found
         {
             // 2nd parameter means remove one item only
-            this.blocks.splice(index, 1);
+            blocks.splice(index, 1);
         }
     }
 
