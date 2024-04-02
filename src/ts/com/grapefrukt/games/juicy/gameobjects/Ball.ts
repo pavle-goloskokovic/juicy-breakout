@@ -15,7 +15,7 @@ export class Ball extends GameObject {
     private gfx: Phaser.GameObjects.Graphics;
     private ballShakiness = 0;
     private ballShakinessVel = 0;
-    private ballRotation = 0;
+    private ballAngle = 0;
     private ballExtraScale = 0;
     private brightnessTween: Phaser.Tweens.Tween;
     private colorOffset = 0;
@@ -48,7 +48,7 @@ export class Ball extends GameObject {
 
         this.ballShakiness = 0;
         this.ballShakinessVel = 0;
-        this.ballRotation = 0;
+        this.ballAngle = 0;
         this.ballExtraScale = 0;
     }
 
@@ -85,22 +85,22 @@ export class Ball extends GameObject {
 
         if (Settings.EFFECT_BALL_ROTATE)
         {
-            const targetRotation =
+            const targetAngle =
                 Math.atan2(this.velocityY, this.velocityX) / Math.PI * 180;
 
-            this.ballRotation +=
-                (targetRotation - this.ballRotation) * deltaFactor * 0.5;
+            this.ballAngle +=
+                (targetAngle - this.ballAngle) * deltaFactor * 0.5;
 
             if (!Settings.EFFECT_BALL_ROTATE_ANIMATED)
             {
-                this.ballRotation = targetRotation;
+                this.ballAngle = targetAngle;
             }
 
-            this.gfx.rotation = this.ballRotation;
+            this.gfx.angle = this.ballAngle;
         }
         else
         {
-            this.gfx.rotation = 0;
+            this.gfx.angle = 0;
         }
 
         if (Math.abs(this.ballShakiness) > 0)

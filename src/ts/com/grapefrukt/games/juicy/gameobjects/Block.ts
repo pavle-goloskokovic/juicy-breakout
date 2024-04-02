@@ -36,7 +36,7 @@ export class Block extends GameObject {
 
             if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION)
             {
-                this.rotation = Math.random() * 90 - 45;
+                this.angle = Math.random() * 90 - 45;
             }
 
             if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE)
@@ -44,12 +44,12 @@ export class Block extends GameObject {
                 this.setScale(.2);
             }
 
-            scene.add.tween({
+            scene.tweens.add({
                 targets: this,
                 duration: Settings.EFFECT_TWEENIN_DURATION * 1000,
                 props: {
                     y,
-                    rotation: 0,
+                    angle: 0,
                     scaleX: 1,
                     scaleY: 1
                 },
